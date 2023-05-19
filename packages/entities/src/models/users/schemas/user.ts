@@ -15,6 +15,7 @@ export interface User extends Base {
  biography: string;
  wishlist: string[];
  interests: string[];
+ songs: string[];
  consumptions: string[];
  artistType: string;
  workerType: string;

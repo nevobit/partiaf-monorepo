@@ -1,5 +1,5 @@
 {
-  "name": "@partiaf/entities",
+  "name": "@partiaf/constant-definitions",
   "version": "1.0.0",
   "description": "",
   "main": "build/index.js",
@@ -11,12 +11,12 @@
   "keywords": [],
   "author": "Nestor Mosquera",
   "license": "ISC",
-  "devDependencies": {
-    "typescript": "5.0.4",
-    "tslib": "2.5.1",
-    "@types/node": "~20.2.1"
-  },
   "dependencies": {
     "mongoose": "7.1.1"
+  },
+  "devDependencies": {
+    "tslib": "~2.5.2",
+    "@types/node": "~20.2.1",
+    "typescript": "~5.0.4"
   }
 }

@@ -31,25 +31,25 @@
       "projectFolder": "packages/entities",
       "reviewCategory": "production",
       "shouldPublish": false
+    },
+    {
+      "packageName": "@partiaf/business-logic",
+      "projectFolder": "packages/business-logic",
+      "reviewCategory": "production",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@partiaf/constant-definitions",
+      "projectFolder": "packages/constant-definitions",
+      "reviewCategory": "production",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "@partiaf/data-sources",
+      "projectFolder": "packages/data-sources",
+      "reviewCategory": "production",
+      "shouldPublish": false
     }
-    // {
-    //   "packageName": "@partiaf/business-logic",
-    //   "projectFolder": "packages/business-logic",
-    //   "reviewCategory": "production",
-    //   "shouldPublish": false
-    // },
-    // {
-    //   "packageName": "@partiaf/constant-definitios",
-    //   "projectFolder": "packages/constant-definitios",
-    //   "reviewCategory": "production",
-    //   "shouldPublish": false
-    // },
-    // {
-    //   "packageName": "@partiaf/data-sources",
-    //   "projectFolder": "packages/data-sources",
-    //   "reviewCategory": "production",
-    //   "shouldPublish": false
-    // },
     // {
     //   "packageName": "@partiaf/core-modules",
     //   "projectFolder": "packages/core-modules",

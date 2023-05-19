@@ -16,6 +16,7 @@ lib-cov
 coverage
 build
 build/*
+build/
 # nyc test coverage
 .nyc_output
 
