@@ -49,12 +49,12 @@
       "projectFolder": "packages/data-sources",
       "reviewCategory": "production",
       "shouldPublish": false
+    },
+    {
+      "packageName": "@partiaf/core-modules",
+      "projectFolder": "packages/core-modules",
+      "reviewCategory": "production",
+      "shouldPublish": false
     }
-    // {
-    //   "packageName": "@partiaf/core-modules",
-    //   "projectFolder": "packages/core-modules",
-    //   "reviewCategory": "production",
-    //   "shouldPublish": false
-    // }
   ]
 }

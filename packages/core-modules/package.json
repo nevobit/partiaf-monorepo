@@ -1,12 +1,18 @@
 {
-  "name": "core-modules",
+  "name": "@partiaf/core-modules",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "build/index.js",
+  "typings": "build/index.d.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc --project tsconfig.build.json"
   },
   "keywords": [],
   "author": "Nestor Mosquera",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "tslib": "~2.5.2",
+    "@types/node": "~20.2.1",
+    "typescript": "~5.0.4"
+  }
 }
