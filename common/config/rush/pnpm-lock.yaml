@@ -11,6 +11,7 @@ importers:
       '@fastify/multipart': 7.6.0
       '@partiaf/business-logic': workspace:*
       '@partiaf/data-sources': workspace:*
+      '@partiaf/entities': workspace:*
       '@types/node': 18.11.18
       dotenv: 16.0.3
       fastify: 4.11.0
@@ -22,6 +23,7 @@ importers:
       '@fastify/multipart': 7.6.0
       '@partiaf/business-logic': link:../../packages/business-logic
       '@partiaf/data-sources': link:../../packages/data-sources
+      '@partiaf/entities': link:../../packages/entities
       dotenv: 16.0.3
       fastify: 4.11.0
       fastify-multer: 2.0.3
