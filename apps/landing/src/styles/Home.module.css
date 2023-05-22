@@ -1,0 +1,78 @@
+.download {
+  height: 50rem;
+  background: linear-gradient(135deg, #ffe243, #ffc800);
+  background: linear-gradient(135deg, #ffe243, rgba(255, 226, 67, 0.92)),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 15px,
+      rgba(255, 255, 255, 0.2) 15px,
+      rgba(255, 255, 255, 0.2) 25px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 15px,
+      rgba(255, 255, 255, 0.2) 15px,
+      rgba(255, 255, 255, 0.2) 25px
+    );
+  background-size: cover;
+}
+
+.container {
+  width: min(1050px, 90%);
+  margin-inline: auto;
+  color: #fff;
+  position: relative;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
+}
+
+.picture {
+  position: absolute;
+  bottom: -50.4rem;
+  /* left: 0; */
+}
+
+.container > div:last-child {
+  position: absolute;
+  left: 45rem;
+  top: 10rem;
+}
+
+.container > div h2 {
+  font-size: 6rem;
+  margin-bottom: 2rem;
+  max-width: 50rem;
+}
+
+.container > div span {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .container > div:last-child {
+    position: relative;
+    left: 0rem;
+    top: 0rem;
+  }
+
+  .container > div h2 {
+    font-size: 3rem;
+    padding-top: 2rem;
+    text-align: center;
+  }
+
+  .download {
+    height: 70rem;
+    width: 100%;
+  }
+
+  .picture {
+    position: absolute;
+    bottom: -58.8rem;
+    /* left: 0; */
+  }
+}

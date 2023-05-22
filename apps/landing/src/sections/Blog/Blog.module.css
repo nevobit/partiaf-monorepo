@@ -1,0 +1,80 @@
+.container {
+  width: min(1050px, 90%);
+  margin-inline: auto;
+  color: #fff;
+  padding-block: 5rem;
+  padding-bottom: 10rem;
+}
+
+.commitment h2 {
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 6rem;
+  text-align: center;
+}
+
+.commitment h2 span {
+  color: rgb(255, 226, 67);
+}
+
+.commitment .copy {
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 3rem;
+  text-align: center;
+  width: 60rem;
+  margin-inline: auto;
+  color: rgb(255, 255, 255, 0.6);
+}
+
+.banner > * {
+  justify-self: flex-end;
+}
+
+.stores {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  margin-top: 5rem;
+}
+
+.options {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 6rem;
+  gap: 4rem;
+}
+
+.options > div {
+  max-width: 30rem;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.options h3 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 2rem;
+}
+
+.options p {
+  font-size: 1.4rem;
+  line-height: 2rem;
+  width: 100%;
+  text-align: center;
+  color: rgb(255, 255, 255, 0.6);
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .commitment .copy {
+    width: 90%;
+  }
+  .options {
+    flex-direction: column;
+    align-items: center;
+  }
+}

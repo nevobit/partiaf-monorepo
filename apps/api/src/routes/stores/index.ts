@@ -1,6 +1,4 @@
-import { RouteOptions } from "fastify";
-import { getStoresByAdminRoute } from "./get-by-admin";
+import { RouteOptions } from 'fastify';
+import { getStoresByAdminRoute } from './get-by-admin';
 
-export const storeRoutes: RouteOptions[] = [
- getStoresByAdminRoute
-]
+export const storeRoutes: RouteOptions[] = [getStoresByAdminRoute];
