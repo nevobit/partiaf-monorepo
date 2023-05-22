@@ -27,6 +27,12 @@
       "shouldPublish": false
     },
     {
+      "packageName": "users",
+      "projectFolder": "apps/users",
+      "reviewCategory": "production",
+      "shouldPublish": false
+    },
+    {
       "packageName": "@partiaf/entities",
       "projectFolder": "packages/entities",
       "reviewCategory": "production",
@@ -49,12 +55,12 @@
       "projectFolder": "packages/data-sources",
       "reviewCategory": "production",
       "shouldPublish": false
+    },
+    {
+      "packageName": "@partiaf/core-modules",
+      "projectFolder": "packages/core-modules",
+      "reviewCategory": "production",
+      "shouldPublish": false
     }
-    // {
-    //   "packageName": "@partiaf/core-modules",
-    //   "projectFolder": "packages/core-modules",
-    //   "reviewCategory": "production",
-    //   "shouldPublish": false
-    // }
   ]
 }

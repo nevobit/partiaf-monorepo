@@ -4,7 +4,6 @@
   "description": "",
   "main": "build/index.js",
   "typings": "build/index.d.js",
-  
   "scripts": {
     "build": "npx tsc --project tsconfig.build.json"
   },
@@ -20,6 +19,7 @@
   "devDependencies": {
     "@types/node": "20.2.1",
     "tslib": "2.5.2",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "@types/jsonwebtoken": "~9.0.2"
   }
 }
