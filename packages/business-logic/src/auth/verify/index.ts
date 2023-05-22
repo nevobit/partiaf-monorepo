@@ -1,6 +1,12 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
+import jwt from 'jsonwebtoken';
+import { Admin } from '@partiaf/entities';
 
-const { NODE_ENV, API_KEY } = process.env;
+interface FastifyRequestAdmin extends FastifyRequest {
+  admin: Admin;
+}
+
+const { NODE_ENV, API_KEY, JWT_SECRET } = process.env;
 
 export const verify = (
   request: FastifyRequest,
@@ -22,4 +28,25 @@ export const verify = (
     return reply.code(401).send('Unauthorized: Invalid API key');
 
   done();
+};
+
+export const verifyToken = async (
+  request: FastifyRequestAdmin,
+  reply: FastifyReply,
+  done: () => void
+) => {
+  const authHeader = request.headers.authorization;
+  if (!authHeader)
+    return reply
+      .code(401)
+      .send('Unauthorized: Authorization header is missing');
+
+  const token = authHeader.split(' ')[1];
+  try {
+    const decodedToken = await jwt.verify(token!, JWT_SECRET!);
+    request.admin = decodedToken as Admin;
+    return decodedToken;
+  } catch (err) {
+    return reply.status(401).send('Invalid token');
+  }
 };
