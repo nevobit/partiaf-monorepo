@@ -1,23 +1,24 @@
-import { createStore } from "@partiaf/business-logic";
-import { CreateStoreDto } from "@partiaf/entities";
-import { FastifyReply, FastifyRequest, RouteOptions } from "fastify";
+import { createStore, verifyToken } from '@partiaf/business-logic';
+import { Admin, CreateStoreDto } from '@partiaf/entities';
+import { FastifyReply, FastifyRequest, RouteOptions } from 'fastify';
 
-interface FastifyRequestUser extends FastifyRequest {
-    user?: user;
+interface FastifyRequestAdmin extends FastifyRequest {
+  admin?: Admin;
 }
 
 export const createStoreRoute: RouteOptions = {
-    method: 'POST',
-    url: '/stores',
-    // preHandler: verifyToken,
-    handler: async (request: FastifyRequestUser, reply: FastifyReply) => {
-        try {
-            const { body } = request;
-            const data = body as CreateStoreDto;
-            const store = await createStore(data);
-            reply.status(201).send(store);
-        } catch (err) {
-            reply.status(500).send(err);
-        }
+  method: 'POST',
+  url: '/stores',
+  preHandler: verifyToken,
+  handler: async (request: FastifyRequestAdmin, reply: FastifyReply) => {
+    try {
+      const { body } = request;
+      const data = body as CreateStoreDto;
+      const { admin } = request;
+      const store = await createStore({ ...data, admin: admin?.uuid });
+      reply.status(201).send(store);
+    } catch (err) {
+      reply.status(500).send(err);
     }
-}
+  },
+};
