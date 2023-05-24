@@ -7,7 +7,7 @@ import { getModel, Collection } from '@partiaf/constant-definitions';
  * @param page page number.
  * @param limit number of items per page.
  * @param status status type to filter stores (optional).
- * @returns A Promise that resolves with the a result of stores.
+ * @returns A Promise that resolves with a result of stores.
  */
 export const getStoresByAdmin = async (
   uuid: string,

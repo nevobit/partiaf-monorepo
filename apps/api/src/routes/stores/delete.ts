@@ -1,20 +1,25 @@
-import { verifyToken } from '@partiaf/business-logic';
-import { Admin } from '@partiaf/entities';
+// import { verifyToken } from '@partiaf/business-logic';
 import { FastifyReply, FastifyRequest, RouteOptions } from 'fastify';
+import { deleteStore } from '@partiaf/business-logic';
 
-interface FastifyRequestAdmin extends FastifyRequest {
-  admin?: Admin;
-}
+type Params = {
+  uuid: string;
+};
 
 export const deleteStoreRoute: RouteOptions = {
   method: 'DELETE',
-  url: '/stores/:id',
-  preHandler: verifyToken,
+  url: '/stores/:uuid',
+  // preHandler: verifyToken,
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
+    const { params } = request;
+    const { uuid } = params as Params;
     try {
-      reply.status(204).send();
+      const deleted = await deleteStore(uuid);
+      reply.send(deleted);
     } catch (err) {
-      reply.status(500).send(err);
+      if (err instanceof Error) {
+        reply.send(500).send(err.message);
+      }
     }
   },
 };
