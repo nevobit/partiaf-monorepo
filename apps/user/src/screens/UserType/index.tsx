@@ -17,6 +17,8 @@ const UserType = ({navigation}: any) => {
       <DefaultView
         style={{
           marginBottom: 20,
+          paddingHorizontal: 10,
+          paddingTop: 20
         }}>
         <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
           <Text
@@ -34,12 +36,14 @@ const UserType = ({navigation}: any) => {
           justifyContent: 'space-between',
           gap: 2,
           marginBottom: 10,
+          paddingHorizontal: 10,
         }}>
         <DefaultView
           style={{
             height: 3,
             width: 80,
             backgroundColor: colors.dark.primary,
+            
           }}
         />
         <DefaultView
@@ -70,12 +74,14 @@ const UserType = ({navigation}: any) => {
           fontSize: 30,
           //  textAlign: 'center',
           fontWeight: '600',
+          paddingHorizontal: 10,
         }}>
         Tipo de usuario
       </Text>
       <Text
         style={{
           color: 'rgba(255,255,255,0.6)',
+          paddingHorizontal: 10,
         }}>
         En Partiaf no solo puedes divertirte!
       </Text>
@@ -84,6 +90,7 @@ const UserType = ({navigation}: any) => {
         style={{
           marginTop: 60,
           gap: 20,
+          paddingHorizontal: 10,
         }}>
         <TouchableOpacity
           style={{

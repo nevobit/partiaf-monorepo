@@ -5,80 +5,40 @@ import {
   TouchableOpacity,
   View as DefaultView,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
-
-const preferences = {
-  plan: [
-    'Amigos',
-    'Desayuno/Brunch',
-    'Familiar',
-    'Negocios',
-    'Pareja',
-    'Ocasiones especiales',
-    'Terraza o Jardin',
-    'Perreo',
-  ],
-  music: [
-    'Jazz',
-    'Blues',
-    'Pop',
-    'Salsa',
-    'Flamenco',
-    'Bachata',
-    'Vallenato',
-    'Musica clasica',
-    'Rock and Roll',
-    'Disco',
-    'Techno',
-    'Reggae',
-    'Ranchera',
-    'Hip hop/Rap',
-    'Reggearon old school',
-    'Trap',
-    'Electronica',
-    'Crossover',
-    'Corridos',
-  ],
-  food: [
-    'Hamburguesa',
-    'Parrilla',
-    'Saludable',
-    'Sushi',
-    'Internacional',
-    'Desayunos',
-    'Comida Rapida',
-    'Crepes',
-    'Pizza',
-    'Salchipapas',
-    'Arepa',
-    'Arabe',
-    'Sandwiches',
-    'Jugos y batidos',
-    'Empanadas',
-    'Panaderia',
-    'Peruana',
-    'Cafe',
-    'Vegetariana',
-    'Helados',
-    'Perros calientes',
-    'Poke',
-    'Alitas',
-    'India',
-    'Argentina',
-    'Asiatica',
-    'China',
-    'De autor',
-    'Espanola',
-    'Colombiana',
-    'Italiana',
-    'Mexicana',
-    'Pescados y mariscos',
-    'Pollo',
-  ],
-};
+import DatePicker from 'react-native-date-picker';
+import { useDispatch } from 'react-redux';
+import { signin } from '../../features/auth';
 
 const VerifyAge = ({navigation}: any) => {
+
+  const [date, setDate] = useState(new Date());
+
+  const [user, setUser] = useState({
+    phone: 'Alessandro',
+    password: 'De bonis'
+  });
+
+  const [loading, setLoading] = useState(false)
+
+  const dispatch = useDispatch();
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+   setLoading(true)
+  try{
+      setTimeout(() => {
+dispatch(signin(user)); 
+ setLoading(false)
+      },3000)
+      
+        
+    }catch(err){
+      console.log(err)
+    }
+  }
   return (
     <View
       style={{
@@ -89,6 +49,8 @@ const VerifyAge = ({navigation}: any) => {
       <DefaultView
         style={{
           marginBottom: 20,
+          marginTop: 20,
+          paddingHorizontal: 10,
         }}>
         <TouchableOpacity onPress={() => navigation.navigate('Photo')}>
           <Text
@@ -106,6 +68,7 @@ const VerifyAge = ({navigation}: any) => {
           justifyContent: 'space-between',
           gap: 2,
           marginBottom: 10,
+          paddingHorizontal: 10,
         }}>
         <DefaultView
           style={{
@@ -143,15 +106,19 @@ const VerifyAge = ({navigation}: any) => {
             fontSize: 30,
             //  textAlign: 'center',
             fontWeight: '600',
+            paddingHorizontal: 10,
           }}>
           Verifica tu edad
         </Text>
         <Text
           style={{
             color: 'rgba(255,255,255,0.6)',
+            paddingHorizontal: 10,
           }}>
           Algunos eventos estaran disponibles dependiendo de tu edad.
         </Text>
+        {/* <DatePicker date={date} onDateChange={setDate} /> */}
+        
       </ScrollView>
       <DefaultView style={{flex: 1, justifyContent: 'flex-end'}}>
         <TouchableOpacity
@@ -164,8 +131,13 @@ const VerifyAge = ({navigation}: any) => {
             justifyContent: 'center',
             width: '95%',
             alignSelf: 'center',
-          }}>
-          <Text
+          }}
+          onPress={onSubmit}
+          >
+            {loading ? (
+              <ActivityIndicator color="#000" />
+            ): (
+<Text
             style={{
               fontWeight: '500',
               fontSize: 16,
@@ -173,6 +145,8 @@ const VerifyAge = ({navigation}: any) => {
             }}>
             Continuar
           </Text>
+            )}
+          
         </TouchableOpacity>
       </DefaultView>
     </View>

@@ -1,11 +1,20 @@
 import React from 'react';
 import {View} from '../../components/Layout/Theme';
-import {ScrollView, View as DefaultView, Text} from 'react-native';
+import {ScrollView, View as DefaultView, Text, Keyboard, TouchableWithoutFeedback} from 'react-native';
 import {TouchableOpacity, Image, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+
+const DismissKeyboard = ({children}: any) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+)
 const Tickets = ({navigation}: any) => {
   return (
+    <DismissKeyboard>
+
+    
     <View
       style={{
         minHeight: '100%',
@@ -64,6 +73,7 @@ const Tickets = ({navigation}: any) => {
             color: '#fff',
             fontSize: 16,
             paddingHorizontal: 10,
+            height: 50
           }}
         />
       </DefaultView>
@@ -84,7 +94,7 @@ const Tickets = ({navigation}: any) => {
           }}>
           <DefaultView
             style={{
-              backgroundColor: '#000',
+              backgroundColor: 'rgba(10,10,10,1)',
               height: 30,
               width: 30,
               borderRadius: 50,
@@ -95,7 +105,7 @@ const Tickets = ({navigation}: any) => {
           />
           <DefaultView
             style={{
-              backgroundColor: '#000',
+              backgroundColor: 'rgba(10,10,10,1)',
               height: 30,
               width: 30,
               borderRadius: 50,
@@ -105,6 +115,12 @@ const Tickets = ({navigation}: any) => {
             }}
           />
 
+
+            <DefaultView style={{
+              overflow: 'hidden'
+            }}>
+
+            
           <DefaultView
             style={{
               backgroundColor: '#1c1c1e',
@@ -114,10 +130,19 @@ const Tickets = ({navigation}: any) => {
               borderColor: '#000',
               borderStyle: 'dashed',
               position: 'absolute',
+              margin: -2,
+              marginTop: 10,
               left: 20,
               bottom: 175,
             }}
-          />
+          >
+            <DefaultView style={{
+              height: 200, width: 200
+            }}>
+
+            </DefaultView>
+          </DefaultView>
+          </DefaultView>
 
           <DefaultView
             style={{
@@ -254,6 +279,7 @@ const Tickets = ({navigation}: any) => {
         </DefaultView>
       </ScrollView>
     </View>
+    </DismissKeyboard>
   );
 };
 

@@ -16,7 +16,7 @@ export default {
   dark: {
     primary: '#FFE243',
     text: '#F2F2F2',
-    background: 'rgba(5,5,5,1)',
+    background: 'rgba(10,10,10,1)',
     tint: tintColorDark,
     holderColor: 'gray',
     tabIconDefault: '#CCC',

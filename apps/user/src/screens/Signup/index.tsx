@@ -14,8 +14,6 @@ const Signup = ({navigation}: any) => {
     <View
       style={{
         height: '100%',
-        padding: 20,
-        paddingTop: 100,
       }}>
       <Text
         style={{
@@ -23,6 +21,7 @@ const Signup = ({navigation}: any) => {
           fontSize: 35,
           textAlign: 'center',
           fontWeight: '600',
+          paddingTop: 100
         }}>
         Bienvenido a Partiaf
       </Text>
@@ -32,6 +31,7 @@ const Signup = ({navigation}: any) => {
           textAlign: 'center',
           fontWeight: '300',
           color: 'rgba(255, 255, 255,.8)',
+          
         }}>
         Los eventos mas divertidos, crea tu cuenta ahora!
       </Text>
@@ -40,6 +40,7 @@ const Signup = ({navigation}: any) => {
         style={{
           marginTop: 60,
           gap: 20,
+          paddingHorizontal: 10,
         }}>
         <DefaultView
           style={{

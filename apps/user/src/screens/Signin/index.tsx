@@ -1,21 +1,52 @@
-import React from 'react';
-import {View} from '../../components/Layout/Theme';
+import React, { useState } from 'react';
 import {
   Text,
   TextInput,
   TouchableOpacity,
   View as DefaultView,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
+import { View } from '../../components/Layout/Theme';
+import DismissKeyboard from '../../components/Layout/DimissKeyboard';
+import { useDispatch } from 'react-redux';
+import { signin } from '../../features/auth';
 
 const Signin = ({navigation}: any) => {
+
+  const [user, setUser] = useState({
+    phone: '',
+    password: ''
+  });
+
+  const [loading, setLoading] = useState(false)
+
+  const dispatch = useDispatch();
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+   setLoading(true)
+  try{
+      setTimeout(() => {
+dispatch(signin(user)); 
+ setLoading(false)
+      },3000)
+      
+        
+    }catch(err){
+      console.log(err)
+    }
+  }
   return (
+    <DismissKeyboard>
     <View
       style={{
         height: '100%',
-        padding: 20,
+
         paddingTop: 150,
+        paddingHorizontal: 10,
+  
       }}>
       <Text
         style={{
@@ -23,6 +54,8 @@ const Signin = ({navigation}: any) => {
           fontSize: 35,
           textAlign: 'center',
           fontWeight: '600',
+          paddingTop: 150,
+
         }}>
         Bienvenido a Partiaf
       </Text>
@@ -40,6 +73,7 @@ const Signin = ({navigation}: any) => {
         style={{
           marginTop: 60,
           gap: 20,
+          paddingHorizontal: 10,
         }}>
         <TextInput
           placeholderTextColor="rgba(255,255,255,.5)"
@@ -52,6 +86,7 @@ const Signin = ({navigation}: any) => {
             fontSize: 14,
             color: 'white',
           }}
+          onChangeText={(text) => setUser((prev) => ({...prev, ['phone']: text}))}
           placeholder="Telefono"
         />
         <TextInput
@@ -65,10 +100,13 @@ const Signin = ({navigation}: any) => {
             fontSize: 14,
             color: 'white',
           }}
+          secureTextEntry
+          onChangeText={(text) => setUser((prev) => ({...prev, ['password']: text}))}
           placeholder="Contrasena"
         />
 
         <TouchableOpacity
+          disabled={user.password.length < 1 || user.phone.length < 1}
           style={{
             backgroundColor: colors.dark.primary,
             height: 50,
@@ -76,8 +114,13 @@ const Signin = ({navigation}: any) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-          }}>
-          <Text
+          }}
+          onPress={onSubmit}
+          >
+            {loading ? (
+<ActivityIndicator size='small' color="#000" />
+            ): (
+  <Text
             style={{
               fontWeight: '500',
               fontSize: 16,
@@ -85,6 +128,10 @@ const Signin = ({navigation}: any) => {
             }}>
             Iniciar sesion
           </Text>
+
+            )}
+            
+        
         </TouchableOpacity>
       </DefaultView>
 
@@ -175,6 +222,8 @@ const Signin = ({navigation}: any) => {
         </DefaultView>
       </DefaultView>
     </View>
+    </DismissKeyboard>
+
   );
 };
 

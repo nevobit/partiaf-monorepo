@@ -5,23 +5,32 @@ import 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 // import Home from './src/screens/Home';
 import {NavigationContainer} from '@react-navigation/native';
-import {AppNavigator, AuthNavigator} from './src/navigator/AppNavigator';
-
+import {AppNavigator, AuthNavigator, NavigatorContainer} from './src/navigator/AppNavigator';
+import { Provider, useSelector } from 'react-redux';
 import {ThemeProvider, useTheme} from './src/contexts/ThemeContexts';
+import { PersistGate } from 'redux-persist/integration/react';
 // import Signin from './src/screens/Signin';
 // import Signup from './src/screens/Signup';
+import { persistor, store } from './src/store';
 
 const App = (): JSX.Element => {
   const {updateTheme} = useTheme();
-  const user = true;
+  
+
   return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor} >
+
     <SafeAreaProvider>
       <NavigationContainer>
         <ThemeProvider>
-          {user ? <AppNavigator /> : <AuthNavigator />}
+          <NavigatorContainer />
         </ThemeProvider>
       </NavigationContainer>
     </SafeAreaProvider>
+    </PersistGate>
+
+    </Provider>
   );
 };
 

@@ -9,14 +9,16 @@ const screenHeight = Dimensions.get('screen').height;
 
 const Store = ({navigation}: any) => {
   return (
-    <View>
+    <DefaultView style={{
+      backgroundColor: 'transparent'
+    }}>
       <DefaultView
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
           zIndex: 99,
-          paddingVertical: 10,
+          paddingVertical: 40,
           paddingHorizontal: 10,
         }}>
         <TouchableOpacity
@@ -43,6 +45,11 @@ const Store = ({navigation}: any) => {
           uri: 'https://res.cloudinary.com/matosr96/image/upload/v1682659931/vothwysoycqrw8fsne0w.jpg',
         }}
       />
+
+        <DefaultView style={{
+          backgroundColor: 'rgba(10,10,10,1)',
+          height: '100%'
+        }}>
 
       <DefaultView
         style={{
@@ -114,7 +121,7 @@ const Store = ({navigation}: any) => {
               borderColor: colors.dark.primary,
               paddingVertical: 2,
               paddingHorizontal: 10,
-              borderRadius: 20,
+              borderRadius: 10,
               height: 25,
             }}>
             18+
@@ -126,7 +133,7 @@ const Store = ({navigation}: any) => {
               borderColor: colors.dark.primary,
               paddingVertical: 2,
               paddingHorizontal: 10,
-              borderRadius: 20,
+              borderRadius: 10,
               height: 25,
             }}>
             Discoteca
@@ -138,7 +145,7 @@ const Store = ({navigation}: any) => {
               borderColor: colors.dark.primary,
               paddingVertical: 2,
               paddingHorizontal: 10,
-              borderRadius: 20,
+              borderRadius: 10,
               height: 25,
             }}>
             Salsa
@@ -147,10 +154,6 @@ const Store = ({navigation}: any) => {
       </DefaultView>
       <DefaultView
         style={{
-          borderWidth: 1,
-          borderBottomWidth: 0,
-          borderLeftWidth: 0,
-          borderRightWidth: 0,
           paddingHorizontal: 20,
           paddingVertical: 15,
           paddingTop: 0,
@@ -158,6 +161,7 @@ const Store = ({navigation}: any) => {
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: 10,
+          backgroundColor: 'rgba(10,10,10,1)'
         }}>
         <DefaultView
           style={{
@@ -237,11 +241,14 @@ const Store = ({navigation}: any) => {
       <DefaultView
         style={{
           height: 140,
+          paddingHorizontal: 20,
+          paddingVertical:10
         }}>
         <Text
           style={{
             fontWeight: '500',
             fontSize: 18,
+            color: "#fff"
           }}>
           Ubicacion
         </Text>
@@ -255,7 +262,9 @@ const Store = ({navigation}: any) => {
         }}
       /> */}
       </DefaultView>
-    </View>
+      </DefaultView>
+
+    </DefaultView>
   );
 };
 

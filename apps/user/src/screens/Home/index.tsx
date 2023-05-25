@@ -31,7 +31,7 @@ const Home = ({navigation}: any) => {
             gap: 10,
           }}>
           <Icon name="options-outline" size={23} color="#fff" />
-          <Icon name="qr-code-outline" size={23} color="#000" />
+          <Icon name="qr-code-outline" size={23} color="rgba(10,10,10,1)" />
         </DefaultView>
         <Image
           style={{
