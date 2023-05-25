@@ -46,4 +46,7 @@ export interface Store extends Base {
   rating: number;
   employe_code: number;
   admin: string;
+  organizer: string;
+  min_age: number;
+  music_type: string[];
 }

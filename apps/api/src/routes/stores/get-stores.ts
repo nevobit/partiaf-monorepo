@@ -10,7 +10,7 @@ interface Query {
 export const getAllStoresRoute: RouteOptions = {
   method: RouteMethod.GET,
   url: '/stores',
-  preHandler: verifyToken,
+  // preHandler: verifyToken,
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { query } = request;

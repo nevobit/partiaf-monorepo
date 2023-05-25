@@ -5,6 +5,7 @@ import { deleteStoreRoute } from './delete';
 import { getOneStoreRoute } from './get-one';
 import { getAllStoresRoute } from './get-stores';
 import { updateStoreRoute } from './update';
+import { signInRoute } from './signin';
 
 export const storeRoutes: RouteOptions[] = [
   getAllStoresRoute,
@@ -13,4 +14,5 @@ export const storeRoutes: RouteOptions[] = [
   createStoreRoute,
   deleteStoreRoute,
   updateStoreRoute,
+  signInRoute,
 ];
