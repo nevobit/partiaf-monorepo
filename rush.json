@@ -27,8 +27,8 @@
       "shouldPublish": false
     },
     {
-      "packageName": "users",
-      "projectFolder": "apps/users",
+      "packageName": "api-graphql",
+      "projectFolder": "apps/api-graphql",
       "reviewCategory": "production",
       "shouldPublish": false
     },
