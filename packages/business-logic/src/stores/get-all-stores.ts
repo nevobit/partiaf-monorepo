@@ -1,19 +1,25 @@
 import { Result, StatusType, Store, StoreSchemaMongo } from '@partiaf/entities';
 import { getModel, Collection } from '@partiaf/constant-definitions';
 
+interface Query {
+  status: StatusType;
+  search?: string;
+}
+
 /**
  * Get all stores by admin id in the database with pagination and optional status filter.
  * @param page page number.
  * @param limit number of items per page.
  * @returns A Promise that resolves with a result of stores by page.
  */
+
 export const getAllStores = async (
   page: number,
   limit: number
 ): Promise<Result<Store>> => {
   const model = getModel<Store>(Collection.STORES, StoreSchemaMongo);
 
-  const query: any = { status: StatusType.ACTIVE };
+  const query: Query = { status: StatusType.ACTIVE };
 
   const actualPage = +page || 1;
   const pageSize = +limit || 15;

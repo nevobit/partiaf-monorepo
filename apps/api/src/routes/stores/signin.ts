@@ -11,7 +11,7 @@ export const signInRoute: RouteOptions = {
       const { body } = request;
       const data = body as { id: string; password: string };
       const signedin: boolean = await signin(data);
-      reply.status(200).send({ sign: signedin });
+      reply.status(200).send(signedin);
     } catch (err) {
       reply.status(500).send(err);
     }

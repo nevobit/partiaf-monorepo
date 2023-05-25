@@ -35,7 +35,7 @@ export const StoreSchemaMongo = new Schema<Store>(
     admin: { type: String },
     organizer: {
       type: String,
-      ref: 'user',
+      ref: 'users',
     },
     min_age: { type: Number },
     music_type: { type: [String] },
