@@ -9,8 +9,8 @@ const AddPhoto = ({navigation}: any) => {
     <View
       style={{
         height: '100%',
-        padding: 15,
-        paddingTop: 30,
+        padding: 10,
+        paddingTop: 20,
       }}>
       <DefaultView
         style={{
@@ -97,29 +97,30 @@ const AddPhoto = ({navigation}: any) => {
           <Icon name="cloud-upload-outline" size={50} color="#000" />
         </TouchableOpacity>
       </DefaultView>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Preferences')}
-        style={{
-          backgroundColor: colors.dark.primary,
-          height: 50,
-          borderRadius: 15,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          position: 'absolute',
-          bottom: 30,
-          left: 20,
-          width: '100%',
-        }}>
-        <Text
+      <DefaultView
+        style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 10}}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Preferences')}
           style={{
-            fontWeight: '500',
-            fontSize: 16,
-            color: 'rgba(0, 0, 0, .9)',
+            backgroundColor: colors.dark.primary,
+            height: 50,
+            borderRadius: 15,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '95%',
+            alignSelf: 'center',
           }}>
-          Continuar
-        </Text>
-      </TouchableOpacity>
+          <Text
+            style={{
+              fontWeight: '500',
+              fontSize: 16,
+              color: 'rgba(0, 0, 0, .9)',
+            }}>
+            Continuar
+          </Text>
+        </TouchableOpacity>
+      </DefaultView>
     </View>
   );
 };

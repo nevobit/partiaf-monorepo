@@ -8,4 +8,5 @@ export type AuthStackParamList = {
   Photo: undefined;
   UserType: undefined;
   Preferences: undefined;
+  VerifyAgent: undefined;
 };

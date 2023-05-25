@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Wallet = () => {
+const Wallet = ({navigation}: any) => {
   return (
     <View
       style={{
@@ -25,13 +25,14 @@ const Wallet = () => {
           paddingBottom: 15,
           paddingHorizontal: 10,
         }}>
-        <DefaultView
+        <TouchableOpacity
+          onPress={() => navigation.navigate('HomeScreen')}
           style={{
             flexDirection: 'row',
             gap: 10,
           }}>
-          <Icon name="options-outline" size={23} color="#fff" />
-        </DefaultView>
+          <Icon name="chevron-back-outline" size={23} color="#fff" />
+        </TouchableOpacity>
         <Image
           style={{
             width: 110,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View} from '../../components/Layout/Theme';
 import {
   Text,
@@ -79,12 +79,31 @@ const preferences = {
 };
 
 const Preferences = ({navigation}: any) => {
+  const [myPreferences, setMyPreferences] = useState<string[]>(['']);
+
+  console.log(myPreferences);
+  const addPreference = (name: string) => {
+    setMyPreferences(prev => {
+      const updatedPreferences = [...prev];
+
+      if (updatedPreferences?.includes(name)) {
+        // Si el nombre ya está en el arreglo, se elimina
+        updatedPreferences?.splice(updatedPreferences.indexOf(name), 1);
+      } else {
+        // Si el nombre no está en el arreglo, se agrega
+        updatedPreferences.push(name);
+      }
+
+      return updatedPreferences;
+    });
+  };
+
   return (
     <View
       style={{
         height: '100%',
-        padding: 20,
-        paddingTop: 25,
+        padding: 10,
+        paddingTop: 20,
       }}>
       <DefaultView
         style={{
@@ -174,14 +193,19 @@ const Preferences = ({navigation}: any) => {
             }}>
             {preferences.plan.map(preference => (
               <TouchableOpacity
+                onPress={() => addPreference(preference)}
                 style={{
-                  backgroundColor: 'rgba(255,255,255,0.2)',
+                  backgroundColor: myPreferences.includes(preference)
+                    ? colors.dark.primary
+                    : 'rgba(255,255,255,0.2)',
                   borderRadius: 10,
                   padding: 5,
                 }}>
                 <Text
                   style={{
-                    color: '#fff',
+                    color: myPreferences.includes(preference)
+                      ? 'rgba(10,10,10,1)'
+                      : '#fff',
                   }}
                   key={preference}>
                   {preference}
@@ -207,14 +231,19 @@ const Preferences = ({navigation}: any) => {
             }}>
             {preferences.music.map(preference => (
               <TouchableOpacity
+                onPress={() => addPreference(preference)}
                 style={{
-                  backgroundColor: 'rgba(255,255,255,0.2)',
+                  backgroundColor: myPreferences.includes(preference)
+                    ? colors.dark.primary
+                    : 'rgba(255,255,255,0.2)',
                   borderRadius: 10,
                   padding: 5,
                 }}>
                 <Text
                   style={{
-                    color: '#fff',
+                    color: myPreferences.includes(preference)
+                      ? 'rgba(10,10,10,1)'
+                      : '#fff',
                   }}
                   key={preference}>
                   {preference}
@@ -241,14 +270,19 @@ const Preferences = ({navigation}: any) => {
             }}>
             {preferences.food.map(preference => (
               <TouchableOpacity
+                onPress={() => addPreference(preference)}
                 style={{
-                  backgroundColor: 'rgba(255,255,255,0.2)',
+                  backgroundColor: myPreferences.includes(preference)
+                    ? colors.dark.primary
+                    : 'rgba(255,255,255,0.2)',
                   borderRadius: 10,
                   padding: 5,
                 }}>
                 <Text
                   style={{
-                    color: '#fff',
+                    color: myPreferences.includes(preference)
+                      ? 'rgba(10,10,10,1)'
+                      : '#fff',
                   }}
                   key={preference}>
                   {preference}
@@ -258,29 +292,29 @@ const Preferences = ({navigation}: any) => {
           </DefaultView>
         </DefaultView>
       </ScrollView>
-
-      <TouchableOpacity
-        style={{
-          backgroundColor: colors.dark.primary,
-          height: 50,
-          borderRadius: 15,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          position: 'absolute',
-          bottom: 30,
-          left: 20,
-          width: '100%',
-        }}>
-        <Text
+      <DefaultView style={{flex: 1, justifyContent: 'flex-end'}}>
+        <TouchableOpacity
           style={{
-            fontWeight: '500',
-            fontSize: 16,
-            color: 'rgba(0, 0, 0, .9)',
-          }}>
-          Continuar
-        </Text>
-      </TouchableOpacity>
+            backgroundColor: colors.dark.primary,
+            height: 50,
+            borderRadius: 15,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '95%',
+            alignSelf: 'center',
+          }}
+          onPress={() => navigation.navigate('VerifyAge')}>
+          <Text
+            style={{
+              fontWeight: '500',
+              fontSize: 16,
+              color: 'rgba(0, 0, 0, .9)',
+            }}>
+            Continuar
+          </Text>
+        </TouchableOpacity>
+      </DefaultView>
     </View>
   );
 };

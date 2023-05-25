@@ -45,6 +45,7 @@ const Signin = ({navigation}: any) => {
           placeholderTextColor="rgba(255,255,255,.5)"
           style={{
             paddingHorizontal: 10,
+            height: 50,
             borderWidth: 1,
             borderColor: 'rgba(255, 255, 255, .5)',
             borderRadius: 15,
@@ -57,6 +58,7 @@ const Signin = ({navigation}: any) => {
           placeholderTextColor="rgba(255,255,255,.5)"
           style={{
             paddingHorizontal: 10,
+            height: 50,
             borderWidth: 1,
             borderColor: 'rgba(255, 255, 255, .5)',
             borderRadius: 15,

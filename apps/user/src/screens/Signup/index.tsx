@@ -58,6 +58,7 @@ const Signup = ({navigation}: any) => {
               fontSize: 14,
               color: 'white',
               width: '47%',
+              height: 50,
             }}
             placeholder="Nombre"
           />
@@ -71,6 +72,7 @@ const Signup = ({navigation}: any) => {
               fontSize: 14,
               color: 'white',
               width: '47%',
+              height: 50,
             }}
             placeholder="Apellido"
           />
@@ -85,6 +87,7 @@ const Signup = ({navigation}: any) => {
             borderRadius: 15,
             fontSize: 14,
             color: 'white',
+            height: 50,
           }}
           placeholder="Telefono"
         />
@@ -98,6 +101,7 @@ const Signup = ({navigation}: any) => {
             borderRadius: 15,
             fontSize: 14,
             color: 'white',
+            height: 50,
           }}
           placeholder="Contrasena"
         />

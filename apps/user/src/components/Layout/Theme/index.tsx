@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {SafeAreaView, StyleProp, ViewStyle, ScrollView} from 'react-native';
+import {
+  SafeAreaView,
+  StyleProp,
+  ViewStyle,
+  ScrollView,
+  StatusBar,
+} from 'react-native';
 import Colors from './colors';
 import {ReactNode} from 'react';
 import {useTheme} from '../../../contexts/ThemeContexts';
@@ -23,6 +29,7 @@ export const View = ({style, children}: Props) => {
         },
         style,
       ]}>
+      <StatusBar backgroundColor="rgba(10,10,10,1)" barStyle="light-content" />
       {children}
     </SafeAreaView>
   );

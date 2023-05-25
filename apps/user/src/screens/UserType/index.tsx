@@ -11,8 +11,8 @@ const UserType = ({navigation}: any) => {
     <View
       style={{
         height: '100%',
-        padding: 15,
-        paddingTop: 30,
+        padding: 10,
+        paddingTop: 20,
       }}>
       <DefaultView
         style={{

@@ -50,7 +50,7 @@ const Store = ({navigation}: any) => {
           bottom: 40,
           // height: '100%',
           borderRadius: 30,
-          backgroundColor: 'rgba(0,0,0,1)',
+          backgroundColor: 'rgba(10,10,10,1)',
           padding: 20,
           paddingTop: 20,
           paddingBottom: 0,
@@ -115,6 +115,7 @@ const Store = ({navigation}: any) => {
               paddingVertical: 2,
               paddingHorizontal: 10,
               borderRadius: 20,
+              height: 25,
             }}>
             18+
           </Text>
@@ -126,6 +127,7 @@ const Store = ({navigation}: any) => {
               paddingVertical: 2,
               paddingHorizontal: 10,
               borderRadius: 20,
+              height: 25,
             }}>
             Discoteca
           </Text>
@@ -137,6 +139,7 @@ const Store = ({navigation}: any) => {
               paddingVertical: 2,
               paddingHorizontal: 10,
               borderRadius: 20,
+              height: 25,
             }}>
             Salsa
           </Text>

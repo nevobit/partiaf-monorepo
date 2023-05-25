@@ -12,6 +12,7 @@ import AddPhoto from '../../screens/AddPhoto';
 import {AuthStackParamList} from './types';
 import HomeNavigator from './HomeNavigator';
 import Partiaf from '../../screens/Partiaf';
+import VerifyAge from '../../screens/VerifyAge';
 
 const Tab = createBottomTabNavigator();
 const Auth = createStackNavigator<AuthStackParamList>();
@@ -54,6 +55,14 @@ export const AuthNavigator = () => {
       <Auth.Screen
         name="Preferences"
         component={Preferences}
+        options={{
+          presentation: 'card',
+          animationTypeForReplace: 'push',
+        }}
+      />
+      <Auth.Screen
+        name="VerifyAge"
+        component={VerifyAge}
         options={{
           presentation: 'card',
           animationTypeForReplace: 'push',
