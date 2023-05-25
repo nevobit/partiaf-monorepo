@@ -1,5 +1,6 @@
 // import { verifyToken } from '@partiaf/business-logic';
 import { FastifyReply, FastifyRequest, RouteOptions } from 'fastify';
+import { RouteMethod } from '@partiaf/constant-definitions';
 import { deleteStore } from '@partiaf/business-logic';
 
 type Params = {
@@ -7,7 +8,7 @@ type Params = {
 };
 
 export const deleteStoreRoute: RouteOptions = {
-  method: 'DELETE',
+  method: RouteMethod.DELETE,
   url: '/stores/:uuid',
   // preHandler: verifyToken,
   handler: async (request: FastifyRequest, reply: FastifyReply) => {

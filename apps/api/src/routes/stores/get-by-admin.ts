@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest, RouteOptions } from 'fastify';
-import { getStoresByAdmin } from '@partiaf/business-logic';
+import { RouteMethod } from '@partiaf/constant-definitions';
+import { getStoresByAdmin, verifyToken } from '@partiaf/business-logic';
 import { StatusType } from '@partiaf/entities/build';
 
 interface Params {
@@ -12,8 +13,9 @@ interface Query {
 }
 
 export const getStoresByAdminRoute: RouteOptions = {
-  method: 'GET',
+  method: RouteMethod.GET,
   url: '/stores/:admin',
+  // preHandler: verifyToken,
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { params } = request;

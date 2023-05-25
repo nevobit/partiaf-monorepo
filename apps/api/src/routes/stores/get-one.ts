@@ -8,7 +8,7 @@ type Params = {
 
 export const getOneStoreRoute: RouteOptions = {
   method: RouteMethod.GET,
-  url: '/stores/:uuid',
+  url: '/store/:uuid',
   handler: async (request: FastifyRequest, reply) => {
     const { params } = request;
     const { uuid } = params as Params;

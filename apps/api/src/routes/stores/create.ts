@@ -1,4 +1,5 @@
 import { createStore, verifyToken } from '@partiaf/business-logic';
+import { RouteMethod } from '@partiaf/constant-definitions';
 import { Admin, CreateStoreDto } from '@partiaf/entities';
 import { FastifyReply, FastifyRequest, RouteOptions } from 'fastify';
 
@@ -7,9 +8,9 @@ interface FastifyRequestAdmin extends FastifyRequest {
 }
 
 export const createStoreRoute: RouteOptions = {
-  method: 'POST',
+  method: RouteMethod.POST,
   url: '/stores',
-  preHandler: verifyToken,
+  // preHandler: verifyToken,
   handler: async (request: FastifyRequestAdmin, reply: FastifyReply) => {
     try {
       const { body } = request;

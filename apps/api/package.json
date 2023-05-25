@@ -20,7 +20,8 @@
     "@fastify/multipart": "7.6.0",
     "@partiaf/data-sources": "workspace:*",
     "@partiaf/business-logic": "workspace:*",
-    "@partiaf/entities": "workspace:*"
+    "@partiaf/entities": "workspace:*",
+    "@partiaf/constant-definitions": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "18.11.18",
