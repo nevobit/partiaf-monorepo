@@ -1,16 +1,16 @@
 import { RouteMethod } from '@partiaf/constant-definitions';
 import { RouteOptions, FastifyRequest, FastifyReply } from 'fastify';
-import { login, verifyToken } from '@partiaf/business-logic';
+import { registerAdmin } from '@partiaf/business-logic';
+import { CreateAdminDto } from '@partiaf/entities';
 
-export const loginRoute: RouteOptions = {
+export const registerAdminsRoute: RouteOptions = {
   method: RouteMethod.POST,
-  url: 'login',
-  preHandler: verifyToken,
+  url: '/admins',
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { body } = request;
-      const data = body as { username: string; password: string };
-      const admin = await login(data);
+      const data = body as CreateAdminDto;
+      const admin = await registerAdmin(data);
       reply.status(201).send(admin);
     } catch (err) {
       reply.status(500).send(err);
