@@ -16,6 +16,7 @@
     "@partiaf/data-sources": "workspace:*",
     "ts-node-dev": "~2.0.0",
     "typescript": "~5.0.4",
-    "graphql": "~16.6.0"
+    "graphql": "~16.6.0",
+    "apollo-server-core": "~3.12.0"
   }
 }

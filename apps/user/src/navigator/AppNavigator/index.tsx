@@ -13,6 +13,7 @@ import {AuthStackParamList} from './types';
 import HomeNavigator from './HomeNavigator';
 import Partiaf from '../../screens/Partiaf';
 import VerifyAge from '../../screens/VerifyAge';
+import {useSelector} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 const Auth = createStackNavigator<AuthStackParamList>();
@@ -86,4 +87,9 @@ export const AppNavigator = () => {
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
+};
+
+export const NavigatorContainer = () => {
+  const {user} = useSelector((state: any) => state.auth);
+  return <>{user ? <AppNavigator /> : <AuthNavigator />}</>;
 };

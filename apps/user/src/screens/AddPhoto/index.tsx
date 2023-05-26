@@ -15,6 +15,11 @@ const AddPhoto = ({navigation}: any) => {
       <DefaultView
         style={{
           marginBottom: 20,
+          paddingTop: 20,
+          paddingHorizontal: 10,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}>
         <TouchableOpacity onPress={() => navigation.navigate('UserType')}>
           <Text
@@ -32,6 +37,7 @@ const AddPhoto = ({navigation}: any) => {
           justifyContent: 'space-between',
           gap: 2,
           marginBottom: 10,
+          paddingHorizontal: 10,
         }}>
         <DefaultView
           style={{
@@ -68,14 +74,16 @@ const AddPhoto = ({navigation}: any) => {
           fontSize: 30,
           //  textAlign: 'center',
           fontWeight: '600',
+          paddingHorizontal: 10,
         }}>
         Anadir una foto
       </Text>
       <Text
         style={{
           color: 'rgba(255,255,255,0.6)',
+          paddingHorizontal: 10,
         }}>
-        Selecciona al menos 5
+        Podras cambiarla cuando quieras
       </Text>
 
       <DefaultView
@@ -99,6 +107,28 @@ const AddPhoto = ({navigation}: any) => {
       </DefaultView>
       <DefaultView
         style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 10}}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Preferences')}
+          style={{
+            height: 50,
+            borderRadius: 15,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '50%',
+            alignSelf: 'center',
+            marginBottom: 10,
+          }}>
+          <Text
+            style={{
+              fontWeight: '500',
+              fontSize: 16,
+
+              color: colors.dark.primary,
+            }}>
+            Omitir
+          </Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate('Preferences')}
           style={{
