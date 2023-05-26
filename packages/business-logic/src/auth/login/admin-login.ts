@@ -35,8 +35,6 @@ export const login = async ({ username, password, code }: UpdateAdminDto) => {
     if (!code) {
       throw new Error('Authentication code must be provided for login');
     }
-
-    const verified = false;
   }
 
   admin.login_attempts = 0;

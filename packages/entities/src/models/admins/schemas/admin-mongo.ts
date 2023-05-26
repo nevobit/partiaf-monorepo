@@ -12,6 +12,12 @@ export const AdminSchemaMongo = new Schema<Admin>({
   status: { type: String, default: StatusType.ACTIVE },
   identification: { type: String, unique: true },
   address: { type: String, unique: true },
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  code: { type: Number, required: false },
+  login_attempts: { type: Number, default: 0 },
+  two_factor_auth: { type: Boolean, default: false },
+  locked: { type: Boolean, default: false },
   trial_start_date: { type: Date },
   trial_end_date: { type: Date },
 });
