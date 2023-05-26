@@ -6,16 +6,16 @@ import colors from '../../components/Layout/Theme/colors';
 import {useTheme} from '../../contexts/ThemeContexts';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ProfileTopTap from '../../navigator/AppNavigator/ProfileTopTap';
-import { useDispatch } from 'react-redux';
-import { signout } from '../../features/auth';
+import {useDispatch} from 'react-redux';
+import {signout} from '../../features/auth';
 
 const Profile = () => {
   const {theme} = useTheme();
 
   const dispatch = useDispatch();
   const logout = () => {
-    dispatch(signout())
-  }
+    dispatch(signout());
+  };
   return (
     <View
       style={{
@@ -51,7 +51,6 @@ const Profile = () => {
           <TouchableOpacity onPress={logout}>
             <Icon name="menu" size={35} color="#fff" />
           </TouchableOpacity>
-          
         </DefaultView>
       </DefaultView>
 

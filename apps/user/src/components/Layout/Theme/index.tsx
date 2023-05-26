@@ -5,7 +5,7 @@ import {
   ViewStyle,
   ScrollView,
   StatusBar,
-  View as DefaultView
+  View as DefaultView,
 } from 'react-native';
 import Colors from './colors';
 import {ReactNode} from 'react';
@@ -30,8 +30,12 @@ export const View = ({style, children}: Props) => {
         },
         style,
       ]}>
-                <CustomStatusBar translucent backgroundColor="#000" barStyle="light-content" />
-  
+      <CustomStatusBar
+        translucent
+        backgroundColor="#000"
+        barStyle="light-content"
+      />
+
       {children}
     </SafeAreaView>
   );

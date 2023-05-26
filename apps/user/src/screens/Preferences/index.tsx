@@ -109,7 +109,7 @@ const Preferences = ({navigation}: any) => {
         style={{
           marginBottom: 20,
           paddingHorizontal: 10,
-          marginTop:20
+          marginTop: 20,
         }}>
         <TouchableOpacity onPress={() => navigation.navigate('Photo')}>
           <Text
@@ -199,7 +199,7 @@ const Preferences = ({navigation}: any) => {
             }}>
             {preferences.plan.map(preference => (
               <TouchableOpacity
-              key={preference}
+                key={preference}
                 onPress={() => addPreference(preference)}
                 style={{
                   backgroundColor: myPreferences.includes(preference)
@@ -213,8 +213,7 @@ const Preferences = ({navigation}: any) => {
                     color: myPreferences.includes(preference)
                       ? 'rgba(10,10,10,1)'
                       : '#fff',
-                  }}
-                 >
+                  }}>
                   {preference}
                 </Text>
               </TouchableOpacity>
@@ -238,7 +237,7 @@ const Preferences = ({navigation}: any) => {
             }}>
             {preferences.music.map(preference => (
               <TouchableOpacity
-              key={preference}
+                key={preference}
                 onPress={() => addPreference(preference)}
                 style={{
                   backgroundColor: myPreferences.includes(preference)
@@ -246,15 +245,13 @@ const Preferences = ({navigation}: any) => {
                     : 'rgba(255,255,255,0.2)',
                   borderRadius: 10,
                   padding: 5,
-                  
                 }}>
                 <Text
                   style={{
                     color: myPreferences.includes(preference)
                       ? 'rgba(10,10,10,1)'
                       : '#fff',
-                  }}
-                  >
+                  }}>
                   {preference}
                 </Text>
               </TouchableOpacity>
@@ -279,7 +276,7 @@ const Preferences = ({navigation}: any) => {
             }}>
             {preferences.food.map(preference => (
               <TouchableOpacity
-              key={preference}
+                key={preference}
                 onPress={() => addPreference(preference)}
                 style={{
                   backgroundColor: myPreferences.includes(preference)
@@ -304,9 +301,12 @@ const Preferences = ({navigation}: any) => {
       </ScrollView>
       <DefaultView style={{flex: 1, justifyContent: 'flex-end'}}>
         <TouchableOpacity
-        disabled={myPreferences.length < 5 }
+          disabled={myPreferences.length < 5}
           style={{
-            backgroundColor: myPreferences.length <= 5 ? 'rgb(100,100,100)' : colors.dark.primary,
+            backgroundColor:
+              myPreferences.length <= 5
+                ? 'rgb(100,100,100)'
+                : colors.dark.primary,
             height: 50,
             borderRadius: 15,
             display: 'flex',

@@ -9,36 +9,33 @@ import {
 } from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import DatePicker from 'react-native-date-picker';
-import { useDispatch } from 'react-redux';
-import { signin } from '../../features/auth';
+import {useDispatch} from 'react-redux';
+import {signin} from '../../features/auth';
 
 const VerifyAge = ({navigation}: any) => {
-
   const [date, setDate] = useState(new Date());
 
   const [user, setUser] = useState({
     phone: 'Alessandro',
-    password: 'De bonis'
+    password: 'De bonis',
   });
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-   setLoading(true)
-  try{
+    setLoading(true);
+    try {
       setTimeout(() => {
-dispatch(signin(user)); 
- setLoading(false)
-      },3000)
-      
-        
-    }catch(err){
-      console.log(err)
+        dispatch(signin(user));
+        setLoading(false);
+      }, 3000);
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
   return (
     <View
       style={{
@@ -118,7 +115,6 @@ dispatch(signin(user));
           Algunos eventos estaran disponibles dependiendo de tu edad.
         </Text>
         {/* <DatePicker date={date} onDateChange={setDate} /> */}
-        
       </ScrollView>
       <DefaultView style={{flex: 1, justifyContent: 'flex-end'}}>
         <TouchableOpacity
@@ -132,21 +128,19 @@ dispatch(signin(user));
             width: '95%',
             alignSelf: 'center',
           }}
-          onPress={onSubmit}
-          >
-            {loading ? (
-              <ActivityIndicator color="#000" />
-            ): (
-<Text
-            style={{
-              fontWeight: '500',
-              fontSize: 16,
-              color: 'rgba(0, 0, 0, .9)',
-            }}>
-            Continuar
-          </Text>
-            )}
-          
+          onPress={onSubmit}>
+          {loading ? (
+            <ActivityIndicator color="#000" />
+          ) : (
+            <Text
+              style={{
+                fontWeight: '500',
+                fontSize: 16,
+                color: 'rgba(0, 0, 0, .9)',
+              }}>
+              Continuar
+            </Text>
+          )}
         </TouchableOpacity>
       </DefaultView>
     </View>

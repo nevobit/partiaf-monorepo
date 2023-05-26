@@ -33,6 +33,12 @@ export const StoreSchemaMongo = new Schema<Store>(
     rating: { type: Number },
     employe_code: { type: Number },
     admin: { type: String },
+    organizer: {
+      type: String,
+      ref: 'users',
+    },
+    min_age: { type: Number },
+    music_type: { type: [String] },
   },
   {
     versionKey: false,

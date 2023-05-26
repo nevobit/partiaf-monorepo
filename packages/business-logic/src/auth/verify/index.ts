@@ -1,9 +1,10 @@
+// import jwt from 'jsonwebtoken';
 import { FastifyRequest, FastifyReply } from 'fastify';
 import jwt from 'jsonwebtoken';
 import { Admin } from '@partiaf/entities';
 
 interface FastifyRequestAdmin extends FastifyRequest {
-  admin: Admin;
+  admin?: Admin;
 }
 
 const { NODE_ENV, API_KEY, JWT_SECRET } = process.env;

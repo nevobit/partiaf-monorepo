@@ -18,7 +18,7 @@ const UserType = ({navigation}: any) => {
         style={{
           marginBottom: 20,
           paddingHorizontal: 10,
-          paddingTop: 20
+          paddingTop: 20,
         }}>
         <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
           <Text
@@ -43,7 +43,6 @@ const UserType = ({navigation}: any) => {
             height: 3,
             width: 80,
             backgroundColor: colors.dark.primary,
-            
           }}
         />
         <DefaultView

@@ -19,7 +19,7 @@ const AddPhoto = ({navigation}: any) => {
           paddingHorizontal: 10,
           flexDirection: 'row',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
         }}>
         <TouchableOpacity onPress={() => navigation.navigate('UserType')}>
           <Text
@@ -29,7 +29,6 @@ const AddPhoto = ({navigation}: any) => {
             Atras
           </Text>
         </TouchableOpacity>
-
       </DefaultView>
       <DefaultView
         style={{
@@ -108,10 +107,9 @@ const AddPhoto = ({navigation}: any) => {
       </DefaultView>
       <DefaultView
         style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 10}}>
-            <TouchableOpacity
+        <TouchableOpacity
           onPress={() => navigation.navigate('Preferences')}
           style={{
-            
             height: 50,
             borderRadius: 15,
             display: 'flex',
@@ -119,13 +117,13 @@ const AddPhoto = ({navigation}: any) => {
             justifyContent: 'center',
             width: '50%',
             alignSelf: 'center',
-            marginBottom: 10
+            marginBottom: 10,
           }}>
           <Text
             style={{
               fontWeight: '500',
               fontSize: 16,
-              
+
               color: colors.dark.primary,
             }}>
             Omitir
