@@ -1,15 +1,15 @@
 import 'dotenv/config';
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
 import { initDataSources } from '@partiaf/data-sources';
 import typeDefs from '../typedefs';
 import resolvers from '../resolvers';
-import {
-  ApolloServerPluginLandingPageGraphQLPlayground,
-  ApolloServerPluginLandingPageLocalDefault,
-  ApolloServerPluginLandingPageProductionDefault,
-} from 'apollo-server-core';
 
-const { PORT, MONGODB_URL, NODE_ENV } = process.env;
+const { PORT, MONGODB_URL } = process.env;
+
+interface ApiContext {
+  token?: string;
+}
 
 const main = async () => {
   await initDataSources({
@@ -18,21 +18,12 @@ const main = async () => {
     },
   });
 
-  const server = new ApolloServer({
-    cors: true,
-    resolvers,
-    typeDefs,
-    context: async ({ req }) => ({ user: req.headers.user }),
-    plugins: [
-      NODE_ENV == 'production'
-        ? ApolloServerPluginLandingPageProductionDefault
-        : ApolloServerPluginLandingPageGraphQLPlayground,
-    ],
+  const server = new ApolloServer<ApiContext>({ resolvers, typeDefs });
+  const { url } = await startStandaloneServer(server, {
+    context: async ({ req }) => ({ token: req.headers.token }),
+    listen: { port: Number(PORT) | 8001 },
   });
-
-  server.listen(PORT, async () => {
-    console.log(`server listening on port ${PORT}`);
-  });
+  console.log(`server listening on ${url}`);
 };
 
 void main();
