@@ -3,8 +3,13 @@ import { ApolloServer } from 'apollo-server';
 import { initDataSources } from '@partiaf/data-sources';
 import typeDefs from '../typedefs';
 import resolvers from '../resolvers';
+import {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+  ApolloServerPluginLandingPageLocalDefault,
+  ApolloServerPluginLandingPageProductionDefault,
+} from 'apollo-server-core';
 
-const { PORT, MONGODB_URL } = process.env;
+const { PORT, MONGODB_URL, NODE_ENV } = process.env;
 
 const main = async () => {
   await initDataSources({
@@ -17,6 +22,12 @@ const main = async () => {
     cors: true,
     resolvers,
     typeDefs,
+    context: async ({ req }) => ({ user: req.headers.user }),
+    plugins: [
+      NODE_ENV == 'production'
+        ? ApolloServerPluginLandingPageProductionDefault
+        : ApolloServerPluginLandingPageGraphQLPlayground,
+    ],
   });
 
   server.listen(PORT, async () => {
