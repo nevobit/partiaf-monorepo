@@ -6,6 +6,7 @@ export interface Admin extends Base {
   age: number;
   birth_date: Date;
   photo: string;
+  phone: string;
   identification: string;
   address: string;
   email: string;

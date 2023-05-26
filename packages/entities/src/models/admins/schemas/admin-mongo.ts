@@ -10,6 +10,7 @@ export const AdminSchemaMongo = new Schema<Admin>({
   birth_date: { type: Date, required: true },
   age: { type: Number },
   photo: { type: String },
+  phone: { type: String, required: true, unique: true },
   status: { type: String, default: StatusType.ACTIVE },
   identification: { type: String, required: true, unique: true },
   address: { type: String, unique: true },
