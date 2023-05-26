@@ -1,5 +1,6 @@
-export interface Admin {
-  uuid: string;
+import { Base } from '../../../common';
+
+export interface Admin extends Base {
   name: string;
   lastname: string;
   age: number;
