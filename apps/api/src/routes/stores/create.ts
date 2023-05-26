@@ -16,7 +16,7 @@ export const createStoreRoute: RouteOptions = {
       const { body } = request;
       const data = body as CreateStoreDto;
       const { admin } = request;
-      const store = await createStore({ ...data, admin: admin?.uuid });
+      const store = await createStore({ ...data, admin: admin?.id });
       reply.status(201).send(store);
     } catch (err) {
       reply.status(500).send(err);
