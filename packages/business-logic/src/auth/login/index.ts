@@ -5,10 +5,10 @@ import jwt from 'jsonwebtoken';
 
 const { JWT_SECRET } = process.env;
 
-export const login = async ({ username, password, code }: UpdateAdminDto) => {
+export const login = async ({ email, password, code }: UpdateAdminDto) => {
   const model = getModel<Admin>(Collection.ADMINS, AdminSchemaMongo);
 
-  const admin = await model.findOne({ username });
+  const admin = await model.findOne({ email });
 
   if (!admin) throw new Error('Invalid credentials');
 

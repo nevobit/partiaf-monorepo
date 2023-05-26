@@ -9,7 +9,7 @@ export const loginRoute: RouteOptions = {
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { body } = request;
-      const data = body as { username: string; password: string };
+      const data = body as { email: string; password: string };
       const admin = await login(data);
       reply.status(201).send(admin);
     } catch (err) {
