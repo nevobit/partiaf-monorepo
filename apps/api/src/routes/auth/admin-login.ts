@@ -4,7 +4,7 @@ import { login, verifyToken } from '@partiaf/business-logic';
 
 export const loginRoute: RouteOptions = {
   method: RouteMethod.POST,
-  url: '/admins/login',
+  url: '/login',
   preHandler: verifyToken,
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
