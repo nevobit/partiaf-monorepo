@@ -32,6 +32,11 @@ type Initial {
 type Query {
  getInitialQuery: Initial
 }
+
+type Mutation {
+    userSignin(phone: String!, password: String!): String
+}
+
 `;
 
 export default typeDefs;
