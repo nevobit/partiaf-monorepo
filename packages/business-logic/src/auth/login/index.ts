@@ -40,7 +40,7 @@ export const login = async ({ username, password, code }: UpdateAdminDto) => {
   admin.login_attempts = 0;
   await admin.save();
 
-  const token = jwt.sign({ uuid: admin._id }, JWT_SECRET!, {
+  const token = jwt.sign({ id: admin._id }, JWT_SECRET!, {
     expiresIn: '24h',
   });
 
