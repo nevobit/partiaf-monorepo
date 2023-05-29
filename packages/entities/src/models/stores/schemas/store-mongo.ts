@@ -38,7 +38,11 @@ export const StoreSchemaMongo = new Schema<Store>(
       ref: 'users',
     },
     min_age: { type: Number },
-    music_type: { type: [String] },
+    specialties: {
+      music: { type: [String] },
+      plan: { type: [String] },
+      food: { type: [String] },
+    },
   },
   {
     versionKey: false,
