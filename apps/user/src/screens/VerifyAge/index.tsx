@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useState, useEffect} from 'react';
 import {View} from '../../components/Layout/Theme';
 import {
@@ -6,36 +7,46 @@ import {
   View as DefaultView,
   ScrollView,
   ActivityIndicator,
+  TextInput,
 } from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import DatePicker from 'react-native-date-picker';
-import {useDispatch} from 'react-redux';
-import {signin} from '../../features/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {saveUserInfo, signin} from '../../features/auth';
+import {useMutation} from '@apollo/client';
+import {REGISTER_USER} from '../../graphql/mutations';
 
 const VerifyAge = ({navigation}: any) => {
-  const [date, setDate] = useState(new Date());
-
-  const [user, setUser] = useState({
-    phone: 'Alessandro',
-    password: 'De bonis',
-  });
-
+  const {userInfo} = useSelector((state: any) => state.auth);
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
+
+  const [register] = useMutation(REGISTER_USER);
+  const [error, setError] = useState('');
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     try {
-      setTimeout(() => {
-        dispatch(signin(user));
-        setLoading(false);
-      }, 3000);
+      const {data} = await register({
+        variables: {
+          userData: userInfo,
+        },
+      });
+      dispatch(signin({...data.userSignup}));
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
+
+  if (error.length > 0) {
+    setTimeout(() => {
+      setError('');
+    }, 10000);
+  }
+
   return (
     <View
       style={{
@@ -49,7 +60,7 @@ const VerifyAge = ({navigation}: any) => {
           marginTop: 20,
           paddingHorizontal: 10,
         }}>
-        <TouchableOpacity onPress={() => navigation.navigate('Photo')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Preferences')}>
           <Text
             style={{
               color: colors.dark.primary,
@@ -113,6 +124,29 @@ const VerifyAge = ({navigation}: any) => {
             paddingHorizontal: 10,
           }}>
           Algunos eventos estaran disponibles dependiendo de tu edad.
+        </Text>
+        <DefaultView
+          style={{
+            padding: 10,
+          }}>
+          <TextInput
+            placeholder="Edad"
+            placeholderTextColor="rgba(255,255,255,0.5)"
+            style={{
+              borderWidth: 1,
+              borderColor: 'rgba(255,255,255,0.5)',
+              borderRadius: 10,
+              color: 'rgba(255,255,255,1)',
+              fontSize: 16,
+              paddingHorizontal: 10,
+            }}
+          />
+        </DefaultView>
+        <Text
+          style={{
+            color: 'red',
+          }}>
+          {error}
         </Text>
         {/* <DatePicker date={date} onDateChange={setDate} /> */}
       </ScrollView>

@@ -6,12 +6,15 @@ import {
   View as DefaultView,
   Image,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import {View} from '../../components/Layout/Theme';
 import DismissKeyboard from '../../components/Layout/DimissKeyboard';
 import {useDispatch} from 'react-redux';
 import {signin} from '../../features/auth';
+import {useMutation} from '@apollo/client';
+import {LOGIN_USER} from '../../graphql/mutations';
 
 const Signin = ({navigation}: any) => {
   const [user, setUser] = useState({
@@ -19,29 +22,42 @@ const Signin = ({navigation}: any) => {
     password: '',
   });
 
-  const [loading, setLoading] = useState(false);
-
   const dispatch = useDispatch();
+
+  const [login] = useMutation(LOGIN_USER);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     try {
-      setTimeout(() => {
-        dispatch(signin(user));
-        setLoading(false);
-      }, 3000);
+      console.log(user);
+      const {data} = await login({
+        variables: {
+          ...user,
+        },
+      });
+      dispatch(signin({...data.userSignin}));
+      setLoading(false);
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
+
+  if (error.length > 0) {
+    setTimeout(() => {
+      setError('');
+    }, 10000);
+  }
+
   return (
     <DismissKeyboard>
       <View
         style={{
           height: '100%',
-
-          paddingTop: 150,
+          paddingTop: Platform.OS == 'ios' ? 150 : 0,
           paddingHorizontal: 10,
         }}>
         <Text

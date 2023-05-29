@@ -25,7 +25,14 @@ const Banner = () => {
           />
         </div>
       </div>
-      <Image src="/banner.png" width={300} height={300} alt="Partiaf Banner" />
+      <div className={styles.picture}>
+        <Image
+          src="/banner_ph.png"
+          width={390}
+          height={390}
+          alt="Partiaf Banner"
+        />
+      </div>
     </section>
   );
 };

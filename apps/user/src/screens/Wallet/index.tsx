@@ -6,10 +6,29 @@ import {
   Text,
   TouchableOpacity,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
+import {useQuery} from '@apollo/client';
+import {GET_USER_BALANCE} from '../../graphql/queries/users';
+import {useEffect} from 'react';
+import {DivisaFormater} from '../../utilities/divisaFormater';
 
 const Wallet = ({navigation}: any) => {
+  const {user} = useSelector((state: any) => state.auth);
+
+  const {data, loading, refetch} = useQuery(GET_USER_BALANCE, {
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   return (
     <View
       style={{
@@ -66,14 +85,18 @@ const Wallet = ({navigation}: any) => {
           }}>
           Balance total
         </Text>
-        <Text
-          style={{
-            color: 'rgba(255,255,255,1)',
-            fontWeight: '600',
-            fontSize: 30,
-          }}>
-          $0.00
-        </Text>
+        {loading ? (
+          <ActivityIndicator color="rgba(255,255,255,0.5)" />
+        ) : (
+          <Text
+            style={{
+              color: 'rgba(255,255,255,1)',
+              fontWeight: '600',
+              fontSize: 30,
+            }}>
+            {DivisaFormater(data?.getUserById.balance)}
+          </Text>
+        )}
       </DefaultView>
 
       <DefaultView

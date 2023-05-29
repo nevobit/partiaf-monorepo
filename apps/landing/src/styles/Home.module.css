@@ -30,7 +30,8 @@
 
 .picture {
   position: absolute;
-  bottom: -50.4rem;
+  bottom: -49rem;
+  z-index: 1;
   /* left: 0; */
 }
 
@@ -73,6 +74,6 @@
   .picture {
     position: absolute;
     bottom: -58.8rem;
-    /* left: 0; */
+    left: 5rem;
   }
 }

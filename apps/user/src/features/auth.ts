@@ -3,6 +3,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initialState = {
   user: null,
+  userInfo: {
+    firstname: '',
+    lastname: '',
+    phone: '',
+    password: '',
+    accountType: '',
+    photo: '',
+    interests: {},
+  },
   isLoading: true,
   isSignout: false,
 };
@@ -10,7 +19,7 @@ const initialState = {
 export const UserKey = 'user';
 
 const loginUser = async (action: any) => {
-  await AsyncStorage.setItem(UserKey, JSON.stringify(action.payload));
+  await AsyncStorage.setItem(UserKey, JSON.stringify(action));
 };
 
 let state: any = {};
@@ -31,7 +40,6 @@ export const isSignedIn = () => {
 
 state = state || initialState;
 
-console.log({state});
 const authSlice = createSlice({
   name: 'auth',
   initialState: state,
@@ -40,10 +48,13 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.isLoading = false;
     },
+    saveUserInfo: (state, action) => {
+      state.userInfo = {...state.userInfo, ...action.payload};
+    },
     signin: (state, action) => {
       state.isSignout = false;
       state.user = action.payload;
-      loginUser(action);
+      loginUser(action.payload);
     },
     signout: state => {
       state.isSignout = true;
@@ -52,5 +63,5 @@ const authSlice = createSlice({
   },
 });
 
-export const {restoreToken, signin, signout} = authSlice.actions;
+export const {restoreToken, saveUserInfo, signin, signout} = authSlice.actions;
 export default authSlice.reducer;

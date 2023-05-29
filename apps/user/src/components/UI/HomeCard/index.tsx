@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 
-const HomeCard = () => {
+const StoreCard = () => {
   return (
     <View
       style={{
@@ -36,4 +36,4 @@ const HomeCard = () => {
   );
 };
 
-export default HomeCard;
+export default StoreCard;

@@ -1,12 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from '../../components/Layout/Theme';
 import {Text, TouchableOpacity, View as DefaultView} from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useDispatch} from 'react-redux';
+import {saveUserInfo} from '../../features/auth';
 
 const UserType = ({navigation}: any) => {
-  const [selected, setSelected] = useState('personal');
+  const dispatch = useDispatch();
 
+  const onSubmit = (selected: string) => {
+    dispatch(saveUserInfo({accountType: selected}));
+    navigation.navigate('Photo');
+  };
   return (
     <View
       style={{
@@ -93,10 +99,7 @@ const UserType = ({navigation}: any) => {
         }}>
         <TouchableOpacity
           style={{
-            backgroundColor:
-              selected == 'personal'
-                ? colors.dark.primary
-                : colors.dark.holderColor,
+            backgroundColor: colors.dark.primary,
             height: 50,
             borderRadius: 15,
             flexDirection: 'row',
@@ -104,7 +107,7 @@ const UserType = ({navigation}: any) => {
             justifyContent: 'space-between',
             padding: 10,
           }}
-          onPress={() => navigation.navigate('Photo')}>
+          onPress={() => onSubmit('personal')}>
           <Text
             style={{
               fontWeight: '500',
@@ -117,10 +120,7 @@ const UserType = ({navigation}: any) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor:
-              selected == 'promoter'
-                ? colors.dark.primary
-                : colors.dark.holderColor,
+            backgroundColor: colors.dark.holderColor,
             height: 50,
             borderRadius: 15,
             flexDirection: 'row',
@@ -128,7 +128,7 @@ const UserType = ({navigation}: any) => {
             justifyContent: 'space-between',
             padding: 10,
           }}
-          onPress={() => navigation.navigate('Photo')}>
+          onPress={() => onSubmit('promoter')}>
           <Text
             style={{
               fontWeight: '500',
@@ -141,10 +141,7 @@ const UserType = ({navigation}: any) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor:
-              selected == 'artist'
-                ? colors.dark.primary
-                : colors.dark.holderColor,
+            backgroundColor: colors.dark.holderColor,
             height: 50,
             borderRadius: 15,
             display: 'flex',
@@ -153,7 +150,7 @@ const UserType = ({navigation}: any) => {
             justifyContent: 'space-between',
             padding: 10,
           }}
-          onPress={() => setSelected('artist')}>
+          onPress={() => onSubmit('artist')}>
           <Text
             style={{
               fontWeight: '500',
@@ -166,10 +163,7 @@ const UserType = ({navigation}: any) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor:
-              selected == 'worker'
-                ? colors.dark.primary
-                : colors.dark.holderColor,
+            backgroundColor: colors.dark.holderColor,
             height: 50,
             borderRadius: 15,
             flexDirection: 'row',
@@ -177,7 +171,7 @@ const UserType = ({navigation}: any) => {
             justifyContent: 'space-between',
             padding: 10,
           }}
-          onPress={() => navigation.navigate('Photo')}>
+          onPress={() => onSubmit('worker')}>
           <Text
             style={{
               fontWeight: '500',
@@ -190,10 +184,7 @@ const UserType = ({navigation}: any) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor:
-              selected == 'admin'
-                ? colors.dark.primary
-                : colors.dark.holderColor,
+            backgroundColor: colors.dark.holderColor,
             height: 50,
             borderRadius: 15,
             flexDirection: 'row',
@@ -201,7 +192,7 @@ const UserType = ({navigation}: any) => {
             justifyContent: 'space-between',
             padding: 10,
           }}
-          onPress={() => navigation.navigate('Photo')}>
+          onPress={() => navigation.navigate('business')}>
           <Text
             style={{
               fontWeight: '500',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View} from '../../components/Layout/Theme';
 import {
   Text,
@@ -8,8 +8,32 @@ import {
   Image,
 } from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
+import {useDispatch} from 'react-redux';
+import {saveUserInfo} from '../../features/auth';
 
 const Signup = ({navigation}: any) => {
+  const [user, setUser] = useState({
+    firstname: '',
+    lastname: '',
+    phone: '',
+    password: '',
+  });
+
+  const dispatch = useDispatch();
+
+  const isUserValid = () => {
+    return (
+      user.firstname !== '' &&
+      user.lastname !== '' &&
+      user.phone !== '' &&
+      user.password !== ''
+    );
+  };
+  const onSubmit = () => {
+    dispatch(saveUserInfo(user));
+    navigation.navigate('UserType');
+  };
+
   return (
     <View
       style={{
@@ -61,6 +85,7 @@ const Signup = ({navigation}: any) => {
               height: 50,
             }}
             placeholder="Nombre"
+            onChangeText={text => setUser(prev => ({...prev, firstname: text}))}
           />
           <TextInput
             placeholderTextColor="rgba(255,255,255,.5)"
@@ -75,6 +100,7 @@ const Signup = ({navigation}: any) => {
               height: 50,
             }}
             placeholder="Apellido"
+            onChangeText={text => setUser(prev => ({...prev, lastname: text}))}
           />
         </DefaultView>
 
@@ -90,6 +116,7 @@ const Signup = ({navigation}: any) => {
             height: 50,
           }}
           placeholder="Telefono"
+          onChangeText={text => setUser(prev => ({...prev, phone: text}))}
         />
         <TextInput
           secureTextEntry
@@ -104,12 +131,16 @@ const Signup = ({navigation}: any) => {
             height: 50,
           }}
           placeholder="Contrasena"
+          onChangeText={text => setUser(prev => ({...prev, password: text}))}
         />
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('UserType')}
+          onPress={onSubmit}
+          disabled={!isUserValid()}
           style={{
-            backgroundColor: colors.dark.primary,
+            backgroundColor: !isUserValid()
+              ? 'rgb(100,100,100)'
+              : colors.dark.primary,
             height: 50,
             borderRadius: 15,
             display: 'flex',

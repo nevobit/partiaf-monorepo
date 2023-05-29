@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Text, View as DefaultView, Image, TouchableOpacity} from 'react-native';
@@ -6,16 +7,34 @@ import colors from '../../components/Layout/Theme/colors';
 import {useTheme} from '../../contexts/ThemeContexts';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ProfileTopTap from '../../navigator/AppNavigator/ProfileTopTap';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {signout} from '../../features/auth';
+import {useQuery} from '@apollo/client';
+import {GET_USER_BY_ID} from '../../graphql/queries/users';
+import {useEffect} from 'react';
 
 const Profile = () => {
   const {theme} = useTheme();
+
+  const {user} = useSelector((state: any) => state.auth);
+
+  const {data, loading, error, refetch} = useQuery(GET_USER_BY_ID, {
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
 
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(signout());
   };
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
   return (
     <View
       style={{
@@ -72,7 +91,7 @@ const Profile = () => {
               fontWeight: '700',
               fontSize: 18,
             }}>
-            0
+            {data?.getUserById.following.length}
           </Text>
           <Text
             style={{
@@ -105,7 +124,7 @@ const Profile = () => {
               fontWeight: '700',
               fontSize: 18,
             }}>
-            0
+            {data?.getUserById.following.length}
           </Text>
           <Text
             style={{
@@ -124,7 +143,7 @@ const Profile = () => {
             fontWeight: '600',
             textAlign: 'center',
           }}>
-          Nestor Mosquera
+          {data?.getUserById.firstname} {data?.getUserById.lastname}
         </Text>
         <TouchableOpacity>
           <Text

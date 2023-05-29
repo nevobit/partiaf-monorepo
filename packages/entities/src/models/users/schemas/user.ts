@@ -1,12 +1,34 @@
 import { Base } from '../../../common';
 
-type UserAccountType =
+export type UserAccountType =
   | 'personal'
   | 'promoter'
   | 'business'
   | 'artist'
   | 'worker';
 
+interface Interests {
+  music: string[];
+  plan: string[];
+  food: string[];
+}
+type Address = {
+  street: string;
+  city: string;
+  state: string;
+  zipcode: string;
+};
+
+type Geo = {
+  caract: string;
+  latitud: string;
+  longitud: string;
+};
+
+interface Location {
+  address: Address;
+  geo: Geo;
+}
 export interface User extends Base {
   firstname: string;
   lastname: string;
@@ -19,8 +41,7 @@ export interface User extends Base {
   gender: string;
   biography: string;
   wishlist: string[];
-  interests: string[];
-  songs: string[];
+  interests: Interests;
   consumptions: string[];
   artistType: string;
   workerType: string;
@@ -33,7 +54,7 @@ export interface User extends Base {
   balance: number;
   verificationCode: number;
   lastLogin: Date;
-  location: string;
+  location: Location;
   dateOfBirth: Date;
   notifications: boolean;
   pin: number;

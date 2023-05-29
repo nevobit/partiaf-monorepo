@@ -18,9 +18,9 @@ const main = async () => {
     },
   });
 
-  const server = new ApolloServer<ApiContext>({ resolvers, typeDefs });
+  const server = new ApolloServer<any>({ resolvers, typeDefs });
   const { url } = await startStandaloneServer(server, {
-    context: async ({ req }) => ({ token: req.headers.token }),
+    context: async ({ req }) => ({ req }),
     listen: { port: Number(PORT) | 8001 },
   });
   console.log(`server listening on ${url}`);
