@@ -3,8 +3,18 @@ import {View} from '../../components/Layout/Theme';
 import {Text, TouchableOpacity, View as DefaultView} from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useDispatch} from 'react-redux';
+import {useState} from 'react';
+import {saveUserInfo} from '../../features/auth';
 
 const AddPhoto = ({navigation}: any) => {
+  const [photo, setPhoto] = useState('');
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    dispatch(saveUserInfo({photo: photo}));
+    navigation.navigate('Photo');
+  };
   return (
     <View
       style={{
@@ -130,7 +140,7 @@ const AddPhoto = ({navigation}: any) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Preferences')}
+          onPress={onSubmit}
           style={{
             backgroundColor: colors.dark.primary,
             height: 50,

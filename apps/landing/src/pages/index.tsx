@@ -14,9 +14,9 @@ const Home: NextPage = () => {
         <div className={styles.container}>
           <div className={styles.picture}>
             <Image
-              src="/download.png"
-              width={360}
-              height={440}
+              src="/capture.png"
+              width={240}
+              height={470}
               alt="Partiaf App"
             />
           </div>

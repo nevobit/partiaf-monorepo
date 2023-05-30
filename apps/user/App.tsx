@@ -16,21 +16,25 @@ import {PersistGate} from 'redux-persist/integration/react';
 // import Signin from './src/screens/Signin';
 // import Signup from './src/screens/Signup';
 import {persistor, store} from './src/store';
+import client from './src/graphql';
+import {ApolloProvider} from '@apollo/client';
 
 const App = (): JSX.Element => {
   const {updateTheme} = useTheme();
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <SafeAreaProvider>
-          <NavigationContainer>
-            <ThemeProvider>
-              <NavigatorContainer />
-            </ThemeProvider>
-          </NavigationContainer>
-        </SafeAreaProvider>
-      </PersistGate>
+      <ApolloProvider client={client}>
+        <PersistGate loading={null} persistor={persistor}>
+          <SafeAreaProvider>
+            <NavigationContainer>
+              <ThemeProvider>
+                <NavigatorContainer />
+              </ThemeProvider>
+            </NavigationContainer>
+          </SafeAreaProvider>
+        </PersistGate>
+      </ApolloProvider>
     </Provider>
   );
 };

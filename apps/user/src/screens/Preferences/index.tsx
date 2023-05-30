@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {View} from '../../components/Layout/Theme';
 import {
   Text,
@@ -7,6 +7,8 @@ import {
   ScrollView,
 } from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
+import {useDispatch} from 'react-redux';
+import {saveUserInfo} from '../../features/auth';
 
 const preferences = {
   plan: [
@@ -29,6 +31,8 @@ const preferences = {
     'Vallenato',
     'Musica clasica',
     'Rock and Roll',
+    'Exotico',
+    'Champeta',
     'Disco',
     'Techno',
     'Reggae',
@@ -96,6 +100,13 @@ const Preferences = ({navigation}: any) => {
 
       return updatedPreferences;
     });
+  };
+
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    dispatch(saveUserInfo({interests: preferences}));
+    navigation.navigate('VerifyAge');
   };
 
   return (
@@ -315,7 +326,7 @@ const Preferences = ({navigation}: any) => {
             width: '95%',
             alignSelf: 'center',
           }}
-          onPress={() => navigation.navigate('VerifyAge')}>
+          onPress={onSubmit}>
           <Text
             style={{
               fontWeight: '500',

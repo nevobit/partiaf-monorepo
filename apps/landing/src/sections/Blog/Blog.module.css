@@ -4,6 +4,7 @@
   color: #fff;
   padding-block: 5rem;
   padding-bottom: 10rem;
+  z-index: 99999;
 }
 
 .commitment h2 {
@@ -11,6 +12,7 @@
   margin-bottom: 0.5rem;
   line-height: 6rem;
   text-align: center;
+  z-index: 99999;
 }
 
 .commitment h2 span {

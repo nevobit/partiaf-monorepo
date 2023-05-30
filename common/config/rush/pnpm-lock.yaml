@@ -36,6 +36,7 @@ importers:
   ../../apps/api-graphql:
     specifiers:
       '@apollo/server': ~4.7.1
+      '@partiaf/business-logic': workspace:*
       '@partiaf/data-sources': workspace:*
       '@partiaf/entities': workspace:*
       '@types/node': ~20.2.4
@@ -48,6 +49,7 @@ importers:
       typescript: ~5.0.4
     dependencies:
       '@apollo/server': 4.7.1_graphql@16.6.0
+      '@partiaf/business-logic': link:../../packages/business-logic
       '@partiaf/data-sources': link:../../packages/data-sources
       '@partiaf/entities': link:../../packages/entities
       apollo-server: 3.12.0_graphql@16.6.0
@@ -2479,6 +2481,7 @@ packages:
         integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==,
       }
     engines: { node: '>=0.4.0' }
+    dev: false
 
   /delegates/1.0.0:
     resolution:
@@ -3828,40 +3831,6 @@ packages:
         integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==,
       }
     engines: { node: '>=12' }
-    dev: false
-
-  /mailgun-js/0.22.0:
-    resolution:
-      {
-        integrity: sha512-a2alg5nuTZA9Psa1pSEIEsbxr1Zrmqx4VkgGCQ30xVh0kIH7Bu57AYILo+0v8QLSdXtCyLaS+KVmdCrQo0uWFA==,
-      }
-    engines: { node: '>=6.0.0' }
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-    dependencies:
-      async: 2.6.4
-      debug: 4.3.4
-      form-data: 2.5.1
-      inflection: 1.12.0
-      is-stream: 1.1.0
-      path-proxy: 1.0.0
-      promisify-call: 2.0.4
-      proxy-agent: 3.1.1
-      tsscmp: 1.0.6
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /mailgun.js/8.0.6:
-    resolution:
-      {
-        integrity: sha512-b+c7QO1T4oFsudEcRB2H7oZKth8ZDeYRW4xjW12QQVNYDSJCVxqSQfps6ofcH8fqcCMJdzc76HVNGdnUZgBPCw==,
-      }
-    dependencies:
-      axios: 0.27.2
-      base-64: 1.0.0
-      url-join: 4.0.1
-    transitivePeerDependencies:
-      - debug
     dev: false
 
   /make-dir/3.1.0:

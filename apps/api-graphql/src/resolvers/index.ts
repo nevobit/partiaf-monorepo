@@ -1,10 +1,13 @@
+import auth from './auth';
+import stores from './stores';
+import users from './users';
+
 export default {
   Query: {
-    async getInitialQuery() {
-      return {
-        uuid: 'any uuid',
-        name: 'initial name',
-      };
-    },
+    ...users.Query,
+    ...stores.Query,
+  },
+  Mutation: {
+    ...auth.Mutation,
   },
 };

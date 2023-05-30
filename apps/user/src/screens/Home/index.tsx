@@ -80,7 +80,7 @@ const Home = ({navigation}: any) => {
               Especialmente para ti
             </Text>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Stores')}>
               <Text
                 style={{
                   color: '#fff',
