@@ -1,55 +1,59 @@
 import formData from 'form-data';
 import Mailgun from 'mailgun.js';
-import {
-  getEmailHTML,
-  EmailSubjects,
-  EmailTemplates,
-  code,
-} from './htmlTemplates';
+import otp from 'otp-generator';
+import { getEmailHTML, EmailSubjects, EmailTemplates } from './html-templates';
+import { UpdateAdminDto } from '@partiaf/entities';
 
 const MAILGUN_KEY = process.env.MAILGUN_KEY || 'anymailgunparameter';
+
 const mailgun = new Mailgun(formData);
-const DOMAIN = 'partiaf-api.xyz';
+const DOMAIN = 'sandbox2735ce1d8bb34a27b7f30691bdd07bb2.mailgun.org';
 const mg = mailgun.client({
-  username: 'Partiaf',
+  username: 'PARTIAF',
   key: MAILGUN_KEY,
 });
 
 type EmailTemplateType = 'verification' | 'changePassword' | 'resetPassword';
 
-type EmailData = {
-  email: string;
-  templateType: EmailTemplateType;
-  generateCode: boolean;
-};
-
-export const sendEmail = async ({
-  email,
-  templateType,
-  generateCode,
-}: EmailData) => {
+export const sendEmail = async (
+  data: UpdateAdminDto,
+  templateType: EmailTemplateType,
+  generateCode: boolean
+) => {
   const htmlTemplate = EmailTemplates[templateType];
 
-  const html = getEmailHTML(htmlTemplate, generateCode);
+  const code = otp.generate(6, {
+    lowerCaseAlphabets: false,
+    upperCaseAlphabets: false,
+    specialChars: false,
+  });
 
-  const data = {
+  const html = getEmailHTML(htmlTemplate, code);
+
+  const dataMessage = {
     from: 'noreply@partiaf.com',
-    to: email,
+    to: data.email,
     subject: EmailSubjects[templateType],
     text: EmailSubjects[templateType],
     html: html,
   };
 
   try {
-    const response = await mg.messages.create(DOMAIN, data);
-    console.log(response);
+    mg.messages
+      .create(DOMAIN, dataMessage)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
-    return generateCode ? code() : undefined;
+    return generateCode ? code : undefined;
   } catch (error: any) {
     if (error instanceof Error) {
       throw new Error(error.message);
     } else {
-      console.error(error);
+      console.log('Hubo un error inesperado.');
     }
   }
 };

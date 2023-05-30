@@ -16,7 +16,7 @@ export const StoreSchemaMongo = new Schema<Store>(
     location: { type: { lat: Number, lng: Number } },
     limit: { type: Number },
     photos: { type: [String] },
-    employes: { type: String },
+    employes: { type: Number },
     status: { type: String, default: StatusType.ACTIVE },
     last_login: { type: Date, default: Date.now() },
     balance: { type: Number, default: 0 },
@@ -32,7 +32,7 @@ export const StoreSchemaMongo = new Schema<Store>(
     youtube: { type: String },
     rating: { type: Number },
     employe_code: { type: Number },
-    admin: { type: String },
+    admin: { type: String, ref: 'admins' },
     organizer: {
       type: String,
       ref: 'users',

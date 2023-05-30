@@ -1,15 +1,16 @@
 import { Collection, getModel } from '@partiaf/constant-definitions';
 import { Admin, AdminSchemaMongo, UpdateAdminDto } from '@partiaf/entities';
-import { sendEmail } from '../helpers/emails/send-email';
+import { sendEmail } from '../helpers';
 
-export const resetPassword = async (data: UpdateAdminDto) => {
-  const model = await getModel<Admin>(Collection.ADMINS, AdminSchemaMongo);
+export const generateCode = async (data: UpdateAdminDto) => {
+  const model = getModel<Admin>(Collection.ADMINS, AdminSchemaMongo);
 
   const admin = await model.findOne(data);
 
   if (admin) {
-    // admin.code = sendEmail({ data, 'changePassword', true });
-
+    const code = await sendEmail(data, 'resetPassword', true);
+    console.log(code);
+    admin.code = Number(code);
     await admin.save();
   } else {
     throw new Error('Usuario no encontrado');
