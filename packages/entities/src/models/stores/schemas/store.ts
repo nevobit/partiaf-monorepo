@@ -18,6 +18,12 @@ interface Location {
   geo: Geo;
 }
 
+interface Specialties {
+  music: string[];
+  plan: string[];
+  food: string[];
+}
+
 export interface Store extends Base {
   name: string;
   description: string;
@@ -42,11 +48,11 @@ export interface Store extends Base {
   instagram: string;
   tiktok: string;
   youtube: string;
-  employes: string;
+  employes: number;
   rating: number;
   employe_code: number;
   admin: string;
   organizer: string;
+  specialties: Specialties;
   min_age: number;
-  music_type: string[];
 }
