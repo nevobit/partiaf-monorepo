@@ -36,7 +36,8 @@ jobs:
     
     env:
       MONGODB_URL: ${{ secrets.MONGODB_URL }}
-    
+      PORT: ${{ secrets.PORT_API }}
+
     steps: 
       - name: Checkout repository
         uses: actions/checkout@v3
