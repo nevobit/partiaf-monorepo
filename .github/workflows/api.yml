@@ -43,6 +43,9 @@ jobs:
         with:
           node-version: 18
           
+      - name: Install Microsoft Rush
+        run: npm install -g @microsoft/rush
+      
       - name: Install dependecies
         run: rush update
         
