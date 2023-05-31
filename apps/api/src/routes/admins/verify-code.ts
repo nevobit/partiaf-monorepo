@@ -9,8 +9,8 @@ export const verifyCodeAdminsRoute: RouteOptions = {
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { body } = request;
-      const { email, code } = body as UpdateAdminDto;
-      const response = await verifyCode({ email }, code!);
+      const { email, code } = body as { email: string; code: number };
+      const response = await verifyCode({ email, code });
       reply.status(200).send(response);
     } catch (err) {
       reply.status(500).send(err);

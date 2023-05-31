@@ -1,10 +1,14 @@
 import { Collection, getModel } from '@partiaf/constant-definitions';
 import { Admin, AdminSchemaMongo, UpdateAdminDto } from '@partiaf/entities';
 
-export const verifyCode = async (email: UpdateAdminDto, code: number) => {
+interface Props extends UpdateAdminDto {
+  code: number;
+}
+
+export const verifyCode = async ({ email, code }: Props) => {
   const model = getModel<Admin>(Collection.ADMINS, AdminSchemaMongo);
 
-  const admin = await model.findOne(email);
+  const admin = await model.findOne({ email });
 
   if (admin) {
     if (admin.code === code) {
