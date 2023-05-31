@@ -21,10 +21,12 @@ jobs:
     - name: Install Microsoft Rush
       run: npm install -g @microsoft/rush
     
+    - name: Update monorepo
+      run: rush update
+      
     - name: Install dependencies
       run: rush install
       
-          
     - name: Build API
       run: rush build -t api --to /apps/api
 
