@@ -48,9 +48,12 @@ type User {
 }
 
 type Store{
+    id: String
     name: String
     type: String
     phone: String
+    min_age: Int
+    photos: [String]
 }
 
 type AuthPayload {
@@ -62,9 +65,7 @@ type Query {
     getUserById: User
     getAllUsers: [User]
     getAllStores: [Store]
-    getStoreById: Store
-    
-    
+    getStoreById(id: String): Store
 }
    
 

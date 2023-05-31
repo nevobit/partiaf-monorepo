@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '../../contexts/ThemeContexts';
 import Users from '../../screens/Search/Users';
 import Stores from '../../screens/Search/Stores';
+import Artists from '../../screens/Search/Artists';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -91,7 +92,7 @@ const SearchTopTap = () => {
         backgroundColor: 'rgba(10,10,10,1)',
       }}>
       <Tab.Screen name="Cuentas" component={Users} />
-      <Tab.Screen name="Artistas" component={Moments} />
+      <Tab.Screen name="Artistas" component={Artists} />
       <Tab.Screen name="Negocios" component={Stores} />
       <Tab.Screen name="Colaboradores" component={Moments} />
     </Tab.Navigator>
