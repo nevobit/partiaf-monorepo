@@ -1,3 +1,4 @@
+import { getStoreById } from '@partiaf/business-logic';
 import {
   getAllStores,
   getAllUsers,
@@ -11,14 +12,16 @@ interface Context {
 
 export default {
   Query: {
-    getStoreById: async (parent: any, {}, ctx: any) => {
-      const { id } = (await verifyUserToken(ctx)) as { id: string };
-      const user = await getUserById(id);
-      if (user instanceof Error) {
+    getStoreById: async (parent: any, id: string, ctx: any) => {
+      await verifyUserToken(ctx);
+      console.log(id);
+      const store = await getStoreById(id);
+      console.log(store);
+      if (store instanceof Error) {
         return new Error('Invalid credentials');
       }
 
-      return user;
+      return store;
     },
     getAllStores: async (parent: any, {}, ctx: any) => {
       (await verifyUserToken(ctx)) as { id: string };

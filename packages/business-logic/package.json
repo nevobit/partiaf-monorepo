@@ -15,13 +15,15 @@
     "fastify": "4.11.0",
     "@partiaf/constant-definitions": "workspace:*",
     "@partiaf/entities": "workspace:*",
-    "bcrypt": "5.1.0"
+    "bcrypt": "5.1.0",
+    "mercadopago": "~1.5.16"
   },
   "devDependencies": {
     "@types/node": "20.2.1",
     "tslib": "2.5.2",
     "typescript": "5.0.4",
     "@types/jsonwebtoken": "~9.0.2",
-    "@types/bcrypt": "~5.0.0"
+    "@types/bcrypt": "~5.0.0",
+    "@types/mercadopago": "~1.5.8"
   }
 }

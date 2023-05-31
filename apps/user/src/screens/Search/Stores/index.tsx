@@ -24,7 +24,7 @@ const Stores = () => {
     <View
       style={{
         height: '100%',
-        padding: 10,
+        paddingHorizontal: 10,
       }}>
       {!loading && (
         <DefaultView>
