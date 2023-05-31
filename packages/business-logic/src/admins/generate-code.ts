@@ -9,7 +9,7 @@ export const generateCode = async (data: UpdateAdminDto) => {
 
   if (admin) {
     const code = await sendEmail(data, 'resetPassword', true);
-    console.log(code);
+
     admin.code = Number(code);
     await admin.save();
   } else {
