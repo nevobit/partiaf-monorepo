@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const { JWT_SECRET } = process.env;
-console.log(JWT_SECRET);
 
 export const login = async ({ email, password, code }: UpdateAdminDto) => {
   const model = getModel<Admin>(Collection.ADMINS, AdminSchemaMongo);
