@@ -28,9 +28,7 @@ jobs:
       run: rush install
       
     - name: Build API
-      run: | 
-        cd apps/api
-        rushx build
+      run: rush build
 
   deploy: 
     needs: build
