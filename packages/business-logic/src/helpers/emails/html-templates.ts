@@ -51,6 +51,7 @@ export const EmailTemplates = {
       <p style="font-size: 14px;">Recibimos una solicitud para reestablecer la contraseña de su cuenta Partiaf. Ingrese el siguiente código de verificación en la página correspondiente para continuar con el proceso.</p>
       <h4 style="text-align: center; margin: 0; margin-top: 2rem; margin-bottom: 5px; color: rgba(0,0,0, 0.8);">Código de verificación</h4>
       <h2 style="text-align: center; font-size: 2.2rem; margin: 0;">{code}</h2>
+      <a>Ingresa el código</a>
       <p style="text-align: center; margin: 0; margin-bottom: 1rem; font-size: 14px; margin-top: 5px;">(Este código es válido durante 1 hora)</p>
     </div>
   `,
