@@ -49,6 +49,9 @@ jobs:
       - name: Install dependecies
         run: rush update
         
+      - name: Build API
+        run: rush build
+      
       - name: Deploy api
         run: | 
           cd apps/api
