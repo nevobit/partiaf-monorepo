@@ -52,9 +52,11 @@ export const GET_USERS = gql`
 export const GET_STORES = gql`
   query GetAllStores {
     getAllStores {
+      id
       name
       phone
       type
+      photos
     }
   }
 `;

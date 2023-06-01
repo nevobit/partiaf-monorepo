@@ -9,8 +9,22 @@ import {View} from '../../components/Layout/Theme';
 import Stories from '../../components/UI/Home/Stories';
 import Icon from 'react-native-vector-icons/Ionicons';
 import StoreCard from '../../components/UI/StoreCard';
+import { useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
+import { GET_STORES } from '../../graphql/queries/users';
+import { getAllStores } from '../../../../../packages/business-logic/src/stores/get-all-stores';
 
-const Stores = ({navigation}: any) => {
+const Stores = ({navigation}: any) => {  
+    const {user} = useSelector((state: any) => state.auth);
+  
+    const {data, loading} = useQuery(GET_STORES, {
+      context: {
+        headers: {
+          authorization: user.token ? `Bearer ${user.token}` : '',
+        },
+      },
+    });
+    
   return (
     <View>
       <DefaultView
@@ -69,46 +83,18 @@ const Stores = ({navigation}: any) => {
               marginBottom: 100,
               width: '100%',
             }}>
-            <TouchableOpacity
-              style={{
-                width: '100%',
-                marginBottom: 40,
-              }}
-              onPress={() => navigation.navigate('Store')}>
-              <StoreCard />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: '100%',
-                marginBottom: 40,
-              }}
-              onPress={() => navigation.navigate('Store')}>
-              <StoreCard />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: '100%',
-                marginBottom: 40,
-              }}
-              onPress={() => navigation.navigate('Store')}>
-              <StoreCard />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: '100%',
-                marginBottom: 40,
-              }}
-              onPress={() => navigation.navigate('Store')}>
-              <StoreCard />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: '100%',
-                marginBottom: 40,
-              }}
-              onPress={() => navigation.navigate('Store')}>
-              <StoreCard />
-            </TouchableOpacity>
+              {data?.getAllStores.map((store:any) => (
+                 <TouchableOpacity
+                 key={store.id}
+                 style={{
+                   width: '100%',
+                   marginBottom: 40,
+                 }}
+                 onPress={() => navigation.navigate('Store')}>
+                 <StoreCard {...store} />
+               </TouchableOpacity>
+              ))}
+           
           </ScrollView>
         </DefaultView>
       </ScrollView>
