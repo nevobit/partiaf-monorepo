@@ -4,6 +4,7 @@ import logo from "../../../public/logo-partiaf-neg.svg"
 import Input from '@/components/Shared/Input'
 import Field from '@/components/Shared/Field'
 import Button from '@/components/Shared/Button'
+import Copyright from '@/components/Shared/Copyright'
 
 const Login = () => {
 
@@ -75,6 +76,7 @@ const Login = () => {
             variant='gray'
             >Ir a registrarse</Button>
         </form>
+        <Copyright/>
     </div>
   )
 }

@@ -1,9 +1,14 @@
 import React from 'react'
 import styles from "./copyright.module.css"
 
-const Copyright = () => {
+interface props {
+    variant?: 'normal' | 'secundary' ;
+  }
+
+const Copyright = ({variant = 'normal'}: props) => {
   return (
-    <div>© Todos los derechos reservados</div>
+    <div className={`${styles.body} ${styles[variant]}`}
+    >© Todos los derechos reservados</div>
   )
 }
 
