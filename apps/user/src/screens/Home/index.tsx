@@ -11,8 +11,24 @@ import Stories from '../../components/UI/Home/Stories';
 import HomeCard from '../../components/UI/HomeCard';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
+import { GET_STORES } from '../../graphql/queries/users';
 
 const Home = ({navigation}: any) => {
+  
+  const {user} = useSelector((state: any) => state.auth);
+
+  const {data, loading} = useQuery(GET_STORES, {
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
+
+  
+  console.log(data)
   return (
     <View>
       <DefaultView
@@ -96,9 +112,9 @@ const Home = ({navigation}: any) => {
               flexDirection: 'row',
               marginTop: 20,
             }}>
-            <HomeCard />
-            <HomeCard />
-            <HomeCard />
+              {data?.getAllStores.map((store: any) => (
+                <HomeCard {...store} />
+              ))}
           </ScrollView>
         </DefaultView>
         <DefaultView
@@ -145,6 +161,9 @@ const Home = ({navigation}: any) => {
             <HomeCard />
             <HomeCard />
           </ScrollView>
+          <DefaultView style={{
+            marginBottom:30
+          }}></DefaultView>
         </DefaultView>
       </ScrollView>
     </View>

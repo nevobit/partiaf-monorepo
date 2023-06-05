@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 
-const StoreCard = () => {
+const StoreCard = ({photos, name, type}: any) => {
   return (
     <View
       style={{
@@ -23,7 +23,7 @@ const StoreCard = () => {
               fontWeight: '700',
               fontSize: 16,
             }}>
-            Lagomar -{' '}
+            {name} -{' '}
           </Text>
           <Text
             style={{
@@ -31,7 +31,7 @@ const StoreCard = () => {
               fontWeight: '300',
               color: 'rgba(255,255,255, .5)',
             }}>
-            Discoteca
+            {type}
           </Text>
         </View>
         <Text
@@ -49,7 +49,7 @@ const StoreCard = () => {
           height: 450,
         }}
         source={{
-          uri: 'https://res.cloudinary.com/matosr96/image/upload/v1682659931/vothwysoycqrw8fsne0w.jpg',
+          uri: photos?.length > 0 ? photos[0] : 'https://res.cloudinary.com/matosr96/image/upload/v1682659931/vothwysoycqrw8fsne0w.jpg',
         }}
       />
       <View></View>

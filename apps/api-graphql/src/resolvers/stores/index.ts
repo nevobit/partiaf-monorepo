@@ -1,20 +1,17 @@
-import { getStoreById } from '@partiaf/business-logic';
-import {
-  getAllStores,
-  getAllUsers,
-  getUserById,
-  verifyUserToken,
-} from '@partiaf/business-logic';
+import { getAllStores, getStoreById, verifyUserToken } from '@partiaf/business-logic';
 
 interface Context {
   token: string;
 }
 
+interface ArgsType {
+  id: string;
+}
+
 export default {
   Query: {
-    getStoreById: async (parent: any, id: string, ctx: any) => {
+    getStoreById: async (parent: any, { id }: ArgsType, ctx: any) => {
       await verifyUserToken(ctx);
-      console.log(id);
       const store = await getStoreById(id);
       console.log(store);
       if (store instanceof Error) {
@@ -31,7 +28,6 @@ export default {
       if (stores instanceof Error) {
         return new Error('Stores not found');
       }
-
       return stores.items;
     },
   },
