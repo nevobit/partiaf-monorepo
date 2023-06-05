@@ -6,6 +6,31 @@ import { UpdateAdminDto } from "@partiaf/entities";
 export const generateCodeAdminsRoute: RouteOptions = {
   method: RouteMethod.PUT,
   url: "/admins/generate-code",
+  schema: {
+    body: {
+      type: 'object',
+      properties: {
+        email: { type: 'string' }
+      },
+      required: ['email']
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          code: { type: 'number' }
+        }
+      },
+      500: {
+        type: 'object',
+        properties: {
+          statusCode: { type: 'number'},
+          error: { type: 'string' },
+          message: { type: 'string' },
+        }
+      }
+    }
+  },
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { body } = request;

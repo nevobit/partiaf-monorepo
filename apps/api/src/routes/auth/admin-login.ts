@@ -5,6 +5,32 @@ import { login } from '@partiaf/business-logic';
 export const loginRoute: RouteOptions = {
   method: RouteMethod.POST,
   url: '/login',
+  schema: {
+    body: {
+      type: 'object',
+      properties: {
+        email: { type: 'string' },
+        password: { type: 'string' }
+      },
+      required: ['email', 'password']
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          token: { type: 'string' }
+        }
+      },
+      500: {
+        type: 'object',
+        properties: {
+          statusCode: { type: 'number' },
+          error: { type: 'string' },
+          message: { type: 'string' },
+        }
+      }
+    }
+  },
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { body } = request;

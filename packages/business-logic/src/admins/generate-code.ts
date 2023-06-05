@@ -15,5 +15,5 @@ export const generateCode = async (data: UpdateAdminDto) => {
   } else {
     throw new Error('Usuario no encontrado');
   }
-  return admin;
+  return { code: admin.code };
 };

@@ -6,6 +6,32 @@ import { UpdateAdminDto } from '@partiaf/entities';
 export const verifyCodeAdminsRoute: RouteOptions = {
   method: RouteMethod.POST,
   url: '/admins/verify-code',
+  schema: {
+    body: {
+      type: 'object',
+      properties: {
+        email: { type: 'string' },
+        code: { type: 'number' }
+      }, 
+      required: ['email', 'code']
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          response: { type: 'boolean' }
+        }
+      },
+      500: {
+        type: 'object',
+        properties: {
+          statusCode: { type: 'number' },
+          error: { type: 'string' },
+          message: { type: 'string' },
+        }
+      }
+    }
+  },
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { body } = request;

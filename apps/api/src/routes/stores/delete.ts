@@ -11,6 +11,28 @@ export const deleteStoreRoute: RouteOptions = {
   method: RouteMethod.DELETE,
   url: '/stores/:uuid',
   // preHandler: verifyToken,
+  schema: {
+    params: {
+      type: 'object',
+      properties: {
+        uuid: { type: 'string' }
+      },
+      required: ['uuid']
+    },
+    response: {
+      200: {
+        type: 'boolean',
+      },
+      500: {
+        type: 'object',
+        properties: {
+          statusCode: { type: 'number' },
+          error: { type: 'string' },
+          message: { type: 'string' },
+        }
+      }
+    }
+  },
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     const { params } = request;
     const { uuid } = params as Params;
