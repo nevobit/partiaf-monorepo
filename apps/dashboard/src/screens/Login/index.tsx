@@ -61,14 +61,12 @@ const Login = () => {
             variant='dark'
             >Entrar</Button>
             <div className={styles.form_options}>
-                <div>
                     <Input 
                     onChange={handleCheckBox}
-                    type="checkbox"
-                    variant="checkbox"/>
-                </div>
+                    variant="checkbox"
+                    type='checkbox'
+                >Recuerdame</Input>
                 <p>¿Has olvidado tu contraseña?</p>
-
             </div>
             <Button
             type='button'

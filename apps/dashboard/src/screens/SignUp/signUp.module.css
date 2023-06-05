@@ -1,0 +1,31 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    width: 91rem;
+    height: 82rem;
+    background-color: var(--background);
+    margin: auto;
+    margin-top: 3rem;
+    border-radius: 1%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    padding: 6rem 2rem 2rem 2rem;
+    gap: 2rem;
+
+}
+
+.form{
+   display: flex;
+   flex-direction: column;
+}
+
+.inputs{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+
+}
+
+.logo{
+    max-width: 50%;
+    align-self: center;
+}
