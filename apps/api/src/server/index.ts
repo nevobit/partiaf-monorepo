@@ -25,7 +25,7 @@ const main = async () => {
 
   server.register(fastifyCors, corsOptions);
 
-  server.addHook('preValidation', verify);
+  //server.addHook('preValidation', verify);
 
   server.register(fastifyMultipart);
 
@@ -44,6 +44,7 @@ const main = async () => {
         description: 'Endpoints documentation to manage the data in the Partiaf-APP',
         version: '3.0.0'
       },
+      host: 'localhost',
       securityDefinitions: {
         apiKey: {
           type: 'apiKey',
@@ -53,7 +54,8 @@ const main = async () => {
       }
     },
   });
-
+  await server.ready();
+  server.swagger();
 
   server.listen({ port: Number(PORT), host: HOST }, (error, address) => {
     if (error) {
