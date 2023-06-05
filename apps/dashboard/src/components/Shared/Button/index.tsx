@@ -2,7 +2,7 @@ import Loader from '../Loader';
 import styles from './Button.module.css';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'cancel' | 'third' | 'danger';
+  variant?: 'primary' | 'secondary' | 'cancel' | 'third' | 'danger' | 'gray' | 'dark';
   className?: string;
   children?: React.ReactNode
   loading?: boolean;
