@@ -39,3 +39,20 @@
 .input_none{
  border: none;
 }
+
+.checkbox{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.input_checkbox{
+    min-height: 5rem;
+   
+}
+
+.eye_icon{
+    margin-right: 2rem;
+}

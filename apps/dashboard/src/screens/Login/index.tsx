@@ -49,9 +49,9 @@ const Login = () => {
             //error={setError(error)}
             >
             <Input
-                type="password"
                 name="password"
                 id="password"
+                variant='password'
                 placeholder="Introduce tu Contraseña"
                 onChange={handleChange}
             />
@@ -61,12 +61,11 @@ const Login = () => {
             variant='dark'
             >Entrar</Button>
             <div className={styles.form_options}>
-                <div className={styles.rememberMe}>
+                <div>
                     <Input 
                     onChange={handleCheckBox}
                     type="checkbox"
                     variant="checkbox"/>
-                    <p>Recuerdame</p>
                 </div>
                 <p>¿Has olvidado tu contraseña?</p>
 
