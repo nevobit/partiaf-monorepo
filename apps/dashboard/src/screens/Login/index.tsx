@@ -7,6 +7,8 @@ import Button from '@/components/Shared/Button'
 
 const Login = () => {
 
+    const [remember, setRemeber] = useState<boolean>(false);
+
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -15,6 +17,12 @@ const Login = () => {
       const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser((prev) => ({...prev, [event.target.name]: event.target.value}))
       }
+
+      const handleCheckBox =(e: React.FormEvent<HTMLInputElement>) =>{
+        e.preventDefault()
+        setRemeber(!remember)
+        console.log(remember)
+    }
 
       const onSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -54,6 +62,7 @@ const Login = () => {
             <div className={styles.form_options}>
                 <div className={styles.rememberMe}>
                     <Input 
+                    onChange={handleCheckBox}
                     type="checkbox"
                     variant="checkbox"/>
                     <p>Recuerdame</p>
