@@ -43,7 +43,7 @@ if (typePss === 'password'){
       {icon && icon }
       <input type={typePss} {...rest} className={`${variant == 'checkbox' ? styles.input_checkbox : styles.input_element} `} > 
       </input>
-      {variant == "password" && <span className={styles.eye_icon} onClick={hangleShow}><Icon icon={showPss} size={30}/></span>}
+      {variant == "password" && <span className={styles.eye_icon} onClick={hangleShow}><Icon icon={showPss} size={20}/></span>}
       <div className={styles.label}>{children}</div>
     </div>
   )

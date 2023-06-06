@@ -1,4 +1,5 @@
 import React, { FormEvent ,useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
 import styles from "./login.module.css"
 import logo from "../../../public/logo-partiaf-neg.svg"
 import Input from '@/components/Shared/Input'
@@ -71,7 +72,7 @@ const Login = () => {
             <Button
             type='button'
             variant='gray'
-            >Ir a registrarse</Button>
+            ><Link to="/signup">Ir a registrarse</Link></Button>
         </form>
         <Copyright/>
     </div>
