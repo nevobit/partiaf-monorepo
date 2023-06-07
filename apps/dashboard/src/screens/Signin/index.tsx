@@ -41,6 +41,13 @@ const Signin = () => {
             <Button variant='google'> Registrarse con Google</Button>
             <Button variant='facebook'>Registrarse con Facebook</Button>
         </div>
+        <div className={styles.hr}>
+            <div className={styles.line}>
+            </div>
+            <p className={styles.center_hr}>O</p>
+            <div className={styles.line}>
+            </div>
+        </div>
         <div className={styles.main}>
             <form onSubmit={onSubmit}>
                 <Field label="Correo Electronico">
@@ -68,8 +75,13 @@ const Signin = () => {
                     variant="checkbox"
                     type='checkbox'
                 >Recuerdame</Input>
-                <Button type='submit'><p className={styles.button_text}>Registrarse</p></Button>
+                <div className={styles.buttons}>
+                    <Button className={styles.button_submit} type='submit'><p className={styles.button_text}>Registrarse</p></Button>
+                    <p><Link className={styles.terms} to="">Olvide mi contraseña</Link></p>
+                    <p>¿No tienes cuenta?<Link className={styles.terms} to="/signup"> Ir a registrarse →</Link></p>
+                </div>
             </form>
+            <Copyright/>
         </div>
     </div>
   )

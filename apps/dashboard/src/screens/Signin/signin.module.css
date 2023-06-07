@@ -2,20 +2,19 @@
     display: flex;
     flex-direction: column;
     width: 65rem;
-    height: 79rem;
+    height: max-content;
     background-color: var(--background);
     margin: auto;
     margin-top: 3rem;
     border-radius: 1%;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     gap: 2rem;
-
 }
 
 .header{
     display: flex;
     flex-direction: column;
-    padding: 5rem 10rem;
+    padding: 3rem 10rem 0rem 10rem;
     align-items: center;
     gap: 2rem;
 }
@@ -23,7 +22,7 @@
 .main{
     display: flex;
     flex-direction: column;
-    padding: 5rem 10rem;
+    padding: 0rem 10rem 0rem 10rem;
     gap: 2rem;
 }
 
@@ -37,4 +36,51 @@
     color: var(--primary-dark);
     font-weight: bold;
     margin-bottom: 2rem;
+}
+
+.button_text{
+    font-size: 2rem;
+    margin: 0rem 5rem;
+}
+
+.button_submit{
+    min-width: 100%;
+}
+
+.buttons{
+    display: flex;
+    padding: 2rem 2rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.terms{
+    color: var(--primary-dark);
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.terms:hover {
+    text-decoration-color:var(--primary-base);
+    cursor:pointer;  
+}
+
+.hr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    height: auto;
+    gap: 2rem;
+}
+
+.line{
+width: 42%;
+border-bottom: 1px solid var(--labels);
+}
+
+.center_hr{
+    color: var(--labels);
 }
