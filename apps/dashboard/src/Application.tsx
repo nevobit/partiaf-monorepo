@@ -7,6 +7,7 @@ import { PrivateRoutes ,PublicRoutes} from './constant-definitions';
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 import Terms from './screens/Terms';
+import Signin from './screens/Signin';
 
 const Application = () => {
   return (
@@ -19,6 +20,7 @@ const Application = () => {
           <Route path={PublicRoutes.SIGNUP} element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
           <Route path={PublicRoutes.TERMS} element={<Terms />} />
+          <Route path={PublicRoutes.SIGNIN} element={<Signin />} />
 
           {/* private routes */}
           <Route path={PrivateRoutes.HOME} element={<Home />} />

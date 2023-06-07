@@ -6,13 +6,19 @@ import Field from '@/components/Shared/Field'
 import Button from '@/components/Shared/Button'
 import Copyright from '@/components/Shared/Copyright'
 import {Link} from 'react-router-dom'
+import PhoneInput from "react-phone-number-input"
+import 'react-phone-number-input/style.css'
+
 
 
 const SignUp = () => {
 
+    const [country, setCountry]= useState("US")
+
     const [user, setUser] = useState({
         name: '',
         last_name: '',
+        phoneCountry: {country},
         phone: 0,
         email: '',
         password: '',
@@ -79,8 +85,18 @@ const SignUp = () => {
                         />
                     </Field>
                     <Field label="Telefono">
+                        <PhoneInput
+                         type="number"
+                         name="phoneCountry"
+                         id="phoneCountry"
+                         placeholder={country}
+                         country={country}
+                         value={country}
+                         onChange={(value: any)=>setCountry(value)}
+                        />
                         <Input
-                            type="text"
+                            variant='number'
+                            type="number"
                             name="phone"
                             id="phone"
                             placeholder="Telefono"
@@ -89,16 +105,18 @@ const SignUp = () => {
                     </Field>
                     <Field label="Fecha de nacimiento">
                         <Input
+                        variant='date'
                             type="date"
                             name="date"
                             id="date"
-                            placeholder="DD/MM/AA"
+                            // placeholder="DD/MM/AA"
                             onChange={handleChange}
                         />
                     </Field>
                     <Field label="Edad">
                         <Input
-                            type="text"
+                        variant='number'
+                            type="number"
                             name="age"
                             id="age"
                             placeholder="0"
