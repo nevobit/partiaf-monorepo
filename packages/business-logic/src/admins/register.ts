@@ -1,6 +1,7 @@
 import { Collection, getModel } from '@partiaf/constant-definitions';
-import { Admin, AdminSchemaMongo, CreateAdminDto } from '@partiaf/entities';
+import { Admin, AdminSchemaMongo, CreateAdminDto, UpdateAdminDto } from '@partiaf/entities';
 import bcrypt from 'bcrypt';
+import { sendEmail } from '../helpers';
 
 export const registerAdmin = async (
   data: CreateAdminDto
@@ -13,6 +14,8 @@ export const registerAdmin = async (
   admin.password = bcrypt.hashSync(data.password, salt);
 
   await admin.save();
+  const email = admin.email;
+  await sendEmail({ email }, 'verification', false);
 
   return admin;
 };

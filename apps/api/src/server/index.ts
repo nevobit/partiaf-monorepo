@@ -5,6 +5,7 @@ import { initDataSources } from '@partiaf/data-sources';
 import { registerRoutes } from '../routes';
 import { verify } from '@partiaf/business-logic';
 import fastifyMultipart from '@fastify/multipart';
+import swagger from '@fastify/swagger';
 
 const { PORT, HOST, MONGODB_URL } = process.env;
 const corsOptions = {
@@ -24,7 +25,7 @@ const main = async () => {
 
   server.register(fastifyCors, corsOptions);
 
-  server.addHook('preValidation', verify);
+  //server.addHook('preValidation', verify);
 
   server.register(fastifyMultipart);
 
@@ -36,6 +37,26 @@ const main = async () => {
     { prefix: 'api/v3' }
   );
 
+  await server.register(swagger, {
+    swagger: {
+      info: {
+        title: 'Partiaf API',
+        description: 'Endpoints documentation to manage the data in the Partiaf-APP',
+        version: '3.0.0'
+      },
+      host: 'localhost',
+      securityDefinitions: {
+        apiKey: {
+          type: 'apiKey',
+          name: 'api-key',
+          in: 'header'
+        }
+      }
+    },
+  });
+  await server.ready();
+  server.swagger();
+
   server.listen({ port: Number(PORT), host: HOST }, (error, address) => {
     if (error) {
       server.log.error(error);
@@ -45,6 +66,7 @@ const main = async () => {
     server.log.info(`Backend App is running at https://${address}`);
     server.log.info(`Press CTRL-c to stop`);
   });
+
 };
 
 void main();

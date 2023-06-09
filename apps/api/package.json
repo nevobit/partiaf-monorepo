@@ -21,11 +21,13 @@
     "@partiaf/data-sources": "workspace:*",
     "@partiaf/business-logic": "workspace:*",
     "@partiaf/entities": "workspace:*",
-    "@partiaf/constant-definitions": "workspace:*"
+    "@partiaf/constant-definitions": "workspace:*",
+    "@fastify/swagger": "8.5.1"
   },
   "devDependencies": {
     "@types/node": "18.11.18",
     "ts-node-dev": "2.0.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "fastify-swagger": "5.2.0"
   }
 }

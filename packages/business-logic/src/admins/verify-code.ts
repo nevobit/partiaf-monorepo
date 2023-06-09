@@ -12,7 +12,7 @@ export const verifyCode = async ({ email, code }: Props) => {
 
   if (admin) {
     if (admin.code === code) {
-      return true;
+      return { response: true };
     } else {
       throw new Error('Código inválido.');
     }
