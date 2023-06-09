@@ -1,11 +1,17 @@
 .field{
  margin-top: 2rem;
+
+}
+
+.childrens{
+    display: flex;
+    gap: 2rem;
 }
 
 .label{
  display: block;
  padding-bottom: .5rem;
- color: #6b7280;
+ color: var(--primary-dark);
  font-weight: 600;
  font-size: 1.3rem;
 }

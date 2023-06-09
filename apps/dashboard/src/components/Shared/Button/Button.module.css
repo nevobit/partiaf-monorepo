@@ -2,14 +2,14 @@
  display: inline-flex;
  align-items: center;
  justify-content: center;
- height: 2rem;
+ height: 2.5rem;
  vertical-align: middle;
  line-height: 1;
  white-space: nowrap;
- border-radius: .5rem;
+ border-radius: 1rem;
  appearance: none;
- padding: .5rem 1.5rem;
- font-size: 1.3rem;
+ padding: 1rem 1.5rem;
+ font-size: 1.5rem;
  font-weight: 500;
  transition: .3s;
 }
@@ -51,3 +51,32 @@
  border-color: #ec3232;
  color: #fff;
 }
+
+.dark{
+    background-color: var(--primary-dark);
+    color: var(--background)
+}
+
+.gray{
+    background-color: var(--primary-gray);
+}
+
+.facebook{
+color: #ffffff;
+background-color: var(--blue-facebook);
+min-width: 100%;
+font-weight: bold;
+gap: 2rem;
+
+}
+
+.google{
+color: var(--primary-dark);
+border: 1px solid var(--primary-dark);
+min-width: 100%;
+font-weight: bold;
+gap: 2rem;
+}
+
+
+
