@@ -1,0 +1,23 @@
+.body{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  border-right: 1px solid var(--labels);
+  justify-content: space-between;
+  padding: 0rem 0rem 2rem 0rem;
+}
+
+.opcions{
+    display: flex;
+    flex-direction: column;
+    padding: 7rem 2rem 2rem 2rem;
+    gap: 2rem;
+
+}
+
+.sign_oof{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
