@@ -5,10 +5,10 @@ import crypto from 'crypto';
 
 export const AdminSchemaMongo = new Schema<Admin>({
   _id: { type: String, unique: true, default: () => crypto.randomUUID() },
-  name: { type: String },
-  lastname: { type: String },
+  name: { type: String, required: true },
+  lastname: { type: String, required: true },
   birth_date: { type: Date, required: true },
-  age: { type: Number },
+  age: { type: Number, required: true },
   photo: { type: String },
   phone: { type: String, required: true, unique: true },
   status: { type: String, default: StatusType.ACTIVE },

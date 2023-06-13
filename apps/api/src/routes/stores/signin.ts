@@ -6,6 +6,32 @@ export const signInRoute: RouteOptions = {
   method: RouteMethod.POST,
   url: '/stores/signin',
   // preHandler: verifyToken,
+  schema: {
+    body: {
+      type: 'object',
+      properties: {
+        id: { type: 'string' },
+        password: { type: 'string' }
+      },
+      required: ['id', 'password']
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          sign: { type: 'boolean' }
+        }
+      },
+      500: {
+        type: 'object',
+        properties: {
+          statusCode: { type: 'number' },
+          error: { type: 'string' },
+          message: { type: 'string' },
+        }
+      }
+    }
+  },
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { body } = request;
