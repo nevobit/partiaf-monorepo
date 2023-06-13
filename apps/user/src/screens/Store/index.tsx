@@ -1,13 +1,27 @@
 import React from 'react';
-import {View} from '../../components/Layout/Theme';
 import {Text, Image, Dimensions, View as DefaultView} from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native';
+import { GET_STORE_BY_ID } from '../../graphql/queries/users';
+import { useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
 
 const screenHeight = Dimensions.get('screen').height;
 
-const Store = ({navigation}: any) => {
+const Store = ({route, navigation}: any) => {
+  const {user} = useSelector((state: any) => state.auth);
+  console.log("UUID", route.params.store)
+  const { data } = useQuery(GET_STORE_BY_ID, {
+    variables: { getStoreByIdId: route.params.store },
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
+  
+  console.log(data)
   return (
     <DefaultView
       style={{
@@ -43,7 +57,7 @@ const Store = ({navigation}: any) => {
           resizeMode: 'cover',
         }}
         source={{
-          uri: 'https://res.cloudinary.com/matosr96/image/upload/v1682659931/vothwysoycqrw8fsne0w.jpg',
+          uri: data?.getStoreById?.photos[0],
         }}
       />
 
@@ -90,7 +104,7 @@ const Store = ({navigation}: any) => {
               fontSize: 20,
               marginTop: 10,
             }}>
-            Jennylao Club
+            {data?.getStoreById?.name}
           </Text>
           <Text
             style={{
@@ -106,7 +120,7 @@ const Store = ({navigation}: any) => {
               fontWeight: '400',
               fontSize: 16,
             }}>
-            Disocteca
+            {data?.getStoreById?.type}
           </Text>
 
           <DefaultView
@@ -125,7 +139,7 @@ const Store = ({navigation}: any) => {
                 borderRadius: 10,
                 height: 25,
               }}>
-              18+
+              {data?.getStoreById?.min_age}+
             </Text>
             <Text
               style={{
@@ -137,7 +151,7 @@ const Store = ({navigation}: any) => {
                 borderRadius: 10,
                 height: 25,
               }}>
-              Discoteca
+              {data?.getStoreById?.specialties?.plan[0]}
             </Text>
             <Text
               style={{
@@ -149,7 +163,7 @@ const Store = ({navigation}: any) => {
                 borderRadius: 10,
                 height: 25,
               }}>
-              Salsa
+              {data?.getStoreById?.specialties.music[0]}
             </Text>
           </DefaultView>
         </DefaultView>
@@ -176,7 +190,8 @@ const Store = ({navigation}: any) => {
               Reservas
             </Text>
           </DefaultView>
-          <DefaultView
+          <TouchableOpacity
+          onPress={() => navigation.navigate('Covers')}
             style={{
               alignItems: 'center',
             }}>
@@ -187,7 +202,7 @@ const Store = ({navigation}: any) => {
               }}>
               Tickets
             </Text>
-          </DefaultView>
+          </TouchableOpacity>
           <DefaultView
             style={{
               alignItems: 'center',

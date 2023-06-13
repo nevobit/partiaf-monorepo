@@ -47,6 +47,12 @@ type User {
     accountType: String
 }
 
+type Specialties{
+    music: [String]
+    plan: [String]
+    food: [String]
+}
+
 type Store{
     id: String
     name: String
@@ -54,6 +60,9 @@ type Store{
     phone: String
     min_age: Int
     photos: [String]
+    specialties: Specialties
+    description: String
+    status: String
 }
 
 type AuthPayload {

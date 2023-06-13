@@ -1,7 +1,6 @@
 import React from 'react';
 import {View} from '../../components/Layout/Theme';
 import {
-  ScrollView,
   View as DefaultView,
   Text,
   Keyboard,
@@ -9,6 +8,7 @@ import {
 } from 'react-native';
 import {TouchableOpacity, Image, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import colors from '../../components/Layout/Theme/colors';
 
 const DismissKeyboard = ({children}: any) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -80,204 +80,152 @@ const Tickets = ({navigation}: any) => {
             }}
           />
         </DefaultView>
-        <ScrollView
-          contentContainerStyle={{
+        <DefaultView style={{
+          paddingHorizontal: 10,
+        }}>
+          <DefaultView style={{
             display: 'flex',
-            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 10
           }}>
-          <DefaultView
-            style={{
-              backgroundColor: '#1C1C1E',
-              height: 500,
-              width: '95%',
-              borderRadius: 20,
-              position: 'relative',
-              paddingHorizontal: 15,
-              paddingVertical: 5,
-            }}>
-            <DefaultView
-              style={{
-                backgroundColor: 'rgba(10,10,10,1)',
-                height: 30,
-                width: 30,
-                borderRadius: 50,
-                position: 'absolute',
-                left: -20,
-                bottom: 200,
-              }}
-            />
-            <DefaultView
-              style={{
-                backgroundColor: 'rgba(10,10,10,1)',
-                height: 30,
-                width: 30,
-                borderRadius: 50,
-                position: 'absolute',
-                right: -20,
-                bottom: 200,
-              }}
-            />
-
-            <DefaultView
-              style={{
-                overflow: 'hidden',
-              }}>
-              <DefaultView
-                style={{
-                  backgroundColor: '#1c1c1e',
-                  height: 40,
-                  width: '98%',
-                  borderTopWidth: 2,
-                  borderColor: '#000',
-                  borderStyle: 'dashed',
-                  position: 'absolute',
-                  margin: -2,
-                  marginTop: 10,
-                  left: 20,
-                  bottom: 175,
-                }}>
-                <DefaultView
-                  style={{
-                    height: 200,
-                    width: 200,
-                  }}></DefaultView>
-              </DefaultView>
-            </DefaultView>
-
-            <DefaultView
-              style={{
-                alignSelf: 'flex-end',
-              }}>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 30,
-                }}>
-                Partiaf
-              </Text>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 18,
-                  fontWeight: '300',
-                }}>
-                FAST PASS
-              </Text>
-            </DefaultView>
-
-            <DefaultView>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 22,
-                }}>
-                Alessandro,
-              </Text>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 14,
-                  fontWeight: '300',
-                }}>
-                Te esparamos con emocion.
-              </Text>
-            </DefaultView>
-
-            <DefaultView
-              style={{
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                gap: 20,
-                marginTop: 30,
-              }}>
-              <DefaultView
-                style={{
-                  width: '45%',
-                }}>
-                <Text
-                  style={{
-                    color: '#fff',
-                    fontSize: 16,
-                  }}>
-                  Evento
-                </Text>
-                <Text
-                  style={{
-                    color: '#fff',
-                    fontSize: 18,
-                  }}>
-                  Partiaf Party
-                </Text>
-              </DefaultView>
-              <DefaultView
-                style={{
-                  width: '45%',
-                }}>
-                <Text
-                  style={{
-                    color: '#fff',
-                    fontSize: 16,
-                  }}>
-                  Fecha
-                </Text>
-                <Text
-                  style={{
-                    color: '#fff',
-                    fontSize: 18,
-                  }}>
-                  May 12, 22:00
-                </Text>
-              </DefaultView>
-              <DefaultView
-                style={{
-                  width: '45%',
-                }}>
-                <Text
-                  style={{
-                    color: '#fff',
-                    fontSize: 16,
-                  }}>
-                  Cantidad
-                </Text>
-                <Text
-                  style={{
-                    color: '#fff',
-                    fontSize: 18,
-                  }}>
-                  3
-                </Text>
-              </DefaultView>
-              <DefaultView
-                style={{
-                  width: '45%',
-                }}>
-                <Text
-                  style={{
-                    color: '#fff',
-                    fontSize: 16,
-                  }}>
-                  Total
-                </Text>
-                <Text
-                  style={{
-                    color: '#fff',
-                    fontSize: 18,
-                  }}>
-                  $ 20.000
-                </Text>
-              </DefaultView>
-            </DefaultView>
-            <Text
-              style={{
-                color: '#fff',
-                textAlign: 'center',
-                marginTop: 'auto',
-                paddingBottom: 10,
-              }}>
-              info@partiaf.com
-            </Text>
+            <Text style={{
+              color: '#fff'
+            }}>Todos los Tickets</Text>
+            <TouchableOpacity ><Text style={{
+                color: colors.dark.primary
+              }}>Ver todos</Text></TouchableOpacity>
           </DefaultView>
-        </ScrollView>
+          
+          <TouchableOpacity 
+          onPress={() => navigation.navigate('TicketDetails')}
+          style={{
+            backgroundColor: '#fff',
+            marginTop: 20,
+            borderRadius: 5,
+            height: 100,
+            flexDirection: 'row',
+          }}>
+            <DefaultView style={{
+              width: '65%',
+              padding: 10,
+            }}>
+              <Text style={{
+                fontSize: 12
+              }}>ID 2000 | Ticket | <Text style={{
+                color: "green"
+              }}>EN-USO</Text></Text>
+              <Text style={{
+                fontSize: 16,
+                fontWeight: '600',
+                color: colors.light.text
+              }}>Aluna Disco Bar</Text>
+              <Text style={{
+                fontSize: 14,
+                fontWeight: '500',
+              }}>10 Junio 2023 | 10:00PM</Text>
+              <Text style={{
+                fontSize: 14,
+                fontWeight: '500',
+              }}>Santa Marta - Colombia</Text>
+            </DefaultView>
+            <DefaultView style={{
+              position: 'relative'
+            }}>
+              
+              <DefaultView style={{
+                backgroundColor: 'black',
+                height: 25,
+                width: 25,
+                borderRadius: 100,
+                position: 'absolute',
+                top: -16
+              }} />
+              
+              <DefaultView style={{
+                backgroundColor: 'black',
+                height: 25,
+                width: 25,
+                borderRadius: 100,
+                position: 'absolute',
+                bottom: -16
+              }} />
+              
+              <DefaultView style={{
+                marginTop:3
+              }}>
+                
+             
+              
+              <DefaultView style={{
+                backgroundColor: 'black',
+                height: 10,
+                width: 1,
+                borderRadius: 100,
+                position: 'absolute',
+                top: 12,
+                left: 13
+              }} />
+              
+              <DefaultView style={{
+                backgroundColor: 'black',
+                height: 10,
+                width: 1,
+                borderRadius: 100,
+                position: 'absolute',
+                top: 27,
+                left: 13
+              }} />
+              
+              <DefaultView style={{
+                backgroundColor: 'black',
+                height: 10,
+                width: 1,
+                borderRadius: 100,
+                position: 'absolute',
+                top: 42,
+                left: 13
+              }} />
+              <DefaultView style={{
+                backgroundColor: 'black',
+                height: 10,
+                width: 1,
+                borderRadius: 100,
+                position: 'absolute',
+                top: 57,
+                left: 13
+              }} />
+              <DefaultView style={{
+                backgroundColor: 'black',
+                height: 10,
+                width: 1,
+                borderRadius: 100,
+                position: 'absolute',
+                top: 72,
+                left: 13
+              }} />
+              
+              <DefaultView style={{
+                backgroundColor: 'black',
+                height: 10,
+                width: 1,
+                borderRadius: 100,
+                position: 'absolute',
+                top: 97,
+                left: 13
+              }} />
+              </DefaultView>
+                <Image style={{
+                  width: 100,
+                  height: 100,
+                  marginLeft: 25,
+                  marginTop: -3
+                }} source={{
+                  uri:'https://i.ibb.co/n14Qpb9/qrcode.png'
+                }} />
+            </DefaultView>
+          </TouchableOpacity>
+        </DefaultView>
       </View>
     </DismissKeyboard>
   );

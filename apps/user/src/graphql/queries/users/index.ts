@@ -60,3 +60,22 @@ export const GET_STORES = gql`
     }
   }
 `;
+
+
+export const GET_STORE_BY_ID = gql`
+query GetStoreById($getStoreByIdId: String) {
+  getStoreById(id: $getStoreByIdId) {
+    id
+    min_age
+    name
+    phone
+    photos
+    type
+    specialties {
+      food
+      music
+      plan
+    }
+  }
+}
+`;

@@ -19,7 +19,7 @@ const Home = ({navigation}: any) => {
   
   const {user} = useSelector((state: any) => state.auth);
 
-  const {data, loading} = useQuery(GET_STORES, {
+  const { data } = useQuery(GET_STORES, {
     context: {
       headers: {
         authorization: user.token ? `Bearer ${user.token}` : '',
@@ -113,7 +113,9 @@ const Home = ({navigation}: any) => {
               marginTop: 20,
             }}>
               {data?.getAllStores.map((store: any) => (
-                <HomeCard {...store} />
+                <TouchableOpacity onPress={() => navigation.navigate('Store', {store: store.id})}>
+                <HomeCard {...store} />                  
+                </TouchableOpacity>
               ))}
           </ScrollView>
         </DefaultView>

@@ -12,12 +12,11 @@ import StoreCard from '../../components/UI/StoreCard';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { GET_STORES } from '../../graphql/queries/users';
-import { getAllStores } from '../../../../../packages/business-logic/src/stores/get-all-stores';
 
 const Stores = ({navigation}: any) => {  
     const {user} = useSelector((state: any) => state.auth);
   
-    const {data, loading} = useQuery(GET_STORES, {
+    const { data } = useQuery(GET_STORES, {
       context: {
         headers: {
           authorization: user.token ? `Bearer ${user.token}` : '',
@@ -90,7 +89,7 @@ const Stores = ({navigation}: any) => {
                    width: '100%',
                    marginBottom: 40,
                  }}
-                 onPress={() => navigation.navigate('Store')}>
+                 onPress={() => navigation.navigate('Store', {store: store.id})}>
                  <StoreCard {...store} />
                </TouchableOpacity>
               ))}

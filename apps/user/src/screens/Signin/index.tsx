@@ -42,6 +42,11 @@ const Signin = ({navigation}: any) => {
       setLoading(false);
     } catch (err) {
       console.log(err);
+      if(err instanceof Error){
+        if(err.message == 'Invalid crednetials'){
+          setError('Credenciales invalidas');                  
+        }
+      }
       setLoading(false);
     }
   };
@@ -49,7 +54,7 @@ const Signin = ({navigation}: any) => {
   if (error.length > 0) {
     setTimeout(() => {
       setError('');
-    }, 10000);
+    }, 9000);
   }
 
   return (
@@ -117,7 +122,6 @@ const Signin = ({navigation}: any) => {
             }
             placeholder="Contrasena"
           />
-
           <TouchableOpacity
             disabled={user.password.length < 1 || user.phone.length < 1}
             style={{
@@ -143,10 +147,15 @@ const Signin = ({navigation}: any) => {
             )}
           </TouchableOpacity>
         </DefaultView>
+        <Text style={{
+            color: 'red',
+            paddingHorizontal: 10,
+            paddingTop: 10
+          }}>{error}</Text>
 
         <DefaultView
           style={{
-            marginTop: 60,
+            marginTop: 40,
           }}>
           <Text
             style={{
