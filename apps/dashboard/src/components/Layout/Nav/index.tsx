@@ -20,34 +20,34 @@ const Nav = () => {
         <div className={styles.opcions}>
             <NavOptions>
                 <img src={icon_dashboard}/>
-                Dashboard
+                <h3 className={styles.text}>Dashboard</h3>
             </NavOptions>
             <NavOptions>
                 <img src={icon_tickets}/>
-                Tickets
+                <h3 className={styles.text}>Tickets</h3>
             </NavOptions>
 
             <NavOptions>
                 <img src={icon_reservation}/>
-                    Reservas
+                <h3 className={styles.text}>Reservas</h3>
             </NavOptions>
             <NavOptions>
                 <img src={icon_collaborators}/>
-                Colaboradores
+                <h3 className={styles.text}>Colaboradores</h3>
             </NavOptions>
             <NavOptions>
                 <img src={icon_settings}/>
-                Configuracion
+                <h3 className={styles.text}>Configuracion</h3>
             </NavOptions>
             <NavOptions>
                 <img src={icon_messages}/>
-                Mensajes
+                <h3 className={styles.text}> Mensajes</h3>
             </NavOptions>
         </div>
         <div className={styles.sign_oof}>
             <NavOptions>
                 <img src={icon_signoff}/>
-                Cerrar Sesion
+                <h3 className={styles.text}>Cerrar Sesion</h3>
             </NavOptions>
         </div>
     </div>

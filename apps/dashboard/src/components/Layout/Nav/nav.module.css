@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100%;
   height: auto;
+  min-height: 70rem;
   border-right: 1px solid var(--labels);
   justify-content: space-between;
   padding: 0rem 0rem 2rem 0rem;
@@ -12,7 +13,7 @@
     display: flex;
     flex-direction: column;
     padding: 7rem 2rem 2rem 2rem;
-    gap: 2rem;
+    gap: 3.5rem;
 
 }
 
@@ -20,4 +21,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.text{
+  font-weight: bold;
+  font-size: 2rem;
+  color: var(--primary-dark);
 }

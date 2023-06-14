@@ -2,8 +2,19 @@ import React from 'react'
 import styles from "./reservation.module.css"
 import SearchBar from '@/components/Shared/SearchBar'
 import Button from '@/components/Shared/Button'
+import ReservationTotals from '@/components/Shared/ReservationTotals'
 
 const Reservation = () => {
+
+  // this is only example of data
+
+  const totals = [
+
+  ]
+
+  // example data end
+ 
+
   return (
     <div className={styles.body}>
         <div className={styles.header}>
@@ -17,6 +28,12 @@ const Reservation = () => {
                 variant='secondary'
                 >Configuracion de la reserva</Button>
             </div>
+        </div>
+        <div className={styles.totals}>
+          <ReservationTotals title='Total de reservas' totals="05"/>
+          <ReservationTotals title='Sillas disponibles' totals="10"/>
+          <ReservationTotals title='Mesas disponibles'totals="10"/>  
+            
         </div>
     </div>
   )

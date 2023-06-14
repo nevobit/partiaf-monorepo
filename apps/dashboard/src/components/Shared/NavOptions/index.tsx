@@ -14,11 +14,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const NavOptions = ({children, loading, ...rest }: ButtonProps) => {
   return (
     <button className={styles.button} {...rest}>
-    {loading ? <Loader small={true} /> :
-      <>
         {children}
-      </>
-    }
   </button>
   )
 }
