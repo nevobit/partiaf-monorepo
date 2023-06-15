@@ -1,0 +1,14 @@
+.table{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    border: 1px solid var(--lines);
+    margin: 1rem;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.tbody{
+display: flex;
+flex-direction: column;
+}
