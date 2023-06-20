@@ -16,6 +16,7 @@ const Private = () => {
     <Layout>
         <RoutesWithNotFound>
             <Route path={PrivateRoutes.HOME} element={<Home />} />
+            <Route path={PrivateRoutes.DASHBOARD} element={<Home />} />
             <Route path={PrivateRoutes.TICKETS} element={<Tickets/>} />
             <Route path={PrivateRoutes.RESERVATION} element={<Reservation />} />
             <Route path={PrivateRoutes.COLLABORATORS} element={<Collaborators/>} />
