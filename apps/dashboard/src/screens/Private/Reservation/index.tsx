@@ -5,6 +5,7 @@ import Button from '@/components/Shared/Button'
 import ReservationTotals from '@/components/Shared/ReservationTotals'
 import WelcomeReservation from '@/components/Shared/WelcomeReservation'
 import TableInfo from '@/components/Shared/TableInfo'
+import ReservationDetails from '@/components/Shared/ReservationDetails'
 
 
 
@@ -27,44 +28,54 @@ const Reservation = ( { user, date, hour, ...rest }: Table) => {
 
   const reservations = [
     {name: "Skarlys Barreno",
+      id:"0",
       user: "@Skarlysba",
       date: " Jun 18, 2023",
       hour: "09:30 PM",
       value: 131.50,
       ticket: "Vip",
-      ticketState: "Usado"},
+      ticketState: "Usado",
+      user_picture: "../../../../public/img/user_picture.png" },
       
-      {name: "Skarlys Barreno",
+      {name: "Pedro Gonzales",
+      id:"1",
       user: "@Skarlysba",
-      date: " Jun 18, 2023",
-      hour: "09:30 PM",
+      date: " May 23, 2023",
+      hour: "03:30 PM",
       value: 131.50,
-      ticket: "Vip",
-      ticketState: "Usado"},
+      ticket: "Normal",
+      ticketState: "New",
+      user_picture: "../../../../public/img/user_picture.png"},
       
-      {name: "Skarlys Barreno",
+      {name: "Mariano Rivera",
+      id:"2",
       user: "@Skarlysba",
-      date: " Jun 18, 2023",
-      hour: "09:30 PM",
-      value: 131.50,
-      ticket: "Vip",
-      ticketState: "Usado"},
+      date: " Sep 5, 2023",
+      hour: "09:30 AM",
+      value: 220.50,
+      ticket: "Normal",
+      ticketState: "Usado",
+      user_picture: "../../../../public/img/user_picture.png"},
       
-      {name: "Skarlys Barreno",
+      {name: "Ana Medina",
+      id:"3",
       user: "@Skarlysba",
-      date: " Jun 18, 2023",
-      hour: "09:30 PM",
-      value: 131.50,
+      date: " Aug 31, 2023",
+      hour: "4:30 PM",
+      value: 500.50,
       ticket: "Vip",
-      ticketState: "Usado"},
+      ticketState: "Usado",
+      user_picture: "../../../../public/img/user_picture.png"},
       
-      {name: "Skarlys Barreno",
+      {name: "Yelena Camero",
+      id:"4",
       user: "@Skarlysba",
-      date: " Jun 18, 2023",
-      hour: "09:30 PM",
-      value: 131.50,
-      ticket: "Vip",
-      ticketState: "Usado"}
+      date: " Jan 1, 2023",
+      hour: "11:30 PM",
+      value: 300.50,
+      ticket: "Normal",
+      ticketState: "New",
+      user_picture: "../../../../public/img/user_picture.png"}
   ]
 
   // example data end
@@ -101,11 +112,14 @@ const openDetail = ()=>{
                 variant='dark'
                 >Informacion de la reserva</Button>
             </div>
-            <TableInfo data={reservations}/>
+            <TableInfo 
+            data={reservations}
+            detail={open}
+            seeDetail={(e: React.MouseEvent) =>{setOpen(!open)}}/>
           </div>
           <div className={styles.main_aside}>
             {!open ?  <WelcomeReservation/> :
-            ""}
+            <ReservationDetails/>}
             
           </div>
         </div>

@@ -18,14 +18,49 @@
 }
 
 .h2{
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--primary-dark);
     font-weight: bold;
     width: max-content;
 }
-
+.p{
+    font-size: 1.4rem;
+    display: flex;
+    max-width: max-content;
+}
 .tr:hover{
    background-color: var(--primary-light);
 
 }
+
+.activate{
+    background-color: var(--primary-light);
+ 
+ }
+
+ .td_picture{
+    display: flex;
+    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .picture{
+    width: 6rem;
+    height: 6rem;
+    display: flex;
+    border-radius: 50%;
+
+ }
+
+ .picture_details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+
+ }
+
+
 

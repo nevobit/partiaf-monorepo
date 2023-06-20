@@ -29,11 +29,11 @@
 }
 
 .totals{
-    margin-top: 4rem;
+    margin: 4rem 0rem 3rem 0rem;
     display: flex;
     gap: 4rem;
     min-width: 100%;
-    justify-content: space-around;
+    justify-content: space-around
 
 }
 
@@ -55,7 +55,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0rem 1rem;
 }
 
 .main_title{
