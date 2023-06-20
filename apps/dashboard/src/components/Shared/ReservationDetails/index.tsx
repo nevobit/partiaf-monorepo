@@ -3,7 +3,10 @@ import styles from "./reservationDetails.module.css"
 
 const ReservationDetails = () => {
   return (
-    <div>ReservationDetails</div>
+    <div className={styles.body}>
+      
+      
+    </div>
   )
 }
 
