@@ -26,7 +26,6 @@ const Home = ({navigation}: any) => {
       },
     },
   });
-
   
   console.log(data)
   return (
@@ -113,7 +112,7 @@ const Home = ({navigation}: any) => {
               marginTop: 20,
             }}>
               {data?.getAllStores.map((store: any) => (
-                <TouchableOpacity onPress={() => navigation.navigate('Store', {store: store.id})}>
+                <TouchableOpacity key={store.id} onPress={() => navigation.navigate('Store', {store: store.id})}>
                 <HomeCard {...store} />                  
                 </TouchableOpacity>
               ))}

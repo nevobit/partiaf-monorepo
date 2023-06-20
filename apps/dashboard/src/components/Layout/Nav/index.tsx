@@ -8,8 +8,9 @@ import icon_collaborators from '../../../../public/icons/icon_collaborators.svg'
 import icon_settings  from '../../../../public/icons/icon_settings.svg'
 import icon_messages from '../../../../public/icons/icon_messages.svg'
 import icon_signoff  from '../../../../public/icons/icon_signoff.svg'
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Button from '@/components/Shared/Button'
+import { PrivateRoutes } from '../../../constant-definitions/Routes/index';
 
 const Nav = () => {
 
@@ -18,14 +19,19 @@ const Nav = () => {
   return (
     <div className={styles.body}>
         <div className={styles.opcions}>
+            <Link to={PrivateRoutes.RESERVATION}>
             <NavOptions>
                 <img src={icon_dashboard}/>
                 <h3 className={styles.text}>Dashboard</h3>
             </NavOptions>
+            </Link>
+            <Link to={PrivateRoutes.TICKETS}>
+
             <NavOptions>
                 <img src={icon_tickets}/>
                 <h3 className={styles.text}>Tickets</h3>
             </NavOptions>
+            </Link>
 
             <NavOptions>
                 <img src={icon_reservation}/>

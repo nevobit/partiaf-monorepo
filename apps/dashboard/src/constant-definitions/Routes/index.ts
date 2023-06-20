@@ -8,7 +8,7 @@ export const PublicRoutes = {
 export const PrivateRoutes = {
 
   // private temporary path for layout
-  PRIVATE: 'private',
+  PRIVATE: '/private',
   HOME: '/',
   TICKETS: '/tickets',
   RESERVATION: "/reservation"

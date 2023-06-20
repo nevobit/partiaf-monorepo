@@ -6,6 +6,11 @@ import Input from '@/components/Shared/Input'
 import Field from '@/components/Shared/Field'
 import Button from '@/components/Shared/Button'
 import Copyright from '@/components/Shared/Copyright'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppStore } from '@/redux/store'
+import { resetStores } from '@/redux/states/stores/slice'
+import { createStore, getStoresByAdmin } from '@/redux/states'
+import { Store } from '@partiaf/entities'
 
 
 const Signin = () => {
@@ -32,6 +37,28 @@ const Signin = () => {
         //dispatch(login({email: user.email, password: user.password}) as any)
       }
 
+    //   TODO: esto es REDUX
+
+    //   const [store, setStore] = useState<Store>({
+    //     name: '',
+    //     email: '',
+    //     password: ''
+    //   })
+
+    //   const { success, result, loading, error } = useSelector((state: AppStore) => state.stores);
+
+
+    //  const dispatch = useDispatch();
+
+    //  const onSubmitCreateStore = () => {
+    //     dispatch(createStore(store) as any)
+    //  }
+    //   useEffect(() => {
+    //     if(success){
+    //         dispatch(resetStores())
+    //     }
+    //     dispatch(getStoresByAdmin({ }) as any)
+    //   }, [dispatch, success])
 
   return (
     <div className={styles.body}>

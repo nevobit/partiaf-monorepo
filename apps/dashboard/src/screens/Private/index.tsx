@@ -6,8 +6,6 @@ import Reservation from './Reservation'
 import Home from './Home'
 import RoutesWithNotFound from '@/utilities/routes-with-not-found'
 
-
-
 const Private = () => {
     // temporary path format until private access is configured
   return (
@@ -15,6 +13,8 @@ const Private = () => {
         <RoutesWithNotFound>
             <Route path={PrivateRoutes.RESERVATION} element={<Reservation />} />
             <Route path={PrivateRoutes.HOME} element={<Reservation />} />
+            <Route path={PrivateRoutes.TICKETS} element={<div>Tickets Screen</div>} />
+
         </RoutesWithNotFound>
     </Layout>
 

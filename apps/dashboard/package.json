@@ -16,7 +16,9 @@
     "react-router-dom": "6.3.0",
     "@partiaf/entities": "workspace:*",
     "axios": "~1.4.0",
-    "react-feather": "~2.0.10"
+    "react-feather": "~2.0.10",
+    "react-icons-kit": "~2.0.0",
+    "react-phone-number-input": "~3.2.23"
   },
   "devDependencies": {
     "@types/react": "18.0.0",
