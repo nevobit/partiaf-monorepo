@@ -11,5 +11,9 @@ export const PrivateRoutes = {
   PRIVATE: '/private',
   HOME: '/',
   TICKETS: '/tickets',
-  RESERVATION: "/reservation"
+  RESERVATION: "/reservation",
+  COLLABORATORS: "/collaborators",
+  SETTINGS: "/settings",
+  MESSAGES: "/messages",
+  
 };
