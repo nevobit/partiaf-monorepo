@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import styles from "./tableInfoTr.module.css"
 import Button from '../Button';
 import eye from "../../../../public/icons/icon_eye.svg"
+import { Link , useLocation} from 'react-router-dom';
 
 interface Table  {
   
@@ -10,6 +11,7 @@ interface Table  {
     setDetail?: (e: React.MouseEvent)=> void;
     detail?: boolean;
     data: Data;
+    action?: string;
   }
 
   interface Data{
@@ -24,15 +26,21 @@ interface Table  {
     id: string;
   }
 
-const TableInfoTr = ({detail, seeDetail,setDetail, data:{id, user_picture, name, user, date, hour, ticket, ticketValue, ticketState}, ...rest }: Table) => {
+const TableInfoTr = ({action, detail, seeDetail,setDetail, data:{id, user_picture, name, user, date, hour, ticket, ticketValue, ticketState}, ...rest }: Table) => {
   
+
+  const location = useLocation()
    const [activate, setActivate]= useState(false)
+   const [actualLocation, setctualLocation]= useState(location.pathname)
+
 
 
   //  useEffect(()=>{
   //   console.log(detail)
   //   setActivate(!activate)
   //  },[detail])
+  console.log(actualLocation)
+
 
     return (
     <tr key={id} className={`${styles.tr}  ${activate ? styles.activate : ""}`}>
@@ -51,8 +59,25 @@ const TableInfoTr = ({detail, seeDetail,setDetail, data:{id, user_picture, name,
         <h2 className={styles.h2}>{hour}</h2>
         <p className={styles.p}>Hora de la reserva</p>
       </td>
+      {ticketValue &&
+      <td className={styles.td}>
+      <h2 className={styles.h2}>{`$${ticketValue}`}</h2>
+      <p className={styles.p}>Valor total del ticket</p>
+    </td>}
+      {ticket &&
+      <td className={styles.td}>
+      <h2 className={styles.h2}>{ticket}</h2>
+      <p className={styles.p}>Ticket</p>
+    </td>}
+    {ticket &&
+      <td className={styles.td}>
+      <h2 className={styles.h2}>{ticketState}</h2>
+      <p className={styles.p}>Estado del ticket</p>
+    </td>}
       <td className={styles.td} onClick={()=>{setActivate(!activate)}}>
-      <Button onClick={seeDetail} variant='dark'>ver reserva <img src={eye}/></Button>
+        {/* <Link to={`${actualLocation}/${id}`}> */}
+      <Button onClick={seeDetail} variant='dark'>{action} <img src={eye}/></Button>
+      {/* </Link> */}
       </td>
     </tr>
   )

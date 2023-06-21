@@ -15,6 +15,7 @@ export const PrivateRoutes = {
   RESERVATION: "/reservation",
   COLLABORATORS: "/collaborators",
   SETTINGS: "/settings",
+  MODAL: "modal",
   MESSAGES: "/messages",
   
 };
