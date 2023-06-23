@@ -91,7 +91,7 @@ const openDetail = ()=>{
       <div className={styles.body}>
           <div className={styles.header}>
               <h2 className={styles.title}>
-                  Tickets
+                    Tickets
               </h2>
               <div className={styles.header_options}>
                   <SearchBar className={styles.header_buttons}/>

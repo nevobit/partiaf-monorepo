@@ -5,22 +5,24 @@
     align-items: center;
 }
 .header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto;
+     align-items: center; 
+     justify-content: space-between;
     gap: 2rem;
     min-width: 100%;
-    background-color: aquamarine;
+
 }
 
 .header_options{
     display: flex;
-    width: 50%;
+    max-width: max-content;
     gap: 3rem;
+    padding: 1rem;
 }
 
 .header_buttons{
-    width: 35rem;
+    width: auto
 }
 
 .title{
@@ -74,6 +76,6 @@
 
     .header{
       flex-direction: column;
-     
+
     }
 }

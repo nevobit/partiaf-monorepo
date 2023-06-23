@@ -73,16 +73,20 @@ const openDetail = ()=>{
   return (
     <div className={styles.body}>
         <div className={styles.header}>
-            <h2 className={styles.title}>
-                Reserva con nosotros
-            </h2>
-            <div className={styles.header_options}>
-                <SearchBar className={styles.header_buttons}/>
-                <Button 
-                className={styles.header_buttons}
-                variant='secondary'
-                >Configuracion de la reserva</Button>
-            </div>
+          <div>
+
+         
+          <h2 className={styles.title}>
+              Reserva con nosotros
+          </h2>
+          </div>
+          <div className={styles.header_options}>
+              <SearchBar className={styles.header_buttons}/>
+              <Button 
+              className={styles.header_buttons}
+              variant='secondary'
+              >Configuracion de la reserva</Button>
+          </div>
         </div>
         <div className={styles.totals}>
           <ReservationTotals title='Total de reservas' totals="05"/>
