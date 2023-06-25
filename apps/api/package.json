@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node build/server/index.js",
+    "start": "node buildcap/server/index.js",
     "dev": "ts-node-dev ./src/server/index.ts",
     "build": "npx tsc",
     "clean": "rm -rf ./build"
