@@ -24,6 +24,7 @@ input UserInput {
 
 
 type User {
+    _id: String
     id: String
     firstname: String
     lastname: String

@@ -22,7 +22,7 @@ export default {
     getAllUsers: async (parent: any, {}, ctx: any) => {
       const { id } = (await verifyUserToken(ctx)) as { id: string };
       const users = await getAllUsers(id);
-
+      
       console.log(users);
       if (users instanceof Error) {
         return new Error('Invalid credentials');

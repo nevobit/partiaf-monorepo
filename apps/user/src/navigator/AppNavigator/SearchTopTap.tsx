@@ -19,6 +19,7 @@ import {useTheme} from '../../contexts/ThemeContexts';
 import Users from '../../screens/Search/Users';
 import Stores from '../../screens/Search/Stores';
 import Artists from '../../screens/Search/Artists';
+import Collaborators from '../../screens/Search/Collaborators';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -94,7 +95,7 @@ const SearchTopTap = () => {
       <Tab.Screen name="Cuentas" component={Users} />
       <Tab.Screen name="Artistas" component={Artists} />
       <Tab.Screen name="Negocios" component={Stores} />
-      <Tab.Screen name="Colaboradores" component={Moments} />
+      <Tab.Screen name="Aliados" component={Collaborators} />
     </Tab.Navigator>
   );
 };

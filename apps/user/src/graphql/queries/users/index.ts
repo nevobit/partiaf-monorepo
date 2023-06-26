@@ -7,6 +7,7 @@ export const GET_USER_BY_ID = gql`
       phone
       lastname
       firstname
+      photo
       accountType
       followers
       following
@@ -34,6 +35,7 @@ export const GET_USERS = gql`
       followers
       following
       friend
+      _id
       id
       isPrivate
       isVerified

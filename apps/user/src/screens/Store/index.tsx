@@ -21,6 +21,7 @@ const Store = ({route, navigation}: any) => {
     },
   });
   
+  
   console.log(data)
   return (
     <DefaultView
@@ -37,7 +38,7 @@ const Store = ({route, navigation}: any) => {
           paddingHorizontal: 10,
         }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('HomeScreen')}
+          onPress={() => navigation.goBack(null)}
           style={{
             backgroundColor: 'rgba(0,0,0,.8)',
             borderRadius: 100,
@@ -174,11 +175,11 @@ const Store = ({route, navigation}: any) => {
             paddingTop: 0,
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             gap: 10,
             backgroundColor: 'rgba(10,10,10,1)',
           }}>
-          <DefaultView
+          {/* <DefaultView
             style={{
               alignItems: 'center',
             }}>
@@ -189,9 +190,9 @@ const Store = ({route, navigation}: any) => {
               }}>
               Reservas
             </Text>
-          </DefaultView>
+          </DefaultView> */}
           <TouchableOpacity
-          onPress={() => navigation.navigate('Covers')}
+          onPress={() => navigation.navigate('Covers', { store:  route.params.store })}
             style={{
               alignItems: 'center',
             }}>
@@ -203,7 +204,7 @@ const Store = ({route, navigation}: any) => {
               Tickets
             </Text>
           </TouchableOpacity>
-          <DefaultView
+          {/* <DefaultView
             style={{
               alignItems: 'center',
             }}>
@@ -214,9 +215,9 @@ const Store = ({route, navigation}: any) => {
               }}>
               Menu
             </Text>
-          </DefaultView>
+          </DefaultView> */}
         </DefaultView>
-        <DefaultView
+        {/* <DefaultView
           style={{
             borderWidth: 1,
             borderColor: 'rgba(255,255,255, .1)',
@@ -253,21 +254,21 @@ const Store = ({route, navigation}: any) => {
               Organizador
             </Text>
           </DefaultView>
-        </DefaultView>
+        </DefaultView> */}
         <DefaultView
           style={{
             height: 140,
             paddingHorizontal: 20,
             paddingVertical: 10,
           }}>
-          <Text
+          {/* <Text
             style={{
               fontWeight: '500',
               fontSize: 18,
               color: '#fff',
             }}>
             Ubicacion
-          </Text>
+          </Text> */}
           {/* <MapView
         style={{ flex: 1 }}
         initialRegion={{

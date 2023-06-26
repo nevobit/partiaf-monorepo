@@ -6,6 +6,7 @@ import Wallet from '../../screens/Wallet';
 import Stores from '../../screens/Stores';
 import Details from '../../screens/Tickets/Details';
 import Covers from '../../screens/Covers';
+import Payment from '../../screens/Covers/Payment';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -24,6 +25,7 @@ export type RootStackParamList = {
   };
   Payment: {
     user: string | undefined;
+    goer: any | undefined;
   };
   Wallet: {
     user: string | undefined;
@@ -50,6 +52,7 @@ const HomeNavigator = () => {
       <HomeStackNavigator.Screen name="Stores" component={Stores} />
       <HomeStackNavigator.Screen name="Covers" component={Covers} />
       <HomeStackNavigator.Screen name="TicketDetails" component={Details} />
+      <HomeStackNavigator.Screen name="Payment" component={Payment} />
 
       {/* <HomeStackNavigator.Screen name="HomeScreen" component={Home}  /> */}
       {/* <HomeStackNavigator.Screen name="HomeScreen" component={Home}  /> */}

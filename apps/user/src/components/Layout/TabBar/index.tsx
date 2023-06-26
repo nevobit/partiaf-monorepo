@@ -13,10 +13,29 @@ import {useTheme} from '../../../contexts/ThemeContexts';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import colors from '../Theme/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
+import { GET_USER_BY_ID } from '../../../graphql/queries/users';
+import { useEffect } from 'react';
 
 const TabBar = ({state, navigation}: BottomTabBarProps) => {
   const {theme} = useTheme();
   const insets = useSafeAreaInsets();
+
+   
+  const {user} = useSelector((state: any) => state.auth);
+
+  const {data, loading, error, refetch} = useQuery(GET_USER_BY_ID, {
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   return (
     <View
       style={{
@@ -92,7 +111,7 @@ const TabBar = ({state, navigation}: BottomTabBarProps) => {
                       height: 30,
                     }}
                     source={{
-                      uri: 'https://i.ibb.co/GVRTSzP/52696599642627236248.webp',
+                      uri: data?.getUserById.photo[0]? data?.getUserById.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
                     }}
                   />
                 </View>

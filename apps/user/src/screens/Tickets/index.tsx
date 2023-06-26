@@ -15,7 +15,7 @@ const DismissKeyboard = ({children}: any) => (
     {children}
   </TouchableWithoutFeedback>
 );
-const Tickets = ({navigation}: any) => {
+const Tickets = ({navigation,  route}: any) => {
   return (
     <DismissKeyboard>
       <View
@@ -33,7 +33,7 @@ const Tickets = ({navigation}: any) => {
             paddingHorizontal: 10,
           }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('HomeScreen')}
+            onPress={() => navigation.navigate('HomeScreen', {store:  route.params.store})}
             style={{
               flexDirection: 'row',
               gap: 10,

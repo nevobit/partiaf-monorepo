@@ -45,7 +45,7 @@ const Artists = () => {
             .filter((user: any) => user.accountType == 'artists')
             .map((user: any) => (
               <TouchableOpacity
-                key={user.id}
+                key={user._id}
                 style={{
                   display: 'flex',
                   alignItems: 'center',

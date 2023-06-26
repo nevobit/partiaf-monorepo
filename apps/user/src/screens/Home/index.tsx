@@ -37,7 +37,7 @@ const Home = ({navigation}: any) => {
           alignItems: 'center',
           justifyContent: 'space-between',
           paddingTop: 15,
-          paddingBottom: 15,
+          paddingBottom: 10,
           paddingHorizontal: 10,
         }}>
         <DefaultView
@@ -95,7 +95,11 @@ const Home = ({navigation}: any) => {
               Especialmente para ti
             </Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Stores')}>
+            <TouchableOpacity 
+            style={{
+              marginRight: 15
+            }}
+            onPress={() => navigation.navigate('Stores')}>
               <Text
                 style={{
                   color: '#fff',
@@ -123,6 +127,7 @@ const Home = ({navigation}: any) => {
             width: '100%',
             paddingLeft: 10,
             marginTop: 40,
+            marginBottom: 60
           }}>
           <DefaultView
             style={{
@@ -139,7 +144,11 @@ const Home = ({navigation}: any) => {
               Las mejores discos
             </Text>
 
-            <TouchableOpacity>
+            <TouchableOpacity 
+            style={{
+              marginRight: 15
+            }}
+            onPress={() => navigation.navigate('Stores')}>
               <Text
                 style={{
                   color: '#fff',
@@ -154,13 +163,12 @@ const Home = ({navigation}: any) => {
             style={{
               flexDirection: 'row',
               marginTop: 20,
-              marginBottom: 70,
             }}>
-            <TouchableOpacity onPress={() => navigation.navigate('Store')}>
-              <HomeCard />
-            </TouchableOpacity>
-            <HomeCard />
-            <HomeCard />
+              {data?.getAllStores.map((store: any) => (
+                <TouchableOpacity key={store.id} onPress={() => navigation.navigate('Store', {store: store.id})}>
+                <HomeCard {...store} />                  
+                </TouchableOpacity>
+              ))}
           </ScrollView>
           <DefaultView style={{
             marginBottom:30

@@ -9,14 +9,36 @@ import {
 import {TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { ScrollView } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import colors from '../../components/Layout/Theme/colors';
+import { useQuery } from '@apollo/client';
+import { useSelector } from 'react-redux';
+import { GET_USER_BY_ID } from '../../graphql/queries/users';
+import { useEffect } from 'react';
 
 const DismissKeyboard = ({children}: any) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     {children}
   </TouchableWithoutFeedback>
 );
-const Covers = ({navigation}: any) => {
+const Covers = ({navigation, route}: any) => {
+  
+  const {user} = useSelector((state: any) => state.auth);
+
+  const {data, loading, error, refetch} = useQuery(GET_USER_BY_ID, {
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
+
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+
   const [covers, setCovers] = useState<any>({});
   
   const addCover = (cover: any, op:string) => {
@@ -51,7 +73,6 @@ const Covers = ({navigation}: any) => {
     if(!has)
       return 0;
     return covers.amount;
-    
   }
   
   return (
@@ -70,7 +91,7 @@ const Covers = ({navigation}: any) => {
           paddingHorizontal: 10,
         }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Store')}
+          onPress={() => navigation.goBack({store:  route.params.store})}
           style={{
             backgroundColor: 'rgba(0,0,0,.8)',
             borderRadius: 100,
@@ -340,6 +361,12 @@ const Covers = ({navigation}: any) => {
          <DefaultView
         style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 10}}>
         <TouchableOpacity
+         onPress={() => navigation.navigate("Payment", {store: route.params.store, goer: { 
+          amount: covers.amount,
+          price: covers.price,
+          cover: covers.id,
+          user: data?.getUserById.id
+         }})}
           style={{
             backgroundColor: colors.dark.primary,
             height: 50,

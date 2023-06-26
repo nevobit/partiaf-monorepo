@@ -1,13 +1,30 @@
-import React from 'react';
+import { useQuery } from '@apollo/client';
+import React, { useEffect } from 'react';
 import {ScrollView, View as DefaultView, Image, Text} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { GET_USER_BY_ID } from '../../../../graphql/queries/users';
 
 const Stories = () => {
+  
+  const {user} = useSelector((state: any) => state.auth);
+
+  const {data, loading, error, refetch} = useQuery(GET_USER_BY_ID, {
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   return (
     <ScrollView
       horizontal
       style={{
         gap: 20,
-        paddingHorizontal: 15,
+        paddingHorizontal: 5,
         paddingTop: 5,
         paddingBottom: 20,
       }}>
@@ -36,7 +53,7 @@ const Stories = () => {
                 borderRadius: 100,
               }}
               source={{
-                uri: 'https://i.ibb.co/GVRTSzP/52696599642627236248.webp',
+                uri: data?.getUserById.photo[0]? data?.getUserById.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
               }}
             />
           </DefaultView>
@@ -46,10 +63,10 @@ const Stories = () => {
             color: '#fff',
             fontSize: 12,
           }}>
-          Nestor
+          {data?.getUserById.firstname}
         </Text>
       </DefaultView>
-      <DefaultView
+      {/* <DefaultView
         style={{
           alignItems: 'center',
           gap: 5,
@@ -241,7 +258,7 @@ const Stories = () => {
           }}>
           Josue
         </Text>
-      </DefaultView>
+      </DefaultView> */}
     </ScrollView>
   );
 };

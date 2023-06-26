@@ -1,16 +1,24 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View as DefaultView, Text, Image, TouchableOpacity} from 'react-native';
+import {
+  TextInput,
+  View as DefaultView,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
 import {useQuery} from '@apollo/client';
-import {GET_STORES} from '../../../graphql/queries/users';
+import {GET_USERS} from '../../../graphql/queries/users';
 import {View} from '../../../components/Layout/Theme';
 import colors from '../../../components/Layout/Theme/colors';
 
-const Stores = ({navigation}: any) => {
+const Collaborators = () => {
   const {user} = useSelector((state: any) => state.auth);
 
-  const {data, loading} = useQuery(GET_STORES, {
+  const {data, loading} = useQuery(GET_USERS, {
     context: {
       headers: {
         authorization: user.token ? `Bearer ${user.token}` : '',
@@ -25,11 +33,11 @@ const Stores = ({navigation}: any) => {
         paddingHorizontal: 10,
       }}>
       {!loading && (
-        <DefaultView>
-          {data?.getAllStores.map((user: any) => (
+        <ScrollView>
+          {data?.getAllUsers.filter((user: any) => user.accountType == 'collaborators')
+          .map((user: any) => (
             <TouchableOpacity
-            onPress={() => navigation.navigate('Store', {store:  user.id})}
-              key={user.id}
+              key={user._id}
               style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -56,8 +64,8 @@ const Stores = ({navigation}: any) => {
                   }}
                   source={{
                     uri:
-                      user.photos?.length > 0
-                        ? user?.photos[0]
+                      user.photo.length > 0
+                        ? user?.photo[0]
                         : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
                   }}
                 />
@@ -69,7 +77,7 @@ const Stores = ({navigation}: any) => {
                     fontSize: 14,
                     color: colors.dark.text,
                   }}>
-                  {user.name}
+                  {user.firstname} {user.lastname}
                 </Text>
                 <Text
                   style={{
@@ -77,15 +85,17 @@ const Stores = ({navigation}: any) => {
                     fontSize: 14,
                     color: 'rgba(255,255,255,.5)',
                   }}>
-                  {user.type}
+                  {user.interests.food ? user.interests.food[0] + ' -' : ''}{' '}
+                  {user.interests.plan ? user.interests.plan[0] + ' -' : ''}{' '}
+                  {user.interests.music ? user.interests.music[0] : ''}
                 </Text>
               </DefaultView>
             </TouchableOpacity>
           ))}
-        </DefaultView>
+        </ScrollView>
       )}
     </View>
   );
 };
 
-export default Stores;
+export default Collaborators;

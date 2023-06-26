@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  ScrollView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
@@ -25,8 +26,6 @@ const Users = () => {
     },
   });
 
-  console.log(data);
-
   return (
     <View
       style={{
@@ -34,10 +33,11 @@ const Users = () => {
         paddingHorizontal: 10,
       }}>
       {!loading && (
-        <DefaultView>
-          {data?.getAllUsers.map((user: any) => (
+        <ScrollView>
+          {data?.getAllUsers.filter((user: any) => user.accountType == 'personal')
+          .map((user: any) => (
             <TouchableOpacity
-              key={user.id}
+              key={user._id}
               style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -92,7 +92,7 @@ const Users = () => {
               </DefaultView>
             </TouchableOpacity>
           ))}
-        </DefaultView>
+        </ScrollView>
       )}
     </View>
   );
