@@ -103,7 +103,7 @@ const Signin = () => {
                     type='checkbox'
                 >Recuerdame</Input>
                 <div className={styles.buttons}>
-                    <Button className={styles.button_submit} type='submit'><p className={styles.button_text}>Registrarse</p></Button>
+                    <Button className={styles.button_submit} type='submit'><p className={styles.button_text}>Entrar</p></Button>
                     <p><Link className={styles.terms} to="">Olvide mi contraseña</Link></p>
                     <p>¿No tienes cuenta?<Link className={styles.terms} to="/signup"> Ir a registrarse →</Link></p>
                 </div>

@@ -12,6 +12,6 @@ export interface AppStore {
 export default configureStore<AppStore>({
   reducer: {
     stores: StoresSlice,
-    auth: AuthSlice
+    auth: AuthSlice,
   },
 });
