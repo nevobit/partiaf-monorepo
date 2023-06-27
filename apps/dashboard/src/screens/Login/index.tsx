@@ -6,15 +6,19 @@ import Input from '@/components/Shared/Input'
 import Field from '@/components/Shared/Field'
 import Button from '@/components/Shared/Button'
 import Copyright from '@/components/Shared/Copyright'
+import { useDispatch, useSelector } from 'react-redux'
+// import { AppStore } from "@/redux/store";
+// import { login } from '@/redux/auth/users/thunks'
 
 const Login = () => {
 
     const [remember, setRemeber] = useState<boolean>(false);
-
     const [user, setUser] = useState({
         email: "",
         password: "",
       });
+
+      const dispatch = useDispatch();
 
       const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser((prev) => ({...prev, [event.target.name]: event.target.value}))
@@ -28,8 +32,9 @@ const Login = () => {
 
       const onSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+  
         console.log(user)
-        //dispatch(login({email: user.email, password: user.password}) as any)
+        // dispatch(login({email: user.email, password: user.password}) as any)
       }
     
   return (
