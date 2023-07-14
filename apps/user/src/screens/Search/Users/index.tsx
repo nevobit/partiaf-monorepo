@@ -27,13 +27,14 @@ const Users = () => {
   });
 
   return (
-    <View
+    <DefaultView
       style={{
         height: '100%',
         paddingHorizontal: 10,
+        marginTop: 10
       }}>
       {!loading && (
-        <ScrollView>
+        <ScrollView >
           {data?.getAllUsers.filter((user: any) => user.accountType == 'personal')
           .map((user: any) => (
             <TouchableOpacity
@@ -94,7 +95,7 @@ const Users = () => {
           ))}
         </ScrollView>
       )}
-    </View>
+    </DefaultView>
   );
 };
 

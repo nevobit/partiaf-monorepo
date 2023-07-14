@@ -32,7 +32,6 @@ const Search = () => {
     <View
       style={{
         height: '100%',
-        padding: 10,
       }}>
       <DefaultView
         style={{
@@ -43,6 +42,9 @@ const Search = () => {
           alignItems: 'center',
           marginTop: 10,
           height: 40,
+          width: '95%',
+          alignContent: 'center',
+          alignSelf: 'center',
         }}>
         <Icon name="search-outline" color="#fff" size={20} />
         <TextInput

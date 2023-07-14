@@ -127,7 +127,7 @@ const VerifyAge = ({navigation}: any) => {
         </Text>
         <DefaultView
           style={{
-            padding: 10,
+            padding: 10
           }}>
           <TextInput
             placeholder="Edad"
@@ -139,6 +139,7 @@ const VerifyAge = ({navigation}: any) => {
               color: 'rgba(255,255,255,1)',
               fontSize: 16,
               paddingHorizontal: 10,
+              height: 40
             }}
           />
         </DefaultView>

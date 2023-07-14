@@ -104,34 +104,40 @@ const Covers = ({navigation, route}: any) => {
           <Icon name="chevron-back-outline" size={25} color="#fff" />
         </TouchableOpacity>
       </DefaultView>
+      
          <ScrollView style={{
-          paddingHorizontal: 15
+          paddingHorizontal: 15,
+          marginTop: 50
          }}>
           <DefaultView style={{
-           marginTop: 60,
            overflow: 'hidden',
-           borderRadius: 20,
+           marginBottom: 20,
+           borderRadius: 10,
            width: '100%',
-           position: 'relative'
+           position: 'relative',
+           flexDirection: 'row',
+           alignItems: 'center',
+           justifyContent: 'space-between',
           }}>
+            <DefaultView style={{
+              width: '35%',
+            }}>
+
            <Image style={{
             height: 200,
-            width: '100%',
-            resizeMode: 'stretch',
-            zIndex: 1
+            resizeMode: 'cover',
            }} source={{
             uri: 'https://i.ibb.co/wrpN79h/coverimage.jpg',
             
            }} />
+            </DefaultView>
+
            <DefaultView style={{
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            width:'100%',
+            backgroundColor: 'rgba(255,255,255,0.05)',
             height:'100%',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: 9,
-            padding: 10
+            width:'65%',
+            paddingVertical: 5,
+            paddingHorizontal: 10
            }}>
             <DefaultView style={{
               flexDirection: 'row',
@@ -141,20 +147,20 @@ const Covers = ({navigation, route}: any) => {
             <Text style={{
             color: colors.dark.primary,
             fontWeight: '600',
-            fontSize: 20
+            fontSize: 18
            }}>Land Part</Text>
             <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
             fontSize: 14
-           }}>Santa Marta-Colombia</Text>
+           }}>Santa Marta</Text>
                
             </DefaultView>
             
             <DefaultView style={{
               alignItems: 'flex-start',
               justifyContent: 'flex-start',
-              marginTop: 15
+              marginTop: 30
             }}>
             <Text style={{
             color: colors.dark.text,
@@ -177,12 +183,12 @@ const Covers = ({navigation, route}: any) => {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
-              marginTop: 20
+              marginTop: 25
             }}>
             <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
-            fontSize: 20
+            fontSize: 18
            }}>$50,000</Text>
            <DefaultView style={{
             flexDirection: 'row',
@@ -232,30 +238,33 @@ const Covers = ({navigation, route}: any) => {
            </DefaultView>
           </DefaultView>
           <DefaultView style={{
-           marginTop: 60,
            overflow: 'hidden',
-           borderRadius: 20,
+           borderRadius: 10,
            width: '100%',
-           position: 'relative'
+           position: 'relative',
+           flexDirection: 'row',
+           alignItems: 'center',
+           justifyContent: 'space-between',
           }}>
+            <DefaultView style={{
+              width: '35%',
+            }}>
+
            <Image style={{
             height: 200,
-            width: '100%',
-            resizeMode: 'stretch',
-            zIndex: 1
+            resizeMode: 'cover',
            }} source={{
             uri: 'https://i.ibb.co/ZfVftdq/cover2.jpg',
             
            }} />
+            </DefaultView>
+
            <DefaultView style={{
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            width:'100%',
+            backgroundColor: 'rgba(255,255,255,0.05)',
             height:'100%',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: 9,
-            padding: 10
+            width:'65%',
+            paddingVertical: 5,
+            paddingHorizontal: 10
            }}>
             <DefaultView style={{
               flexDirection: 'row',
@@ -265,20 +274,20 @@ const Covers = ({navigation, route}: any) => {
             <Text style={{
             color: colors.dark.primary,
             fontWeight: '600',
-            fontSize: 20
+            fontSize: 18
            }}>Land Part</Text>
             <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
             fontSize: 14
-           }}>Santa Marta-Colombia</Text>
+           }}>Santa Marta</Text>
                
             </DefaultView>
             
             <DefaultView style={{
               alignItems: 'flex-start',
               justifyContent: 'flex-start',
-              marginTop: 15
+              marginTop: 30
             }}>
             <Text style={{
             color: colors.dark.text,
@@ -301,12 +310,12 @@ const Covers = ({navigation, route}: any) => {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
-              marginTop: 20
+              marginTop: 25
             }}>
             <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
-            fontSize: 20
+            fontSize: 18
            }}>$50,000</Text>
            <DefaultView style={{
             flexDirection: 'row',
@@ -318,7 +327,7 @@ const Covers = ({navigation, route}: any) => {
             height: 40
            }}>
            <TouchableOpacity
-                       onPress={() => addCover({name: 'Land party', price: 10000, id: 'cf34f34-q34f32', limit: 200}, "-")}
+                       onPress={() => addCover({name: 'Land party', price: 50000, id: 'cf34f34-f34f32', limit: 20}, "-")}
 
            style={{
             width:50,
@@ -335,9 +344,9 @@ const Covers = ({navigation, route}: any) => {
                 fontSize: 20,
                 color: colors.dark.text,
                 textAlign: 'center'
-              }}>{getAmount({name: 'Land party', price: 50000, id: 'cf34f34-q34f32'})}</Text>
+              }}>{getAmount({name: 'Land party', price: 50000, id: 'cf34f34-f34f32'})}</Text>
             <TouchableOpacity 
-            onPress={() => addCover({name: 'Land party', price: 10000, id: 'cf34f34-q34f32', limit: 200}, "+")}
+            onPress={() => addCover({name: 'Land party', price: 50000, id: 'cf34f34-f34f32', limit: 20}, "+")}
             style={{
             width:50
            }}>
