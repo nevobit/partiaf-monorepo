@@ -66,6 +66,21 @@ type Store{
     status: String
 }
 
+type Ticket{
+    id: String
+    name: String
+    type: String
+    limit: Int
+    hour: String
+    price: String
+    min_age: Int
+    image: String
+    description: String
+    status: String
+    percentage: String
+}
+
+
 type AuthPayload {
     token: String
 }
@@ -76,6 +91,7 @@ type Query {
     getAllUsers: [User]
     getAllStores: [Store]
     getStoreById(id: String): Store
+    getTicketsByStoreId(id: String): [Ticket]
 }
    
 

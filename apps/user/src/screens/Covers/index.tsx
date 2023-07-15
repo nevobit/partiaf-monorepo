@@ -15,6 +15,7 @@ import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { GET_USER_BY_ID } from '../../graphql/queries/users';
 import { useEffect } from 'react';
+import { GET_TICKETS_BY_STORE_ID } from '../../graphql/queries/tickets';
 
 const DismissKeyboard = ({children}: any) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -32,6 +33,16 @@ const Covers = ({navigation, route}: any) => {
       },
     },
   });
+
+  const {data: tickets} = useQuery(GET_TICKETS_BY_STORE_ID, {
+    variables: { id: route.params.store },
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  })
+
 
 
   useEffect(() => {
@@ -104,6 +115,9 @@ const Covers = ({navigation, route}: any) => {
           <Icon name="chevron-back-outline" size={25} color="#fff" />
         </TouchableOpacity>
       </DefaultView>
+      <Text style={{
+        color: '#fff'
+      }}>{JSON.stringify(tickets)}</Text>
          <ScrollView style={{
           paddingHorizontal: 15
          }}>
@@ -231,7 +245,7 @@ const Covers = ({navigation, route}: any) => {
             
            </DefaultView>
           </DefaultView>
-          <DefaultView style={{
+          {/* <DefaultView style={{
            marginTop: 60,
            overflow: 'hidden',
            borderRadius: 20,
@@ -354,7 +368,7 @@ const Covers = ({navigation, route}: any) => {
             </DefaultView>
             
            </DefaultView>
-          </DefaultView>
+          </DefaultView> */}
          </ScrollView>
          {covers.amount > 0 && (
           
