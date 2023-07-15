@@ -15,8 +15,9 @@ export const colors = {
   },
   dark: {
     primary: '#FFE243',
+    primaryInactive: 'rgba(255,226,67,0.5)',
     text: '#F2F2F2',
-    textInactive: 'rgba(242,242,242,0.6)',
+    textInactive: 'rgba(242,242,242,0.7)',
     background: 'rgba(10,10,10,1)',
     tint: tintColorDark,
     holderColor: 'gray',

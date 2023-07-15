@@ -1,12 +1,8 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {Text} from 'react-native';
 import {Signin} from '../../screens/Signin';
-
-const Home = () => {
-  return <Text>Home</Text>;
-};
+import {HomeScreen} from '../../screens/Home';
 
 const Auth = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,14 +27,23 @@ const AuthNavigator = () => {
 
 const AppNavigator = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="home" component={Home} />
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Tab.Screen
+        name="home"
+        component={HomeScreen}
+        options={{
+          tabBarStyle: {display: 'none'},
+        }}
+      />
     </Tab.Navigator>
   );
 };
 
 export const NavigatorContainer = () => {
   // const {user} = useSelector((state: any) => state.auth);
-  const user = '';
+  const user = 'hola';
   return <>{user ? <AppNavigator /> : <AuthNavigator />}</>;
 };

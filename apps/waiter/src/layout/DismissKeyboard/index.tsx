@@ -12,6 +12,6 @@ export const DismissKeyboard = ({children}: any) => (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       {children}
     </TouchableWithoutFeedback>
-    <View style={{height: 100}} />
+    <View />
   </KeyboardAvoidingView>
 );
