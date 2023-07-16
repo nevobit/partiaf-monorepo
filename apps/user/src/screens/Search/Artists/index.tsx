@@ -28,10 +28,11 @@ const Artists = () => {
   console.log(data);
 
   return (
-    <View
+    <DefaultView
       style={{
         height: '100%',
         paddingHorizontal: 10,
+        marginTop: 10
       }}>
       {!loading && (
         <DefaultView
@@ -103,7 +104,7 @@ const Artists = () => {
             ))}
         </DefaultView>
       )}
-    </View>
+    </DefaultView>
   );
 };
 

@@ -4,3 +4,4 @@ export * from './helpers';
 export * from './stores';
 export * from './tickets';
 export * from './users';
+export * from './goers';

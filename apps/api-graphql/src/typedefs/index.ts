@@ -80,6 +80,32 @@ type Ticket{
     percentage: String
 }
 
+type Goer {
+    id: String
+    user: String
+    status: String
+    cost: Float
+    time: String
+    ticket: String
+    amount: Int
+    image: String
+    name: String
+    description: String
+    date: String
+}
+
+input GoerInput {
+    user: String
+    status: String
+    cost: Float
+    time: String
+    ticket: String
+    amount: Int
+    image: String
+    name: String
+    description: String
+    date: String
+}
 
 type AuthPayload {
     token: String
@@ -92,12 +118,14 @@ type Query {
     getAllStores: [Store]
     getStoreById(id: String): Store
     getTicketsByStoreId(id: String): [Ticket]
+    getGoersByUserId: [Goer]
 }
    
 
 type Mutation {
     userSignin(phone: String!, password: String!): AuthPayload
     userSignup(userData: UserInput): AuthPayload
+    createGoer(data: GoerInput): Goer
 }
 
 `;

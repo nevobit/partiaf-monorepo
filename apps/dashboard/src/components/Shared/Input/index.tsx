@@ -2,7 +2,7 @@ import { ReactNode, useState, useEffect } from 'react'
 import { Icon } from 'react-icons-kit'
 import {eyeOff} from 'react-icons-kit/feather/eyeOff'
 import {eye} from 'react-icons-kit/feather/eye'  
-import styles from './input.module.css'
+import styles from './Input.module.css'
 import PhoneInput from "react-phone-number-input"
 import 'react-phone-number-input/style.css'
 
