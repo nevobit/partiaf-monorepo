@@ -11,14 +11,14 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
 import {useQuery} from '@apollo/client';
-import {GET_USER_BALANCE} from '../../graphql/queries/users';
+import {GET_USER_BY_ID} from '../../graphql/queries/users';
 import {useEffect} from 'react';
 import {DivisaFormater} from '../../utilities/divisaFormater';
 
 const Wallet = ({navigation}: any) => {
   const {user} = useSelector((state: any) => state.auth);
 
-  const {data, loading, refetch} = useQuery(GET_USER_BALANCE, {
+  const {data, loading, refetch} = useQuery(GET_USER_BY_ID, {
     context: {
       headers: {
         authorization: user.token ? `Bearer ${user.token}` : '',

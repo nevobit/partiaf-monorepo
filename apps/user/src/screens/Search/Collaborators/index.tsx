@@ -27,10 +27,11 @@ const Collaborators = () => {
   });
 
   return (
-    <View
+    <DefaultView
       style={{
         height: '100%',
         paddingHorizontal: 10,
+        marginTop: 10
       }}>
       {!loading && (
         <ScrollView>
@@ -94,7 +95,7 @@ const Collaborators = () => {
           ))}
         </ScrollView>
       )}
-    </View>
+    </DefaultView>
   );
 };
 

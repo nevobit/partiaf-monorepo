@@ -3,12 +3,14 @@ import { healthCheckRoute } from './health-check';
 import { storeRoutes } from './stores';
 import { adminRoutes } from './admins';
 import { authRoutes } from './auth';
+import { ticketRoutes } from './tickets';
 
 const routes: RouteOptions[] = [
   healthCheckRoute,
   ...authRoutes,
   ...storeRoutes,
   ...adminRoutes,
+  ...ticketRoutes
 ];
 
 export const registerRoutes = (server: FastifyInstance) => {

@@ -111,7 +111,7 @@ const TabBar = ({state, navigation}: BottomTabBarProps) => {
                       height: 30,
                     }}
                     source={{
-                      uri: data?.getUserById.photo[0]? data?.getUserById.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
+                      uri: data?.getUserById?.photo[0]? data?.getUserById?.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
                     }}
                   />
                 </View>

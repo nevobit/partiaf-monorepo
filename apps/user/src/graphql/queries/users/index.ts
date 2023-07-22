@@ -3,6 +3,7 @@ import {gql} from '@apollo/client';
 export const GET_USER_BY_ID = gql`
   query Query {
     getUserById {
+      id
       artistType
       phone
       lastname
@@ -11,17 +12,11 @@ export const GET_USER_BY_ID = gql`
       accountType
       followers
       following
-    }
-  }
-`;
-
-export const GET_USER_BALANCE = gql`
-  query Query {
-    getUserById {
       balance
     }
   }
 `;
+
 
 export const GET_USERS = gql`
   query GetAllUsers {

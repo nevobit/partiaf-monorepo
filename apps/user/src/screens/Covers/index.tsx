@@ -15,6 +15,8 @@ import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { GET_USER_BY_ID } from '../../graphql/queries/users';
 import { useEffect } from 'react';
+import { GET_TICKETS_BY_STORE_ID } from '../../graphql/queries/tickets';
+import { DivisaFormater } from '../../utilities/divisaFormater';
 
 const DismissKeyboard = ({children}: any) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -32,6 +34,16 @@ const Covers = ({navigation, route}: any) => {
       },
     },
   });
+
+  const {data: tickets} = useQuery(GET_TICKETS_BY_STORE_ID, {
+    variables: { id: route.params.store },
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  })
+
 
 
   useEffect(() => {
@@ -105,33 +117,40 @@ const Covers = ({navigation, route}: any) => {
         </TouchableOpacity>
       </DefaultView>
          <ScrollView style={{
-          paddingHorizontal: 15
+          paddingHorizontal: 15,
+          marginTop: 50
          }}>
+          {tickets?.getTicketsByStoreId?.map((ticket:any) => (
+
           <DefaultView style={{
-           marginTop: 60,
            overflow: 'hidden',
-           borderRadius: 20,
+           marginBottom: 20,
+           borderRadius: 10,
            width: '100%',
-           position: 'relative'
+           position: 'relative',
+           flexDirection: 'row',
+           alignItems: 'center',
+           justifyContent: 'space-between',
           }}>
+            <DefaultView style={{
+              width: '35%',
+            }}>
+
            <Image style={{
             height: 200,
-            width: '100%',
-            resizeMode: 'stretch',
-            zIndex: 1
+            resizeMode: 'cover',
            }} source={{
-            uri: 'https://i.ibb.co/wrpN79h/coverimage.jpg',
+            uri: ticket.image,
             
            }} />
+            </DefaultView>
+
            <DefaultView style={{
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            width:'100%',
+            backgroundColor: 'rgba(255,255,255,0.05)',
             height:'100%',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: 9,
-            padding: 10
+            width:'65%',
+            paddingVertical: 5,
+            paddingHorizontal: 10
            }}>
             <DefaultView style={{
               flexDirection: 'row',
@@ -141,20 +160,20 @@ const Covers = ({navigation, route}: any) => {
             <Text style={{
             color: colors.dark.primary,
             fontWeight: '600',
-            fontSize: 20
-           }}>Land Part</Text>
+            fontSize: 18
+           }}>{ticket.name}</Text>
             <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
             fontSize: 14
-           }}>Santa Marta-Colombia</Text>
+           }}></Text>
                
             </DefaultView>
             
             <DefaultView style={{
               alignItems: 'flex-start',
               justifyContent: 'flex-start',
-              marginTop: 15
+              marginTop: 30
             }}>
             <Text style={{
             color: colors.dark.text,
@@ -164,6 +183,137 @@ const Covers = ({navigation, route}: any) => {
            <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
+            fontSize: 16
+           }}>{ticket.hour}</Text>
+            <Text style={{
+            color: colors.dark.text,
+            fontWeight: '600',
+            fontSize: 16
+           }}>{ticket.limit} Cupos</Text>
+               
+            </DefaultView>
+            <DefaultView style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginTop: 25
+            }}>
+            <Text style={{
+            color: colors.dark.text,
+            fontWeight: '600',
+            fontSize: 18
+           }}>{DivisaFormater(ticket.price)}</Text>
+           <DefaultView style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderWidth: 1,
+            borderColor: '#fff',
+            borderRadius:10,
+            height: 40
+           }}>
+           <TouchableOpacity
+                       onPress={() => addCover({...ticket, name: ticket.name, price: ticket.price, id: ticket.id, limit: ticket.limit}, "-")}
+
+           style={{
+            width:50,
+           }}>
+              <Text style={{
+                fontSize: 25,
+                color: colors.dark.text,
+                textAlign: 'center'
+              }}>
+                -
+              </Text>
+            </TouchableOpacity>
+            <Text style={{
+                fontSize: 20,
+                color: colors.dark.text,
+                textAlign: 'center'
+              }}>{getAmount({name: ticket.name, price: ticket.price, id: ticket.id})}</Text>
+            <TouchableOpacity 
+            onPress={() => addCover({name: ticket.name, price: ticket.price, id: ticket.id, limit: ticket.limit}, "+")}
+            style={{
+            width:50
+           }}>
+              <Text style={{
+                fontSize: 25,
+                color: colors.dark.text,
+                textAlign: 'center'
+              }}>
+                +
+              </Text>
+            </TouchableOpacity>
+           </DefaultView>
+               
+            </DefaultView>
+            
+           </DefaultView>
+          </DefaultView>
+          ))}
+
+          {/* <DefaultView style={{
+           marginTop: 60,
+          <DefaultView style={{
+           overflow: 'hidden',
+           borderRadius: 10,
+           width: '100%',
+           position: 'relative',
+           flexDirection: 'row',
+           alignItems: 'center',
+           justifyContent: 'space-between',
+          }}>
+            <DefaultView style={{
+              width: '35%',
+            }}>
+
+           <Image style={{
+            height: 200,
+            resizeMode: 'cover',
+           }} source={{
+            uri: 'https://i.ibb.co/ZfVftdq/cover2.jpg',
+            
+           }} />
+            </DefaultView>
+
+           <DefaultView style={{
+            backgroundColor: 'rgba(255,255,255,0.05)',
+            height:'100%',
+            width:'65%',
+            paddingVertical: 5,
+            paddingHorizontal: 10
+           }}>
+            <DefaultView style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Text style={{
+            color: colors.dark.primary,
+            fontWeight: '600',
+            fontSize: 18
+           }}>Land Part</Text>
+            <Text style={{
+            color: colors.dark.text,
+            fontWeight: '600',
+            fontSize: 14
+           }}>Santa Marta</Text>
+               
+            </DefaultView>
+            
+            <DefaultView style={{
+              alignItems: 'flex-start',
+              justifyContent: 'flex-start',
+              marginTop: 30
+            }}>
+            <Text style={{
+            color: colors.dark.text,
+            fontWeight: '600',
+            fontSize: 16
+           }}>23 Jun 2023</Text>
+           <Text style={{
+            color: colors.dark.text,
+            fontWeigetGoersByUserIdIdght: '600',
             fontSize: 16
            }}>3:00PM</Text>
             <Text style={{
@@ -177,12 +327,12 @@ const Covers = ({navigation, route}: any) => {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
-              marginTop: 20
+              marginTop: 25
             }}>
             <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
-            fontSize: 20
+            fontSize: 18
            }}>$50,000</Text>
            <DefaultView style={{
             flexDirection: 'row',
@@ -230,131 +380,7 @@ const Covers = ({navigation, route}: any) => {
             </DefaultView>
             
            </DefaultView>
-          </DefaultView>
-          <DefaultView style={{
-           marginTop: 60,
-           overflow: 'hidden',
-           borderRadius: 20,
-           width: '100%',
-           position: 'relative'
-          }}>
-           <Image style={{
-            height: 200,
-            width: '100%',
-            resizeMode: 'stretch',
-            zIndex: 1
-           }} source={{
-            uri: 'https://i.ibb.co/ZfVftdq/cover2.jpg',
-            
-           }} />
-           <DefaultView style={{
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            width:'100%',
-            height:'100%',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: 9,
-            padding: 10
-           }}>
-            <DefaultView style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={{
-            color: colors.dark.primary,
-            fontWeight: '600',
-            fontSize: 20
-           }}>Land Part</Text>
-            <Text style={{
-            color: colors.dark.text,
-            fontWeight: '600',
-            fontSize: 14
-           }}>Santa Marta-Colombia</Text>
-               
-            </DefaultView>
-            
-            <DefaultView style={{
-              alignItems: 'flex-start',
-              justifyContent: 'flex-start',
-              marginTop: 15
-            }}>
-            <Text style={{
-            color: colors.dark.text,
-            fontWeight: '600',
-            fontSize: 16
-           }}>23 Jun 2023</Text>
-           <Text style={{
-            color: colors.dark.text,
-            fontWeight: '600',
-            fontSize: 16
-           }}>3:00PM</Text>
-            <Text style={{
-            color: colors.dark.text,
-            fontWeight: '600',
-            fontSize: 16
-           }}>200 Cupos</Text>
-               
-            </DefaultView>
-            <DefaultView style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginTop: 20
-            }}>
-            <Text style={{
-            color: colors.dark.text,
-            fontWeight: '600',
-            fontSize: 20
-           }}>$50,000</Text>
-           <DefaultView style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            borderWidth: 1,
-            borderColor: '#fff',
-            borderRadius:10,
-            height: 40
-           }}>
-           <TouchableOpacity
-                       onPress={() => addCover({name: 'Land party', price: 10000, id: 'cf34f34-q34f32', limit: 200}, "-")}
-
-           style={{
-            width:50,
-           }}>
-              <Text style={{
-                fontSize: 25,
-                color: colors.dark.text,
-                textAlign: 'center'
-              }}>
-                -
-              </Text>
-            </TouchableOpacity>
-            <Text style={{
-                fontSize: 20,
-                color: colors.dark.text,
-                textAlign: 'center'
-              }}>{getAmount({name: 'Land party', price: 50000, id: 'cf34f34-q34f32'})}</Text>
-            <TouchableOpacity 
-            onPress={() => addCover({name: 'Land party', price: 10000, id: 'cf34f34-q34f32', limit: 200}, "+")}
-            style={{
-            width:50
-           }}>
-              <Text style={{
-                fontSize: 25,
-                color: colors.dark.text,
-                textAlign: 'center'
-              }}>
-                +
-              </Text>
-            </TouchableOpacity>
-           </DefaultView>
-               
-            </DefaultView>
-            
-           </DefaultView>
-          </DefaultView>
+          </DefaultView> */}
          </ScrollView>
          {covers.amount > 0 && (
           
@@ -365,6 +391,11 @@ const Covers = ({navigation, route}: any) => {
           amount: covers.amount,
           price: covers.price,
           cover: covers.id,
+          date: covers.date,
+          description: covers.description,
+          image: covers.image,
+          hour: covers.hour,
+          name: covers.name,
           user: data?.getUserById.id
          }})}
           style={{

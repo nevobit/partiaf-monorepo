@@ -15,3 +15,22 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+
+export const CREATE_GOER = gql`
+  mutation Mutation($data: GoerInput) {
+    createGoer(data: $data) {
+      amount
+      cost
+      date
+      description
+      id
+      name
+      image
+      status
+      ticket
+      time
+      user
+    }
+  }
+`

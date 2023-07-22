@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View} from '../../components/Layout/Theme';
 import {
   View as DefaultView,
@@ -9,6 +9,10 @@ import {
 import {TouchableOpacity, Image, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../../components/Layout/Theme/colors';
+import { useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
+import { GET_GOERS_BY_USER_ID } from '../../graphql/queries/goers';
+import { GET_USER_BY_ID } from '../../graphql/queries/users';
 
 const DismissKeyboard = ({children}: any) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -16,6 +20,30 @@ const DismissKeyboard = ({children}: any) => (
   </TouchableWithoutFeedback>
 );
 const Tickets = ({navigation,  route}: any) => {
+  
+  const {user} = useSelector((state: any) => state.auth);
+
+  // const {data, loading, error} = useQuery(GET_USER_BY_ID, {
+  //   context: {
+  //     headers: {
+  //       authorization: user.token ? `Bearer ${user.token}` : '',
+  //     },
+  //   },
+  // });
+
+  const {data: tickets, refetch} = useQuery(GET_GOERS_BY_USER_ID, {
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
+
   return (
     <DismissKeyboard>
       <View
@@ -96,7 +124,8 @@ const Tickets = ({navigation,  route}: any) => {
                 color: colors.dark.primary
               }}>Ver todos</Text></TouchableOpacity>
           </DefaultView>
-          
+          {tickets?.getGoersByUserId?.map((ticket:any) => (
+
           <TouchableOpacity 
           onPress={() => navigation.navigate('TicketDetails')}
           style={{
@@ -105,7 +134,9 @@ const Tickets = ({navigation,  route}: any) => {
             borderRadius: 5,
             height: 100,
             flexDirection: 'row',
-          }}>
+          }}
+          key={ticket.id}
+          >
             <DefaultView style={{
               width: '65%',
               padding: 10,
@@ -119,7 +150,7 @@ const Tickets = ({navigation,  route}: any) => {
                 fontSize: 16,
                 fontWeight: '600',
                 color: colors.light.text
-              }}>Aluna Disco Bar</Text>
+              }}>{ticket.name}</Text>
               <Text style={{
                 fontSize: 14,
                 fontWeight: '500',
@@ -225,6 +256,8 @@ const Tickets = ({navigation,  route}: any) => {
                 }} />
             </DefaultView>
           </TouchableOpacity>
+          ))}
+
         </DefaultView>
       </View>
     </DismissKeyboard>

@@ -1,26 +1,70 @@
 import React from 'react'
 import { View } from '../../../components/Layout/Theme'
-import { View as DefaultView, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
+import { View as DefaultView, TouchableOpacity, Text, ActivityIndicator, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector } from 'react-redux';
-import { useQuery } from '@apollo/client';
-import { GET_USER_BALANCE } from '../../../graphql/queries/users';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_USER_BY_ID } from '../../../graphql/queries/users';
 import { useEffect } from 'react';
 import colors from '../../../components/Layout/Theme/colors';
 import { DivisaFormater } from '../../../utilities/divisaFormater';
 import { useState } from 'react';
+import { CREATE_GOER } from '../../../graphql/mutations';
 
 const Payment = ({navigation, route}: any) => {
     const {user} = useSelector((state: any) => state.auth);
 
+    const [error, setError] = useState('')
+    const [loadingGoer, setLoadingGoer] = useState(false)
+
+    const [createGoer] = useMutation(CREATE_GOER);
+
     const [loader, serLoader] = useState(false);
-  const {data, loading, refetch} = useQuery(GET_USER_BALANCE, {
+  const {data, loading, refetch} = useQuery(GET_USER_BY_ID, {
     context: {
       headers: {
         authorization: user.token ? `Bearer ${user.token}` : '',
       },
     },
   });
+
+  const {data: userInfo } = useQuery(GET_USER_BY_ID, {
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
+
+
+  const onSubmit = async(e: any) => {
+    e.preventDefault();
+    setLoadingGoer(true);
+    try{
+      const { data } = await createGoer({
+        variables: {
+          data: {
+            user: userInfo?.getUserById.id,
+            amount: route.params.goer.amount,
+            cost: Number(route.params.goer.price),
+            ticket: route.params.goer.cover,
+            date: route.params.goer.date,
+            description: route.params.goer.description,
+            image: route.params.goer.image,
+            name: route.params.goer.name,
+            time: route.params.goer.hour,
+          },
+        },
+        
+      }); 
+      setLoadingGoer(false);
+      navigation.navigate('Tickets')
+    }catch(err){
+      setError(JSON.stringify(err))
+        console.log(err)
+    }
+  }
+
 
   useEffect(() => {
     refetch();
@@ -191,11 +235,12 @@ const Payment = ({navigation, route}: any) => {
             width: '95%',
             alignSelf: 'center',
             }}
-            // onPress={() =>
-            //   userBalance?.userById?.balance >= coverInfo.cost
-            //     ? createGoerHandler()
-            //     : navigation.navigate("Wallet")
-            // }
+             onPress={onSubmit
+              // data?.getUserById?.balance >= route.params.goer.price
+              //    ? onSubmit
+              //  : navigation.navigate("Wallet")
+             }
+
           >
             <Text
               style={{
@@ -211,7 +256,7 @@ const Payment = ({navigation, route}: any) => {
             >
                     
               {data?.getUserById?.balance >= route.params.goer.price
-                 ? loader? <ActivityIndicator color="#333" />  : 'PAGAR'  
+                 ? loadingGoer? <ActivityIndicator color="#333" />  : 'PAGAR'  
                  : "RECARGAR"}
             </Text>
           </TouchableOpacity>
