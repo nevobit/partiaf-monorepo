@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import React from 'react';
-import Events from '../../screens/Partiaf/Events';
-import Moments from '../../screens/Profile/Moments';
+import Events from '../../screens/UserProfile/Events';
+import Moments from '../../screens/UserProfile/Moments';
 import colors from '../../components/Layout/Theme/colors';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {
@@ -16,7 +16,6 @@ import {
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useTheme} from '../../contexts/ThemeContexts';
-import Trends from '../../screens/Partiaf/Trends';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -77,7 +76,7 @@ const TabBar = ({state, navigation}: any) => {
   );
 };
 
-const PartiafTopTap = () => {
+const OtherProfileTopTap = ({id}: any) => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -90,10 +89,6 @@ const PartiafTopTap = () => {
               break;
             case 'Eventos':
               icon = focused ? 'calendar' : 'calendar-outline';
-              break;
-            case 'Tendencias':
-              icon = focused ? 'radio' : 'radio-outline';
-              break;
             default:
               break;
           }
@@ -101,14 +96,14 @@ const PartiafTopTap = () => {
           return (
             <Icon
               name={icon}
-              size={22}
+              size={25}
               style={{
                 color: focused ? color : '#rgba(255,255,255,0.8)',
               }}
             />
           );
         },
-        tabBarLabelStyle: {fontSize: 10, color: '#fff'},
+        tabBarLabelStyle: {fontSize: 0, color: '#fff'},
         tabBarStyle: {backgroundColor: 'rgba(10,10,10,1)'},
         tabBarIndicatorStyle: {backgroundColor: colors.dark.primary},
         tabBarActiveTintColor: colors.dark.primary,
@@ -116,11 +111,12 @@ const PartiafTopTap = () => {
       sceneContainerStyle={{
         backgroundColor: 'rgba(10,10,10,1)',
       }}>
-      <Tab.Screen name="Tendencias" component={Trends} />
-      <Tab.Screen name="Eventos" component={Events} />
+      <Tab.Screen name="Eventos" >
+        {() => <Events id={id} />}
+      </Tab.Screen> 
       <Tab.Screen name="Momentos" component={Moments} />
     </Tab.Navigator>
   );
 };
 
-export default PartiafTopTap;
+export default OtherProfileTopTap;

@@ -9,7 +9,7 @@ interface Props {
 
 mercadopago.configure({
   access_token:
-    'APP_USR-4427138981263654-103114-09b1954c80295c39f47255f73b5060f2-319397311',
+    'APP_USR-111919875569225-091621-12afb0b23b63802e46d2d0b7b6ef950a-1199911258',
 });
 
 export const createOrder = async ({ title, price }: Props) => {
@@ -23,14 +23,8 @@ export const createOrder = async ({ title, price }: Props) => {
     ],
   };
 
-  await mercadopago.preferences
-    .create(preference)
-    .then(function (response) {
-      return response.body.init_point;
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
+  const result = await mercadopago.preferences.create(preference)
+  return result.body;
 };
 
 export const success = () => {};

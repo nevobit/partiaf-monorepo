@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import {View, Text, ScrollView, Image, TouchableOpacity} from 'react-native';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
-import { GET_GOERS_BY_USER_ID } from '../../../graphql/queries/goers';
+import { GET_GOERS_BY_ID, GET_GOERS_BY_USER_ID } from '../../../graphql/queries/goers';
 import colors from '../../../components/Layout/Theme/colors';
 
-const Events = ({navigation, id}:any) => {
+const Events = ({navigation, route, id}:any) => {
 
    
   const {user} = useSelector((state: any) => state.auth);
+  console.log(id)
 
-  const {data: tickets, refetch} = useQuery(GET_GOERS_BY_USER_ID, {
+  const {data: tickets, refetch} = useQuery(GET_GOERS_BY_ID, {
+    variables: { id: id },
     context: {
       headers: {
         authorization: user.token ? `Bearer ${user.token}` : '',
@@ -18,6 +20,7 @@ const Events = ({navigation, id}:any) => {
     },
   });
 
+  console.log(tickets)
 
   useEffect(() => {
     refetch();

@@ -4,13 +4,15 @@ import { storeRoutes } from './stores';
 import { adminRoutes } from './admins';
 import { authRoutes } from './auth';
 import { ticketRoutes } from './tickets';
+import { paymentsRoutes } from './payments';
 
 const routes: RouteOptions[] = [
   healthCheckRoute,
   ...authRoutes,
   ...storeRoutes,
   ...adminRoutes,
-  ...ticketRoutes
+  ...ticketRoutes,
+  ...paymentsRoutes
 ];
 
 export const registerRoutes = (server: FastifyInstance) => {

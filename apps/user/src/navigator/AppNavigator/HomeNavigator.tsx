@@ -7,6 +7,7 @@ import Stores from '../../screens/Stores';
 import Details from '../../screens/Tickets/Details';
 import Covers from '../../screens/Covers';
 import Payment from '../../screens/Covers/Payment';
+import UserProfile from '../../screens/UserProfile';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -30,12 +31,12 @@ export type RootStackParamList = {
   Wallet: {
     user: string | undefined;
   };
-  TicketDetails: undefined;
+  TicketDetails: { id: String | undefined};
   Comments: {
     store: string | undefined;
   };
-  OtherProfile: {
-    user: string | undefined;
+  UserProfile: {
+    id: string | undefined;
   };
   Moments:undefined;
   Settings:undefined;
@@ -53,6 +54,7 @@ const HomeNavigator = () => {
       <HomeStackNavigator.Screen name="Covers" component={Covers} />
       <HomeStackNavigator.Screen name="TicketDetails" component={Details} />
       <HomeStackNavigator.Screen name="Payment" component={Payment} />
+      <HomeStackNavigator.Screen name="UserProfile" component={UserProfile} />
 
       {/* <HomeStackNavigator.Screen name="HomeScreen" component={Home}  /> */}
       {/* <HomeStackNavigator.Screen name="HomeScreen" component={Home}  /> */}

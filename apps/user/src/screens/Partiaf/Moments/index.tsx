@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-const Moments = () => {
+const Trends = () => {
   return (
     <View
       style={{
@@ -14,10 +14,10 @@ const Moments = () => {
           fontSize: 18,
           marginTop: 50
         }}>
-        No tienes Moments
+        No hay Tendencias
       </Text>
     </View>
   );
 };
 
-export default Moments;
+export default Trends;

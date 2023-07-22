@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View as DefaultView,
   Keyboard,
@@ -7,13 +7,32 @@ import {
 import { TouchableOpacity, Image, Text, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { View } from '../../../components/Layout/Theme';
+import { useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
+import { GET_ONE_GOER } from '../../../graphql/queries/goers';
+import { DivisaFormater } from '../../../utilities/divisaFormater';
 
 const DismissKeyboard = ({children}: any) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     {children}
   </TouchableWithoutFeedback>
 );
-const Details = ({navigation}: any) => {
+const Details = ({navigation, route}: any) => {
+  const {user} = useSelector((state: any) => state.auth);
+
+  const {data, loading, error, refetch} = useQuery(GET_ONE_GOER, {
+    variables: { id: route.params.id },
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
   return (
     <DismissKeyboard>
       <View
@@ -142,7 +161,7 @@ const Details = ({navigation}: any) => {
                   color: '#000',
                   fontSize: 22,
                 }}>
-                Aluna Disco Bar,
+                {data?.getOneGoer?.name},
               </Text>
               <Text
                 style={{
@@ -150,7 +169,7 @@ const Details = ({navigation}: any) => {
                   fontSize: 14,
                   fontWeight: '300',
                 }}>
-                Jun 14  2023 ~ Santa Marta - Colombia
+                {/* Jun 14  2023 ~ Santa Marta - Colombia */}
               </Text>
             </DefaultView>
 
@@ -178,7 +197,7 @@ const Details = ({navigation}: any) => {
                     color: '#000',
                     fontSize: 16,
                   }}>
-                  Alessandro de Bonis
+                  {data?.getOneGoer?.user.firstname} {data?.getOneGoer?.user.lastname}
                 </Text>
               </DefaultView>
               <DefaultView
@@ -197,7 +216,8 @@ const Details = ({navigation}: any) => {
                     color: '#000',
                     fontSize: 16,
                   }}>
-                  $54,000
+
+                  {DivisaFormater(data?.getOneGoer?.cost * data?.getOneGoer?.amount)}
                 </Text>
               </DefaultView>
               
@@ -217,7 +237,7 @@ const Details = ({navigation}: any) => {
                     color: '#000',
                     fontSize: 16,
                   }}>
-                  3:00PM
+                  {data?.getOneGoer?.ticket.hour}
                 </Text>
               </DefaultView>
               <DefaultView
@@ -236,7 +256,7 @@ const Details = ({navigation}: any) => {
                     color: '#000',
                     fontSize: 16,
                   }}>
-                  Land Party
+                  {data?.getOneGoer?.name}
                 </Text>
               </DefaultView>
               <DefaultView
@@ -274,7 +294,7 @@ const Details = ({navigation}: any) => {
                     color: '#000',
                     fontSize: 16,
                   }}>
-                  4
+                  {data?.getOneGoer?.amount}
                 </Text>
               </DefaultView>
               
@@ -301,7 +321,7 @@ const Details = ({navigation}: any) => {
               marginBottom: -15,
               marginTop: 20
              }}>
-              Tikect ID: 2000123
+              Tikect ID: {data?.getOneGoer?.id.slice(0,8).toUpperCase()}
              </Text>
             <Image style={{
                   width: 200,
