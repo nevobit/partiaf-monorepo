@@ -14,7 +14,7 @@ const Moments = () => {
           fontSize: 18,
           marginTop: 50
         }}>
-        No tienes Moments
+        No tiene Moments
       </Text>
     </View>
   );

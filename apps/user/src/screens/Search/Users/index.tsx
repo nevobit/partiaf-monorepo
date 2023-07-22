@@ -15,7 +15,7 @@ import {GET_USERS} from '../../../graphql/queries/users';
 import {View} from '../../../components/Layout/Theme';
 import colors from '../../../components/Layout/Theme/colors';
 
-const Users = () => {
+const Users = ({navigation}:any) => {
   const {user} = useSelector((state: any) => state.auth);
 
   const {data, loading} = useQuery(GET_USERS, {
@@ -39,6 +39,7 @@ const Users = () => {
           .map((user: any) => (
             <TouchableOpacity
               key={user._id}
+              onPress={() => navigation.navigate('UserProfile', {id: user._id})}
               style={{
                 display: 'flex',
                 flexDirection: 'row',

@@ -16,3 +16,20 @@ query GetTicketsByStoreId($id: String) {
     }
   }
 `
+
+export const GET_ALL_TICKETS = gql`
+query GetAllTickets {
+    getAllTickets {
+      hour
+      id
+      image
+      limit
+      description
+      name
+      image
+      price
+      type
+      percentage
+    }
+  }
+`

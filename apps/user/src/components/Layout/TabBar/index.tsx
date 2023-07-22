@@ -117,9 +117,27 @@ const TabBar = ({state, navigation}: BottomTabBarProps) => {
                 </View>
               ) : (
                 <View style={{alignItems: 'center'}}>
+
                   {route.name === 'Home' ? (
                     <Icon name="ios-home" size={25} color="#fff" />
                   ) : (
+                    route.name == "Partiaf" ? 
+                    <View style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 25,
+                      height: 25,
+                
+                    }}>
+                      <Image source={{
+                      uri: 'https://i.ibb.co/JrHLDXM/svgviewer-png-output-1.png'
+                    }} style={{
+                      width: 25,
+                      height: 25,
+                      resizeMode: 'contain'
+                    }} />
+                    </View>
+                     :
                     <Icon name={iconName} size={25} color="#fff" />
                   )}
                 </View>

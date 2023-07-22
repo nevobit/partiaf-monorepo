@@ -17,6 +17,29 @@ export const GET_USER_BY_ID = gql`
   }
 `;
 
+export const GET_ONE_USER = gql`
+query GetOneUser($id: String) {
+  getOneUser(id: $id) {
+    accountType
+    artistType
+    biography
+    events
+    firstname
+    followers
+    following
+    friend
+    interests {
+      food
+      music
+      plan
+    }
+    isPrivate
+    isVerified
+    lastname
+    photo
+  }
+}
+`;
 
 export const GET_USERS = gql`
   query GetAllUsers {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View} from '../../components/Layout/Theme';
 import {
   ScrollView,
@@ -14,6 +14,9 @@ import {useQuery} from '@apollo/client';
 import {GET_USER_BY_ID} from '../../graphql/queries/users';
 import {useEffect} from 'react';
 import {DivisaFormater} from '../../utilities/divisaFormater';
+import axios from 'axios';
+import { Linking } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 const Wallet = ({navigation}: any) => {
   const {user} = useSelector((state: any) => state.auth);
@@ -25,6 +28,26 @@ const Wallet = ({navigation}: any) => {
       },
     },
   });
+
+  const [paymentInfo, setPaymentInfo] = useState();
+  const [amount, setAmount] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [url, setUrl] = useState("");
+
+  const createOrder = async() => {
+    const { data } = await axios.post('http://192.168.1.11:8000/api/v3/create-order',{
+      price: 1000
+    });
+    setPaymentInfo(data)
+    // if (await Linking.canOpenURL(data.init_point)) {
+      // await Linking.openURL(data.init_point);
+
+      setUrl(data.init_point);
+      setOpen(true);
+    // } else {
+      // console.log("No se puede abrir la URL:", data.init_point);
+    // }
+  }
 
   useEffect(() => {
     refetch();
@@ -175,7 +198,8 @@ const Wallet = ({navigation}: any) => {
           </Text>
         </DefaultView>
 
-        <DefaultView
+        <TouchableOpacity
+          onPress={createOrder}
           style={{
             alignItems: 'center',
           }}>
@@ -196,7 +220,7 @@ const Wallet = ({navigation}: any) => {
             }}>
             Recargar
           </Text>
-        </DefaultView>
+        </TouchableOpacity>
         <DefaultView
           style={{
             alignItems: 'center',
@@ -224,9 +248,24 @@ const Wallet = ({navigation}: any) => {
         contentContainerStyle={{
           display: 'flex',
           alignItems: 'center',
-        }}></ScrollView>
+        }}>
+        </ScrollView>
+
+        {open && <MyWebView url={url} />}
     </View>
   );
 };
 
 export default Wallet;
+
+const MyWebView = ({ url }:any) => {
+  return (
+  <DefaultView style={{
+    position:'absolute',
+    top: 0,
+    left: 0,
+    width: '100%'
+  }}>
+    <WebView source={{ uri: url }} />;
+  </DefaultView>)
+};

@@ -82,11 +82,11 @@ type Ticket{
 
 type Goer {
     id: String
-    user: String
+    user: User
     status: String
     cost: Float
     time: String
-    ticket: String
+    ticket: Ticket
     amount: Int
     image: String
     name: String
@@ -114,11 +114,15 @@ type AuthPayload {
 
 type Query {
     getUserById: User
+    getOneUser(id: String): User
     getAllUsers: [User]
     getAllStores: [Store]
     getStoreById(id: String): Store
     getTicketsByStoreId(id: String): [Ticket]
+    getAllTickets: [Ticket]
     getGoersByUserId: [Goer]
+    getOneGoer(id: String): Goer
+    getGoersById(id: String): [Goer]
 }
    
 
