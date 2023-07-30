@@ -1,4 +1,4 @@
-import React, { FormEvent ,useEffect, useState} from 'react'
+import React, { FormEvent ,useEffect, useState, useRef} from 'react'
 import styles from "./signUp.module.css"
 import logo from "../../../public/logo-partiaf-neg.svg"
 import Input from '@/components/Shared/Input'
@@ -17,16 +17,17 @@ const SignUp = () => {
 
     const [user, setUser] = useState({
         name: '',
-        last_name: '',
+        lastname: '',
         phoneCountry: {country},
         phone: 0,
         email: '',
         password: '',
         repeat_password: '',
-        date: 0,
+        birth_date: 0,
         age: 0,
         newsletter: true,
-        method: 'email'
+        method: 'email',
+        identification: ''
       });
 
       const [agree, setAgree] = useState<boolean>(false);
@@ -42,6 +43,9 @@ const SignUp = () => {
       }
 
       const onSubmit = (event: React.FormEvent) => {
+        if (!agree){
+            alert
+        }
         event.preventDefault();
         console.log(user)
         //dispatch(register(user) as any)
@@ -59,6 +63,7 @@ const SignUp = () => {
                 <div className={styles.inputs}>
                     <Field label="Nombre">
                         <Input
+                            required
                             type="text"
                             name="name"
                             id="name"
@@ -68,8 +73,9 @@ const SignUp = () => {
                     </Field>
                     <Field label="Apellido">
                         <Input
+                            required
                             type="text"
-                            name="last_name"
+                            name="lastname"
                             id="last_name"
                             placeholder="Indicar nombre completo"
                             onChange={handleChange}
@@ -77,6 +83,7 @@ const SignUp = () => {
                     </Field>
                     <Field label="Correo electronico">
                         <Input
+                            required
                             type="text"
                             name="email"
                             id="email"
@@ -95,6 +102,7 @@ const SignUp = () => {
                          onChange={(value: any)=>setCountry(value)}
                         />
                         <Input
+                            required
                             variant='number'
                             type="number"
                             name="phone"
@@ -105,17 +113,19 @@ const SignUp = () => {
                     </Field>
                     <Field label="Fecha de nacimiento">
                         <Input
-                        variant='date'
+                            required
+                            variant='date'
                             type="date"
-                            name="date"
-                            id="date"
+                            name="birth_date"
+                            id="birth_date"
                             // placeholder="DD/MM/AA"
                             onChange={handleChange}
                         />
                     </Field>
                     <Field label="Edad">
                         <Input
-                        variant='number'
+                            required
+                            variant='number'
                             type="number"
                             name="age"
                             id="age"
@@ -127,6 +137,7 @@ const SignUp = () => {
                     //error={setError(error)}
                     >
                     <Input
+                        required
                         name="password"
                         id="password"
                         variant='password'
@@ -138,6 +149,7 @@ const SignUp = () => {
                     //error={setError(error)}
                     >
                     <Input
+                        required
                         name="repeat_password"
                         id="repeat_password"
                         variant='password'
@@ -145,8 +157,20 @@ const SignUp = () => {
                         onChange={handleChange}
                     />
                     </Field>
+                    <Field label="Identificacion personal"
+                    //error={setError(error)}
+                    >
+                    <Input
+                        required
+                        name="identification"
+                        id="identification"
+                        placeholder="Colocar su identificacion personal"
+                        onChange={handleChange}
+                    />
+                    </Field>
                 </div>
                 <Input 
+                        required
                         onChange={handleCheckBox}
                         variant="checkbox"
                         ><p>Acepto los<Link className={styles.terms} to="/terms-and-conditions"> terminos y condiciones</Link> de Partiaf</p></Input>

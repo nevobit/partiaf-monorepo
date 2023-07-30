@@ -14,10 +14,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>{
   children?: React.ReactNode
   type?: 'text' | 'checkbox' | 'password' | 'date' | 'datetime' | 'phoneNumber'| 'number';
   label?: string
+  ref?: React.MutableRefObject<boolean>
 
 }
 
-const Input = ({ label,icon, type, children, variant = 'normal', className, ...rest}: InputProps) => {
+const Input = ({ ref, label,icon, type, children, variant = 'normal', className, ...rest}: InputProps) => {
   
   const [showPss, setshowPss] = useState(eyeOff)
   const [typePss, setTypePss] = useState(variant)

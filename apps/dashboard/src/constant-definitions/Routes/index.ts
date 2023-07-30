@@ -10,6 +10,12 @@ export const PrivateRoutes = {
   // private temporary path for layout
   PRIVATE: '/private',
   HOME: '/',
+  DASHBOARD: '/dashboard',
   TICKETS: '/tickets',
-  RESERVATION: "/reservation"
+  RESERVATION: "/reservation",
+  COLLABORATORS: "/collaborators",
+  SETTINGS: "/settings",
+  MODAL: "modal",
+  MESSAGES: "/messages",
+  
 };

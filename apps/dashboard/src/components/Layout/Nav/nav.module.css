@@ -1,7 +1,7 @@
 .body{
   display: flex;
   flex-direction: column;
-  width: 100%;
+  max-width: 100%;
   height: auto;
   min-height: 70rem;
   border-right: 1px solid var(--labels);
@@ -25,6 +25,6 @@
 
 .text{
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.5  rem;
   color: var(--primary-dark);
 }
