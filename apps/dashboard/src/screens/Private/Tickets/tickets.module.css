@@ -1,8 +1,9 @@
 .body{
     display: flex;
     flex-direction: column;
-    padding: 5rem 3rem 3rem 5rem;
+    padding: 1rem 2rem;
     position: relative;
+    width: 100%;
 }
 .header{
     display: grid;
@@ -10,7 +11,7 @@
      align-items: center; 
      justify-content: space-between;
     gap: 2rem;
-    min-width: 100%;
+    width: 100%;
 
 }
 
@@ -33,11 +34,12 @@
 }
 
 .totals{
-    margin: 4rem 0rem 3rem 0rem;
+    margin: 0rem 0rem;
+    margin-bottom: 2rem;
     display: flex;
     gap: 4rem;
     min-width: 100%;
-    justify-content: space-around
+    justify-content: flex-start;
 
 }
 
@@ -70,6 +72,13 @@
 
 .main_aside{
    display: flex;
+}
+
+.container_items{
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
 }
 
 @media only screen and (max-width: 1600px){

@@ -1,23 +1,23 @@
 .body{
     display: flex;
     flex-direction: column;
-    width: 91rem;
+    width: 70rem;
     min-height: max-content;
     background-color: var(--background);
     margin: auto;
     margin-top: 3rem;
     border-radius: 1%;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     gap: 2rem;
-
+    border: 1px solid rgba(0, 0, 0, .1);
+    margin-top: 10rem;
 }
 
 .header{
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 3px solid var(--primary-gray);
-    padding: 4rem 2rem 3rem 2rem;
+    border-bottom:2px solid var(--primary-gray);
+    padding: 2rem 2rem 2rem 2rem;
 }
 
 .main{
@@ -27,7 +27,7 @@
 }
 
 .title{
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: var(--primary-dark);
     font-weight: bold;
 }
@@ -40,23 +40,29 @@
 .inputs{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 3rem;
-
-
+    gap: 0 2rem;
+    margin-bottom: 1rem;
 }
 
 .logo{
-    max-width: 50%;
+    max-width: 18rem;
     align-self: center;
 }
 .buttons{
     display: flex;
-    padding: 8rem 2rem 2rem 2rem;
-    justify-content: space-around;
+    padding: 2rem 2rem 2rem 2rem;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.buttons > button{
+    font-size: 1.4rem;
+    font-weight:600;
+    width: 20rem;
+    height: 3rem;
 }
 
 .button_text{
-    font-size: 2rem;
     margin: 0rem 5rem;
 }
 
@@ -64,8 +70,12 @@
     color: var(--primary-dark);
     text-decoration: underline;
     font-weight: bold;
+    font-size: 1.4rem;
 }
 
+.copy{
+    font-size: 1.4rem;
+}
 .terms:hover {
     text-decoration-color:var(--primary-base);
     cursor:pointer;  

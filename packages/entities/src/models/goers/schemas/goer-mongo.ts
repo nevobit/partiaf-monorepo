@@ -16,6 +16,7 @@ export const GoerSchemaMongo = new Schema<Goer>(
     name: {type: String},
     description: {type: String},
     date: {type: String},
+    entry_status: {type: String}
   },
   {
     versionKey: false,

@@ -17,9 +17,9 @@ const ReservationTotals = ( { className = '', title, totals, porcent = 12}: Prop
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.data}>
         <h3 className={styles.total}>{totals}</h3>
-        <div className={styles.porcents}>
+        {/* <div className={styles.porcents}>
             <h4 className={styles.porcents_text}>{`${porcent}%`}</h4>
-        </div>
+        </div> */}
       </div>
     </div>
   )

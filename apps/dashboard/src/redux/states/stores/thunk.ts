@@ -9,7 +9,7 @@ interface Props {
     admin?: string;
 }
 
-export const createStore = createAsyncThunk<Store, CreateStoreDto>(
+export const createStore = createAsyncThunk<Store, Partial<CreateStoreDto>>(
     'stores/create',
     async (store) => {
         const { data } = await partiafApi.post<Store>('/stores', store);
@@ -20,7 +20,11 @@ export const createStore = createAsyncThunk<Store, CreateStoreDto>(
 export const getStoresByAdmin = createAsyncThunk<Result<Store>, Props>(
     'stores/get-by-admin',
     async (props) => {
-        const { data } = await partiafApi.get<Result<Store>>(`/stores/${props.admin}?page=${props.page}`);
+        console.log(props)
+        const { data } = await partiafApi.get<Result<Store>>(`/stores?page=${props.page}`, {
+            headers: {
+              "Authorization": `Bearer ${props}`
+        }});
         return data;
     }
 );

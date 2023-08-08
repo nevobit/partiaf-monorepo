@@ -21,9 +21,6 @@ const NavOptions = ({children, tittle, loading, ...rest }: ButtonProps) => {
 
   useEffect(()=>{
       let ruta = sampleLocation.pathname.slice(1)
-      
-      console.log(`la ruta es:${sampleLocation.pathname}`)
-      console.log(`el componente es:${tittle}`)
   },[sampleLocation])
   
   return (

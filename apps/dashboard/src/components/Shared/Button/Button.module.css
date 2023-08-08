@@ -2,15 +2,15 @@
  display: inline-flex;
  align-items: center;
  justify-content: center;
- height: 2.5rem;
+ height: 2rem;
  vertical-align: middle;
  line-height: 1;
  white-space: nowrap;
- border-radius: 1rem;
+ border-radius: .5rem;
  appearance: none;
- padding: 1rem 1.5rem;
- font-size: 1.2rem;
- font-weight: 500;
+ padding: .5rem 1.5rem;
+ font-size: 1.3rem;
+ font-weight: 600;
  transition: .3s;
  gap: 1rem;
 }

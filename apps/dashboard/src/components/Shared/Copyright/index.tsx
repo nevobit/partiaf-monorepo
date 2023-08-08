@@ -8,7 +8,7 @@ interface props {
 const Copyright = ({variant = 'normal'}: props) => {
   return (
     <div className={`${styles.body} ${styles[variant]}`}
-    >© Todos los derechos reservados</div>
+    >&copy; Todos los derechos reservados</div>
   )
 }
 

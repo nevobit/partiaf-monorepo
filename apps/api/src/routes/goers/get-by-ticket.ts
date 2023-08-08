@@ -1,10 +1,10 @@
 import { FastifyReply, FastifyRequest, RouteOptions } from 'fastify';
 import { RouteMethod } from '@partiaf/constant-definitions';
-import { getAllTicketsByStore, verifyToken } from '@partiaf/business-logic';
+import { getAllTicketsByStore, getGoersByTicket, verifyToken } from '@partiaf/business-logic';
 import { StatusType } from '@partiaf/entities/build';
 
 interface Params {
-  admin: string;
+  ticket: string;
 }
 interface Query {
   page: number;
@@ -13,19 +13,18 @@ interface Query {
   status: StatusType;
 }
 
-export const getStoresByAdminRoute: RouteOptions = {
+export const getGoersByTicketRoute: RouteOptions = {
   method: RouteMethod.GET,
-  url: '/tickets/:store',
+  url: '/goers/:ticket',
   //preHandler: verifyToken,
   handler: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const { params } = request;
-      const { admin } = params as Params;
-      const { query } = request;
-      const { page, limit, store } = query as Query;
+      const { ticket } = params as Params;
 
-      const stores = await getAllTicketsByStore(page, limit, store);
-      reply.status(200).send(stores);
+      console.log({ticket})
+      const goers = await getGoersByTicket(ticket);
+      reply.status(200).send(goers);
     } catch (err) {
       reply.status(500).send(err);
     }

@@ -5,9 +5,13 @@ import Input from '@/components/Shared/Input'
 import Field from '@/components/Shared/Field'
 import Button from '@/components/Shared/Button'
 import Copyright from '@/components/Shared/Copyright'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import PhoneInput from "react-phone-number-input"
 import 'react-phone-number-input/style.css'
+import { PrivateRoutes, PublicRoutes } from '@/constant-definitions'
+import { register } from '@/redux/auth/users/thunks'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppStore } from '@/redux/store'
 
 
 
@@ -15,22 +19,20 @@ const SignUp = () => {
 
     const [country, setCountry]= useState("US")
 
+    const {loading, success, error} = useSelector((state:AppStore) => state.auth)
     const [user, setUser] = useState({
         name: '',
         lastname: '',
-        phoneCountry: {country},
         phone: 0,
         email: '',
         password: '',
         repeat_password: '',
-        birth_date: 0,
-        age: 0,
-        newsletter: true,
         method: 'email',
-        identification: ''
       });
 
       const [agree, setAgree] = useState<boolean>(false);
+
+      const dispatch = useDispatch();
 
       const handleCheckBox =(e: React.FormEvent<HTMLInputElement>) =>{
         e.preventDefault()
@@ -44,12 +46,28 @@ const SignUp = () => {
 
       const onSubmit = (event: React.FormEvent) => {
         if (!agree){
-            alert
+            alert("Debes aceptar lso terminos y condiciones para continuar");
+            return;
+        }
+
+        if(user.password !== user.repeat_password){
+            alert("Las contrasenas deben ser iguales");
+            return;
         }
         event.preventDefault();
         console.log(user)
-        //dispatch(register(user) as any)
+        const {repeat_password, ...registerUser} = user;
+        dispatch(register(registerUser) as any)
       }
+
+      const navigate = useNavigate();
+
+      useEffect(() => {
+        if(success){
+          navigate(PrivateRoutes.BUSINESS, { replace: true })
+        }
+      }, [success, navigate]);
+      
 
 
   return (
@@ -67,7 +85,7 @@ const SignUp = () => {
                             type="text"
                             name="name"
                             id="name"
-                            placeholder="Indicar nombre completo"
+                            placeholder="Ingresa tu nombre"
                             onChange={handleChange}
                         />
                     </Field>
@@ -77,7 +95,7 @@ const SignUp = () => {
                             type="text"
                             name="lastname"
                             id="last_name"
-                            placeholder="Indicar nombre completo"
+                            placeholder="Ingresa tu apellido"
                             onChange={handleChange}
                         />
                     </Field>
@@ -87,20 +105,12 @@ const SignUp = () => {
                             type="text"
                             name="email"
                             id="email"
-                            placeholder="Indicar aqui tu email"
+                            placeholder="Ingresa tu email"
                             onChange={handleChange}
                         />
                     </Field>
                     <Field label="Telefono">
-                        <PhoneInput
-                         type="number"
-                         name="phoneCountry"
-                         id="phoneCountry"
-                         placeholder={country}
-                         country={country}
-                         value={country}
-                         onChange={(value: any)=>setCountry(value)}
-                        />
+
                         <Input
                             required
                             variant='number'
@@ -111,28 +121,7 @@ const SignUp = () => {
                             onChange={handleChange}
                         />
                     </Field>
-                    <Field label="Fecha de nacimiento">
-                        <Input
-                            required
-                            variant='date'
-                            type="date"
-                            name="birth_date"
-                            id="birth_date"
-                            // placeholder="DD/MM/AA"
-                            onChange={handleChange}
-                        />
-                    </Field>
-                    <Field label="Edad">
-                        <Input
-                            required
-                            variant='number'
-                            type="number"
-                            name="age"
-                            id="age"
-                            placeholder="0"
-                            onChange={handleChange}
-                        />
-                    </Field>
+                   
                     <Field label="Contraseña"
                     //error={setError(error)}
                     >
@@ -141,11 +130,12 @@ const SignUp = () => {
                         name="password"
                         id="password"
                         variant='password'
+                        type='password'
                         placeholder="Introduce tu Contraseña"
                         onChange={handleChange}
                     />
                     </Field>
-                    <Field label="Repetir contraseña"
+                    <Field label="Confirmar contraseña"
                     //error={setError(error)}
                     >
                     <Input
@@ -153,18 +143,7 @@ const SignUp = () => {
                         name="repeat_password"
                         id="repeat_password"
                         variant='password'
-                        placeholder="repetir contraseña"
-                        onChange={handleChange}
-                    />
-                    </Field>
-                    <Field label="Identificacion personal"
-                    //error={setError(error)}
-                    >
-                    <Input
-                        required
-                        name="identification"
-                        id="identification"
-                        placeholder="Colocar su identificacion personal"
+                        placeholder="Repetir contraseña"
                         onChange={handleChange}
                     />
                     </Field>
@@ -173,12 +152,13 @@ const SignUp = () => {
                         required
                         onChange={handleCheckBox}
                         variant="checkbox"
-                        ><p>Acepto los<Link className={styles.terms} to="/terms-and-conditions"> terminos y condiciones</Link> de Partiaf</p></Input>
+                        ><p className={styles.copy}>Acepto los<Link className={styles.terms} to="/terms-and-conditions"> terminos y condiciones </Link> de Partiaf</p></Input>
             <div className={styles.buttons}>
             <Button
             type='button'
-            variant='dark'><p className={styles.button_text}><Link to="/login">Ir a iniciar sesion</Link></p></Button>
-            <Button type='submit'><p className={styles.button_text}>Registrarse</p></Button>
+            loading={loading}
+            variant='dark'><Link to={PublicRoutes.SIGNIN}>Ir a iniciar sesion</Link></Button>
+            <Button type='submit'>Registrarse</Button>
             </div>
             </form>
         </div>

@@ -8,6 +8,7 @@ import { Base } from "../../../common";
     ticket: string;
     amount: number;
     image: string;
+    entry_status: string;
     name: string;
     description: string;
   }

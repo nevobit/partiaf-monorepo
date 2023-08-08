@@ -19,7 +19,7 @@ export const register = createAsyncThunk(
  "auth/register",
  async (user: any, thunkAPI) => {
    try {
-     const { data } = await partiafApi.post("/register", user);
+     const { data } = await partiafApi.post("/admins", user);
      localStorage.setItem("user", JSON.stringify(data));
      return data;
    } catch (err: any) {

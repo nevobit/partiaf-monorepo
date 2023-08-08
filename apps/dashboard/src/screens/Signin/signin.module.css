@@ -1,20 +1,21 @@
 .body{
     display: flex;
     flex-direction: column;
-    width: 65rem;
+    width: 60rem;
     min-height: max-content;
     background-color: var(--background);
     margin: auto;
     margin-top: 3rem;
     border-radius: 1%;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     gap: 2rem;
+    border: 1px solid rgba(0, 0, 0, .1);
+    margin-top: 12rem;
 }
 
 .header{
     display: flex;
     flex-direction: column;
-    padding: 3rem 10rem 0rem 10rem;
+    padding: 3rem 0rem 0rem 0rem;
     align-items: center;
     gap: 2rem;
 }
@@ -22,20 +23,20 @@
 .main{
     display: flex;
     flex-direction: column;
-    padding: 0rem 10rem 0rem 10rem;
+    padding: 0rem 4rem 0rem 4rem;
     gap: 2rem;
 }
 
 .logo{
-    max-width: 50%;
+    max-width: 18rem;
     align-self: center;
+    margin-bottom: 1rem;
 }
 
 .title{
-    font-size: 3rem;
+    font-size: 2.2rem;
     color: var(--primary-dark);
-    font-weight: bold;
-    margin-bottom: 2rem;
+    font-weight: 600;
 }
 
 .button_text{
@@ -45,6 +46,12 @@
 
 .button_submit{
     min-width: 100%;
+    color: #333;
+    border-radius: .5rem;
+    text-align: center;
+    min-height: 3rem;
+    font-weight: 600;
+    font-size: 1.4rem;
 }
 
 .buttons{
@@ -58,10 +65,12 @@
 
 .terms{
     color: var(--primary-dark);
-    text-decoration: underline;
     font-weight: bold;
+    font-size: 1.4rem;
 }
-
+.copy{
+    font-size: 1.4rem;
+}
 .terms:hover {
     text-decoration-color:var(--primary-base);
     cursor:pointer;  
@@ -77,10 +86,22 @@
 }
 
 .line{
-width: 42%;
-border-bottom: 1px solid var(--labels);
+width: 25%;
+border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
 
 .center_hr{
     color: var(--labels);
+    font-size: 1.2rem;
+}
+
+.google_btn{
+    width: 100%;
+    display: grid;
+    place-items:center;
+    margin-bottom: .5rem;
+}
+
+.google_btn iframe{
+    margin: 0;
 }

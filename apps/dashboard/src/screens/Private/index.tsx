@@ -11,6 +11,9 @@ import Messages from './Messages'
 import Collaborators from './Collaborators'
 import ReservationDetails from '@/components/Shared/ReservationDetails'
 import Modal from '@/components/Shared/Modal'
+import Bussiness from './Business'
+import RegisterBusiness from './RegisterBusiness'
+import CoversDetails from './Tickets/Details'
 
 const Private = () => {
     // temporary path format until private access is configured
@@ -19,9 +22,8 @@ const Private = () => {
         <RoutesWithNotFound>
             <Route path={PrivateRoutes.HOME} element={<Home />} />
             <Route path={PrivateRoutes.DASHBOARD} element={<Home />} />
-            <Route path={PrivateRoutes.TICKETS} element={<Tickets/>}>
-              <Route path="tickets/:id" element={<Modal/>}/>
-            </Route>
+            <Route path={PrivateRoutes.TICKETS} element={<Tickets />} />
+            <Route path={PrivateRoutes.COVERS_DETAILS} element={<CoversDetails />} />
             <Route path={PrivateRoutes.RESERVATION} element={<Reservation />}>
               {/* <Route path="reservation/id" element={<Reservation/>}/> */}
             </Route>

@@ -53,7 +53,7 @@ const Tickets = ({navigation,  route}: any) => {
             paddingHorizontal: 10,
           }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('HomeScreen', {store:  route.params.store})}
+            onPress={() => navigation.goBack()}
             style={{
               flexDirection: 'row',
               gap: 10,

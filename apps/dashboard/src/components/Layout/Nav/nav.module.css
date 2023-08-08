@@ -3,17 +3,18 @@
   flex-direction: column;
   max-width: 100%;
   height: auto;
-  min-height: 70rem;
+  height: 90vh;
   border-right: 1px solid var(--labels);
   justify-content: space-between;
-  padding: 0rem 0rem 2rem 0rem;
 }
 
 .opcions{
     display: flex;
     flex-direction: column;
-    padding: 7rem 2rem 2rem 2rem;
-    gap: 3.5rem;
+    padding-right: 2rem;
+    padding-top: 2rem;
+    /* padding: 7rem 2rem 2rem 2rem; */
+    gap: 2rem;
 
 }
 
@@ -25,6 +26,6 @@
 
 .text{
   font-weight: bold;
-  font-size: 1.5  rem;
+  font-size: 1.4rem;
   color: var(--primary-dark);
 }
