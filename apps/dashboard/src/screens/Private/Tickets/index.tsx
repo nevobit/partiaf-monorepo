@@ -7,8 +7,8 @@ import WelcomeReservation from '@/components/Shared/WelcomeReservation'
 import TableInfo from '@/components/Shared/TableInfo'
 import ReservationDetails from '@/components/Shared/ReservationDetails'
 import Modal from '@/components/Shared/Modal'
-import { useQuery } from '@tanstack/react-query'
-import { getTickets } from '@/services/tickets'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { deleteTicket, getTickets } from '@/services/tickets'
 import Loader from '@/components/Shared/Loader'
 import { Ticket } from '@partiaf/entities'
 import CardCover from '@/components/UI/Tickets/Card'
@@ -32,6 +32,16 @@ const Tickets = ( { user, date, hour, ...rest }: Table) => {
   const { isLoading, data: tickets } = useQuery({
     queryKey: ['tickets'],
     queryFn: () => getTickets(store.id)
+  });
+
+  const { isLoading: isDeleting, mutate } = useMutation({
+    mutationFn: () => deleteTicket(store.id),
+    onSuccess: () => {
+
+    },
+    onError: () => {
+      
+    }
   });
 
 
