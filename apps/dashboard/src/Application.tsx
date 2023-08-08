@@ -29,7 +29,7 @@ const Application = () => {
           <Route path={PublicRoutes.SIGNIN} element={<Signin />} />
 
           {/* private routes */}
-          {/* <Route path={PrivateRoutes.HOME} element={<Home />} /> */}
+          {/* <Route path={PrivateRoutes.HOME} element={<Home />} /> */ }
           {/* <Route path={PrivateRoutes.RESERVATION} element={<Reservation />} /> */}
 
           <Route element={<GuardRoute privateValidation={true}/>}>
