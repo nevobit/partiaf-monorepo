@@ -126,7 +126,7 @@ const CardCover = ({ticket}: Props) => {
             </button>
             <button
               className={styles.btn_icon_card_cover_delete}
-            //   onClick={submitDeleteHandler}
+            onClick={submitDeleteHandler}
             >
               <p className="">Borrar</p>
             </button>
