@@ -63,7 +63,7 @@ export const Dropdown = ({selected, setSelected, data}: DropdownProps) => {
             <FilterIcon width={25} height={25} color={colors.dark.text} />
           </View>
 
-          <Text style={styles.text}>{data[selected]?.name}</Text>
+          <Text style={styles.text}>No hay Covers</Text>
 
           <View style={styles.iconContainer}>
             {toggle ? (
@@ -81,7 +81,7 @@ export const Dropdown = ({selected, setSelected, data}: DropdownProps) => {
 
       <Animated.View style={[styles.dropdown, animationStyles]}>
         <ScrollView>
-          {Object.values(data).map(item => (
+          {/* {Object.values(data).map(item => (
             <TouchableNativeFeedback
               key={item.id}
               onPress={() => handleCloseDropdown(item.id)}>
@@ -94,7 +94,7 @@ export const Dropdown = ({selected, setSelected, data}: DropdownProps) => {
                 {item.name}
               </Text>
             </TouchableNativeFeedback>
-          ))}
+          ))} */}
         </ScrollView>
       </Animated.View>
     </View>

@@ -10,20 +10,55 @@ import {
 
 import {colors} from '../../layout/theme/colors';
 import {DismissKeyboard} from '../../layout/DismissKeyboard';
+import { useDispatch } from 'react-redux';
+import { signin } from '../../features/auth';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../../graphql/mutations/auth';
 
 export const Signin = ({navigation}: any) => {
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({
+    phone: '',
+    password: '',
+  });
 
-  const handlePhoneChanged = (input: string) => setPhone(input);
-  const handlePasswordChanged = (input: string) => setPassword(input);
+  const dispatch = useDispatch();
 
-  const handleSubmit = () => {
-    const user = {phone, password};
-    setLoading(!loading);
+  const [login] = useMutation(LOGIN_USER);
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      console.log(user);
+      const {data} = await login({
+        variables: {
+          ...user,
+        },
+      });
+      dispatch(signin({...data.userSignin}));
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      if(err instanceof Error){
+        if(err.message == 'Invalid crednetials'){
+          setError('Credenciales invalidas');                  
+        }
+      }
+      setLoading(false);
+    }
   };
+
+  if (error.length > 0) {
+    setTimeout(() => {
+      setError('');
+    }, 9000);
+  }
+
+  const handlePhoneChanged = (input: string) => setUser(prev => ({...prev, ['phone']: input}));
+  const handlePasswordChanged = (input: string) => setUser(prev => ({...prev, ['password']: input}));
+
 
   return (
     <DismissKeyboard>
@@ -49,7 +84,7 @@ export const Signin = ({navigation}: any) => {
 
           <Text style={styles.forgot}>¿Olvidaste tu contraseña?</Text>
 
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <TouchableOpacity style={styles.button} onPress={onSubmit}>
             {loading ? (
               <ActivityIndicator size="small" color="#000" />
             ) : (

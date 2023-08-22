@@ -3,6 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {Signin} from '../../screens/Signin';
 import {HomeScreen} from '../../screens/Home';
+import { useSelector } from 'react-redux';
+import { Business } from '../../screens/Business';
 
 const Auth = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,7 +35,7 @@ const AppNavigator = () => {
       }}>
       <Tab.Screen
         name="home"
-        component={HomeScreen}
+        component={Business}
         options={{
           tabBarStyle: {display: 'none'},
         }}
@@ -44,6 +46,6 @@ const AppNavigator = () => {
 
 export const NavigatorContainer = () => {
   // const {user} = useSelector((state: any) => state.auth);
-  const user = 'hola';
+  const {user} =  useSelector((state: any) => state.auth);
   return <>{user ? <AppNavigator /> : <AuthNavigator />}</>;
 };

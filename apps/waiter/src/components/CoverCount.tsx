@@ -17,7 +17,7 @@ export const CoverCount = ({selected, data}: CoverCountProps) => {
 
   return (
     <>
-      {selected ? (
+      {!selected ? (
         <Text style={styles.text}>
           {getTotalChecked()}/{data[selected].data.length}
         </Text>

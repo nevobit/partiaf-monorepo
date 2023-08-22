@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableNativeFeedback,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -22,41 +23,95 @@ import {data} from '../../data/covers';
 import {colors} from '../../layout/theme/colors';
 import {SearchBar} from '../../components/SearchBar';
 import { signout } from '../../features/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
+import { GET_USER_BY_ID } from '../../graphql/queries';
 
-export const HomeScreen = ({navigation}:any) => {
+export const Business = ({navigation}:any) => {
   const [selected, setSelected] = useState('after-party');
   const [searchValue, onChangeValue] = useState();
+
+
+  const {user} = useSelector((state: any) => state.auth);
+
+  const {data, loading, error, refetch} = useQuery(GET_USER_BY_ID, {
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
+
 
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(signout());
   };
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
         <View style={styles.header}>
-          <LogoIcon width={180} height={40} color={colors.dark.primary} />
+          <LogoIcon width={120} height={40} color={colors.dark.primary} />
           <TouchableOpacity
             onPress={logout}
             >
-            <CheckIcon width={30} height={30} color={colors.dark.primary} />
+            <TouchableOpacity onPress={logout}>
+                <Text style={{
+                    color: colors.dark.text
+                }}>Cerrar Sesion</Text>
+            </TouchableOpacity>
           </TouchableOpacity>
         </View>
         <View style={styles.body}>
+            <View style={{
+                alignItems: 'center',
+                marginBottom: 10
+            }}>
+
+            <Image source={{
+                uri: 'https://i.ibb.co/nPhc5fd/default.jpg'
+            }} style={{
+                width: 80,
+                height: 80,
+                borderRadius: 50
+            }} />
+            </View>
+
           <View style={styles.head}>
-            <Text style={styles.title}>Jennylao Club</Text>
-            <CoverCount selected={selected} data={data} />
+            <Text style={{
+                color: '#fff',
+                fontSize: 16,
+                textAlign: 'center'
+            }}>{data?.getUserById.firstname} {data?.getUserById.lastname}</Text>
           </View>
 
-          <Dropdown selected={selected} setSelected={setSelected} data={data} />
+          <View style={{
+            marginTop: 5
+          }}>
+            <Text style={{
+                color: '#fff',
+                fontSize: 13,
+                textAlign: 'center'
+            }}>Por favor selecciona un negocio</Text>
+          </View>
 
-          {/* <View style={styles.list}>
-            {selected &&
-              data[selected].data.map(userData => (
-                <CoverItem {...userData} key={userData.cc} />
-              ))}
-          </View> */}
+          <TouchableOpacity style={{
+            backgroundColor: colors.dark.primary,
+            padding: 12,
+            borderRadius: 15,
+            marginTop: 20
+          }}>
+            <Text style={{
+                textAlign: 'center',
+                color: colors.dark.background,
+                fontWeight: '500'
+            }}>Asociarse a un Negocio</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
 
@@ -77,22 +132,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 30,
+    paddingTop: 5,
     paddingBottom: 15,
   },
   select: {
     position: 'relative',
   },
   body: {
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 25,
     zIndex: 0,
   },
   head: {
-    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 14,
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   title: theme.title,
   subtitle: theme.subtitle,

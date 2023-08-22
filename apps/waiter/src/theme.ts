@@ -11,7 +11,7 @@ export const theme = {
     marginHorizontal: 10,
   },
   screenPrimary: {
-    paddingHorizontal: 25,
+    paddingHorizontal: 10,
     backgroundColor: colors.dark.background,
     height: '100%',
   },

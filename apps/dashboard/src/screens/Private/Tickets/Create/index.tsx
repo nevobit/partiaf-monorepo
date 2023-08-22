@@ -11,7 +11,7 @@ import { createTicket } from '@/services/tickets'
 
 const CreateTicket = ({setOpen}: any) => {
     const store = JSON.parse(localStorage.getItem('store') || "") 
-    const {isLoading, urls, uploadImage} = useUploadImage();
+    const {isLoading, urls, url, uploadImage} = useUploadImage();
     const [cover, setCover] = useState({
         name: "",
         type: "General",
@@ -37,7 +37,7 @@ const CreateTicket = ({setOpen}: any) => {
 
       const queryClient = useQueryClient();
     const {isLoading: isCreating, mutate} = useMutation({
-      mutationFn: () => createTicket(cover),
+      mutationFn: () => createTicket({...cover, image: url}),
       onSuccess: () => {
         alert("Creado correctamente")
         // Trae la data actualizada de la base da datos con el nuevo elemento
@@ -50,6 +50,8 @@ const CreateTicket = ({setOpen}: any) => {
         alert(JSON.stringify(err))
       }
     })
+
+    console.log(urls)
   return (
     <div className={styles.overlay}>
         <div className={styles.container}>
@@ -67,6 +69,7 @@ const CreateTicket = ({setOpen}: any) => {
                       name="limit"
                       value={cover.limit}
                       onChange={handleChange}
+                      required
                     />
                   </Field>
                   <Field label="Tipo">
@@ -76,19 +79,23 @@ const CreateTicket = ({setOpen}: any) => {
                     </select>
                   </Field>
                   <Field label="Fecha">
-                    <Input type="date" name="date" onChange={handleChange} />
+                    <Input 
+                    required
+                    type="date" name="date" onChange={handleChange} />
                   </Field>
                   <Field label="Hora">
                     <Input
                       name="hour"
                       value={cover.hour}
                       onChange={handleChange}
+                      required
                     />
                   </Field>
 
                   <Field label="Precio">
                     <Input
                       type="text"
+                      required
                     />
                   </Field>
         </div>
