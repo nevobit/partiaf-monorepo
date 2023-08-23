@@ -25,16 +25,16 @@ const CardCover = ({ticket}: Props) => {
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [coverSelected, setCoverSelected] = useState<Ticket>(ticket);
 
-//   const submitDeleteHandler = async (e: any) => {
-//     e.preventDefault();
-//     ChangeStatus(
-//       dispatch,
-//       updateCover,
-//       { ...cover, status: StatusType.DELETED },
-//       "Estas seguro de eliminar el cover",
-//       "Eliminar"
-//     );
-//   };
+   const submitDeleteHandler = async (e: any) => {
+     e.preventDefault();
+    //  ChangeStatus(
+    //    dispatch,
+    //    updateCover,
+    //    { ...cover, status: StatusType.DELETED },
+    //    "Estas seguro de eliminar el cover",
+    //    "Eliminar"
+    //  );
+   };
 
 //   const submitUpdateStatusHandler = async (e: any) => {
 //     e.preventDefault();
