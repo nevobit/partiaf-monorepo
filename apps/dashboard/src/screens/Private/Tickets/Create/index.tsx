@@ -1,6 +1,6 @@
 import Field from "@/components/Shared/Field";
 import Input from "@/components/Shared/Input";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Create.module.css";
 import Button from "@/components/Shared/Button";
 import { Upload } from "react-feather";
@@ -14,7 +14,7 @@ import { Ticket } from "@partiaf/entities";
 const CreateTicket = ({ setOpen }: any) => {
   const store = JSON.parse(localStorage.getItem("store") || "");
   const { isLoading, urls, url, uploadImage } = useUploadImage();
-  const { isCreating, createTicket } = useCreateTicket();
+  const { isCreating, createTicket, isSuccess } = useCreateTicket();
 
   const { formState, handleChange } = useForm({
     name: "",
@@ -35,6 +35,12 @@ const CreateTicket = ({ setOpen }: any) => {
     uploadImage(event.target.files![0]);
   };
 
+
+  useEffect(() => {
+    if(isSuccess){
+      setOpen(false)
+    }
+  }, [isSuccess])
 
   return (
     <div className={styles.overlay}>

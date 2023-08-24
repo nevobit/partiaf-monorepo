@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useCreateTicket = () => {
     const queryClient = useQueryClient();
-    const { isLoading: isCreating, mutate: createTicket } = useMutation({
+    const { isLoading: isCreating, mutate: createTicket, isSuccess } = useMutation({
       mutationFn: createTicketApi,
       onSuccess: () => {
         alert("Creado correctamente");
@@ -16,5 +16,5 @@ export const useCreateTicket = () => {
       },
     });
 
-    return { isCreating, createTicket }
+    return { isCreating, createTicket, isSuccess }
 }
