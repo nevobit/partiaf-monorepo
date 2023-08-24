@@ -4,11 +4,12 @@ import SearchBar from "@/components/Shared/SearchBar";
 import Button from "@/components/Shared/Button";
 import ReservationTotals from "@/components/Shared/ReservationTotals";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { deleteTicket, getTickets } from "@/services/tickets";
+import { getTickets } from "@/services/tickets";
 import Loader from "@/components/Shared/Loader";
 import { Ticket } from "@partiaf/entities";
 import CardCover from "@/components/UI/Tickets/Card";
 import CreateTicket from "./Create";
+import { useTickets } from "@/hooks/tickets/useTickets";
 
 interface Table {
   user?: string;
@@ -21,16 +22,7 @@ const Tickets = ({ user, date, hour, ...rest }: Table) => {
 
   const store = JSON.parse(localStorage.getItem("store") || "");
 
-  const { isLoading, data: tickets } = useQuery({
-    queryKey: ["tickets"],
-    queryFn: () => getTickets(store.id),
-  });
-
-  const { isLoading: isDeleting, mutate } = useMutation({
-    mutationFn: () => deleteTicket(store.id),
-    onSuccess: () => {},
-    onError: () => {},
-  });
+  const {isLoading, tickets} = useTickets(store.id);
 
   if (isLoading) return <Loader small />;
 
