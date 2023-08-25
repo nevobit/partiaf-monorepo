@@ -1,17 +1,15 @@
-import { Result, StatusType, Ticket, TicketSchemaMongo } from '@partiaf/entities';
-import { getModel, Collection } from '@partiaf/constant-definitions';
+import {
+  Result,
+  StatusType,
+  Ticket,
+  TicketSchemaMongo,
+} from "@partiaf/entities";
+import { getModel, Collection } from "@partiaf/constant-definitions";
 
 interface Query {
   status: StatusType;
   search?: string;
 }
-
-/**
- * Get all stores by admin id in the database with pagination and optional status filter.
- * @param page page number.
- * @param limit number of items per page.
- * @returns A Promise that resolves with a result of stores by page.
- */
 
 export const getAllTicketsByStore = async (
   page: number,
@@ -20,14 +18,17 @@ export const getAllTicketsByStore = async (
 ): Promise<Result<Ticket>> => {
   const model = getModel<Ticket>(Collection.TICKETS, TicketSchemaMongo);
 
-  const query: { store: string; status?: StatusType } = { store: uuid, status: StatusType.ACTIVE};
+  const query: { store: string; status?: StatusType } = {
+    store: uuid,
+    status: { $in: [StatusType.ACTIVE, StatusType.INACTIVE] } as any,
+  };
 
   const actualPage = +page || 1;
   const pageSize = +limit || 15;
   const skip = (actualPage - 1) * pageSize;
 
   const count = await model.countDocuments({
-    $and: [{ status: StatusType.ACTIVE }],
+    status: { $in: [StatusType.ACTIVE, StatusType.INACTIVE] },
   });
 
   const tickets = await model.find(query).skip(skip).limit(pageSize);

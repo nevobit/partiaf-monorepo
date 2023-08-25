@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import styles from "./tickets.module.css";
-import SearchBar from "@/components/Shared/SearchBar";
 import Button from "@/components/Shared/Button";
-import ReservationTotals from "@/components/Shared/ReservationTotals";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { getTickets } from "@/services/tickets";
 import Loader from "@/components/Shared/Loader";
 import { Ticket } from "@partiaf/entities";
 import CardCover from "@/components/UI/Tickets/Card";
@@ -21,37 +17,37 @@ interface Table {
 
 const Tickets = ({ user, date, hour, ...rest }: Table) => {
   const [open, setOpen] = useState(false);
-
   const store = JSON.parse(localStorage.getItem("store") || "");
-
-  const {isLoading, tickets} = useTickets(store.id);
-
+  const { isLoading, tickets } = useTickets(store.id);
   if (isLoading) return <Loader small />;
 
   return (
     <>
-    <div className={styles.screen}>
-      <div className={styles.screen_header}>
-        <Input icon={<Search size={15} color="#333" />} placeholder="Burcar..." />
-        <div className={styles.info}>
-          <h3 title="Total Tickets Creados" >{tickets.items.length}</h3>
-          <h3 title="Total Tickets Finalizados" >0</h3>
+      <div className={styles.screen}>
+        <div className={styles.screen_header}>
+          <Input
+            icon={<Search size={15} color="#333" />}
+            placeholder="Burcar..."
+          />
+          <div className={styles.info}>
+            <h3 title="Total Tickets Creados">{tickets.items.length}</h3>
+            <h3 title="Total Tickets Finalizados">0</h3>
+          </div>
+          <Button
+            className={styles.header_buttons}
+            variant="secondary"
+            onClick={() => setOpen(true)}
+          >
+            Crear Tickets
+          </Button>
         </div>
-        <Button
-              className={styles.header_buttons}
-              variant="secondary"
-              onClick={() => setOpen(true)}
-            >
-              Crear Tickets
-            </Button>
-      </div>
 
-      <div className={styles.items}>
-      {tickets.items.map((ticket: Ticket) => (
-                <CardCover ticket={ticket} key={ticket.id} />
-              ))}
+        <div className={styles.items}>
+          {tickets.items.map((ticket: Ticket) => (
+            <CardCover ticket={ticket} key={ticket.id} />
+          ))}
+        </div>
       </div>
-    </div>
       {/* <div className={styles.body}>
         <div className={styles.header}>
           <h2 className={styles.title}>Tickets</h2>
