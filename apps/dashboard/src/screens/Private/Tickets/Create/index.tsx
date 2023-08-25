@@ -1,24 +1,21 @@
 import Field from "@/components/Shared/Field";
 import Input from "@/components/Shared/Input";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./Create.module.css";
 import Button from "@/components/Shared/Button";
 import { Upload } from "react-feather";
 import Loader from "@/components/Shared/Loader";
 import { useUploadImage } from "@/hooks/useUploadImage";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createTicket } from "@/services/tickets";
 import Textarea from "@/components/Shared/Textarea";
-import AlertCpt from "@/components/Alert";
-import { useValidationHook } from "@/hooks/useValidationHook";
+import { useCreateTicket } from "@/hooks/tickets";
+import { useForm } from "@/hooks/form/useForm";
 
 const CreateTicket = ({ setOpen }: any) => {
   const store = JSON.parse(localStorage.getItem("store") || "");
   const { isLoading, urls, url, uploadImage } = useUploadImage();
-  const { showAlert, alertMessage, validateForm, setShowAlert } =
-    useValidationHook();
+  const { isCreating, createTicket, isSuccess } = useCreateTicket();
 
-  const [cover, setCover] = useState({
+  const { formState, handleChange } = useForm({
     name: "",
     type: "General",
     price: 0,
@@ -36,33 +33,12 @@ const CreateTicket = ({ setOpen }: any) => {
   const uploadHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
     uploadImage(event.target.files![0]);
   };
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setCover((prev) => ({ ...prev, [name]: value }));
-  };
 
-  const queryClient = useQueryClient();
-  const { isLoading: isCreating, mutate } = useMutation({
-    mutationFn: () => createTicket({ ...cover, image: url }),
-    onSuccess: () => {
-      alert("Creado correctamente");
-      // Trae la data actualizada de la base da datos con el nuevo elemento
-      queryClient.invalidateQueries({
-        queryKey: ["tickets"],
-      });
+  useEffect(() => {
+    if (isSuccess) {
       setOpen(false);
-    },
-    onError: (err) => {
-      alert(JSON.stringify(err));
-    },
-  });
-
-  const handleSubmit = () => {
-    const isFormValid = validateForm(cover, url);
-    if (isFormValid) {
-      mutate();
     }
-  };
+  }, [isSuccess]);
 
   return (
     <div className={styles.overlay}>
@@ -76,8 +52,12 @@ const CreateTicket = ({ setOpen }: any) => {
         <div className={styles.main}>
           <div>
             <div className={styles.div_items}>
-              <Field label="Nombre" error="el campo nombre es requerido">
-                <Input name="name" value={cover.name} onChange={handleChange} />
+              <Field label="Nombre">
+                <Input
+                  name="name"
+                  value={formState.name}
+                  onChange={handleChange}
+                />
               </Field>
               <Field label="Tipo">
                 <select name="type" onChange={handleChange}>
@@ -92,7 +72,7 @@ const CreateTicket = ({ setOpen }: any) => {
                 <Input
                   type="number"
                   name="price"
-                  value={cover.price}
+                  value={formState.price}
                   onChange={handleChange}
                   required
                 />
@@ -100,13 +80,13 @@ const CreateTicket = ({ setOpen }: any) => {
               <Field label="Cupo total">
                 <Input
                   name="limit"
-                  value={cover.limit}
+                  value={formState.limit}
                   onChange={handleChange}
                   required
                 />
               </Field>
             </div>
-
+  
             <div className={styles.div_items}>
               <Field label="Fecha">
                 <Input
@@ -120,7 +100,7 @@ const CreateTicket = ({ setOpen }: any) => {
                 <Input
                   name="hour"
                   type="datetime"
-                  value={cover.hour}
+                  value={formState.hour}
                   onChange={handleChange}
                   required
                 />
@@ -129,7 +109,7 @@ const CreateTicket = ({ setOpen }: any) => {
             <Field label="Descripcion">
               <Textarea
                 name="description"
-                value={cover.description}
+                value={formState.description}
                 onChange={handleChange}
               />
             </Field>
@@ -190,15 +170,13 @@ const CreateTicket = ({ setOpen }: any) => {
           </div>
         </div>
 
-        {showAlert && (
-          <AlertCpt
-            message={alertMessage}
-            onClose={() => setShowAlert(false)}
-          />
-        )}
-
         <div className={styles.footer}>
-          <Button onClick={handleSubmit}>Crear</Button>
+          <Button
+            loading={isCreating}
+            onClick={() => createTicket({ ...formState, image: url })}
+          >
+            Crear
+          </Button>
         </div>
       </div>
     </div>

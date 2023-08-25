@@ -28,7 +28,7 @@ const CoversDetails = () => {
           <div className={styles.screen_header_principal}>
             <div className={styles.box}>
               <h3>Total Entradas</h3>
-              <p>{goers[0].ticket.limit}</p>
+              <p>{goers[0]?.ticket.limit}</p>
             </div>
             <div className={styles.box}>
               <h3>Entradas Efectivas</h3>
@@ -36,7 +36,7 @@ const CoversDetails = () => {
             </div>
             <div className={styles.box}>
               <h3>Entradas no Efectivas </h3>
-              <p>{goers.filter((goer: Goer) => goer.entry_status == "cancelled").length}</p>
+              <p>{goers?.filter((goer: Goer) => goer.entry_status == "cancelled").length}</p>
             </div>
           </div>
           <div className={styles.screen_title}>

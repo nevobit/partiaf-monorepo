@@ -5,12 +5,12 @@ export const getTickets = async(store: string) => {
     return data;
 }
 
-export const createTicket = async (ticket: any) => {
+export const createTicketApi = async (ticket: any) => {
     const { data } = await partiafApi.post(`/tickets`, ticket);
     return data;
 }
 
-export const deleteTicket = async (ticket: any) => {
-    const { data } = await partiafApi.delete(`/tickets`, ticket);
+export const deleteTicketApi = async (id: string) => {
+    const { data } = await partiafApi.delete(`/tickets/${id}`);
     return data;
 }

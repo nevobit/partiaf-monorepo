@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { Ticket } from "@partiaf/entities";
 import { PrivateRoutes } from "@/constant-definitions";
 import { DivisaFormater } from "@/utilities/DivisaFormater";
+import { useDeleteTicket } from "@/hooks/tickets/useDeleteTicket";
+import Button from "@/components/Shared/Button";
 
 enum StatusType {
   ACTIVE = "active",
@@ -25,32 +27,7 @@ const CardCover = ({ticket}: Props) => {
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [coverSelected, setCoverSelected] = useState<Ticket>(ticket);
 
-   const submitDeleteHandler = async (e: any) => {
-     e.preventDefault();
-    //  ChangeStatus(
-    //    dispatch,
-    //    updateCover,
-    //    { ...cover, status: StatusType.DELETED },
-    //    "Estas seguro de eliminar el cover",
-    //    "Eliminar"
-    //  );
-   };
-
-//   const submitUpdateStatusHandler = async (e: any) => {
-//     e.preventDefault();
-//     ChangeStatus(
-//       dispatch,
-//       updateCover,
-//       cover.status == "active"
-//         ? { ...cover, status: StatusType.INACTIVE }
-//         : { ...cover, status: StatusType.ACTIVE },
-
-//       cover.status == "active"
-//         ? "Se desactivara el cover"
-//         : "Se activara el cover",
-//       "Aceptar"
-//     );
-//   };
+  const {isDeleting, deleteTicket} = useDeleteTicket();
 
   const editHandler = () => {
     setCoverSelected(ticket);
@@ -75,10 +52,10 @@ const CardCover = ({ticket}: Props) => {
           )}
         </div>
         <div className={styles.info_cover_container}>
-          <span className={styles.sumer}>
+          {/* <span className={styles.sumer}>
             #SUMER
             <span>2023</span>
-          </span>
+          </span> */}
 
           <div className={styles.info_cover}>
             <div className={styles.data_cover}>
@@ -119,17 +96,18 @@ const CardCover = ({ticket}: Props) => {
             >
               {ticket.status == "active" ? "Activo" : "Desactivado"}
             </button>
-            <button className={styles.btn_icon_card_cover}>
+            <Button className={styles.btn_icon_card_cover}>
               <p className="" onClick={() => editHandler()}>
                 Editar
               </p>
-            </button>
-            <button
+            </Button>
+            <Button
+            loading={isDeleting}
               className={styles.btn_icon_card_cover_delete}
-            onClick={submitDeleteHandler}
+            onClick={() => deleteTicket(id)}
             >
               <p className="">Borrar</p>
-            </button>
+            </Button>
           </div>
         </div>
       </div>
