@@ -9,10 +9,15 @@ import { useUploadImage } from "@/hooks/useUploadImage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createTicket } from "@/services/tickets";
 import Textarea from "@/components/Shared/Textarea";
+import AlertCpt from "@/components/Alert";
+import { useValidationHook } from "@/hooks/useValidationHook";
 
 const CreateTicket = ({ setOpen }: any) => {
   const store = JSON.parse(localStorage.getItem("store") || "");
   const { isLoading, urls, url, uploadImage } = useUploadImage();
+  const { showAlert, alertMessage, validateForm, setShowAlert } =
+    useValidationHook();
+
   const [cover, setCover] = useState({
     name: "",
     type: "General",
@@ -52,17 +57,26 @@ const CreateTicket = ({ setOpen }: any) => {
     },
   });
 
+  const handleSubmit = () => {
+    const isFormValid = validateForm(cover, url);
+    if (isFormValid) {
+      mutate();
+    }
+  };
+
   return (
     <div className={styles.overlay}>
       <div className={styles.container}>
         <div className={styles.header}>
           <h2>Crear Ticket</h2>
-          <Button onClick={() => setOpen(!open)} variant="dark" >Cerrar</Button>
+          <Button onClick={() => setOpen(!open)} variant="dark">
+            Cerrar
+          </Button>
         </div>
         <div className={styles.main}>
           <div>
             <div className={styles.div_items}>
-              <Field label="Nombre">
+              <Field label="Nombre" error="el campo nombre es requerido">
                 <Input name="name" value={cover.name} onChange={handleChange} />
               </Field>
               <Field label="Tipo">
@@ -176,8 +190,15 @@ const CreateTicket = ({ setOpen }: any) => {
           </div>
         </div>
 
+        {showAlert && (
+          <AlertCpt
+            message={alertMessage}
+            onClose={() => setShowAlert(false)}
+          />
+        )}
+
         <div className={styles.footer}>
-          <Button onClick={() => mutate()}>Crear</Button>
+          <Button onClick={handleSubmit}>Crear</Button>
         </div>
       </div>
     </div>
