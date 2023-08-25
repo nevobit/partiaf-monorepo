@@ -8,6 +8,8 @@ import { PrivateRoutes } from "@/constant-definitions";
 import { DivisaFormater } from "@/utilities/DivisaFormater";
 import { useDeleteTicket } from "@/hooks/tickets/useDeleteTicket";
 import Button from "@/components/Shared/Button";
+import UpdateTicket from "@/screens/Private/Tickets/Update";
+import { useUpdateTicket } from "@/hooks/tickets";
 
 enum StatusType {
   ACTIVE = "active",
@@ -17,22 +19,28 @@ enum StatusType {
 }
 
 interface Props {
-    ticket: Ticket;
+  ticket: Ticket;
 }
 
-const CardCover = ({ticket}: Props) => {
+const CardCover = ({ ticket }: Props) => {
   const dispatch = useDispatch();
   const { name, description, limit, date, hour, price, id, type, image } =
     ticket;
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [coverSelected, setCoverSelected] = useState<Ticket>(ticket);
-
-  const {isDeleting, deleteTicket} = useDeleteTicket();
+  const { isDeleting, deleteTicket } = useDeleteTicket();
+  const { isUpdating, updateTicket, isSuccess } = useUpdateTicket();
+  const [open, setOpen] = useState(false);
 
   const editHandler = () => {
     setCoverSelected(ticket);
-    setIsOpenEdit(true);
+    setOpen(!open);
   };
+
+  const submitUpdateStatusHandler = () => {
+
+  }
+  
 
   return (
     <>
@@ -45,11 +53,7 @@ const CardCover = ({ticket}: Props) => {
           to={`${PrivateRoutes.TICKETS}/${id}`}
         ></Link>
         <div className={styles.image_cover}>
-          {image ? (
-            <img src={image} alt="Image" />
-          ) : (
-            <img src="" alt="Image" />
-          )}
+          {image ? <img src={image} alt="Image" /> : <img src="" alt="Image" />}
         </div>
         <div className={styles.info_cover_container}>
           {/* <span className={styles.sumer}>
@@ -92,7 +96,7 @@ const CardCover = ({ticket}: Props) => {
                   ? styles.card_btn_status_active
                   : styles.card_btn_status_inactive
               }
-            //   onClick={submitUpdateStatusHandler}
+              onClick={() => updateTicket({ id, status: StatusType.INACTIVE })}
             >
               {ticket.status == "active" ? "Activo" : "Desactivado"}
             </button>
@@ -102,9 +106,9 @@ const CardCover = ({ticket}: Props) => {
               </p>
             </Button>
             <Button
-            loading={isDeleting}
+              loading={isDeleting}
               className={styles.btn_icon_card_cover_delete}
-            onClick={() => deleteTicket(id)}
+              onClick={() => deleteTicket(id)}
             >
               <p className="">Borrar</p>
             </Button>
@@ -116,6 +120,7 @@ const CardCover = ({ticket}: Props) => {
         openModal={isOpenEdit}
         coverData={coverSelected}
       /> */}
+      {open && <UpdateTicket setOpen={setOpen} cover={ticket} />}
     </>
   );
 };
