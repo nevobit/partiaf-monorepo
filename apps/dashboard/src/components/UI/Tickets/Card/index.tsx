@@ -37,10 +37,7 @@ const CardCover = ({ ticket }: Props) => {
     setOpen(!open);
   };
 
-  const submitUpdateStatusHandler = () => {
-
-  }
-  
+  const submitUpdateStatusHandler = () => {};
 
   return (
     <>
@@ -92,13 +89,21 @@ const CardCover = ({ ticket }: Props) => {
           <div className={styles.icon_cover}>
             <button
               className={
-                ticket.status == "active"
+                ticket.status === "active"
                   ? styles.card_btn_status_active
                   : styles.card_btn_status_inactive
               }
-              onClick={() => updateTicket({ id, status: StatusType.INACTIVE })}
+              onClick={() =>
+                updateTicket({
+                  id,
+                  status:
+                    ticket.status === StatusType.ACTIVE
+                      ? StatusType.INACTIVE
+                      : StatusType.ACTIVE,
+                })
+              }
             >
-              {ticket.status == "active" ? "Activo" : "Desactivado"}
+              {ticket.status === "active" ? "Activo" : "Desactivado"}
             </button>
             <Button className={styles.btn_icon_card_cover}>
               <p className="" onClick={() => editHandler()}>
