@@ -5,7 +5,7 @@ import Nav from '../Nav'
 const Principal = ({children}:any) => {
   return (
     <div className={styles.body}>
-        <Nav/>
+        {/* <Nav/> */}
         {children}
     </div>
   )

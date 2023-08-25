@@ -52,10 +52,10 @@ const CardCover = ({ticket}: Props) => {
           )}
         </div>
         <div className={styles.info_cover_container}>
-          <span className={styles.sumer}>
+          {/* <span className={styles.sumer}>
             #SUMER
             <span>2023</span>
-          </span>
+          </span> */}
 
           <div className={styles.info_cover}>
             <div className={styles.data_cover}>
@@ -96,11 +96,11 @@ const CardCover = ({ticket}: Props) => {
             >
               {ticket.status == "active" ? "Activo" : "Desactivado"}
             </button>
-            <button className={styles.btn_icon_card_cover}>
+            <Button className={styles.btn_icon_card_cover}>
               <p className="" onClick={() => editHandler()}>
                 Editar
               </p>
-            </button>
+            </Button>
             <Button
             loading={isDeleting}
               className={styles.btn_icon_card_cover_delete}

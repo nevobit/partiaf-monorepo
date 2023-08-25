@@ -10,6 +10,8 @@ import { Ticket } from "@partiaf/entities";
 import CardCover from "@/components/UI/Tickets/Card";
 import CreateTicket from "./Create";
 import { useTickets } from "@/hooks/tickets/useTickets";
+import Input from "@/components/Shared/Input";
+import { Search } from "react-feather";
 
 interface Table {
   user?: string;
@@ -28,7 +30,29 @@ const Tickets = ({ user, date, hour, ...rest }: Table) => {
 
   return (
     <>
-      <div className={styles.body}>
+    <div className={styles.screen}>
+      <div className={styles.screen_header}>
+        <Input icon={<Search size={15} color="#333" />} placeholder="Burcar..." />
+        <div className={styles.info}>
+          <h3 title="Total Tickets Creados" >{tickets.items.length}</h3>
+          <h3 title="Total Tickets Finalizados" >0</h3>
+        </div>
+        <Button
+              className={styles.header_buttons}
+              variant="secondary"
+              onClick={() => setOpen(true)}
+            >
+              Crear Tickets
+            </Button>
+      </div>
+
+      <div className={styles.items}>
+      {tickets.items.map((ticket: Ticket) => (
+                <CardCover ticket={ticket} key={ticket.id} />
+              ))}
+      </div>
+    </div>
+      {/* <div className={styles.body}>
         <div className={styles.header}>
           <h2 className={styles.title}>Tickets</h2>
           <div className={styles.header_options}>
@@ -61,7 +85,7 @@ const Tickets = ({ user, date, hour, ...rest }: Table) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {open && <CreateTicket setOpen={setOpen} />}
       {/* <Modal activeModal={(e: React.MouseEvent) =>{setOpen(!open)}}/> */}
     </>

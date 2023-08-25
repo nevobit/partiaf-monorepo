@@ -82,7 +82,7 @@ const CreateTicket = ({ setOpen }: any) => {
                 />
               </Field>
             </div>
-
+  
             <div className={styles.div_items}>
               <Field label="Fecha">
                 <Input
