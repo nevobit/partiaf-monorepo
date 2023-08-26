@@ -32,6 +32,9 @@ export const UsersSchemaMongo = new Schema<User>(
     events: { type: Number },
     balance: { type: Number },
     lastLogin: { type: Date },
+    stores: [{
+      type: String, ref: 'stores'
+    }],
     location: {
       address: {
         street: { type: String },

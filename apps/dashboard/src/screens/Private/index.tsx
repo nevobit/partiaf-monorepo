@@ -20,7 +20,7 @@ const Private = () => {
   return (
     <Layout>
         <RoutesWithNotFound>
-            <Route path={PrivateRoutes.HOME} element={<Home />} />
+            <Route path={PrivateRoutes.HOME} element={<Tickets />} />
             <Route path={PrivateRoutes.DASHBOARD} element={<Home />} />
             <Route path={PrivateRoutes.TICKETS} element={<Tickets />} />
             <Route path={PrivateRoutes.COVERS_DETAILS} element={<CoversDetails />} />

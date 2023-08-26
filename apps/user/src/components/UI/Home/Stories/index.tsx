@@ -63,7 +63,7 @@ const Stories = () => {
             color: '#fff',
             fontSize: 12,
           }}>
-          {data?.getUserById.firstname}
+          {data?.getUserById?.firstname}
         </Text>
       </DefaultView>
       {/* <DefaultView

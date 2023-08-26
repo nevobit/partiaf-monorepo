@@ -10,6 +10,7 @@ import { useDeleteTicket } from "@/hooks/tickets/useDeleteTicket";
 import Button from "@/components/Shared/Button";
 import UpdateTicket from "@/screens/Private/Tickets/Update";
 import { useUpdateTicket } from "@/hooks/tickets";
+import Loader from "@/components/Shared/Loader";
 
 enum StatusType {
   ACTIVE = "active",
@@ -88,6 +89,7 @@ const CardCover = ({ ticket }: Props) => {
           </div>
           <div className={styles.icon_cover}>
             <button
+            
               className={
                 ticket.status === "active"
                   ? styles.card_btn_status_active
@@ -103,7 +105,7 @@ const CardCover = ({ ticket }: Props) => {
                 })
               }
             >
-              {ticket.status === "active" ? "Activo" : "Desactivado"}
+              {isUpdating? <Loader small /> : ticket.status === "active" ? "Activo" : "Desactivado"}
             </button>
             <Button className={styles.btn_icon_card_cover}>
               <p className="" onClick={() => editHandler()}>

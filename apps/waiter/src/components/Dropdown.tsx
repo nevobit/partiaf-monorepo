@@ -25,6 +25,7 @@ interface DropdownProps {
 export const Dropdown = ({selected, setSelected, data}: DropdownProps) => {
   const [toggle, setToggle] = useState(false);
 
+  const [selectedname,  setSelectedName] = useState('Selecciona un ticket');
   const [animationStyles, handleAnimationStart, handleAnimationEnd] =
     useAnimation('height', {
       start: {
@@ -49,8 +50,9 @@ export const Dropdown = ({selected, setSelected, data}: DropdownProps) => {
     }
   };
 
-  const handleCloseDropdown = (itemId: string) => {
-    setSelected(itemId);
+  const handleCloseDropdown = (item: any) => {
+    setSelected(item.id);
+    setSelectedName(item.name);
     setToggle(false);
     handleAnimationEnd();
   };
@@ -63,7 +65,7 @@ export const Dropdown = ({selected, setSelected, data}: DropdownProps) => {
             <FilterIcon width={25} height={25} color={colors.dark.text} />
           </View>
 
-          <Text style={styles.text}>No hay Covers</Text>
+          <Text style={styles.text}>{selectedname}</Text>
 
           <View style={styles.iconContainer}>
             {toggle ? (
@@ -81,10 +83,10 @@ export const Dropdown = ({selected, setSelected, data}: DropdownProps) => {
 
       <Animated.View style={[styles.dropdown, animationStyles]}>
         <ScrollView>
-          {/* {Object.values(data).map(item => (
+           {Object.values(data || [])?.map(item => (
             <TouchableNativeFeedback
               key={item.id}
-              onPress={() => handleCloseDropdown(item.id)}>
+              onPress={() => handleCloseDropdown(item)}>
               <Text
                 style={
                   item.id === selected
@@ -94,7 +96,7 @@ export const Dropdown = ({selected, setSelected, data}: DropdownProps) => {
                 {item.name}
               </Text>
             </TouchableNativeFeedback>
-          ))} */}
+          ))}
         </ScrollView>
       </Animated.View>
     </View>
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.dark.modal,
     borderRadius: 8,
-    marginVertical: 30,
+    marginTop: 30,
     zIndex: 1,
   },
   box: {

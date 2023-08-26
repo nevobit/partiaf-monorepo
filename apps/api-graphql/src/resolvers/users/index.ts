@@ -1,6 +1,7 @@
 import {
   getAllUsers,
   getUserById,
+  registerStore,
   verifyUserToken,
 } from '@partiaf/business-logic';
 
@@ -42,6 +43,17 @@ export default {
       }
 
       return users;
+    },
+  },
+  Mutation: {
+    registerStore: async (parent: any, { code }: {code: string}, ctx: any) => {
+      const { id } = await verifyUserToken(ctx) as { id: string };
+      const user = await registerStore({id, code});
+      if (user instanceof Error) {
+        return new Error('Invalid credentials');
+      }
+
+      return user;
     },
   },
 };

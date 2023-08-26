@@ -6,8 +6,11 @@ import { Provider } from 'react-redux';
 import { store } from './src/store/store';
 import { ApolloProvider } from '@apollo/client';
 import client from './src/graphql';
+import { LogBox } from 'react-native';
 
 function App(): JSX.Element {
+  LogBox.ignoreLogs(['ViewPropTypes will be removed from React Native']);
+
   return (
     <SafeAreaProvider>
       <ApolloProvider client={client}>

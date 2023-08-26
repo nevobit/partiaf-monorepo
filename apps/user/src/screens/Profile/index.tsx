@@ -143,7 +143,7 @@ const Profile = () => {
             fontWeight: '600',
             textAlign: 'center',
           }}>
-          {data?.getUserById.firstname} {data?.getUserById.lastname}
+          {data?.getUserById?.firstname} {data?.getUserById.lastname}
         </Text>
         <TouchableOpacity>
           <Text

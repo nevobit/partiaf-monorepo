@@ -16,7 +16,7 @@ export const theme = {
     height: '100%',
   },
   title: {
-    fontSize: 25,
+    fontSize: 20,
     color: colors.dark.primary,
   },
   subtitle: {

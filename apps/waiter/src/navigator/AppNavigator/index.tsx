@@ -5,6 +5,7 @@ import {Signin} from '../../screens/Signin';
 import {HomeScreen} from '../../screens/Home';
 import { useSelector } from 'react-redux';
 import { Business } from '../../screens/Business';
+import QrScanner from '../../screens/QrScanner';
 
 const Auth = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,6 +37,20 @@ const AppNavigator = () => {
       <Tab.Screen
         name="home"
         component={Business}
+        options={{
+          tabBarStyle: {display: 'none'},
+        }}
+      />
+         <Tab.Screen
+        name="covers"
+        component={HomeScreen}
+        options={{
+          tabBarStyle: {display: 'none'},
+        }}
+      />
+          <Tab.Screen
+        name="scanner"
+        component={QrScanner}
         options={{
           tabBarStyle: {display: 'none'},
         }}

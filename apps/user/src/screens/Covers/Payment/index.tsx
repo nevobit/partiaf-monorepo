@@ -62,6 +62,8 @@ const Payment = ({navigation, route}: any) => {
     }catch(err){
       setError(JSON.stringify(err))
         console.log(err)
+        setLoadingGoer(false)
+        Alert.alert(String(err))
     }
   }
 

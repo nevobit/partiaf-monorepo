@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableNativeFeedback,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -22,51 +23,97 @@ import {data} from '../../data/covers';
 import {colors} from '../../layout/theme/colors';
 import {SearchBar} from '../../components/SearchBar';
 import { signout } from '../../features/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
+import { GET_GOERS_BY_TICKET_ID, GET_TICKETS_BY_STORE_ID } from '../../graphql/queries';
+import { signoutStore } from '../../features/authStore';
+import HomeTopTap from '../../navigator/HomeTopTap';
 
-export const HomeScreen = ({navigation}:any) => {
+export const HomeScreen = ({navigation, route}:any) => {
   const [selected, setSelected] = useState('after-party');
   const [searchValue, onChangeValue] = useState();
-
+  const {store} = useSelector((state: any) => state.authStore);
   const dispatch = useDispatch();
   const logout = () => {
-    dispatch(signout());
+    dispatch(signoutStore());
+    setSelected('')
+    navigation.navigate('home')
   };
+    
+  const {user} = useSelector((state: any) => state.auth);
+
+  const {data: tickets, refetch} = useQuery(GET_TICKETS_BY_STORE_ID, {
+    variables: { id: store?.id },
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  })
+
+  
+  useEffect(() => {
+    refetch();
+  }, [refetch])
+
   return (
     <SafeAreaView>
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.header}>
-          <LogoIcon width={180} height={40} color={colors.dark.primary} />
+          <LogoIcon width={140} height={40} color={colors.dark.primary} />
           <TouchableOpacity
             onPress={logout}
             >
-            <CheckIcon width={30} height={30} color={colors.dark.primary} />
+              <Text style={{
+                color: "#fff"
+              }}>Cambiar negocio</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.body}>
           <View style={styles.head}>
-            <Text style={styles.title}>Jennylao Club</Text>
-            <CoverCount selected={selected} data={data} />
+            <Text style={styles.title}>{store?.name}</Text>
+            <CoverCount selected={selected} data={tickets?.getTicketsByStoreId} />
           </View>
 
-          <Dropdown selected={selected} setSelected={setSelected} data={data} />
+          <Dropdown selected={selected} setSelected={setSelected} data={tickets?.getTicketsByStoreId} />
+          <View style={{
+            height: 800,
+            marginTop: -10
+          }}>
 
-          {/* <View style={styles.list}>
-            {selected &&
-              data[selected].data.map(userData => (
-                <CoverItem {...userData} key={userData.cc} />
-              ))}
-          </View> */}
+          <HomeTopTap id={selected} />
+          </View>
+
         </View>
-      </ScrollView>
 
-      <View style={styles.buttonsContainer}>
-        {/* <SearchBar
-          navigation={navigation}
-          searchValue={searchValue}
-          onChangeValue={onChangeValue}
-        /> */}
+      
       </View>
+
+      <TouchableOpacity style={{
+          width: 50,
+          height: 50,
+          borderWidth: 2,
+          borderColor: "#fff",
+          position: 'absolute',
+          bottom: 20,
+          right: 20,
+          borderRadius: 100,
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+        onPress={() => navigation.navigate('scanner')}
+        >
+          <Image 
+          style={{
+            width: 25, height: 25
+          }}
+          source={{
+            uri: 'https://i.ibb.co/SNC889R/scanner.png'
+          }} />
+        </TouchableOpacity>
+  
+
+     
     </SafeAreaView>
   );
 };
@@ -77,8 +124,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 30,
-    paddingBottom: 15,
+    paddingTop: 10,
+    paddingBottom: 5,
   },
   select: {
     position: 'relative',

@@ -186,7 +186,7 @@ export const Signin = ({navigation}: any) => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    paddingHorizontal: 28,
+    paddingHorizontal: 10,
     backgroundColor: colors.dark.background,
     flexDirection: 'column',
   },
