@@ -141,7 +141,8 @@ key={ticket.id}
     padding: 10,
   }}>
     <Text style={{
-      fontSize: 12
+      fontSize: 12,
+      color: '#000'
     }}>ID {ticket.id.slice(0,8).toUpperCase()} | Ticket | <Text style={{
       color: "green"
     }}>EN-USO</Text></Text>
@@ -153,10 +154,12 @@ key={ticket.id}
     <Text style={{
       fontSize: 14,
       fontWeight: '500',
+      color: '#000'
     }}>10 Junio 2023 | {ticket.ticket.hour}</Text>
     <Text style={{
       fontSize: 14,
       fontWeight: '500',
+      color: '#000'
     }}>Santa Marta - Colombia</Text>
   </DefaultView>
   <DefaultView style={{

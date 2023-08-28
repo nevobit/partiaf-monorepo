@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
 import { theme } from '../../../theme'
 import { CoverItem } from '../../../components/CoverItem'
 import { useQuery } from '@apollo/client'
@@ -21,12 +21,12 @@ const Tickets = ({selected}: any) => {
         refetch()
       }, [selected])
   return (
-    <View style={styles.list}>
+    <ScrollView style={styles.list}>
     {selected &&
       goers?.getGoersByTicketId?.map((goer: any) => (
         <CoverItem {...goer} key={goer.id} />
       ))}
-  </View> 
+  </ScrollView> 
   )
 }
 
