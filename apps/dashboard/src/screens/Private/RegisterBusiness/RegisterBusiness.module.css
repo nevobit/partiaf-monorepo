@@ -1,125 +1,125 @@
-.body{
-    display: flex;
-    flex-direction: column;
-    width: 70rem;
-    min-height: max-content;
-    background-color: var(--background);
-    margin: auto;
-    margin-top: 3rem;
-    border-radius: 1%;
-    gap: 2rem;
-    border: 1px solid rgba(0, 0, 0, .1);
-    margin-top: 10rem;
+.body {
+  display: flex;
+  flex-direction: column;
+  width: 70rem;
+  min-height: max-content;
+  background-color: var(--background);
+  margin: auto;
+  margin-top: 3rem;
+  border-radius: 1%;
+  gap: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 10rem;
 }
 
-.header{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom:2px solid var(--primary-gray);
-    padding: 2rem 2rem 2rem 2rem;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid var(--primary-gray);
+  padding: 2rem 2rem 2rem 2rem;
 }
 
-.main{
-    display: flex;
-    flex-direction: column; 
-    padding: 0rem 2rem 0rem 2rem;
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 2rem 0rem 2rem;
 }
 
-.title{
-    font-size: 2.5rem;
-    color: var(--primary-dark);
-    font-weight: bold;
+.title {
+  font-size: 2.5rem;
+  color: var(--primary-dark);
+  font-weight: bold;
 }
 
-.form{
-   display: flex;
-   flex-direction: column;
+.form {
+  display: flex;
+  flex-direction: column;
 }
 
-.inputs{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 2rem;
-    margin-bottom: 1rem;
+.inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2rem;
+  margin-bottom: 1rem;
 }
 
-.logo{
-    max-width: 18rem;
-    align-self: center;
+.logo {
+  max-width: 18rem;
+  align-self: center;
 }
-.buttons{
-    display: flex;
-    padding: 2rem 2rem 2rem 2rem;
-    justify-content: center;
-    gap: 4rem;
-}
-
-.buttons > button{
-    font-size: 1.4rem;
-    font-weight:600;
-    width: 20rem;
-    height: 3rem;
+.buttons {
+  display: flex;
+  padding: 2rem 2rem 2rem 2rem;
+  justify-content: center;
+  gap: 4rem;
 }
 
-.button_text{
-    margin: 0rem 5rem;
+.buttons > button {
+  font-size: 1.4rem;
+  font-weight: 600;
+  width: 20rem;
+  height: 3rem;
 }
 
-.terms{
-    color: var(--primary-dark);
-    text-decoration: underline;
-    font-weight: bold;
-    font-size: 1.4rem;
+.button_text {
+  margin: 0rem 5rem;
 }
 
-.copy{
-    font-size: 1.4rem;
+.terms {
+  color: var(--primary-dark);
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.copy {
+  font-size: 1.4rem;
 }
 .terms:hover {
-    text-decoration-color:var(--primary-base);
-    cursor:pointer;  
+  text-decoration-color: var(--primary-base);
+  cursor: pointer;
 }
 
-.container_images{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-  
-  .container_images .images{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: flex-start;
-    gap: 1.2rem;
-    height: 100%;
-    width: 100%;
-  }
-  
-  .container_images .images img{
-    width: 100px;
-    height: 100px;
-    margin: 0;
-    border-radius: .5rem;
-    object-fit: cover;
-  }
-  
-  .img_item{
-    position: relative;
-  }
-  
-  .img_item button{
-    height: 1.8rem;
-    width: 1.8rem !important;
-    border-radius: 5rem;
-    font-size: 1.8rem;
-    display: grid;
-    place-items: center;
-    background-color: #CA0B00;
-    color: #f2f6fa;
-    position: absolute;
-    right: -.7rem;
-    top: -.7rem;
-  }
-  
+.container_images {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.container_images .images {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: flex-start;
+  gap: 1.2rem;
+  height: 100%;
+  width: 100%;
+}
+
+.container_images .images img {
+  width: 100px;
+  height: 100px;
+  margin: 0;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.img_item {
+  position: relative;
+}
+
+.img_item button {
+  height: 1.8rem;
+  width: 1.8rem !important;
+  border-radius: 5rem;
+  font-size: 1.8rem;
+  display: grid;
+  place-items: center;
+  background-color: #ca0b00;
+  color: #f2f6fa;
+  position: absolute;
+  right: -0.7rem;
+  top: -0.7rem;
+}

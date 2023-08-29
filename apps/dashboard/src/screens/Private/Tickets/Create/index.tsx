@@ -99,7 +99,7 @@ const CreateTicket = ({ setOpen }: any) => {
               <Field label="Hora">
                 <Input
                   name="hour"
-                  type="datetime"
+                  type="time"
                   value={formState.hour}
                   onChange={handleChange}
                   required
