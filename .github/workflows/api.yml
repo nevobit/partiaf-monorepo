@@ -1,0 +1,62 @@
+name: API-DEPLOYMENT
+
+on: 
+  push:
+    branches:
+    - main
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18
+    
+    - name: Install Microsoft Rush
+      run: npm install -g @microsoft/rush
+    
+    - name: Update monorepo
+      run: rush update
+      
+    - name: Install dependencies
+      run: rush install
+      
+    - name: Build API
+      run: rush build
+
+  deploy: 
+    needs: build
+    runs-on: ubuntu-latest
+    
+    env:
+      MONGODB_URL: ${{ secrets.MONGODB_URL }}
+      PORT: ${{ secrets.PORT_API }}
+
+    steps: 
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+          
+      - name: Install Microsoft Rush
+        run: npm install -g @microsoft/rush
+      
+      - name: Install dependecies
+        run: rush update
+        
+      - name: Build API
+        run: rush build
+      
+      - name: Deploy api
+        run: | 
+          cd apps/api
+          node build/server/index.js

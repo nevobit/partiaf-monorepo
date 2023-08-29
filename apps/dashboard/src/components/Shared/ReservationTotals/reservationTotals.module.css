@@ -1,0 +1,47 @@
+.body{
+    display: flex;
+    width: 25rem;
+    height: max-content;
+    border-radius: 12px;
+    border: 2px solid var(--lines);
+    flex-direction: column; 
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.title{
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: var(--primary-dark);
+    width: max-content;
+    font-weight: bold;
+}
+
+.data{
+    display: flex;
+    width: 100%;
+    height: max-content;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total{
+    font-weight: bold;
+    font-size: 2rem;
+    color: var(--primary-dark);
+}
+
+.porcents{
+    display: flex;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 12px;
+    background-color: var(--primary-base);
+  
+}
+
+.porcents_text{
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--primary-dark);
+}

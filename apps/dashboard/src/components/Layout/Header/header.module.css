@@ -1,0 +1,45 @@
+.body{
+    display: flex;
+    align-items: center;
+    /* grid-template-columns: auto 25rem; */
+    /* width: 100%; */
+    height: 5rem;
+    border-bottom: 1px solid var(--labels);
+    align-items: center;
+}
+
+.logo_section{
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+.logo{
+    width: 13rem;
+    align-self: center;
+}
+
+.options{
+    display: flex;
+    /* width: 100%; */
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+}
+
+.options a{
+    font-weight: 600;
+    color: #333;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: .5rem;
+    transition: all .3s;
+}
+
+
+.options a:hover{
+    font-weight: 600;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, .1);
+}

@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  "rushVersion": "5.83.4",
+  "rushVersion": "5.99.0",
 
   "pnpmVersion": "6.7.1",
 
@@ -27,6 +27,18 @@
       "shouldPublish": false
     },
     {
+      "packageName": "api-graphql",
+      "projectFolder": "apps/api-graphql",
+      "reviewCategory": "production",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "dashboard",
+      "projectFolder": "apps/dashboard",
+      "reviewCategory": "production",
+      "shouldPublish": false
+    },
+    {
       "packageName": "@partiaf/entities",
       "projectFolder": "packages/entities",
       "reviewCategory": "production",
@@ -49,12 +61,12 @@
       "projectFolder": "packages/data-sources",
       "reviewCategory": "production",
       "shouldPublish": false
+    },
+    {
+      "packageName": "@partiaf/core-modules",
+      "projectFolder": "packages/core-modules",
+      "reviewCategory": "production",
+      "shouldPublish": false
     }
-    // {
-    //   "packageName": "@partiaf/core-modules",
-    //   "projectFolder": "packages/core-modules",
-    //   "reviewCategory": "production",
-    //   "shouldPublish": false
-    // }
   ]
 }

@@ -4,7 +4,6 @@
   "description": "",
   "main": "build/index.js",
   "typings": "build/index.d.js",
-  
   "scripts": {
     "build": "npx tsc --project tsconfig.build.json"
   },
@@ -15,11 +14,22 @@
     "jsonwebtoken": "9.0.0",
     "fastify": "4.11.0",
     "@partiaf/constant-definitions": "workspace:*",
-    "@partiaf/entities": "workspace:*"
+    "@partiaf/entities": "workspace:*",
+    "bcrypt": "5.1.0",
+    "mercadopago": "~1.5.16",
+    "form-data": "4.0.0",
+    "mailgun.js": "8.0.6",
+    "otp-generator": "4.0.0",
+    "cloudinary": "~1.40.0"
   },
   "devDependencies": {
     "@types/node": "20.2.1",
     "tslib": "2.5.2",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "@types/jsonwebtoken": "9.0.2",
+    "@types/mercadopago": "~1.5.8",
+    "@types/bcrypt": "5.0.0",
+    "@types/mailgun-js": "0.22.13",
+    "@types/otp-generator": "4.0.0"
   }
 }

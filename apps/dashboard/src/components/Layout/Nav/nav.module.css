@@ -1,0 +1,31 @@
+.body{
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  height: auto;
+  height: 90vh;
+  border-right: 1px solid var(--labels);
+  justify-content: space-between;
+}
+
+.opcions{
+    display: flex;
+    flex-direction: column;
+    padding-right: 2rem;
+    padding-top: 2rem;
+    /* padding: 7rem 2rem 2rem 2rem; */
+    gap: 2rem;
+
+}
+
+.sign_oof{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text{
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: var(--primary-dark);
+}

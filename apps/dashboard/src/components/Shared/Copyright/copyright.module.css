@@ -1,0 +1,12 @@
+.body{
+    display: flex;
+    padding-top: 2rem;
+    justify-content: center;
+    align-items: center;
+    color: var(--labels);
+    font-size: 1.2rem;
+}
+
+.normal{
+    color: var(--labels)
+}

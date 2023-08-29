@@ -1,2 +1,2 @@
-declare const _default: {};
-export default _default;
+import { CreateStoreDto } from '@partiaf/entities';
+export declare const createStore: (data: Partial<CreateStoreDto>) => Promise<CreateStoreDto | Error>;

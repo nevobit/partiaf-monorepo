@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node build/server/index.js",
+    "start": "node buildcap/server/index.js",
     "dev": "ts-node-dev ./src/server/index.ts",
     "build": "npx tsc",
     "clean": "rm -rf ./build"
@@ -19,11 +19,15 @@
     "fastify-multer": "2.0.3",
     "@fastify/multipart": "7.6.0",
     "@partiaf/data-sources": "workspace:*",
-    "@partiaf/business-logic": "workspace:*"
+    "@partiaf/business-logic": "workspace:*",
+    "@partiaf/entities": "workspace:*",
+    "@partiaf/constant-definitions": "workspace:*",
+    "@fastify/swagger": "8.5.1"
   },
   "devDependencies": {
     "@types/node": "18.11.18",
     "ts-node-dev": "2.0.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "fastify-swagger": "5.2.0"
   }
 }

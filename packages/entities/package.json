@@ -4,7 +4,6 @@
   "description": "",
   "main": "build/index.js",
   "typings": "build/index.d.js",
-  
   "scripts": {
     "build": "npx tsc --project tsconfig.build.json"
   },
@@ -14,7 +13,7 @@
   "devDependencies": {
     "typescript": "5.0.4",
     "tslib": "2.5.1",
-    "@types/node": "~20.2.1"
+    "@types/node": "20.2.1"
   },
   "dependencies": {
     "mongoose": "7.1.1"

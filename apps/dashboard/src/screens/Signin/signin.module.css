@@ -1,0 +1,107 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    width: 60rem;
+    min-height: max-content;
+    background-color: var(--background);
+    margin: auto;
+    margin-top: 3rem;
+    border-radius: 1%;
+    gap: 2rem;
+    border: 1px solid rgba(0, 0, 0, .1);
+    margin-top: 12rem;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 0rem 0rem 0rem;
+    align-items: center;
+    gap: 2rem;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    padding: 0rem 4rem 0rem 4rem;
+    gap: 2rem;
+}
+
+.logo{
+    max-width: 18rem;
+    align-self: center;
+    margin-bottom: 1rem;
+}
+
+.title{
+    font-size: 2.2rem;
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+.button_text{
+    font-size: 2rem;
+    margin: 0rem 5rem;
+}
+
+.button_submit{
+    min-width: 100%;
+    color: #333;
+    border-radius: .5rem;
+    text-align: center;
+    min-height: 3rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.buttons{
+    display: flex;
+    padding: 2rem 2rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.terms{
+    color: var(--primary-dark);
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+.copy{
+    font-size: 1.4rem;
+}
+.terms:hover {
+    text-decoration-color:var(--primary-base);
+    cursor:pointer;  
+}
+
+.hr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    height: auto;
+    gap: 2rem;
+}
+
+.line{
+width: 25%;
+border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.center_hr{
+    color: var(--labels);
+    font-size: 1.2rem;
+}
+
+.google_btn{
+    width: 100%;
+    display: grid;
+    place-items:center;
+    margin-bottom: .5rem;
+}
+
+.google_btn iframe{
+    margin: 0;
+}
