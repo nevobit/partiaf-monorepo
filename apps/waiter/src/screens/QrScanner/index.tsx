@@ -43,6 +43,7 @@ const QrScanner = ({navigation}: any) => {
                     paddingVertical: 10,
                     borderRadius: 20,
                     width: 100,
+                    height:'100%',
                     alignItems: 'center',
                 }}
             >

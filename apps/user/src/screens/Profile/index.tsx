@@ -12,6 +12,7 @@ import {signout} from '../../features/auth';
 import {useQuery} from '@apollo/client';
 import {GET_USER_BY_ID} from '../../graphql/queries/users';
 import {useEffect} from 'react';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const Profile = () => {
   const {theme} = useTheme();

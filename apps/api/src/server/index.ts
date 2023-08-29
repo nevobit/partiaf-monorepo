@@ -9,7 +9,7 @@ import swagger from '@fastify/swagger';
 
 const { PORT, HOST, MONGODB_URL } = process.env;
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://app.partiaf.com', 'https://dashboard-pre-five.vercel.app'],
+  origin: '*',
 };
 
 const main = async () => {

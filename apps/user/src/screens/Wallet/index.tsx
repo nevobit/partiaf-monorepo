@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View} from '../../components/Layout/Theme';
+import { View } from '../../components/Layout/Theme';
 import {
   ScrollView,
   View as DefaultView,
@@ -7,21 +7,24 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
+  TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useSelector} from 'react-redux';
-import {useQuery} from '@apollo/client';
-import {GET_USER_BY_ID} from '../../graphql/queries/users';
-import {useEffect} from 'react';
-import {DivisaFormater} from '../../utilities/divisaFormater';
+import { useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
+import { GET_USER_BY_ID } from '../../graphql/queries/users';
+import { useEffect } from 'react';
+import { DivisaFormater } from '../../utilities/divisaFormater';
 import axios from 'axios';
 import { Linking } from 'react-native';
 import { WebView } from 'react-native-webview';
+import colors from '../../components/Layout/Theme/colors';
+import { BottomSheet } from '../../containers';
 
-const Wallet = ({navigation}: any) => {
-  const {user} = useSelector((state: any) => state.auth);
+const Wallet = ({ navigation }: any) => {
+  const { user } = useSelector((state: any) => state.auth);
 
-  const {data, loading, refetch} = useQuery(GET_USER_BY_ID, {
+  const { data, loading, refetch } = useQuery(GET_USER_BY_ID, {
     context: {
       headers: {
         authorization: user.token ? `Bearer ${user.token}` : '',
@@ -32,21 +35,21 @@ const Wallet = ({navigation}: any) => {
   const [paymentInfo, setPaymentInfo] = useState();
   const [amount, setAmount] = useState(0);
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [url, setUrl] = useState("");
 
-  const createOrder = async() => {
-    const { data } = await axios.post('http://192.168.1.11:8000/api/v3/create-order',{
-      price: 1000
+  const createOrder = async () => {
+    const { data } = await axios.post('https://partiaf-api.xyz/api/v3/create-order', {
+      price: amount
     });
     setPaymentInfo(data)
-    // if (await Linking.canOpenURL(data.init_point)) {
-      // await Linking.openURL(data.init_point);
-
-      setUrl(data.init_point);
-      setOpen(true);
-    // } else {
-      // console.log("No se puede abrir la URL:", data.init_point);
-    // }
+    if (!await Linking.canOpenURL(data.init_point)) {
+      await Linking.openURL(data.init_point);
+    // setUrl(data.init_point);
+    // setOpen(true);
+    } else {
+    console.log("No se puede abrir la URL:", data.init_point);
+    }
   }
 
   useEffect(() => {
@@ -199,7 +202,7 @@ const Wallet = ({navigation}: any) => {
         </DefaultView>
 
         <TouchableOpacity
-          onPress={createOrder}
+          onPress={() => setOpenModal(true)}
           style={{
             alignItems: 'center',
           }}>
@@ -249,23 +252,109 @@ const Wallet = ({navigation}: any) => {
           display: 'flex',
           alignItems: 'center',
         }}>
-        </ScrollView>
+      </ScrollView>
 
-        {open && <MyWebView url={url} />}
+      {/* {openModal && (
+
+        <DefaultView style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          height: 230,
+          zIndex: 99,
+          paddingHorizontal: 15,
+          borderTopRightRadius: 30,
+          borderTopLeftRadius: 30,
+          backgroundColor: colors.dark.modal,
+          alignItems: 'center'
+        }}>
+          <DefaultView style={{
+            backgroundColor: '#fff',
+            height: 5,
+            width: 30,
+            borderRadius: 100,
+            marginTop: 10,
+
+          }} />
+          <TextInput
+            onChangeText={(text) => setAmount(Number(text))}
+            style={{
+              borderWidth: 1,
+              borderColor: '#fff',
+              borderRadius: 15,
+              marginBottom: 20,
+              paddingHorizontal: 20,
+              marginTop: 'auto',
+              width: '100%',
+              color: '#fff'
+            }} placeholderTextColor={colors.dark.holderColor} placeholder='Ingresa el valor a recargar' />
+          <TouchableOpacity
+            onPress={createOrder}
+            style={{
+              backgroundColor: colors.dark.primary,
+              borderRadius: 15,
+              height: 50,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 45,
+              width: '100%',
+
+            }}>
+            <Text style={{
+              fontWeight: '600',
+              fontSize: 16,
+              color: '#333'
+            }}>Continuar</Text>
+          </TouchableOpacity>
+        </DefaultView>
+      )} */}
+
+      <BottomSheet isVisible={openModal} setIsVisible={setOpenModal}>
+        <TextInput keyboardType='numeric' style={{
+          color: "#fff",
+          fontSize: 18,
+          height: 60
+        }}
+        placeholder='Valor a recargar'
+        placeholderTextColor={colors.dark.holderColor}
+        />
+        <TouchableOpacity
+            onPress={createOrder}
+            style={{
+              backgroundColor: colors.dark.primary,
+              borderRadius: 15,
+              height: 50,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 45,
+              width: '100%',
+
+            }}>
+            <Text style={{
+              fontWeight: '600',
+              fontSize: 16,
+              color: '#333'
+            }}>Continuar</Text>
+          </TouchableOpacity>
+      </BottomSheet>
+      {open && <MyWebView url={url} />}
     </View>
   );
 };
 
 export default Wallet;
 
-const MyWebView = ({ url }:any) => {
+const MyWebView = ({ url }: any) => {
   return (
-  <DefaultView style={{
-    position:'absolute',
-    top: 0,
-    left: 0,
-    width: '100%'
-  }}>
-    <WebView source={{ uri: url }} />;
-  </DefaultView>)
+    <DefaultView style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%'
+    }}>
+      <WebView source={{ uri: url }} />;
+    </DefaultView>)
 };

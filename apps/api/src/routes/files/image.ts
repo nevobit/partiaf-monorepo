@@ -10,6 +10,7 @@ export const uploadImageRoute: RouteOptions = {
     preHandler: upload.single('image'),
     handler: async (request: FastifyRequest, reply: FastifyReply) => {
         try{
+            console.log("file", request.file)
             const { file } = request as any;
             const image = await UploadImage(file.path);
             reply.status(201).send(image);
