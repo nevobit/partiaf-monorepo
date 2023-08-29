@@ -16,7 +16,7 @@ input UserInput {
     firstname: String
     lastname: String
     phone: String
-    photo: String
+    photo: [String]
     password: String
     accountType: String
     interests: Interests

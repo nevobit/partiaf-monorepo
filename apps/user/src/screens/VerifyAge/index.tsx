@@ -36,7 +36,9 @@ const VerifyAge = ({navigation}: any) => {
       });
       dispatch(signin({...data.userSignup}));
       setLoading(false);
-    } catch (err) {
+    } catch (err:any) {
+      setLoading(false);
+      setError(err.message)
       console.log(err);
     }
   };

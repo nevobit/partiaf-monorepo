@@ -9,7 +9,7 @@ const initialState = {
     phone: '',
     password: '',
     accountType: '',
-    photo: '',
+    photo: [],
     interests: {},
   },
   isLoading: true,

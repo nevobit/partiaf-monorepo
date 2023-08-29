@@ -8,6 +8,7 @@ export const useUploadImage = () => {
 
     const uploadImage = async (image: any) => {
         setIsLoading(true);
+        console.log(image)
         const formData = new FormData();
         formData.append('image', image);
 
