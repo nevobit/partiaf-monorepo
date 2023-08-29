@@ -25,33 +25,31 @@ const Bussiness = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {isLoading, data: admin} = useQuery({
-    queryKey: ['admins'],
-    queryFn: () => getAdmin(auth.token)
+  const { isLoading, data: admin } = useQuery({
+    queryKey: ["admins"],
+    queryFn: () => getAdmin(auth.token),
   });
 
-  const {isLoading: isLoadingStores, data: stores} = useQuery({
-    queryKey: ['stores'],
-    queryFn: () => getStores(auth.token)
+  const { isLoading: isLoadingStores, data: stores } = useQuery({
+    queryKey: ["stores"],
+    queryFn: () => getStores(auth.token),
   });
-
 
   const signoutHandler = () => {
     try {
-        dispatch(logout() as any)
-      navigate(PublicRoutes.SIGNIN, {replace: true});
+      dispatch(logout() as any);
+      navigate(PublicRoutes.SIGNIN, { replace: true });
     } catch (err) {
       console.log(err);
     }
   };
 
-
   const storeHandler = (store: Store) => {
     localStorage.setItem("store", JSON.stringify(store));
-    navigate(PrivateRoutes.TICKETS)
-  }
+    navigate(PrivateRoutes.TICKETS);
+  };
 
-  if(isLoadingStores) return <Loader />
+  if (isLoadingStores) return <Loader />;
 
   return (
     <div className={styles.container}>
@@ -67,30 +65,32 @@ const Bussiness = () => {
           <h1>¡Bienvenido!</h1>
           <img src={admin?.photo ? admin.photo : "/default.jpg"} alt="" />
           <p>
-            {admin?.name} {admin?.lastname} 
+            {admin?.name} {admin?.lastname}
           </p>
           <span className={styles.span}>Por favor selecciona tu negocio</span>
           <Button color="#ccc">
             <Link to={PrivateRoutes.REGISTER_BUSINESS}>Añadir negocio</Link>
           </Button>
           <div className={styles.stores}>
-            {stores.count > 0 ? (
-
-            <>            
-             {stores.items?.map((store: Store) => (
-              <Button style={{
-                width: '150px',
-                marginInline: 'auto'
-              }} variant="third" key={store.id} onClick={() => storeHandler(store)}>
-                {store.name}
-              </Button>
-            ))}
-            </>
-            ): (
-                <h2>No tienes negocios</h2>
+            {stores?.count > 0 ? (
+              <>
+                {stores.items?.map((store: Store) => (
+                  <Button
+                    style={{
+                      width: "150px",
+                      marginInline: "auto",
+                    }}
+                    variant="third"
+                    key={store.id}
+                    onClick={() => storeHandler(store)}
+                  >
+                    {store.name}
+                  </Button>
+                ))}
+              </>
+            ) : (
+              <h2>No tienes negocios</h2>
             )}
-
-
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ const Bussiness = () => {
               </Button>
             </div>
             <div className={styles.content_modal}>
-              <Field >
+              <Field>
                 <Input
                   type={showPassword ? "text" : "password"}
                   value={password}

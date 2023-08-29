@@ -27,7 +27,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     | "date"
     | "datetime"
     | "phoneNumber"
-    | "number";
+    | "number"
+    | "time";
   label?: string;
   ref?: React.MutableRefObject<boolean>;
 }
@@ -43,7 +44,7 @@ const Input = ({
   ...rest
 }: InputProps) => {
   const [showPss, setshowPss] = useState(eyeOff);
-  const [typePss, setTypePss] = useState(variant);
+  const [typePss, setTypePss] = useState(type || variant);
   const [country, setCountry] = useState("US");
 
   const hangleShow = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -57,11 +58,10 @@ const Input = ({
   };
 
   useEffect(() => {
-    if (variant) {
-      setTypePss(variant);
-      setCountry("US");
+    if (variant !== "phoneCountry" && type) {
+      setTypePss(type);
     }
-  }, []);
+  }, [variant, type]);
 
   return (
     <>

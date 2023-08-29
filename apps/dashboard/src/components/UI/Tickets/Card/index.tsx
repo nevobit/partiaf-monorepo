@@ -38,8 +38,6 @@ const CardCover = ({ ticket }: Props) => {
     setOpen(!open);
   };
 
-  const submitUpdateStatusHandler = () => {};
-
   return (
     <>
       <div className={styles.container_cover}>

@@ -11,13 +11,12 @@ import { useUpdateTicket } from "@/hooks/tickets";
 import { useForm } from "@/hooks/form/useForm";
 import { Ticket } from "@partiaf/entities";
 
-interface Props{
+interface Props {
   setOpen: Function;
-  cover: Ticket
+  cover: Ticket;
 }
 
 const UpdateTicket = ({ setOpen, cover }: Props) => {
- 
   const { isLoading, urls, url, uploadImage } = useUploadImage();
   const { isUpdating, updateTicket, isSuccess } = useUpdateTicket();
 
@@ -36,10 +35,13 @@ const UpdateTicket = ({ setOpen, cover }: Props) => {
     location: cover.location,
   });
 
-  const uploadHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    uploadImage(event.target.files![0]);
-  };
+  const uploadHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files![0];
 
+    if (file) {
+      uploadImage(file);
+    }
+  };
   useEffect(() => {
     if (isSuccess) {
       setOpen(false);
@@ -105,7 +107,7 @@ const UpdateTicket = ({ setOpen, cover }: Props) => {
               <Field label="Hora">
                 <Input
                   name="hour"
-                  type="datetime"
+                  type="time"
                   value={formState.hour}
                   onChange={handleChange}
                   required
@@ -179,7 +181,13 @@ const UpdateTicket = ({ setOpen, cover }: Props) => {
         <div className={styles.footer}>
           <Button
             loading={isUpdating}
-            onClick={() => updateTicket({ ...formState, image: url, id: cover.id })}
+            onClick={() =>
+              updateTicket({
+                ...formState,
+                image: url === "" ? cover.image : url,
+                id: cover.id,
+              })
+            }
           >
             Actualizar
           </Button>
