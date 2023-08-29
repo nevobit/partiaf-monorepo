@@ -1,5 +1,6 @@
 import { getTickets } from "@/services/tickets";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 export const useTickets = (id: string) => {
   const { isLoading, data: tickets } = useQuery({
@@ -7,7 +8,14 @@ export const useTickets = (id: string) => {
     queryFn: () => getTickets(id),
   });
 
-  console.log("QUE LLEGA", tickets);
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSearch = (event: any) => {
+    setSearchTerm(event.target.value);
+  };
 
-  return { isLoading, tickets };
+  const searchTickets = tickets?.items?.filter((item: any) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return { isLoading, tickets, searchTickets, searchTerm, handleSearch };
 };

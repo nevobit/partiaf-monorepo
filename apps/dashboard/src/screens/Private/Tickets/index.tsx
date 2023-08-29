@@ -18,7 +18,8 @@ interface Table {
 const Tickets = ({ user, date, hour, ...rest }: Table) => {
   const [open, setOpen] = useState(false);
   const store = JSON.parse(localStorage.getItem("store") || "");
-  const { isLoading, tickets } = useTickets(store.id);
+  const { isLoading, tickets, searchTerm, handleSearch, searchTickets } =
+    useTickets(store.id);
   if (isLoading) return <Loader small />;
 
   return (
@@ -28,6 +29,8 @@ const Tickets = ({ user, date, hour, ...rest }: Table) => {
           <Input
             icon={<Search size={15} color="#333" />}
             placeholder="Burcar..."
+            value={searchTerm}
+            onChange={handleSearch}
           />
           <div className={styles.info}>
             <h3 title="Total Tickets Creados">{tickets.items.length}</h3>
@@ -43,7 +46,7 @@ const Tickets = ({ user, date, hour, ...rest }: Table) => {
         </div>
 
         <div className={styles.items}>
-          {tickets.items.map((ticket: Ticket) => (
+          {searchTickets?.map((ticket: Ticket) => (
             <CardCover ticket={ticket} key={ticket.id} />
           ))}
         </div>
