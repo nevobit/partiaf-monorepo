@@ -15,7 +15,7 @@ import {GET_USERS} from '../../../graphql/queries/users';
 import {View} from '../../../components/Layout/Theme';
 import colors from '../../../components/Layout/Theme/colors';
 
-const Users = ({navigation}:any) => {
+const Users = ({navigation, search}:any) => {
   const {user} = useSelector((state: any) => state.auth);
 
   const {data, loading} = useQuery(GET_USERS, {
@@ -35,7 +35,7 @@ const Users = ({navigation}:any) => {
       }}>
       {!loading && (
         <ScrollView >
-          {data?.getAllUsers.filter((user: any) => user.accountType == 'personal')
+          {data?.getAllUsers.filter((user: any) => user.accountType == 'personal' && search.length > 1 && (user.firstname.toLowerCase().includes(search.toLowerCase()) || user.lastname.toLowerCase().includes(search.toLowerCase())))
           .map((user: any) => (
             <TouchableOpacity
               key={user._id}

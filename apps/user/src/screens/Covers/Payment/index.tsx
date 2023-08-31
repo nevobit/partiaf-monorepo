@@ -237,10 +237,10 @@ const Payment = ({navigation, route}: any) => {
             width: '95%',
             alignSelf: 'center',
             }}
-             onPress={onSubmit
-              // data?.getUserById?.balance >= route.params.goer.price
-              //    ? onSubmit
-              //  : navigation.navigate("Wallet")
+             onPress={
+              data?.getUserById?.balance >= route.params.goer.price
+                 ? onSubmit
+               :() =>  navigation.navigate("Wallet")
              }
 
           >

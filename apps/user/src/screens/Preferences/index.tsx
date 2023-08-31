@@ -256,7 +256,7 @@ const Preferences = ({navigation}: any) => {
                 <Text
                   style={{
                     color: preferencePlan.includes(preference)
-                      ? 'rgba(10,10,10,1)'
+                      ? 'rgba(0,0,0,1)'
                       : '#fff',
                   }}>
                   {preference}
@@ -294,7 +294,7 @@ const Preferences = ({navigation}: any) => {
                 <Text
                   style={{
                     color: preferenceMusic.includes(preference)
-                      ? 'rgba(10,10,10,1)'
+                      ? 'rgba(0,0,0,1)'
                       : '#fff',
                   }}>
                   {preference}
@@ -333,7 +333,7 @@ const Preferences = ({navigation}: any) => {
                 <Text
                   style={{
                     color: preferenceFood.includes(preference)
-                      ? 'rgba(10,10,10,1)'
+                      ? 'rgba(0,0,0,1)'
                       : '#fff',
                   }}
                   key={preference}>

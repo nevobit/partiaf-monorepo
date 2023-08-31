@@ -2,12 +2,8 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: { 
-        flex: 1, 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        margin: 30,
+        flex: 1
     },
-    iconButtonHomeContainer: { marginRight: 10 },
     iconButtonHome: {
         type: 'material',
         size: 50,

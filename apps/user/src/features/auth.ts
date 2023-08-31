@@ -11,6 +11,7 @@ const initialState = {
     accountType: '',
     photo: [],
     interests: {},
+    age: ''
   },
   isLoading: true,
   isSignout: false,

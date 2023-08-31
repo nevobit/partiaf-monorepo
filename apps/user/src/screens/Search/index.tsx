@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View} from '../../components/Layout/Theme';
 import {
   TextInput,
@@ -15,23 +15,16 @@ import {useEffect} from 'react';
 import colors from '../../components/Layout/Theme/colors';
 import SearchTopTap from '../../navigator/AppNavigator/SearchTopTap';
 
-const Search = () => {
+const Search = ({navigation}: any) => {
   const {user} = useSelector((state: any) => state.auth);
 
-  const {data, loading} = useQuery(GET_USERS, {
-    context: {
-      headers: {
-        authorization: user.token ? `Bearer ${user.token}` : '',
-      },
-    },
-  });
-
-  console.log(data);
+  const [search, setSearch] = useState('');
 
   return (
     <View
       style={{
         height: '100%',
+        paddingTop: 10
       }}>
       <DefaultView
         style={{
@@ -53,10 +46,12 @@ const Search = () => {
           style={{
             color: '#fff',
             marginLeft: 5,
+            width: '100%'
           }}
+          onChangeText={(text) => setSearch(text)}
         />
       </DefaultView>
-      <SearchTopTap />
+      <SearchTopTap navigation={navigation} search={search} />
     </View>
   );
 };

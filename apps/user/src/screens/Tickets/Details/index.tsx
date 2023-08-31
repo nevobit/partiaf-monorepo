@@ -37,7 +37,8 @@ const Details = ({navigation, route}: any) => {
     <DismissKeyboard>
       <View
         style={{
-          minHeight: '100%',
+          backgroundColor: '#000',
+          minHeight: '100%'
         }}>
         <DefaultView
           style={{
@@ -83,12 +84,11 @@ const Details = ({navigation, route}: any) => {
           contentContainerStyle={{
             display: 'flex',
             alignItems: 'center',
-            marginTop: 20
+            marginTop: 10
           }}>
           <DefaultView
             style={{
               backgroundColor: '#fff',
-              height: 580,
               width: '95%',
               borderRadius: 20,
               position: 'relative',
@@ -97,7 +97,7 @@ const Details = ({navigation, route}: any) => {
             }}>
             <DefaultView
               style={{
-                backgroundColor: 'rgba(10,10,10,1)',
+                backgroundColor: 'rgba(0,0,0,1)',
                 height: 30,
                 width: 30,
                 borderRadius: 50,
@@ -108,7 +108,7 @@ const Details = ({navigation, route}: any) => {
             />
             <DefaultView
               style={{
-                backgroundColor: 'rgba(10,10,10,1)',
+                backgroundColor: 'rgba(0,0,0,1)',
                 height: 30,
                 width: 30,
                 borderRadius: 50,
@@ -141,14 +141,14 @@ const Details = ({navigation, route}: any) => {
               <Text
                 style={{
                   color: '#000',
-                  fontSize: 20,
+                  fontSize: 18,
                 }}>
                 Partiaf
               </Text>
               <Text
                 style={{
                   color: '#000',
-                  fontSize: 14,
+                  fontSize: 12,
                   fontWeight: '300',
                 }}>
                 FAST PASS
@@ -159,7 +159,7 @@ const Details = ({navigation, route}: any) => {
               <Text
                 style={{
                   color: '#000',
-                  fontSize: 22,
+                  fontSize: 18,
                 }}>
                 {data?.getOneGoer?.name},
               </Text>
@@ -179,7 +179,7 @@ const Details = ({navigation, route}: any) => {
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
                 gap: 20,
-                marginTop: 30,
+                marginTop: 15,
               }}>
               <DefaultView
                 style={{
@@ -195,7 +195,7 @@ const Details = ({navigation, route}: any) => {
                 <Text
                   style={{
                     color: '#000',
-                    fontSize: 16,
+                    fontSize: 15,
                   }}>
                   {data?.getOneGoer?.user.firstname} {data?.getOneGoer?.user.lastname}
                 </Text>
@@ -214,7 +214,7 @@ const Details = ({navigation, route}: any) => {
                 <Text
                   style={{
                     color: '#000',
-                    fontSize: 16,
+                    fontSize: 15,
                   }}>
 
                   {DivisaFormater(data?.getOneGoer?.cost * data?.getOneGoer?.amount)}
@@ -235,7 +235,7 @@ const Details = ({navigation, route}: any) => {
                 <Text
                   style={{
                     color: '#000',
-                    fontSize: 16,
+                    fontSize: 15,
                   }}>
                   {data?.getOneGoer?.ticket.hour}
                 </Text>
@@ -254,7 +254,7 @@ const Details = ({navigation, route}: any) => {
                 <Text
                   style={{
                     color: '#000',
-                    fontSize: 16,
+                    fontSize: 15,
                   }}>
                   {data?.getOneGoer?.name}
                 </Text>
@@ -273,7 +273,7 @@ const Details = ({navigation, route}: any) => {
                 <Text
                   style={{
                     color: '#000',
-                    fontSize: 16,
+                    fontSize: 15,
                   }}>
                   Jun 12 2023
                 </Text>
@@ -292,7 +292,7 @@ const Details = ({navigation, route}: any) => {
                 <Text
                   style={{
                     color: '#000',
-                    fontSize: 16,
+                    fontSize: 15,
                   }}>
                   {data?.getOneGoer?.amount}
                 </Text>
@@ -308,7 +308,8 @@ const Details = ({navigation, route}: any) => {
             }}>
              <Text style={{
               maxWidth: 100,
-              fontSize: 12
+              fontSize: 12,
+              color: "rgba(0,0,0,0.6)"
              }}>
               Scanea el QR Code para tener acceso al evento.
              </Text>

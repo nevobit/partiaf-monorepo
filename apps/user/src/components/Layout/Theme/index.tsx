@@ -26,7 +26,7 @@ export const View = ({style, children}: Props) => {
       style={[
         {
           width: '100%',
-          backgroundColor: Colors[theme].background,
+          backgroundColor: "#000",
         },
         style,
       ]}>

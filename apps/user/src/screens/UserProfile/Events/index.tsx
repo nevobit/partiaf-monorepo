@@ -39,7 +39,8 @@ style={{
   backgroundColor: '#fff',
   marginTop: 20,
   borderRadius: 5,
-  height: 100,
+  paddingHorizontal: 10,
+  paddingVertical: 5,
   flexDirection: 'row',
 }}
 key={ticket.id}
@@ -156,7 +157,7 @@ key={ticket.id}
       <Image style={{
         width: 100,
         height: 100,
-        marginLeft: 25,
+        marginLeft: 19,
         marginTop: -3
       }} source={{
         uri:'https://i.ibb.co/n14Qpb9/qrcode.png'

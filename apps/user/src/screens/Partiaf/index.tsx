@@ -8,6 +8,7 @@ const Partiaf = () => {
     <View
       style={{
         minHeight: '100%',
+        paddingTop: 10
       }}>
       <PartiafTopTap />
     </View>

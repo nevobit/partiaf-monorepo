@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {Text, View as DefaultView, Image, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import {Text, View as DefaultView, Image, TouchableOpacity, Linking} from 'react-native';
 import {View} from '../../components/Layout/Theme';
 import colors from '../../components/Layout/Theme/colors';
 import {useTheme} from '../../contexts/ThemeContexts';
@@ -13,10 +13,14 @@ import {useQuery} from '@apollo/client';
 import {GET_USER_BY_ID} from '../../graphql/queries/users';
 import {useEffect} from 'react';
 import { launchImageLibrary } from 'react-native-image-picker';
+import Header from '../../components/Layout/Header';
+import { BottomSheet } from '../../containers';
+import AppLink from 'react-native-app-link';
 
-const Profile = () => {
+const Profile = ({navigation}: any) => {
   const {theme} = useTheme();
 
+  const [modal, setModal] = useState(false);
   const {user} = useSelector((state: any) => state.auth);
 
   const {data, loading, error, refetch} = useQuery(GET_USER_BY_ID, {
@@ -32,6 +36,13 @@ const Profile = () => {
     dispatch(signout());
   };
 
+  const sendWhatsAppMessage = async() => {
+    Linking.openURL(
+      'http://api.whatsapp.com/send?phone=573226589914' + "Quisiera hablar con alguien"
+    );
+
+  };
+  
   useEffect(() => {
     refetch();
   }, [refetch]);
@@ -40,8 +51,9 @@ const Profile = () => {
     <View
       style={{
         flex: 1,
+        backgroundColor: "#000"
       }}>
-      <DefaultView
+      {/* <DefaultView
         style={{
           paddingVertical: 5,
           paddingHorizontal: 10,
@@ -58,7 +70,7 @@ const Profile = () => {
             resizeMode: 'cover',
           }}
           source={{
-            uri: 'https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png',
+            uri:  'https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png',
           }}
         />
         <DefaultView
@@ -72,7 +84,9 @@ const Profile = () => {
             <Icon name="menu" size={35} color="#fff" />
           </TouchableOpacity>
         </DefaultView>
-      </DefaultView>
+      </DefaultView> */}
+
+      <Header navigation={navigation} options wallet openModal={setModal} />
 
       <DefaultView
         style={{
@@ -111,7 +125,7 @@ const Profile = () => {
               resizeMode: 'cover',
             }}
             source={{
-              uri: 'https://i.postimg.cc/0jMMGxbs/default.jpg',
+              uri: data?.getUserById.photo[0]? data?.getUserById.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
             }}
           />
         </DefaultView>
@@ -160,6 +174,40 @@ const Profile = () => {
         </TouchableOpacity>
       </DefaultView>
       <ProfileTopTap />
+
+      <BottomSheet isVisible={modal} setIsVisible={setModal} >
+      <TouchableOpacity style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 2,
+        height: 50
+      }}
+      onPress={sendWhatsAppMessage}
+      >
+        <Icon name='information-circle-outline' size={24} color="#fff" />
+            <Text style={{
+              color: '#fff',
+              fontSize: 18
+            }}>Ayuda & Sugerencias</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 2,
+        height: 50,
+        
+      }}
+      onPress={logout}
+      >
+          <Icon name='log-out-outline' size={24} color="red" />
+            <Text style={{
+              color: 'red',
+              fontSize: 18
+            }}>Cerrar sesion</Text>
+        </TouchableOpacity>
+      </BottomSheet>
     </View>
   );
 };

@@ -18,7 +18,7 @@ export const colors = {
     primaryInactive: 'rgba(255,226,67,0.5)',
     text: '#F2F2F2',
     textInactive: 'rgba(242,242,242,0.7)',
-    background: 'rgba(10,10,10,1)',
+    background: 'rgba(0,0,0,1)',
     tint: tintColorDark,
     holderColor: 'gray',
     tabIconDefault: '#CCC',

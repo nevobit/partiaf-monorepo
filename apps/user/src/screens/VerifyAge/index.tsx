@@ -8,6 +8,7 @@ import {
   ScrollView,
   ActivityIndicator,
   TextInput,
+  Button,
 } from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import DatePicker from 'react-native-date-picker';
@@ -31,7 +32,7 @@ const VerifyAge = ({navigation}: any) => {
     try {
       const {data} = await register({
         variables: {
-          userData: userInfo,
+          userData: {...userInfo, /*age:date.toLocaleString().slice(0,9)*/ },
         },
       });
       dispatch(signin({...data.userSignup}));
@@ -48,6 +49,9 @@ const VerifyAge = ({navigation}: any) => {
       setError('');
     }, 10000);
   }
+
+  const [date, setDate] = useState(new Date())
+  const [open, setOpen] = useState(false)
 
   return (
     <View
@@ -143,8 +147,39 @@ const VerifyAge = ({navigation}: any) => {
               paddingHorizontal: 10,
               height: 40
             }}
+            value={date.toLocaleString().slice(0,9)}
           />
+        <TouchableOpacity style={{
+          backgroundColor: 'rgba(255,255,255,.6)',
+          height: 40,
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          borderRadius: 10,
+          marginTop: 10
+        }} onPress={() => setOpen(true)}>
+          <Text style={{
+            color: '#fff',
+            textAlign: 'center',
+            fontWeight: '600',
+            fontSize: 16
+          }}>Seleccionar fecha</Text>
+        </TouchableOpacity>
         </DefaultView>
+        
+      <DatePicker
+        modal
+        open={open}
+        date={date}
+        onConfirm={(date) => {
+          setOpen(false)
+          setDate(date)
+        }}
+        mode='date'
+        onCancel={() => {
+          setOpen(false)
+        }}
+      />
         <Text
           style={{
             color: 'red',

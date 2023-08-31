@@ -31,12 +31,13 @@ const Events = ({navigation, id}:any) => {
       {tickets?.getGoersByUserId?.map((ticket:any) => (
 
 <TouchableOpacity 
-onPress={() => navigation.navigate('TicketDetails')}
+onPress={() => {}}
 style={{
   backgroundColor: '#fff',
   marginTop: 20,
   borderRadius: 5,
-  height: 100,
+  paddingHorizontal: 10,
+  paddingVertical: 5,
   flexDirection: 'row',
 }}
 key={ticket.id}
@@ -46,7 +47,8 @@ key={ticket.id}
     padding: 10,
   }}>
     <Text style={{
-      fontSize: 12
+      fontSize: 12,
+      color: '#000'
     }}>ID 2000 | Ticket | <Text style={{
       color: "green"
     }}>EN-USO</Text></Text>
@@ -58,10 +60,12 @@ key={ticket.id}
     <Text style={{
       fontSize: 14,
       fontWeight: '500',
+      color: colors.light.text
     }}>10 Junio 2023 | 10:00PM</Text>
     <Text style={{
       fontSize: 14,
       fontWeight: '500',
+      color: colors.light.text
     }}>Santa Marta - Colombia</Text>
   </View>
   <View style={{
@@ -153,7 +157,7 @@ key={ticket.id}
       <Image style={{
         width: 100,
         height: 100,
-        marginLeft: 25,
+        marginLeft: 19,
         marginTop: -3
       }} source={{
         uri:'https://i.ibb.co/n14Qpb9/qrcode.png'

@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { GET_GOERS_BY_USER_ID } from '../../graphql/queries/goers';
 import { GET_USER_BY_ID } from '../../graphql/queries/users';
+import Header from '../../components/Layout/Header';
 
 const DismissKeyboard = ({children}: any) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -42,45 +43,7 @@ const Tickets = ({navigation,  route}: any) => {
         style={{
           minHeight: '100%',
         }}>
-        <DefaultView
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            paddingTop: 15,
-            paddingBottom: 15,
-            paddingHorizontal: 10,
-          }}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{
-              flexDirection: 'row',
-              gap: 10,
-            }}>
-            <Icon name="chevron-back-outline" size={23} color="#fff" />
-          </TouchableOpacity>
-          <Image
-            style={{
-              width: 110,
-              height: 18,
-              resizeMode: 'contain',
-              tintColor: 'rgba(255,255,255,.9)',
-            }}
-            source={{
-              uri: 'https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png',
-            }}
-          />
-          <DefaultView
-            style={{
-              flexDirection: 'row',
-              gap: 10,
-            }}>
-            <TouchableOpacity>
-              <Icon name="wallet-outline" size={23} color="#fff" />
-            </TouchableOpacity>
-          </DefaultView>
-        </DefaultView>
+          <Header navigation={navigation} back ticket />
 
         <DefaultView
           style={{
@@ -131,7 +94,8 @@ style={{
   backgroundColor: '#fff',
   marginTop: 20,
   borderRadius: 5,
-  height: 100,
+  // height: 100,
+  paddingVertical: 10,
   flexDirection: 'row',
 }}
 key={ticket.id}
@@ -251,7 +215,7 @@ key={ticket.id}
       <Image style={{
         width: 100,
         height: 100,
-        marginLeft: 25,
+        marginLeft: 19,
         marginTop: -3
       }} source={{
         uri:'https://i.ibb.co/n14Qpb9/qrcode.png'

@@ -1,17 +1,19 @@
 import React from 'react';
-import {Text, Image, Dimensions, View as DefaultView} from 'react-native';
+import {Text, Image, Dimensions, View as DefaultView, StatusBar} from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native';
 import { GET_STORE_BY_ID } from '../../graphql/queries/users';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const screenHeight = Dimensions.get('screen').height;
 
 const Store = ({route, navigation}: any) => {
+  const insets = useSafeAreaInsets();
+  
   const {user} = useSelector((state: any) => state.auth);
-  console.log("UUID", route.params.store)
   const { data } = useQuery(GET_STORE_BY_ID, {
     variables: { getStoreByIdId: route.params.store },
     context: {
@@ -20,21 +22,22 @@ const Store = ({route, navigation}: any) => {
       },
     },
   });
-  
-  
-  console.log(data)
   return (
     <DefaultView
       style={{
+        paddingTop: insets.top,
         backgroundColor: 'transparent',
       }}>
+
+      <StatusBar translucent backgroundColor="transparent" />
+
       <DefaultView
         style={{
           position: 'absolute',
-          top: 0,
+          top: insets.top,
           left: 0,
-          zIndex: 99,
-          paddingVertical: 40,
+          zIndex: 9999,
+          paddingVertical: 10,
           paddingHorizontal: 10,
         }}>
         <TouchableOpacity
@@ -53,8 +56,10 @@ const Store = ({route, navigation}: any) => {
       </DefaultView>
       <Image
         style={{
+          position: 'relative',
+          top: -50,
           width: '100%',
-          height: screenHeight * 0.35,
+          height: screenHeight * 0.40,
           resizeMode: 'cover',
         }}
         source={{
@@ -64,16 +69,17 @@ const Store = ({route, navigation}: any) => {
 
       <DefaultView
         style={{
-          backgroundColor: 'rgba(10,10,10,1)',
+          backgroundColor: 'rgba(0,0,0,1)',
+
           height: '100%',
         }}>
         <DefaultView
           style={{
             position: 'relative',
-            bottom: 40,
+            bottom: 80,
             // height: '100%',
             borderRadius: 30,
-            backgroundColor: 'rgba(10,10,10,1)',
+            backgroundColor: 'rgba(0,0,0,1)',
             padding: 20,
             paddingTop: 20,
             paddingBottom: 0,
@@ -82,17 +88,18 @@ const Store = ({route, navigation}: any) => {
             style={{
               backgroundColor: colors.dark.primary,
               borderRadius: 20,
-              width: 65,
-              height: 25,
               paddingHorizontal: 6,
               paddingVertical: 3,
               flexDirection: 'row',
               alignItems: 'center',
+              justifyContent: 'center',
+              width: 60
             }}>
-            <Icon name="star-outline" size={16} />
+            <Icon name="star-outline" size={16} color="#333" />
             <Text
               style={{
                 marginLeft: 5,
+                color:"#333"
               }}>
               4.24
             </Text>
@@ -135,10 +142,12 @@ const Store = ({route, navigation}: any) => {
                 color: '#fff',
                 borderWidth: 1,
                 borderColor: colors.dark.primary,
-                paddingVertical: 2,
+                paddingVertical: 4,
                 paddingHorizontal: 10,
                 borderRadius: 10,
-                height: 25,
+display: 'flex',
+alignItems: 'center',
+justifyContent: 'center'
               }}>
               {data?.getStoreById?.min_age}+
             </Text>
@@ -150,7 +159,9 @@ const Store = ({route, navigation}: any) => {
                 paddingVertical: 2,
                 paddingHorizontal: 10,
                 borderRadius: 10,
-                height: 25,
+                display: 'flex',
+alignItems: 'center',
+justifyContent: 'center'
               }}>
               {data?.getStoreById?.specialties?.plan[0]}
             </Text>
@@ -162,7 +173,9 @@ const Store = ({route, navigation}: any) => {
                 paddingVertical: 2,
                 paddingHorizontal: 10,
                 borderRadius: 10,
-                height: 25,
+                display: 'flex',
+alignItems: 'center',
+justifyContent: 'center'
               }}>
               {data?.getStoreById?.specialties.music[0]}
             </Text>
@@ -171,13 +184,12 @@ const Store = ({route, navigation}: any) => {
         <DefaultView
           style={{
             paddingHorizontal: 20,
-            paddingVertical: 15,
-            paddingTop: 0,
+            marginTop: -50,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
             gap: 10,
-            backgroundColor: 'rgba(10,10,10,1)',
+            backgroundColor: 'rgba(0,0,0,1)',
           }}>
           {/* <DefaultView
             style={{

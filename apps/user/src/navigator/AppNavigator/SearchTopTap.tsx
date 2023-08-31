@@ -80,19 +80,19 @@ const TabBar = ({state, navigation}: any) => {
   );
 };
 
-const SearchTopTap = () => {
+const SearchTopTap = ({navigation, search}:any) => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarLabelStyle: {fontSize: 10, color: '#fff'},
-        tabBarStyle: {backgroundColor: 'rgba(10,10,10,1)'},
+        tabBarStyle: {backgroundColor: 'rgba(0,0,0,1)'},
         tabBarIndicatorStyle: {backgroundColor: colors.dark.primary},
         tabBarActiveTintColor: colors.dark.primary,
       })}
       sceneContainerStyle={{
-        backgroundColor: 'rgba(10,10,10,1)',
+        backgroundColor: 'rgba(0,0,0,1)',
       }}>
-      <Tab.Screen name="Cuentas" component={Users} />
+      <Tab.Screen name="Cuentas" component={()=> <Users navigation={navigation} search={search} />} />
       <Tab.Screen name="Artistas" component={Artists} />
       <Tab.Screen name="Negocios" component={Stores} />
       <Tab.Screen name="Aliados" component={Collaborators} />

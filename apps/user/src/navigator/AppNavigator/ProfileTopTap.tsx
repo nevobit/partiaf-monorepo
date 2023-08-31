@@ -105,12 +105,12 @@ const ProfileTopTap = ({id}: any) => {
           );
         },
         tabBarLabelStyle: {fontSize: 0, color: '#fff'},
-        tabBarStyle: {backgroundColor: 'rgba(10,10,10,1)'},
+        tabBarStyle: {backgroundColor: 'rgba(0,0,0,1)'},
         tabBarIndicatorStyle: {backgroundColor: colors.dark.primary},
         tabBarActiveTintColor: colors.dark.primary,
       })}
       sceneContainerStyle={{
-        backgroundColor: 'rgba(10,10,10,1)',
+        backgroundColor: 'rgba(0,0,0,1)',
       }}>
       <Tab.Screen name="Eventos" >
         {() => <Events id={id} />}

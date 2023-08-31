@@ -20,6 +20,7 @@ import { Linking } from 'react-native';
 import { WebView } from 'react-native-webview';
 import colors from '../../components/Layout/Theme/colors';
 import { BottomSheet } from '../../containers';
+import Header from '../../components/Layout/Header';
 
 const Wallet = ({ navigation }: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -35,19 +36,21 @@ const Wallet = ({ navigation }: any) => {
   const [paymentInfo, setPaymentInfo] = useState();
   const [amount, setAmount] = useState(0);
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [url, setUrl] = useState("");
 
   const createOrder = async () => {
+    setIsLoading(true);
     const { data } = await axios.post('https://partiaf-api.xyz/api/v3/create-order', {
       price: amount
     });
     setPaymentInfo(data)
     if (!await Linking.canOpenURL(data.init_point)) {
       await Linking.openURL(data.init_point);
-    // setUrl(data.init_point);
-    // setOpen(true);
+    setIsLoading(false);
     } else {
+    setIsLoading(false);
     console.log("No se puede abrir la URL:", data.init_point);
     }
   }
@@ -60,45 +63,8 @@ const Wallet = ({ navigation }: any) => {
       style={{
         minHeight: '100%',
       }}>
-      <DefaultView
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingTop: 15,
-          paddingBottom: 15,
-          paddingHorizontal: 10,
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('HomeScreen')}
-          style={{
-            flexDirection: 'row',
-            gap: 10,
-          }}>
-          <Icon name="chevron-back-outline" size={23} color="#fff" />
-        </TouchableOpacity>
-        <Image
-          style={{
-            width: 110,
-            height: 18,
-            resizeMode: 'contain',
-            tintColor: 'rgba(255,255,255,.9)',
-          }}
-          source={{
-            uri: 'https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png',
-          }}
-        />
-        <DefaultView
-          style={{
-            flexDirection: 'row',
-            gap: 10,
-          }}>
-          <TouchableOpacity>
-            <Icon name="qr-code-outline" size={23} color="#fff" />
-          </TouchableOpacity>
-        </DefaultView>
-      </DefaultView>
+    
+      <Header navigation={navigation} back wallet />
       <DefaultView
         style={{
           paddingHorizontal: 10,
@@ -312,10 +278,17 @@ const Wallet = ({ navigation }: any) => {
       )} */}
 
       <BottomSheet isVisible={openModal} setIsVisible={setOpenModal}>
-        <TextInput keyboardType='numeric' style={{
+        <TextInput 
+        onChangeText={(text) => setAmount(Number(text))}
+        keyboardType='numeric' style={{
           color: "#fff",
-          fontSize: 18,
-          height: 60
+          fontSize: 16,
+          height: 60,
+          paddingHorizontal: 10,
+          borderWidth: 1,
+          borderColor: '#fff',
+          borderRadius: 15,
+          marginBottom: 15
         }}
         placeholder='Valor a recargar'
         placeholderTextColor={colors.dark.holderColor}
@@ -333,11 +306,15 @@ const Wallet = ({ navigation }: any) => {
               width: '100%',
 
             }}>
+              {isLoading ? <ActivityIndicator size='small' /> : (
+
             <Text style={{
               fontWeight: '600',
               fontSize: 16,
               color: '#333'
             }}>Continuar</Text>
+            )}
+
           </TouchableOpacity>
       </BottomSheet>
       {open && <MyWebView url={url} />}

@@ -6,6 +6,7 @@ const Moments = () => {
     <View
       style={{
         padding: 10,
+        backgroundColor: "#000"
       }}>
       <Text
         style={{

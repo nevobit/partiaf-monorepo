@@ -16,10 +16,10 @@ const AddPhoto = ({ navigation }: any) => {
   const dispatch = useDispatch();
   const [tempUri, setTempUri] = useState<any>();
 
-  const uploadImage = async () => {
+  const uploadImage = async (file:any) => {
     setIsLoading(true);
     const formData = new FormData();
-    formData.append('image', tempUri);
+    formData.append('image', file);
 
     try {
       const { data } = await axios.post('https://partiaf-api.xyz/api/v3/upload/image', formData, {
@@ -28,12 +28,11 @@ const AddPhoto = ({ navigation }: any) => {
         'api-key': 'a0341d0de71a21b122a134576803f9fea2e9841a307b4e26f9240ac2f7d363ff3018a17f2d7f3ecb5a9fe62327e4eaf306864ec741e6432aa50faaf9d92aa6bd'
         },
       });
-
       setPhoto(data.url);
       setIsLoading(false);
     } catch (error:any) {
       setIsLoading(false);
-      setError(JSON.stringify(error))
+      setError(JSON.stringify(error.message))
       console.log(error)
     }
   };
@@ -47,8 +46,7 @@ const AddPhoto = ({ navigation }: any) => {
       if (!resp.assets[0].uri) return;
 
       const file = {uri: resp.assets[0].uri, name: resp.assets[0].fileName, type: resp.assets[0].type};
-      setTempUri(file)
-      uploadImage();
+      uploadImage(file);
     })
   }
 
@@ -57,6 +55,14 @@ const AddPhoto = ({ navigation }: any) => {
       dispatch(saveUserInfo({ photo: [photo] }));
       navigation.navigate('Preferences');
   };
+
+  console.log(photo)
+
+  if (error.length > 0) {
+    setTimeout(() => {
+      setError('');
+    }, 10000);
+  }
 
   return (
     <View
@@ -158,7 +164,7 @@ const AddPhoto = ({ navigation }: any) => {
             overflow: 'hidden'
           }}>
 
-            {tempUri?.uri?.length > 5 ? (
+            {photo?.length > 5 ? (
                 <Image 
                 style={{
                   height:'100%',
@@ -166,7 +172,7 @@ const AddPhoto = ({ navigation }: any) => {
                   resizeMode: 'contain'
                 }}
                 source={{
-                  uri: tempUri.uri
+                  uri: photo
                 }} />
             ): (
               <Icon name="cloud-upload-outline" size={50} color="#000" />
@@ -176,7 +182,7 @@ const AddPhoto = ({ navigation }: any) => {
 
         </TouchableOpacity>
       </DefaultView>
-      {/* <Text style={{color: "#fff", fontSize: 18}} >{error}</Text> */}
+      <Text style={{color: "#ff0000", fontSize: 18}} >{error}</Text>
       <DefaultView
         style={{ flex: 1, justifyContent: 'flex-end', paddingBottom: 10 }}>
         <TouchableOpacity
