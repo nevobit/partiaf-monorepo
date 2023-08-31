@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, Alert, Text, TouchableOpacity } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-
+import Modal from '../../containers/Modal';
+import { colors } from '../../layout/theme/colors';
 
 const QrScanner = ({navigation}: any) => {
-    const [qrValue, setQrValue] = useState('')
+    const [qrValue, setQrValue] = useState<any>({})
     const [light, setLight] = useState(false)
     const [showDialog, setShowDialog] = useState(false)
 
@@ -13,10 +14,69 @@ const QrScanner = ({navigation}: any) => {
     <View style={{
         flex: 1
     }}>
+        <Modal isVisible={showDialog} setIsVisible={setShowDialog}>
+            <Text style={{
+                color: '#fff',
+                fontSize: 18,
+                fontWeight: '500',
+                textAlign: 'center',
+                marginBottom: 15
+            }}>Datos del Tiket</Text>
+            <View>
+                <Text style={{
+                    color: '#fff',
+                    marginBottom: 5,
+                    fontSize: 16
+                }} >Usuario: {qrValue.user?.firstname} {qrValue.user?.lastname}</Text>
+                <Text style={{
+                    color: '#fff',
+                    marginBottom: 5,
+                    fontSize: 16
+                }} >Nombre del evento: {qrValue.name}</Text>
+                <Text style={{
+                    color: '#fff',
+                    marginBottom: 5,
+                    fontSize: 16
+                }} >Cantidad: {qrValue.amount}</Text>
+                <Text style={{
+                    color: '#fff',
+                    marginBottom: 5,
+                    fontSize: 16
+                }} >Valor pagado: {qrValue.cost} </Text>
+                <Text style={{
+                    color: '#fff',
+                    marginBottom: 5,
+                    fontSize: 16
+                }} >Fecha: {qrValue.date}</Text>
+                <Text style={{
+                    color: '#fff',
+                    marginBottom: 5,
+                    fontSize: 16
+                }} >Hora: {qrValue.time}</Text>
+                <TouchableOpacity 
+                onPress={() => setShowDialog(false)}
+                style={{
+                    backgroundColor: colors.dark.primary,
+                    width: '100%',
+                    height: 40,
+                    borderRadius: 30,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: 15
+                }}><Text style={{
+                    color: '#333',
+                    fontSize: 16,
+                    textAlign: 'center',
+                    fontWeight: '500'
+                }}>Aceptar</Text></TouchableOpacity>
+            </View>
+
+        </Modal>
     <QRCodeScanner
         onRead={(e) => {
             setShowDialog(true)
-            setQrValue(e.data)
+            setQrValue(JSON.parse(e.data))
         }}
         reactivate={true}
         reactivateTimeout={10000}
@@ -36,8 +96,6 @@ const QrScanner = ({navigation}: any) => {
             flex: 0,
         }}
         flashMode={light ? RNCamera.Constants.FlashMode.torch : RNCamera.Constants.FlashMode.auto}
-        topContent={<>
-        </>}
     />
 </View>
   )
