@@ -9,8 +9,9 @@ const initialState = {
     phone: '',
     password: '',
     accountType: '',
-    photo: '',
+    photo: [],
     interests: {},
+    age: ''
   },
   isLoading: true,
   isSignout: false,

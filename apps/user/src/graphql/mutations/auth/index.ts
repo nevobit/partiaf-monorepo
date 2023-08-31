@@ -28,9 +28,7 @@ export const CREATE_GOER = gql`
       name
       image
       status
-      ticket
       time
-      user
     }
   }
 `

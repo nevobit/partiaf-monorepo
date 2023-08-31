@@ -13,6 +13,7 @@ import {useQuery} from '@apollo/client';
 import {GET_ONE_USER, GET_USER_BY_ID} from '../../graphql/queries/users';
 import {useEffect} from 'react';
 import OtherProfileTopTap from '../../navigator/AppNavigator/OtherProfileTopTap';
+import Header from '../../components/Layout/Header';
 
 const UserProfile = ({route}:any) => {
   const {theme} = useTheme();
@@ -38,7 +39,7 @@ const UserProfile = ({route}:any) => {
       style={{
         flex: 1,
       }}>
-      <DefaultView
+      {/* <DefaultView
         style={{
           paddingVertical: 5,
           paddingTop: 25,
@@ -66,8 +67,8 @@ const UserProfile = ({route}:any) => {
             gap: 5,
           }}>
         </DefaultView>
-      </DefaultView>
-
+      </DefaultView> */}
+      <Header wallet ticket />
       <DefaultView
         style={{
           flexDirection: 'row',
@@ -103,9 +104,11 @@ const UserProfile = ({route}:any) => {
               width: 100,
               borderRadius: 100,
               resizeMode: 'cover',
+              borderWidth: 2,
+              borderColor: '#333'
             }}
             source={{
-              uri: 'https://i.postimg.cc/0jMMGxbs/default.jpg',
+              uri: data?.getOneUser.photo[0]? data?.getOneUser.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
             }}
           />
         </DefaultView>
@@ -134,7 +137,7 @@ const UserProfile = ({route}:any) => {
         <Text
           style={{
             color: '#fff',
-            fontSize: 20,
+            fontSize: 16,
             fontWeight: '600',
             textAlign: 'center',
           }}>
@@ -172,29 +175,21 @@ const UserProfile = ({route}:any) => {
             style={{
               color: "#333",
               fontSize: 16,
-              fontWeight: '600',
+              fontWeight: '500',
               textAlign: 'center',
             }}>
             Segir
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={{
-          backgroundColor: colors.dark.primary,
-          width: 150,
+          backgroundColor: 'rgba(255,255,255,.8)',
+          width: 50,
           height: 40,
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: 5
         }}>
-          <Text
-            style={{
-              color: "#333",
-              fontSize: 16,
-              fontWeight: '600',
-              textAlign: 'center',
-            }}>
-            Hazte amigo
-          </Text>
+            <Icon name='person-add-outline' size={18} />
         </TouchableOpacity>
         </DefaultView>
 

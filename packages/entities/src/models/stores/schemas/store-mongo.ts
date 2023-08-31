@@ -7,10 +7,10 @@ export const StoreSchemaMongo = new Schema<Store>(
   {
     _id: { type: String, unique: true, default: () => crypto.randomUUID() },
     name: { type: String, required: true },
-    description: { type: String, required: true },
+    description: { type: String },
     type: { type: String, required: true },
     nit: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String },
     password: { type: String, required: true, min: 5 },
     phone: { type: Number, required: true, unique: true },
     location: { type: { lat: Number, lng: Number } },

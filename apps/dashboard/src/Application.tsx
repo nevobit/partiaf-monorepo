@@ -13,33 +13,45 @@ import {Layout} from './components';
 import Reservation from './screens/Private/Reservation';
 import RoutesWithNotFound from './utilities/routes-with-not-found';
 import GuardRoute from './guards/GuardRoute';
-
-// layout here is temporary
-
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import Bussiness from './screens/Private/Business';
+import RegisterBusiness from './screens/Private/RegisterBusiness';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+  
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+    }
+  }
+})
 const Application = () => {
   return (
-    <Suspense fallback={<LoadingBox />}>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <Suspense fallback={<LoadingBox />}>
+      <GoogleOAuthProvider clientId="581513777412-lgcrkv5l550t3l4u3vpduou0ml9ts6pv.apps.googleusercontent.com">
       <BrowserRouter>
         <RoutesWithNotFound>
           {/* public routes */}
-          <Route path={PublicRoutes.LOGIN} element={<Login/>} />
+          <Route path={PublicRoutes.LOGIN} element={<Signin/>} />
           <Route path={PublicRoutes.SIGNUP} element={<SignUp />} />
           <Route path={PublicRoutes.TERMS} element={<Terms />} />
           <Route path={PublicRoutes.SIGNIN} element={<Signin />} />
-
-          {/* private routes */}
-          {/* <Route path={PrivateRoutes.HOME} element={<Home />} /> */}
-          {/* <Route path={PrivateRoutes.RESERVATION} element={<Reservation />} /> */}
+          <Route path={PrivateRoutes.BUSINESS} element={<Bussiness />} />
+          <Route path={PrivateRoutes.REGISTER_BUSINESS} element={<RegisterBusiness />} />
 
           <Route element={<GuardRoute privateValidation={true}/>}>
           <Route path="/*" element={<Private />} />            
           </Route>
-          {/* private temporary path for layout*/}
           <Route path="*" element={<NotFound />} />
         </RoutesWithNotFound>
       </BrowserRouter>
-    </Suspense>
+      </GoogleOAuthProvider>
+      </Suspense>
+    </QueryClientProvider>
+
   );
 };
 

@@ -4,14 +4,14 @@ min-width: max-content;
 position: relative;
 align-items: center;
 border-radius: 1rem;
-border: 2px solid var(--lines); 
-min-height: 100%;
+border: 1px solid var(--lines); 
+height: 3.2rem;
 }
 
 .input{
     height: 100%;
     width: 100%;
-    padding: 1rem 3rem;
+    padding: 1rem;
     background-color: var(--bg-second);
     color: var(--white-color);
     font-size: 1.3rem;

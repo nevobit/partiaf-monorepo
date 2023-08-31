@@ -1,4 +1,4 @@
-import { createGoer, getGoersByUser, getOneGoer, verifyUserToken } from "@partiaf/business-logic";
+import { createGoer, getGoersByTicket, getGoersByUser, getOneGoer, verifyUserToken } from "@partiaf/business-logic";
 
 
 interface Context {
@@ -16,6 +16,12 @@ export default {
             const tickets = await getGoersByUser(id);
             return tickets;
           },
+
+          getGoersByTicketId: async (parent: any, {id}: ArgsType, ctx: any) => {
+            await verifyUserToken(ctx);
+            const tickets = await getGoersByTicket(id);
+            return tickets;
+          },
           getGoersById: async (parent: any, {id}:ArgsType, ctx: any) => {
             await verifyUserToken(ctx);
             const tickets = await getGoersByUser(id);
@@ -30,6 +36,7 @@ export default {
     },
     Mutation: {
       async createGoer(_: any, { data }: any, context: any) {
+        console.log(data)
         const goer = await createGoer(data);
         return goer;
       },

@@ -16,7 +16,7 @@ input UserInput {
     firstname: String
     lastname: String
     phone: String
-    photo: String
+    photo: [String]
     password: String
     accountType: String
     interests: Interests
@@ -39,6 +39,7 @@ type User {
     location: String
     balance: Int
     events: Int
+    stores: [Store]
     friend: [String]
     match: [String]
     followers: [String]
@@ -123,6 +124,7 @@ type Query {
     getGoersByUserId: [Goer]
     getOneGoer(id: String): Goer
     getGoersById(id: String): [Goer]
+    getGoersByTicketId(id: String): [Goer]
 }
    
 
@@ -130,6 +132,8 @@ type Mutation {
     userSignin(phone: String!, password: String!): AuthPayload
     userSignup(userData: UserInput): AuthPayload
     createGoer(data: GoerInput): Goer
+    registerStore(code: String): User
+
 }
 
 `;

@@ -19,7 +19,8 @@
     "mercadopago": "~1.5.16",
     "form-data": "4.0.0",
     "mailgun.js": "8.0.6",
-    "otp-generator": "4.0.0"
+    "otp-generator": "4.0.0",
+    "cloudinary": "~1.40.0"
   },
   "devDependencies": {
     "@types/node": "20.2.1",

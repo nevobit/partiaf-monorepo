@@ -63,7 +63,7 @@ const Events = () => {
       }}>
         
         <ScrollView>
-          {tickets?.getAllTickets?.map((ticket:any) => (
+          {/* {tickets?.getAllTickets?.map((ticket:any) => (
               <View style={{
                 overflow: 'hidden',
                 marginBottom: 20,
@@ -192,7 +192,13 @@ const Events = () => {
                  
                 </View>
                </View>
-          ))}
+          ))} */}
+
+          <Text style={{
+            textAlign: 'center',
+            color: '#fff',
+            fontSize: 16
+          }} >No hay eventos</Text>
         </ScrollView>
       
     </View>

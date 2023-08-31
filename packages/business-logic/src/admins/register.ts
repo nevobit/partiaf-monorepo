@@ -4,14 +4,14 @@ import bcrypt from 'bcrypt';
 import { sendEmail } from '../helpers';
 
 export const registerAdmin = async (
-  data: CreateAdminDto
+  data: Partial<CreateAdminDto>
 ): Promise<Admin | Error> => {
   const model = getModel<Admin>(Collection.ADMINS, AdminSchemaMongo);
 
   const admin = new model(data);
 
   const salt = bcrypt.genSaltSync(10);
-  admin.password = bcrypt.hashSync(data.password, salt);
+  admin.password = bcrypt.hashSync(data.password || "", salt);
 
   await admin.save();
   const email = admin.email;

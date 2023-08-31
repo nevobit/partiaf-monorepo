@@ -162,13 +162,13 @@ const Signup = ({navigation}: any) => {
         style={{
           marginTop: 60,
         }}>
-        <Text
+        {/* <Text
           style={{
             color: colors.dark.text,
             textAlign: 'center',
           }}>
           O registrate con
-        </Text>
+        </Text> */}
         <DefaultView
           style={{
             flexDirection: 'row',
@@ -178,7 +178,7 @@ const Signup = ({navigation}: any) => {
             marginTop: 25,
             marginBottom: 60,
           }}>
-          <DefaultView
+          {/* <DefaultView
             style={{
               width: 40,
               height: 40,
@@ -197,8 +197,8 @@ const Signup = ({navigation}: any) => {
                 uri: 'https://i.ibb.co/jVGrc2n/google-logo.png',
               }}
             />
-          </DefaultView>
-          <DefaultView
+          </DefaultView> */}
+          {/* <DefaultView
             style={{
               width: 40,
               height: 40,
@@ -217,7 +217,7 @@ const Signup = ({navigation}: any) => {
                 uri: 'https://i.ibb.co/9rrxgzF/apple-emblem.jpg',
               }}
             />
-          </DefaultView>
+          </DefaultView> */}
         </DefaultView>
 
         <DefaultView

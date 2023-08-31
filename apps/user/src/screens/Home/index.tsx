@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { GET_STORES } from '../../graphql/queries/users';
+import Header from '../../components/Layout/Header';
 
 const Home = ({navigation}: any) => {
   
@@ -26,54 +27,17 @@ const Home = ({navigation}: any) => {
       },
     },
   });
-  
-  console.log(data)
-  return (
-    <View>
-      <DefaultView
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingTop: 15,
-          paddingBottom: 10,
-          paddingHorizontal: 10,
-        }}>
-        <DefaultView
-          style={{
-            flexDirection: 'row',
-            gap: 10,
-          }}>
-          <Icon name="options-outline" size={23} color="#fff" />
-          <Icon name="qr-code-outline" size={23} color="rgba(10,10,10,1)" />
-        </DefaultView>
-        <Image
-          style={{
-            width: 110,
-            height: 18,
-            resizeMode: 'contain',
-            tintColor: 'rgba(255,255,255,.9)',
-          }}
-          source={{
-            uri: 'https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png',
-          }}
-        />
-        <DefaultView
-          style={{
-            flexDirection: 'row',
-            gap: 10,
-          }}>
-          <TouchableOpacity onPress={() => navigation.navigate('Wallet')}>
-            <Icon name="wallet-outline" size={23} color="#fff" />
-          </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => navigation.navigate('Tickets')}>
-            <Icon name="qr-code-outline" size={23} color="#fff" />
-          </TouchableOpacity>
-        </DefaultView>
-      </DefaultView>
-      <ScrollView>
+  return (
+    <View style={{
+      backgroundColor: '#000',
+      height: '100%'
+    }}>
+      <Header navigation={navigation} filters={true} />
+      <ScrollView style={{
+      backgroundColor: '#000',
+      height: '100%'
+    }}>
         <Stories />
         <DefaultView
           style={{

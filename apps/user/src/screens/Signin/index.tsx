@@ -12,7 +12,7 @@ import colors from '../../components/Layout/Theme/colors';
 import {View} from '../../components/Layout/Theme';
 import DismissKeyboard from '../../components/Layout/DimissKeyboard';
 import {useDispatch} from 'react-redux';
-import {signin} from '../../features/auth';
+import {signin, signout} from '../../features/auth';
 import {useMutation} from '@apollo/client';
 import {LOGIN_USER} from '../../graphql/mutations';
 
@@ -28,8 +28,12 @@ const Signin = ({navigation}: any) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const logout = () => {
+    dispatch(signout());
+  };
   const onSubmit = async (e: any) => {
     e.preventDefault();
+    logout();
     setLoading(true);
     try {
       console.log(user);
@@ -152,19 +156,19 @@ const Signin = ({navigation}: any) => {
             paddingHorizontal: 10,
             paddingTop: 10
           }}>{error}</Text>
-
+          
         <DefaultView
           style={{
             marginTop: 40,
           }}>
-          <Text
+ {/* <Text
             style={{
               color: colors.dark.text,
               textAlign: 'center',
             }}>
             O inicia sesion con
-          </Text>
-          <DefaultView
+          </Text> */}
+          {/* <DefaultView
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -183,7 +187,7 @@ const Signin = ({navigation}: any) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Image
+               <Image
                 style={{
                   width: 25,
                   height: 25,
@@ -191,8 +195,9 @@ const Signin = ({navigation}: any) => {
                 source={{
                   uri: 'https://i.ibb.co/jVGrc2n/google-logo.png',
                 }}
-              />
+              /> 
             </DefaultView>
+             
             <DefaultView
               style={{
                 width: 40,
@@ -211,9 +216,10 @@ const Signin = ({navigation}: any) => {
                 source={{
                   uri: 'https://i.ibb.co/9rrxgzF/apple-emblem.jpg',
                 }}
-              />
+              /> 
             </DefaultView>
-          </DefaultView>
+            
+          </DefaultView> */}
 
           <DefaultView
             style={{

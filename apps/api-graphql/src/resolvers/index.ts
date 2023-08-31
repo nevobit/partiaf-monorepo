@@ -13,6 +13,7 @@ export default {
   },
   Mutation: {
     ...auth.Mutation,
-    ...goers.Mutation
+    ...goers.Mutation,
+    ...users.Mutation
   },
 };

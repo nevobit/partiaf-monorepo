@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View} from '../../components/Layout/Theme';
+import { View } from '../../components/Layout/Theme';
 import {
   ScrollView,
   View as DefaultView,
@@ -7,21 +7,25 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
+  TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useSelector} from 'react-redux';
-import {useQuery} from '@apollo/client';
-import {GET_USER_BY_ID} from '../../graphql/queries/users';
-import {useEffect} from 'react';
-import {DivisaFormater} from '../../utilities/divisaFormater';
+import { useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
+import { GET_USER_BY_ID } from '../../graphql/queries/users';
+import { useEffect } from 'react';
+import { DivisaFormater } from '../../utilities/divisaFormater';
 import axios from 'axios';
 import { Linking } from 'react-native';
 import { WebView } from 'react-native-webview';
+import colors from '../../components/Layout/Theme/colors';
+import { BottomSheet } from '../../containers';
+import Header from '../../components/Layout/Header';
 
-const Wallet = ({navigation}: any) => {
-  const {user} = useSelector((state: any) => state.auth);
+const Wallet = ({ navigation }: any) => {
+  const { user } = useSelector((state: any) => state.auth);
 
-  const {data, loading, refetch} = useQuery(GET_USER_BY_ID, {
+  const { data, loading, refetch } = useQuery(GET_USER_BY_ID, {
     context: {
       headers: {
         authorization: user.token ? `Bearer ${user.token}` : '',
@@ -32,21 +36,23 @@ const Wallet = ({navigation}: any) => {
   const [paymentInfo, setPaymentInfo] = useState();
   const [amount, setAmount] = useState(0);
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [url, setUrl] = useState("");
 
-  const createOrder = async() => {
-    const { data } = await axios.post('http://192.168.1.11:8000/api/v3/create-order',{
-      price: 1000
+  const createOrder = async () => {
+    setIsLoading(true);
+    const { data } = await axios.post('https://partiaf-api.xyz/api/v3/create-order', {
+      price: amount
     });
     setPaymentInfo(data)
-    // if (await Linking.canOpenURL(data.init_point)) {
-      // await Linking.openURL(data.init_point);
-
-      setUrl(data.init_point);
-      setOpen(true);
-    // } else {
-      // console.log("No se puede abrir la URL:", data.init_point);
-    // }
+    if (!await Linking.canOpenURL(data.init_point)) {
+      await Linking.openURL(data.init_point);
+    setIsLoading(false);
+    } else {
+    setIsLoading(false);
+    console.log("No se puede abrir la URL:", data.init_point);
+    }
   }
 
   useEffect(() => {
@@ -57,45 +63,8 @@ const Wallet = ({navigation}: any) => {
       style={{
         minHeight: '100%',
       }}>
-      <DefaultView
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingTop: 15,
-          paddingBottom: 15,
-          paddingHorizontal: 10,
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('HomeScreen')}
-          style={{
-            flexDirection: 'row',
-            gap: 10,
-          }}>
-          <Icon name="chevron-back-outline" size={23} color="#fff" />
-        </TouchableOpacity>
-        <Image
-          style={{
-            width: 110,
-            height: 18,
-            resizeMode: 'contain',
-            tintColor: 'rgba(255,255,255,.9)',
-          }}
-          source={{
-            uri: 'https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png',
-          }}
-        />
-        <DefaultView
-          style={{
-            flexDirection: 'row',
-            gap: 10,
-          }}>
-          <TouchableOpacity>
-            <Icon name="qr-code-outline" size={23} color="#fff" />
-          </TouchableOpacity>
-        </DefaultView>
-      </DefaultView>
+    
+      <Header navigation={navigation} back wallet />
       <DefaultView
         style={{
           paddingHorizontal: 10,
@@ -199,7 +168,7 @@ const Wallet = ({navigation}: any) => {
         </DefaultView>
 
         <TouchableOpacity
-          onPress={createOrder}
+          onPress={() => setOpenModal(true)}
           style={{
             alignItems: 'center',
           }}>
@@ -249,23 +218,120 @@ const Wallet = ({navigation}: any) => {
           display: 'flex',
           alignItems: 'center',
         }}>
-        </ScrollView>
+      </ScrollView>
 
-        {open && <MyWebView url={url} />}
+      {/* {openModal && (
+
+        <DefaultView style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          height: 230,
+          zIndex: 99,
+          paddingHorizontal: 15,
+          borderTopRightRadius: 30,
+          borderTopLeftRadius: 30,
+          backgroundColor: colors.dark.modal,
+          alignItems: 'center'
+        }}>
+          <DefaultView style={{
+            backgroundColor: '#fff',
+            height: 5,
+            width: 30,
+            borderRadius: 100,
+            marginTop: 10,
+
+          }} />
+          <TextInput
+            onChangeText={(text) => setAmount(Number(text))}
+            style={{
+              borderWidth: 1,
+              borderColor: '#fff',
+              borderRadius: 15,
+              marginBottom: 20,
+              paddingHorizontal: 20,
+              marginTop: 'auto',
+              width: '100%',
+              color: '#fff'
+            }} placeholderTextColor={colors.dark.holderColor} placeholder='Ingresa el valor a recargar' />
+          <TouchableOpacity
+            onPress={createOrder}
+            style={{
+              backgroundColor: colors.dark.primary,
+              borderRadius: 15,
+              height: 50,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 45,
+              width: '100%',
+
+            }}>
+            <Text style={{
+              fontWeight: '600',
+              fontSize: 16,
+              color: '#333'
+            }}>Continuar</Text>
+          </TouchableOpacity>
+        </DefaultView>
+      )} */}
+
+      <BottomSheet isVisible={openModal} setIsVisible={setOpenModal}>
+        <TextInput 
+        onChangeText={(text) => setAmount(Number(text))}
+        keyboardType='numeric' style={{
+          color: "#fff",
+          fontSize: 16,
+          height: 60,
+          paddingHorizontal: 10,
+          borderWidth: 1,
+          borderColor: '#fff',
+          borderRadius: 15,
+          marginBottom: 15
+        }}
+        placeholder='Valor a recargar'
+        placeholderTextColor={colors.dark.holderColor}
+        />
+        <TouchableOpacity
+            onPress={createOrder}
+            style={{
+              backgroundColor: colors.dark.primary,
+              borderRadius: 15,
+              height: 50,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 45,
+              width: '100%',
+
+            }}>
+              {isLoading ? <ActivityIndicator size='small' /> : (
+
+            <Text style={{
+              fontWeight: '600',
+              fontSize: 16,
+              color: '#333'
+            }}>Continuar</Text>
+            )}
+
+          </TouchableOpacity>
+      </BottomSheet>
+      {open && <MyWebView url={url} />}
     </View>
   );
 };
 
 export default Wallet;
 
-const MyWebView = ({ url }:any) => {
+const MyWebView = ({ url }: any) => {
   return (
-  <DefaultView style={{
-    position:'absolute',
-    top: 0,
-    left: 0,
-    width: '100%'
-  }}>
-    <WebView source={{ uri: url }} />;
-  </DefaultView>)
+    <DefaultView style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%'
+    }}>
+      <WebView source={{ uri: url }} />;
+    </DefaultView>)
 };

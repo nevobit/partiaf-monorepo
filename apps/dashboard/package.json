@@ -18,7 +18,10 @@
     "axios": "~1.4.0",
     "react-feather": "~2.0.10",
     "react-icons-kit": "~2.0.0",
-    "react-phone-number-input": "~3.2.23"
+    "react-phone-number-input": "~3.2.23",
+    "@react-oauth/google": "~0.11.1",
+    "@tanstack/react-query": "~4.32.6",
+    "@tanstack/react-query-devtools": "~4.32.6"
   },
   "devDependencies": {
     "@types/react": "18.0.0",

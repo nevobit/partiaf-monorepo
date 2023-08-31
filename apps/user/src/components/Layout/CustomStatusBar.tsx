@@ -9,7 +9,7 @@ const CustomStatusBar = ({backgroundColor, ...props}: StatusBarProps) => {
       style={{
         height: STATUSBAR_HEIGHT,
         marginTop: -10,
-        backgroundColor: 'rgba(10,10,10,1)',
+        backgroundColor: 'rgba(0,0,0,1)',
       }}>
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
     </View>

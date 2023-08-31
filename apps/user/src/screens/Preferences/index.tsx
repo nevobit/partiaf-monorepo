@@ -83,29 +83,63 @@ const preferences = {
 };
 
 const Preferences = ({navigation}: any) => {
-  const [myPreferences, setMyPreferences] = useState<string[]>(['']);
+  const [myPreferences, setMyPreferences] = useState({});
+  const [preferenceFood, setPreferenceFood] = useState<string[]>([]);
+  const [preferenceMusic, setPreferenceMusic] = useState<string[]>([]);
+  const [preferencePlan, setPreferencePlan] = useState<string[]>([]);
 
-  console.log(myPreferences);
-  const addPreference = (name: string) => {
-    setMyPreferences(prev => {
-      const updatedPreferences = [...prev];
+  const addPreferenceFood = (name: string) => {
+    setPreferenceFood(prev => {
+      const updatedPreferencesFood = [...prev];
 
-      if (updatedPreferences?.includes(name)) {
+      if (updatedPreferencesFood?.includes(name)) {
         // Si el nombre ya está en el arreglo, se elimina
-        updatedPreferences?.splice(updatedPreferences.indexOf(name), 1);
+        updatedPreferencesFood?.splice(updatedPreferencesFood.indexOf(name), 1);
       } else {
         // Si el nombre no está en el arreglo, se agrega
-        updatedPreferences.push(name);
+        updatedPreferencesFood.push(name);
       }
 
-      return updatedPreferences;
-    });
-  };
+      return updatedPreferencesFood;
+    })
+  }
+
+  const addPreferenceMusic = (name: string) => {
+    setPreferenceMusic(prev => {
+      const updatedPreferencesMusic = [...prev];
+
+      if (updatedPreferencesMusic?.includes(name)) {
+        // Si el nombre ya está en el arreglo, se elimina
+        updatedPreferencesMusic?.splice(updatedPreferencesMusic.indexOf(name), 1);
+      } else {
+        // Si el nombre no está en el arreglo, se agrega
+        updatedPreferencesMusic.push(name);
+      }
+
+      return updatedPreferencesMusic;
+    })
+  }
+
+  const addPreferencePlan = (name: string) => {
+    setPreferencePlan(prev => {
+      const updatedPreferencesPlan = [...prev];
+
+      if (updatedPreferencesPlan?.includes(name)) {
+        // Si el nombre ya está en el arreglo, se elimina
+        updatedPreferencesPlan?.splice(updatedPreferencesPlan.indexOf(name), 1);
+      } else {
+        // Si el nombre no está en el arreglo, se agrega
+        updatedPreferencesPlan.push(name);
+      }
+
+      return updatedPreferencesPlan;
+    })
+  }
 
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    dispatch(saveUserInfo({interests: preferences}));
+    dispatch(saveUserInfo({interests: {food: preferenceFood, music: preferenceMusic, plan: preferencePlan}}));
     navigation.navigate('VerifyAge');
   };
 
@@ -211,9 +245,9 @@ const Preferences = ({navigation}: any) => {
             {preferences.plan.map(preference => (
               <TouchableOpacity
                 key={preference}
-                onPress={() => addPreference(preference)}
+                onPress={() => addPreferencePlan(preference)}
                 style={{
-                  backgroundColor: myPreferences.includes(preference)
+                  backgroundColor: preferencePlan.includes(preference)
                     ? colors.dark.primary
                     : 'rgba(255,255,255,0.2)',
                   borderRadius: 10,
@@ -221,8 +255,8 @@ const Preferences = ({navigation}: any) => {
                 }}>
                 <Text
                   style={{
-                    color: myPreferences.includes(preference)
-                      ? 'rgba(10,10,10,1)'
+                    color: preferencePlan.includes(preference)
+                      ? 'rgba(0,0,0,1)'
                       : '#fff',
                   }}>
                   {preference}
@@ -249,9 +283,9 @@ const Preferences = ({navigation}: any) => {
             {preferences.music.map(preference => (
               <TouchableOpacity
                 key={preference}
-                onPress={() => addPreference(preference)}
+                onPress={() => addPreferenceMusic(preference)}
                 style={{
-                  backgroundColor: myPreferences.includes(preference)
+                  backgroundColor: preferenceMusic.includes(preference)
                     ? colors.dark.primary
                     : 'rgba(255,255,255,0.2)',
                   borderRadius: 10,
@@ -259,8 +293,8 @@ const Preferences = ({navigation}: any) => {
                 }}>
                 <Text
                   style={{
-                    color: myPreferences.includes(preference)
-                      ? 'rgba(10,10,10,1)'
+                    color: preferenceMusic.includes(preference)
+                      ? 'rgba(0,0,0,1)'
                       : '#fff',
                   }}>
                   {preference}
@@ -288,9 +322,9 @@ const Preferences = ({navigation}: any) => {
             {preferences.food.map(preference => (
               <TouchableOpacity
                 key={preference}
-                onPress={() => addPreference(preference)}
+                onPress={() => addPreferenceFood(preference)}
                 style={{
-                  backgroundColor: myPreferences.includes(preference)
+                  backgroundColor: preferenceFood.includes(preference)
                     ? colors.dark.primary
                     : 'rgba(255,255,255,0.2)',
                   borderRadius: 10,
@@ -298,8 +332,8 @@ const Preferences = ({navigation}: any) => {
                 }}>
                 <Text
                   style={{
-                    color: myPreferences.includes(preference)
-                      ? 'rgba(10,10,10,1)'
+                    color: preferenceFood.includes(preference)
+                      ? 'rgba(0,0,0,1)'
                       : '#fff',
                   }}
                   key={preference}>
@@ -312,10 +346,10 @@ const Preferences = ({navigation}: any) => {
       </ScrollView>
       <DefaultView style={{flex: 1, justifyContent: 'flex-end'}}>
         <TouchableOpacity
-          disabled={myPreferences.length < 5}
+          disabled={preferenceFood.length < 2}
           style={{
             backgroundColor:
-              myPreferences.length <= 5
+              preferenceFood.length <= 2
                 ? 'rgb(100,100,100)'
                 : colors.dark.primary,
             height: 50,

@@ -123,6 +123,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+           release {
+            storeFile file('your_key_name.keystore')
+            storePassword 'yonofuy159'
+            keyAlias 'waiter'
+            keyPassword 'yonofuy159'
+        }
     }
     buildTypes {
         debug {

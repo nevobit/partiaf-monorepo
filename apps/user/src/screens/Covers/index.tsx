@@ -92,11 +92,12 @@ const Covers = ({navigation, route}: any) => {
       <View
         style={{
           minHeight: '100%',
+          paddingVertical: 15
         }}>
          <DefaultView
         style={{
           position: 'absolute',
-          top: 0,
+          top: 5,
           left: 0,
           zIndex: 99,
           paddingVertical: 40,
@@ -160,12 +161,12 @@ const Covers = ({navigation, route}: any) => {
             <Text style={{
             color: colors.dark.primary,
             fontWeight: '600',
-            fontSize: 18
+            fontSize: 16
            }}>{ticket.name}</Text>
             <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
-            fontSize: 14
+            fontSize: 12
            }}></Text>
                
             </DefaultView>
@@ -178,17 +179,17 @@ const Covers = ({navigation, route}: any) => {
             <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
-            fontSize: 16
+            fontSize: 14
            }}>23 Jun 2023</Text>
            <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
-            fontSize: 16
+            fontSize: 14
            }}>{ticket.hour}</Text>
             <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
-            fontSize: 16
+            fontSize: 14
            }}>{ticket.limit} Cupos</Text>
                
             </DefaultView>
@@ -201,7 +202,7 @@ const Covers = ({navigation, route}: any) => {
             <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
-            fontSize: 18
+            fontSize: 15
            }}>{DivisaFormater(ticket.price)}</Text>
            <DefaultView style={{
             flexDirection: 'row',
@@ -209,8 +210,7 @@ const Covers = ({navigation, route}: any) => {
             alignItems: 'center',
             borderWidth: 1,
             borderColor: '#fff',
-            borderRadius:10,
-            height: 40
+            borderRadius:10
            }}>
            <TouchableOpacity
                        onPress={() => addCover({...ticket, name: ticket.name, price: ticket.price, id: ticket.id, limit: ticket.limit}, "-")}

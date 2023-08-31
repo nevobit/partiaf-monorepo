@@ -1,7 +1,12 @@
 import { RouteOptions } from 'fastify';
-import { getStoresByAdminRoute } from './get-by-admin';
+import { getStoresByStoreRoute } from './get-by-store';
 import { createTicketRoute } from './create';
+import { updateTicketRoute } from './update';
+import { deleteTicketRoute } from './delete';
 
 export const ticketRoutes: RouteOptions[] = [
-  createTicketRoute
+  createTicketRoute,
+  getStoresByStoreRoute,
+  updateTicketRoute,
+  deleteTicketRoute
 ];

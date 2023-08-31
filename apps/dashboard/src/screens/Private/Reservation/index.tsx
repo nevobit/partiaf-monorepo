@@ -32,9 +32,6 @@ const Reservation = ( { user, date, hour, ...rest }: Table) => {
       user: "@Skarlysba",
       date: " Jun 18, 2023",
       hour: "09:30 PM",
-      value: 131.50,
-      ticket: "Vip",
-      ticketState: "Usado",
       user_picture: "../../../../public/img/user_picture.png" },
       
       {name: "Pedro Gonzales",
@@ -42,9 +39,6 @@ const Reservation = ( { user, date, hour, ...rest }: Table) => {
       user: "@Skarlysba",
       date: " May 23, 2023",
       hour: "03:30 PM",
-      value: 131.50,
-      ticket: "Normal",
-      ticketState: "New",
       user_picture: "../../../../public/img/user_picture.png"},
       
       {name: "Mariano Rivera",
@@ -52,9 +46,6 @@ const Reservation = ( { user, date, hour, ...rest }: Table) => {
       user: "@Skarlysba",
       date: " Sep 5, 2023",
       hour: "09:30 AM",
-      value: 220.50,
-      ticket: "Normal",
-      ticketState: "Usado",
       user_picture: "../../../../public/img/user_picture.png"},
       
       {name: "Ana Medina",
@@ -62,9 +53,6 @@ const Reservation = ( { user, date, hour, ...rest }: Table) => {
       user: "@Skarlysba",
       date: " Aug 31, 2023",
       hour: "4:30 PM",
-      value: 500.50,
-      ticket: "Vip",
-      ticketState: "Usado",
       user_picture: "../../../../public/img/user_picture.png"},
       
       {name: "Yelena Camero",
@@ -72,9 +60,6 @@ const Reservation = ( { user, date, hour, ...rest }: Table) => {
       user: "@Skarlysba",
       date: " Jan 1, 2023",
       hour: "11:30 PM",
-      value: 300.50,
-      ticket: "Normal",
-      ticketState: "New",
       user_picture: "../../../../public/img/user_picture.png"}
   ]
 
@@ -88,16 +73,20 @@ const openDetail = ()=>{
   return (
     <div className={styles.body}>
         <div className={styles.header}>
-            <h2 className={styles.title}>
-                Reserva con nosotros
-            </h2>
-            <div className={styles.header_options}>
-                <SearchBar className={styles.header_buttons}/>
-                <Button 
-                className={styles.header_buttons}
-                variant='secondary'
-                >Configuracion de la reserva</Button>
-            </div>
+          <div>
+
+         
+          <h2 className={styles.title}>
+              Reserva con nosotros
+          </h2>
+          </div>
+          <div className={styles.header_options}>
+              <SearchBar className={styles.header_buttons}/>
+              <Button 
+              className={styles.header_buttons}
+              variant='secondary'
+              >Configuracion de la reserva</Button>
+          </div>
         </div>
         <div className={styles.totals}>
           <ReservationTotals title='Total de reservas' totals="05"/>
@@ -113,6 +102,7 @@ const openDetail = ()=>{
                 >Informacion de la reserva</Button>
             </div>
             <TableInfo 
+            action='Ver reserva'
             data={reservations}
             detail={open}
             seeDetail={(e: React.MouseEvent) =>{setOpen(!open)}}/>

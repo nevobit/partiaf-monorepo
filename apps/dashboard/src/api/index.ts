@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const partiafApi = axios.create({
+  // baseURL: "https://partiaf-api.xyz/api/v3",
   baseURL: "http://localhost:8000/api/v3",
   headers: {
     "api-key":
