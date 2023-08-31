@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { GET_ONE_GOER } from '../../../graphql/queries/goers';
 import { DivisaFormater } from '../../../utilities/divisaFormater';
+import QRCode from 'react-native-qrcode-svg';
 
 const DismissKeyboard = ({children}: any) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -324,13 +325,17 @@ const Details = ({navigation, route}: any) => {
              }}>
               Tikect ID: {data?.getOneGoer?.id.slice(0,8).toUpperCase()}
              </Text>
-            <Image style={{
-                  width: 200,
-                  height: 200,
-                  margin: 0
-                }} source={{
-                  uri:'https://i.ibb.co/n14Qpb9/qrcode.png'
-                }} />
+           <DefaultView style={{
+            marginLeft: 20,
+            marginBottom: 40
+           }}>
+
+    <QRCode
+      value={JSON.stringify(data?.getOneGoer)}
+      size={160}
+    />
+           </DefaultView>
+
              </DefaultView>
                 
             </DefaultView>

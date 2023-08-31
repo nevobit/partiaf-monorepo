@@ -15,6 +15,7 @@ import { useQuery } from '@apollo/client';
 import { GET_GOERS_BY_USER_ID } from '../../graphql/queries/goers';
 import { GET_USER_BY_ID } from '../../graphql/queries/users';
 import Header from '../../components/Layout/Header';
+import QRCode from 'react-native-qrcode-svg';
 
 const DismissKeyboard = ({children}: any) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -212,14 +213,16 @@ key={ticket.id}
       left: 13
     }} />
     </DefaultView>
-      <Image style={{
-        width: 100,
-        height: 100,
-        marginLeft: 19,
-        marginTop: -3
-      }} source={{
-        uri:'https://i.ibb.co/n14Qpb9/qrcode.png'
-      }} />
+    <DefaultView style={{
+      marginLeft: 30
+    }}>
+
+    <QRCode
+      value={JSON.stringify(ticket)}
+      size={90}
+    />
+    </DefaultView>
+
   </DefaultView>
 </TouchableOpacity>
 ))}

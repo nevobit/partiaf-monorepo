@@ -1,54 +1,37 @@
 import React from 'react';
-import { Modal, Text, TouchableOpacity, View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { Modal as DefaultModal, Text, TouchableOpacity, View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 interface Props {
-  isVisible: boolean;
+  isVisible?: boolean;
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-const BottomSheet = ({ children, isVisible, setIsVisible }: Props) => {
+const Modal = ({ children, isVisible, setIsVisible }: Props) => {
   return (
-    <Modal
-      animationType='slide'
+    <DefaultModal
+      animationType='fade'
       transparent={true}
       visible={isVisible}
     >
       <TouchableWithoutFeedback onPress={() => setIsVisible(false)}>
         <View style={styles.bottomSheetContainer}>
-          {/* Parte superior del BottomSheet */}
-          <View style={styles.bottomSheetHeader}>
-            <View style={{
-              backgroundColor: '#ccc',
-              width: 35,
-              height: 4,
-              borderRadius: 50
-            }} /> 
-
-          </View>
-
           {/* Contenido del BottomSheet */}
           <View style={styles.bottomSheetContent}>
             {children} 
           </View>
         </View>
       </TouchableWithoutFeedback>
-    </Modal>
+    </DefaultModal>
   );
 };
 
 const styles = StyleSheet.create({
   bottomSheetContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: '#212226', // Fondo semitransparente
-  },
-  bottomSheetHeader: {
-    backgroundColor: '#222',
-    padding: 16,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fondo semitransparente
   },
   headerText: {
     fontSize: 18,
@@ -56,8 +39,9 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   bottomSheetContent: {
-    backgroundColor: '#222',
+    backgroundColor: '#212226',
     padding: 16,
+    borderRadius: 15,
   },
   closeButton: {
     backgroundColor: '#fff',
@@ -73,4 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BottomSheet;
+export default Modal;

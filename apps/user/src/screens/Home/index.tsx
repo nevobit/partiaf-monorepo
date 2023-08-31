@@ -39,6 +39,7 @@ const Home = ({navigation}: any) => {
       height: '100%'
     }}>
         <Stories />
+
         <DefaultView
           style={{
             width: '100%',
