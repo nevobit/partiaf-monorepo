@@ -1,0 +1,24 @@
+.screen {
+  width: min(1100px, 90%);
+  margin-inline: auto;
+  min-height: 20rem;
+  padding-block: 2rem;
+}
+
+.header_Setting {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cnt_menu {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin-top: 2rem;
+}
+
+.cnt_cards{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+
