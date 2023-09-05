@@ -77,7 +77,7 @@ export const HomeScreen = ({navigation, route}:any) => {
 
           <Dropdown selected={selected} setSelected={setSelected} data={tickets?.getTicketsByStoreId} />
           <View style={{
-            height: 800,
+            height: '95%',
             marginTop: -10
           }}>
 

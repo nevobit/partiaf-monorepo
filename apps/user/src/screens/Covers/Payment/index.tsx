@@ -41,24 +41,38 @@ const Payment = ({navigation, route}: any) => {
     e.preventDefault();
     setLoadingGoer(true);
     try{
-      const { data } = await createGoer({
-        variables: {
-          data: {
-            user: userInfo?.getUserById.id,
-            amount: route.params.goer.amount,
-            cost: Number(route.params.goer.price),
-            ticket: route.params.goer.cover,
-            date: route.params.goer.date,
-            description: route.params.goer.description,
-            image: route.params.goer.image,
-            name: route.params.goer.name,
-            time: route.params.goer.hour,
+      Alert.alert('Confirmar Compra', 'Seguro que deseas comprar este ticket?', [
+        {
+          text: 'Cancelar',
+          onPress: () => {
+          setLoadingGoer(false);
+          return;
           },
+          style: 'cancel',
         },
-        
-      }); 
-      setLoadingGoer(false);
-      navigation.navigate('Tickets')
+        {text: 'Si, seguro', onPress: async () => {
+          const { data } = await createGoer({
+            variables: {
+              data: {
+                user: userInfo?.getUserById.id,
+                amount: route.params.goer.amount,
+                cost: Number(route.params.goer.price),
+                ticket: route.params.goer.cover,
+                date: route.params.goer.date,
+                description: route.params.goer.description,
+                image: route.params.goer.image,
+                name: route.params.goer.name,
+                time: route.params.goer.hour,
+              },
+            },
+            
+          }); 
+          setLoadingGoer(false);
+          navigation.navigate('Tickets')
+        }},
+      ]);
+
+      
     }catch(err){
       setError(JSON.stringify(err))
         console.log(err)

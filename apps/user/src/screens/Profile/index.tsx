@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import {Text, View as DefaultView, Image, TouchableOpacity, Linking} from 'react-native';
+import {Text, View as DefaultView, Image, TouchableOpacity, Linking, Modal, TouchableWithoutFeedback} from 'react-native';
 import {View} from '../../components/Layout/Theme';
 import colors from '../../components/Layout/Theme/colors';
 import {useTheme} from '../../contexts/ThemeContexts';
@@ -21,6 +21,8 @@ const Profile = ({navigation}: any) => {
   const {theme} = useTheme();
 
   const [modal, setModal] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const {user} = useSelector((state: any) => state.auth);
 
   const {data, loading, error, refetch} = useQuery(GET_USER_BY_ID, {
@@ -42,6 +44,11 @@ const Profile = ({navigation}: any) => {
     );
 
   };
+
+  const modalHandler = () => {
+    setModal(false)
+    setOpen(true);
+  }
   
   useEffect(() => {
     refetch();
@@ -183,6 +190,21 @@ const Profile = ({navigation}: any) => {
         gap: 2,
         height: 50
       }}
+      onPress={modalHandler}
+      >
+        <Icon name='git-merge-outline' size={24} color="#fff" />
+            <Text style={{
+              color: '#fff',
+              fontSize: 18
+            }}>Mis intereses</Text>
+        </TouchableOpacity>
+      <TouchableOpacity style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 2,
+        height: 50
+      }}
       onPress={sendWhatsAppMessage}
       >
         <Icon name='information-circle-outline' size={24} color="#fff" />
@@ -208,6 +230,102 @@ const Profile = ({navigation}: any) => {
             }}>Cerrar sesion</Text>
         </TouchableOpacity>
       </BottomSheet>
+      <Modal visible={open}
+      animationType='fade'
+      transparent={true}
+>
+  <TouchableWithoutFeedback onPress={() => setOpen(false)}>
+
+        <DefaultView style={{
+          width: '100%',
+          flex: 1,
+          alignItems: 'center',
+          borderRadius: 10,
+          justifyContent: 'center',
+          margin: 'auto',
+        }}>
+          <DefaultView style={{
+            backgroundColor: '#101010',
+            width: '95%',
+            paddingTop: 20,
+            paddingBottom: 20,
+            paddingHorizontal: 5,
+            alignItems: 'center',
+            borderRadius: 10,
+            justifyContent: 'center',
+            flexDirection: 'row',
+            gap: 10,
+            flexWrap: 'wrap',
+            margin: 'auto',
+            maxHeight: '80%',
+            marginBottom: 200
+          }}>
+
+{data?.getUserById?.interests?.music.map((m:string) => (
+
+          
+        <DefaultView style={{
+          backgroundColor: 'rgba(255,255,255, .2)',
+          height: 40,
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 10,
+          paddingHorizontal: 10
+        }}>
+          <Text style={{
+            color: '#fff'
+          }}>
+            {m}
+          </Text>
+        </DefaultView>
+))}
+
+
+{data?.getUserById?.interests?.food.map((m:string) => (
+
+          
+<DefaultView style={{
+  backgroundColor: 'rgba(255,255,255, .2)',
+  height: 40,
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 10,
+  paddingHorizontal: 10
+}}>
+  <Text style={{
+    color: '#fff'
+  }}>
+    {m}
+  </Text>
+</DefaultView>
+))}
+
+
+{data?.getUserById?.interests?.plan.map((m:string) => (
+
+          
+<DefaultView style={{
+  backgroundColor: 'rgba(255,255,255, .2)',
+  height: 40,
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 10,
+  paddingHorizontal: 10
+}}>
+  <Text style={{
+    color: '#fff'
+  }}>
+    {m}
+  </Text>
+</DefaultView>
+))}
+
+        </DefaultView>
+
+        </DefaultView>
+  </TouchableWithoutFeedback>
+
+      </Modal>
     </View>
   );
 };

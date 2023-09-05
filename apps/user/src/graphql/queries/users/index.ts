@@ -9,6 +9,11 @@ export const GET_USER_BY_ID = gql`
       lastname
       firstname
       photo
+      interests {
+        food
+        music
+        plan
+      }
       accountType
       followers
       following

@@ -41,10 +41,10 @@ const styles = StyleSheet.create({
   bottomSheetContainer: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: '#212226', // Fondo semitransparente
+    backgroundColor: 'rgba(0,0,0,0.2)', // Fondo semitransparente
   },
   bottomSheetHeader: {
-    backgroundColor: '#222',
+    backgroundColor: '#101010',
     padding: 16,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   bottomSheetContent: {
-    backgroundColor: '#222',
+    backgroundColor: '#101010',
     padding: 16,
   },
   closeButton: {

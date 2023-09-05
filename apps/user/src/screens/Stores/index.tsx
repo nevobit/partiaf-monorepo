@@ -70,7 +70,7 @@ const Stores = ({navigation}: any) => {
         </DefaultView>
       </DefaultView>
       <ScrollView>
-        <Stories />
+        <Stories navigation={navigation} />
         <DefaultView
           style={{
             width: '100%',

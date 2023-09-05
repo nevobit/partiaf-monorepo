@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client';
 import React, { useEffect } from 'react';
-import {ScrollView, View as DefaultView, Image, Text} from 'react-native';
+import {ScrollView, View as DefaultView, Image, Text, TouchableOpacity} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_USERS, GET_USER_BY_ID } from '../../../../graphql/queries/users';
 import localStorage from 'redux-persist/es/storage';
 
-const Stories = () => {
+const Stories = ({navigation}:any) => {
   
   const {user} = useSelector((state: any) => state.auth);
 
@@ -110,7 +110,8 @@ filteredUsers.sort(compararUsuariosPorIntereses);
 
       {filteredUsers?.map((user: any) => (
 
-       <DefaultView
+       <TouchableOpacity
+       onPress={() => navigation.navigate('UserProfile', {id: user._id})}
         style={{
           alignItems: 'center',
           gap: 5,
@@ -147,7 +148,7 @@ filteredUsers.sort(compararUsuariosPorIntereses);
           }}>
           {user.firstname}
         </Text>
-      </DefaultView>
+      </TouchableOpacity>
       ))}
 
     </ScrollView>
