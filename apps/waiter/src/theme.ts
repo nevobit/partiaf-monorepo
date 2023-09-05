@@ -12,7 +12,7 @@ export const theme = {
   },
   screenPrimary: {
     paddingHorizontal: 10,
-    backgroundColor: colors.dark.background,
+    backgroundColor: "#000",
     height: '100%',
   },
   title: {

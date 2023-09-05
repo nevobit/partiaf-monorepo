@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   bottomSheetContainer: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: '#212226', // Fondo semitransparente
+    backgroundColor: 'rgba(0,0,0,0.5)', // Fondo semitransparente
   },
   bottomSheetHeader: {
     backgroundColor: '#222',

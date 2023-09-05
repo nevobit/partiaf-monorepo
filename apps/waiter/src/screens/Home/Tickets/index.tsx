@@ -26,6 +26,9 @@ const Tickets = ({selected}: any) => {
       goers?.getGoersByTicketId?.map((goer: any) => (
         <CoverItem {...goer} key={goer.id} />
       ))}
+      <View style={{
+        height: 20
+      }}/>
   </ScrollView> 
   )
 }
@@ -59,6 +62,9 @@ const styles = StyleSheet.create({
     title: theme.title,
     subtitle: theme.subtitle,
     list: {
+      height: "100%", 
+      paddingBottom: 50,
+      marginBottom: 20,
       gap: 10,
       paddingTop: 20
     },
