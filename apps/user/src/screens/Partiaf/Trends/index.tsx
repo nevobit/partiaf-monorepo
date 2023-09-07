@@ -11,10 +11,10 @@ const Trends = () => {
         style={{
           color: '#fff',
           textAlign: 'center',
-          fontSize: 18,
-          marginTop: 50
+          fontSize: 16,
+          marginTop: 20
         }}>
-        No hay Tendencias
+        No hay tendencias
       </Text>
     </View>
   );

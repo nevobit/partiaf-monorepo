@@ -35,7 +35,7 @@ const Stories = ({navigation}:any) => {
 
 // Función para calcular la puntuación de similitud entre dos conjuntos de intereses
 function calcularPuntuacionIntereses(interesesA: string[], interesesB: string[]): number {
-  const interesesComunes = interesesA?.filter((interes) => interesesB.includes(interes));
+  const interesesComunes = interesesA?.filter((interes) => interesesB?.includes(interes));
   return interesesComunes?.length;
 }
 

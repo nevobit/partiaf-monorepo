@@ -77,7 +77,6 @@ const TabBar = ({state, navigation}: any) => {
 };
 
 const ProfileTopTap = ({id}: any) => {
-  console.log("TOP", id)
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({

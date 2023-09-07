@@ -14,6 +14,7 @@ export default {
         getGoersByUserId: async (parent: any, {}, ctx: any) => {
             const { id } = (await verifyUserToken(ctx)) as { id: string };
             const tickets = await getGoersByUser(id);
+            console.log(tickets)
             return tickets;
           },
 
@@ -30,13 +31,11 @@ export default {
           getOneGoer: async (parent: any, {id}:ArgsType, ctx: any) => {
             await verifyUserToken(ctx);
             const goer = await getOneGoer(id);
-            console.log("GOER", goer)
             return goer;
           },
     },
     Mutation: {
       async createGoer(_: any, { data }: any, context: any) {
-        console.log(data)
         const goer = await createGoer(data);
         return goer;
       },

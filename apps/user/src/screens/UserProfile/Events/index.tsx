@@ -6,10 +6,7 @@ import { GET_GOERS_BY_ID, GET_GOERS_BY_USER_ID } from '../../../graphql/queries/
 import colors from '../../../components/Layout/Theme/colors';
 
 const Events = ({navigation, route, id}:any) => {
-
-   
   const {user} = useSelector((state: any) => state.auth);
-  console.log(id)
 
   const {data: tickets, refetch} = useQuery(GET_GOERS_BY_ID, {
     variables: { id: id },
@@ -20,7 +17,6 @@ const Events = ({navigation, route, id}:any) => {
     },
   });
 
-  console.log(tickets)
 
   useEffect(() => {
     refetch();

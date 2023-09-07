@@ -1,100 +1,60 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
-import {Text, View as DefaultView, Image, TouchableOpacity, Linking, Modal, TouchableWithoutFeedback} from 'react-native';
-import {View} from '../../components/Layout/Theme';
-import colors from '../../components/Layout/Theme/colors';
-import {useTheme} from '../../contexts/ThemeContexts';
+import React, { useEffect, useState } from 'react';
+import { Text, View as DefaultView, Image, TouchableOpacity, Linking, Modal, TouchableWithoutFeedback, TextInput, Pressable, ActivityIndicator } from 'react-native';
+import { View } from '../../components/Layout/Theme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ProfileTopTap from '../../navigator/AppNavigator/ProfileTopTap';
-import {useDispatch, useSelector} from 'react-redux';
-import {signout} from '../../features/auth';
-import {useQuery} from '@apollo/client';
-import {GET_USER_BY_ID} from '../../graphql/queries/users';
-import {useEffect} from 'react';
-import { launchImageLibrary } from 'react-native-image-picker';
+import { useDispatch } from 'react-redux';
+import { signout } from '../../features/auth';
 import Header from '../../components/Layout/Header';
 import { BottomSheet } from '../../containers';
-import AppLink from 'react-native-app-link';
+import { useUser } from '../../hooks';
 
-const Profile = ({navigation}: any) => {
-  const {theme} = useTheme();
-
+const Profile = ({ navigation }: any) => {
   const [modal, setModal] = useState(false);
   const [open, setOpen] = useState(false);
+  const [changePhoto, setChangePhoto] = useState(false);
+  const [changePhotoBottom, setChangePhotoBottom] = useState(false);
 
-  const {user} = useSelector((state: any) => state.auth);
-
-  const {data, loading, error, refetch} = useQuery(GET_USER_BY_ID, {
-    context: {
-      headers: {
-        authorization: user.token ? `Bearer ${user.token}` : '',
-      },
-    },
-  });
+  const { user, isLoading, refetch } = useUser();
 
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(signout());
   };
 
-  const sendWhatsAppMessage = async() => {
-    Linking.openURL(
+  const sendWhatsAppMessage = async () => {
+    await Linking.openURL(
       'http://api.whatsapp.com/send?phone=573226589914' + "Quisiera hablar con alguien"
     );
 
   };
 
+  const photoHandler = () => {
+    if (!user.photo[0]) {
+      setChangePhoto(true);
+    }else{
+      setChangePhotoBottom(true)
+    }
+  }
+
   const modalHandler = () => {
     setModal(false)
     setOpen(true);
   }
-  
+
   useEffect(() => {
     refetch();
   }, [refetch]);
 
+  if(isLoading) return <ActivityIndicator size='large' />
+
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#000"
-      }}>
-      {/* <DefaultView
-        style={{
-          paddingVertical: 5,
-          paddingHorizontal: 10,
-          paddingRight: 5,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-        <Image
-          style={{
-            width: 110,
-            height: 15,
-            tintColor: '#fff',
-            resizeMode: 'cover',
-          }}
-          source={{
-            uri:  'https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png',
-          }}
-        />
-        <DefaultView
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 5,
-          }}>
-          <Icon name="qr-code-outline" size={25} color="#fff" />
-          <TouchableOpacity onPress={logout}>
-            <Icon name="menu" size={35} color="#fff" />
-          </TouchableOpacity>
-        </DefaultView>
-      </DefaultView> */}
-
+    <View style={{
+      flex: 1
+    }}>
       <Header navigation={navigation} options wallet openModal={setModal} />
-
       <DefaultView
         style={{
           flexDirection: 'row',
@@ -113,7 +73,7 @@ const Profile = ({navigation}: any) => {
               fontWeight: '700',
               fontSize: 18,
             }}>
-            {data?.getUserById.following.length}
+            {user?.following.length}
           </Text>
           <Text
             style={{
@@ -123,7 +83,7 @@ const Profile = ({navigation}: any) => {
             Seguidores
           </Text>
         </DefaultView>
-        <DefaultView>
+        <Pressable onPress={photoHandler} onLongPress={photoHandler}>
           <Image
             style={{
               height: 100,
@@ -132,10 +92,10 @@ const Profile = ({navigation}: any) => {
               resizeMode: 'cover',
             }}
             source={{
-              uri: data?.getUserById.photo[0]? data?.getUserById.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
+              uri: user?.photo[0] ? user.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
             }}
           />
-        </DefaultView>
+        </Pressable>
         <DefaultView
           style={{
             alignItems: 'center',
@@ -146,7 +106,7 @@ const Profile = ({navigation}: any) => {
               fontWeight: '700',
               fontSize: 18,
             }}>
-            {data?.getUserById.following.length}
+            {user?.following.length}
           </Text>
           <Text
             style={{
@@ -165,9 +125,22 @@ const Profile = ({navigation}: any) => {
             fontWeight: '600',
             textAlign: 'center',
           }}>
-          {data?.getUserById?.firstname} {data?.getUserById.lastname}
+          {user?.firstname} {user?.lastname}
         </Text>
-        <TouchableOpacity>
+        {user?.biography? (
+          <Text
+          style={{
+            color: 'rgba(255,255,255,0.5)',
+            fontSize: 14,
+            textAlign: 'center',
+            marginTop: 5,
+            marginBottom: 20,
+          }}>
+          {user.biography}
+        </Text>
+        ): (
+
+        <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
           <Text
             style={{
               color: 'rgba(255,255,255,0.5)',
@@ -179,153 +152,267 @@ const Profile = ({navigation}: any) => {
             Click para anadir una biografia
           </Text>
         </TouchableOpacity>
+        )}
+
       </DefaultView>
       <ProfileTopTap />
+      <Modal visible={changePhoto}
+        animationType='fade'
+        transparent={true}
 
-      <BottomSheet isVisible={modal} setIsVisible={setModal} >
-      <TouchableOpacity style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 2,
-        height: 50
-      }}
-      onPress={modalHandler}
       >
-        <Icon name='git-merge-outline' size={24} color="#fff" />
-            <Text style={{
-              color: '#fff',
-              fontSize: 18
-            }}>Mis intereses</Text>
-        </TouchableOpacity>
-      <TouchableOpacity style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 2,
-        height: 50
-      }}
-      onPress={sendWhatsAppMessage}
-      >
-        <Icon name='information-circle-outline' size={24} color="#fff" />
-            <Text style={{
-              color: '#fff',
-              fontSize: 18
-            }}>Ayuda & Sugerencias</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 2,
-        height: 50,
-        
-      }}
-      onPress={logout}
-      >
-          <Icon name='log-out-outline' size={24} color="red" />
-            <Text style={{
-              color: 'red',
-              fontSize: 18
-            }}>Cerrar sesion</Text>
-        </TouchableOpacity>
-      </BottomSheet>
-      <Modal visible={open}
-      animationType='fade'
-      transparent={true}
->
-  <TouchableWithoutFeedback onPress={() => setOpen(false)}>
-
-        <DefaultView style={{
-          width: '100%',
-          flex: 1,
-          alignItems: 'center',
-          borderRadius: 10,
-          justifyContent: 'center',
-          margin: 'auto',
-        }}>
+        <TouchableWithoutFeedback onPress={() => setChangePhoto(false)}>
           <DefaultView style={{
-            backgroundColor: '#101010',
-            width: '95%',
-            paddingTop: 20,
-            paddingBottom: 20,
-            paddingHorizontal: 5,
+            width: '100%',
+            flex: 1,
             alignItems: 'center',
             borderRadius: 10,
             justifyContent: 'center',
-            flexDirection: 'row',
-            gap: 10,
-            flexWrap: 'wrap',
             margin: 'auto',
-            maxHeight: '80%',
-            marginBottom: 200
+            backgroundColor: 'rgba(0,0,0,0.6)'
           }}>
 
-{data?.getUserById?.interests?.music.map((m:string) => (
+            <DefaultView style={{
+              backgroundColor: '#101010',
+              width: '60%',
+              paddingTop: 12,
+              paddingBottom: 12,
+              paddingHorizontal: 20,
+              alignItems: 'flex-start',
+              borderRadius: 10,
+              justifyContent: 'flex-start',
+              flexDirection: 'row',
+              gap: 10,
+              flexWrap: 'wrap',
+              margin: 'auto',
+              maxHeight: '80%',
+              marginBottom: 200
+            }}>
 
-          
-        <DefaultView style={{
-          backgroundColor: 'rgba(255,255,255, .2)',
-          height: 40,
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: 10,
-          paddingHorizontal: 10
-        }}>
-          <Text style={{
-            color: '#fff'
-          }}>
-            {m}
-          </Text>
-        </DefaultView>
-))}
+              <TouchableOpacity>
+                <Text style={{
+                  color: '#fff',
+                  fontSize: 14
+                }}>
+                  Agregar una foto de perfil
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Text style={{
+                  color: '#fff', marginTop: 10,
+                  fontSize: 14
+                }}>
+                  Agregar un moment
+                </Text>
+              </TouchableOpacity>
+            </DefaultView>
+          </DefaultView>
 
-
-{data?.getUserById?.interests?.food.map((m:string) => (
-
-          
-<DefaultView style={{
-  backgroundColor: 'rgba(255,255,255, .2)',
-  height: 40,
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: 10,
-  paddingHorizontal: 10
-}}>
-  <Text style={{
-    color: '#fff'
-  }}>
-    {m}
-  </Text>
-</DefaultView>
-))}
-
-
-{data?.getUserById?.interests?.plan.map((m:string) => (
-
-          
-<DefaultView style={{
-  backgroundColor: 'rgba(255,255,255, .2)',
-  height: 40,
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: 10,
-  paddingHorizontal: 10
-}}>
-  <Text style={{
-    color: '#fff'
-  }}>
-    {m}
-  </Text>
-</DefaultView>
-))}
-
-        </DefaultView>
-
-        </DefaultView>
-  </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
 
       </Modal>
+      <BottomSheet isVisible={modal} setIsVisible={setModal} >
+      <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 6,
+          height: 50
+        }}
+          onPress={() => navigation.navigate('EditProfile')}
+        >
+          <Icon name='person-outline' size={22} color="#fff" />
+          <Text style={{
+            color: '#fff',
+            fontSize: 14
+          }}>Editar perfil</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 6,
+          height: 50
+        }}
+          onPress={modalHandler}
+        >
+          <Icon name='git-merge-outline' size={22} color="#fff" />
+          <Text style={{
+            color: '#fff',
+            fontSize: 14
+          }}>Mis intereses</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 6,
+          height: 50
+        }}
+          onPress={sendWhatsAppMessage}
+        >
+          <Icon name='information-circle-outline' size={22} color="#fff" />
+          <Text style={{
+            color: '#fff',
+            fontSize: 14
+          }}>Ayuda & Sugerencias</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 6,
+          height: 50,
+
+        }}
+          onPress={logout}
+        >
+          <Icon name='log-out-outline' size={22} color="red" />
+          <Text style={{
+            color: 'red',
+            fontSize: 16
+          }}>Cerrar sesion</Text>
+        </TouchableOpacity>
+      </BottomSheet>
+
+
+      <BottomSheet isVisible={changePhotoBottom} setIsVisible={setChangePhotoBottom} >
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 6,
+          height: 50
+        }}
+          onPress={modalHandler}
+        >
+          <Icon name='image-outline' size={22} color="#fff" />
+          <Text style={{
+            color: '#fff',
+            fontSize: 14,
+            fontWeight:'300'
+
+          }}>Nueva foto de perfil</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 4,
+          height: 50,
+
+        }}
+          onPress={logout}
+        >
+          <Icon name='trash-outline' size={22} color="red" />
+          <Text style={{
+            color: 'red',
+            fontSize: 14,
+            fontWeight:'300'
+          }}>Eliminar foto actual</Text>
+        </TouchableOpacity>
+      </BottomSheet>
+
+
+
+      <Modal visible={open}
+        animationType='fade'
+        transparent={true}
+      >
+        <TouchableWithoutFeedback onPress={() => setOpen(false)}>
+
+          <DefaultView style={{
+            width: '100%',
+            flex: 1,
+            alignItems: 'center',
+            borderRadius: 10,
+            justifyContent: 'center',
+            margin: 'auto',
+          }}>
+            <DefaultView style={{
+              backgroundColor: '#101010',
+              width: '95%',
+              paddingTop: 20,
+              paddingBottom: 20,
+              paddingHorizontal: 5,
+              alignItems: 'center',
+              borderRadius: 10,
+              justifyContent: 'center',
+              flexDirection: 'row',
+              gap: 10,
+              flexWrap: 'wrap',
+              margin: 'auto',
+              maxHeight: '80%',
+              marginBottom: 200
+            }}>
+
+              {user?.interests?.music.map((m: string) => (
+
+
+                <DefaultView style={{
+                  backgroundColor: 'rgba(255,255,255, .2)',
+                  height: 40,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 10,
+                  paddingHorizontal: 10
+                }}>
+                  <Text style={{
+                    color: '#fff'
+                  }}>
+                    {m}
+                  </Text>
+                </DefaultView>
+              ))}
+
+
+              {user?.interests?.food.map((m: string) => (
+
+
+                <DefaultView style={{
+                  backgroundColor: 'rgba(255,255,255, .2)',
+                  height: 40,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 10,
+                  paddingHorizontal: 10
+                }}>
+                  <Text style={{
+                    color: '#fff'
+                  }}>
+                    {m}
+                  </Text>
+                </DefaultView>
+              ))}
+
+
+              {user?.interests?.plan.map((m: string) => (
+
+
+                <DefaultView style={{
+                  backgroundColor: 'rgba(255,255,255, .2)',
+                  height: 40,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 10,
+                  paddingHorizontal: 10
+                }}>
+                  <Text style={{
+                    color: '#fff'
+                  }}>
+                    {m}
+                  </Text>
+                </DefaultView>
+              ))}
+
+            </DefaultView>
+
+          </DefaultView>
+        </TouchableWithoutFeedback>
+
+      </Modal>
+
+
     </View>
   );
 };

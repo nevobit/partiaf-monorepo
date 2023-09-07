@@ -1,6 +1,7 @@
 export * from './admins';
 export * from './auth';
 export * from './files';
+export * from './follows';
 export * from './goers';
 export * from './helpers';
 export * from './payments';

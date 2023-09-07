@@ -5,9 +5,34 @@ import { View as DefaultView } from 'react-native'
 import { launchCamera } from 'react-native-image-picker'
 import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/Ionicons';
+import axios from 'axios'
 
 const Moments = () => {
     const [video, setVideo] = useState<string>();
+    const [isLoading, setIsLoading] = useState<boolean>();
+    const [error, setError] = useState<string>();
+
+    const uploadImage = async (file:any) => {
+        setIsLoading(true);
+        const formData = new FormData();
+        formData.append('image', file);
+    
+        try {
+          const { data } = await axios.post('https://partiaf-api.xyz/api/v3/upload/image', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'api-key': 'a0341d0de71a21b122a134576803f9fea2e9841a307b4e26f9240ac2f7d363ff3018a17f2d7f3ecb5a9fe62327e4eaf306864ec741e6432aa50faaf9d92aa6bd'
+            },
+          });
+          setVideo(data.url);
+          setIsLoading(false);
+        } catch (error:any) {
+          setIsLoading(false);
+          setError(JSON.stringify(error.message))
+          console.log(error)
+        }
+      };
+
     const getPhoto = () => {
         launchCamera({
             mediaType: 'video',
@@ -17,15 +42,14 @@ const Moments = () => {
             cameraType: 'back',
             durationLimit: 60
         }, (resp) => {
-            console.log(resp)
-
             if (resp.didCancel) return;
             if (!resp.assets) return;
             if (!resp.assets[0].uri) return;
-            console.log(resp)
 
-            setVideo(resp.assets[0].uri)
+            // setVideo(resp.assets[0].uri)
             const file = { uri: resp.assets[0].uri, name: resp.assets[0].fileName, type: resp.assets[0].type };
+        
+            uploadImage(file)
         })
     }
 
@@ -55,8 +79,9 @@ const Moments = () => {
                 marginLeft: 20,
                 zIndex: 999,
                 fontSize: 18,
+                width: '70%',
                 fontWeight: '500'
-            }}>Moments</Text>
+            }}>Moments Video: {video} Error: {error}</Text>
             <DefaultView style={{
                 width: '100%',
                 position: 'absolute',

@@ -24,8 +24,6 @@ export const getStoresByStoreRoute: RouteOptions = {
       const { query } = request;
       const { page, limit } = query as Query;
 
-      console.log({store})
-
       const stores = await getAllTicketsByStore(page, limit, store);
       reply.status(200).send(stores);
     } catch (err) {

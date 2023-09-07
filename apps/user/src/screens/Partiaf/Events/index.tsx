@@ -60,6 +60,7 @@ const Events = () => {
     <View
       style={{
         padding: 10,
+        flex: 1
       }}>
         
         <ScrollView>
@@ -197,7 +198,8 @@ const Events = () => {
           <Text style={{
             textAlign: 'center',
             color: '#fff',
-            fontSize: 16
+            fontSize: 16,
+            marginTop: 20
           }} >No hay eventos</Text>
         </ScrollView>
       

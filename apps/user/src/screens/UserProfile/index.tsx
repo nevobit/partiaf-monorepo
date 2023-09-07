@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import {Text, View as DefaultView, Image, TouchableOpacity, Modal, TouchableWithoutFeedback, ScrollView} from 'react-native';
+import {Text, View as DefaultView, Image, TouchableOpacity, Modal, TouchableWithoutFeedback, ScrollView, Alert} from 'react-native';
 import {View} from '../../components/Layout/Theme';
 import colors from '../../components/Layout/Theme/colors';
 import {useTheme} from '../../contexts/ThemeContexts';
@@ -14,10 +14,14 @@ import {GET_ONE_USER, GET_USER_BY_ID} from '../../graphql/queries/users';
 import {useEffect} from 'react';
 import OtherProfileTopTap from '../../navigator/AppNavigator/OtherProfileTopTap';
 import Header from '../../components/Layout/Header';
+import styles from './styles';
+import { useFollowUser } from '../../hooks';
+import { useIsfollowUser } from '../../hooks/follows/useIsfollowUser';
+import { useGetFollowers } from '../../hooks/follows/useGetFollowers';
+import { useGetFolloweds } from '../../hooks/follows/useGetFolloweds';
+import { useUnFollowUser } from '../../hooks/follows/useUnFollowUser';
 
 const UserProfile = ({route}:any) => {
-  const {theme} = useTheme();
-
   const {user} = useSelector((state: any) => state.auth);
   const [open, setOpen] = useState(false);
   const {data, loading, error, refetch} = useQuery(GET_ONE_USER, {
@@ -29,54 +33,50 @@ const UserProfile = ({route}:any) => {
     },
   });
 
+  const { followUserFn, follow, isLoading, error: errorFollow } = useFollowUser(route.params.id);
+  const { unfollowUserFn, unfollow, isLoading: isUnfollow, error: errorUnFollow } = useUnFollowUser(route.params.id);
+  
+  const { isFollow, isLoading: isLoadginIsFollow, error: errorIsFollow, refetch: refetchIsFollow } = useIsfollowUser(route.params.id);
+  const { followers, isLoading: isLoadingGetFollowers, error: errorGetFollowers, refetch: refetchGetFollowers } = useGetFollowers(route.params.id);
+  const { followeds, isLoading: isLoadingGetFolloweds, error: errorGetFolloweds, refetch: refetchGetFolloweds, stopPolling, startPolling } = useGetFolloweds(route.params.id);
+
+  const followUser = async () => {
+    await followUserFn();
+    refetchIsFollow();
+    refetchGetFollowers();
+    refetchGetFolloweds();
+  };
+
+  const unfollowUser = async () => {
+    await unfollowUserFn();
+    refetchIsFollow();
+    refetchGetFollowers();
+    refetchGetFolloweds();
+  };
+
 
   useEffect(() => {
+    refetchIsFollow();
     refetch();
-  }, [refetch]);
+    refetchGetFollowers();
+    refetchGetFolloweds();
+  }, [refetch, refetchIsFollow]);
+
+  useEffect(() => {
+    startPolling(1000);
+    return () => {
+      stopPolling();
+    };
+  }, [stopPolling, startPolling]);
+
 
   return (
-    <View
-      style={{
-        flex: 1,
-      }}>
-      {/* <DefaultView
-        style={{
-          paddingVertical: 5,
-          paddingTop: 25,
-          paddingHorizontal: 10,
-          paddingRight: 5,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-        <Image
-          style={{
-            width: 110,
-            height: 15,
-            tintColor: '#fff',
-            resizeMode: 'cover',
-          }}
-          source={{
-            uri: 'https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png',
-          }}
-        />
-        <DefaultView
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 5,
-          }}>
-        </DefaultView>
-      </DefaultView> */}
+    <View style={{
+      flex: 1
+    }}>
       <Header wallet ticket />
       <DefaultView
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 25,
-          paddingVertical: 15,
-        }}>
+        style={styles.container}>
         <DefaultView
           style={{
             alignItems: 'center',
@@ -87,7 +87,7 @@ const UserProfile = ({route}:any) => {
               fontWeight: '700',
               fontSize: 18,
             }}>
-            {data?.getOneUser.following.length}
+            {followeds?.length}
           </Text>
           <Text
             style={{
@@ -99,16 +99,9 @@ const UserProfile = ({route}:any) => {
         </DefaultView>
         <DefaultView>
           <Image
-            style={{
-              height: 100,
-              width: 100,
-              borderRadius: 100,
-              resizeMode: 'cover',
-              borderWidth: 2,
-              borderColor: '#333'
-            }}
+            style={styles.user_photo}
             source={{
-              uri: data?.getOneUser.photo[0]? data?.getOneUser.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
+              uri: data?.getOneUser?.photo[0]? data?.getOneUser.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
             }}
           />
         </DefaultView>
@@ -122,7 +115,7 @@ const UserProfile = ({route}:any) => {
               fontWeight: '700',
               fontSize: 18,
             }}>
-            {data?.getOneUser.following.length}
+            {followers?.length}
           </Text>
           <Text
             style={{
@@ -141,7 +134,7 @@ const UserProfile = ({route}:any) => {
             fontWeight: '600',
             textAlign: 'center',
           }}>
-          {data?.getOneUser.firstname} {data?.getOneUser.lastname}
+          {data?.getOneUser?.firstname} {data?.getOneUser?.lastname}
         </Text>
         <DefaultView style={{
           flexDirection: 'row',
@@ -210,7 +203,7 @@ const UserProfile = ({route}:any) => {
               fontSize: 14,
               textAlign: 'center',
             }}>
-            {data?.getOneUser.biography}
+            {data?.getOneUser?.biography}
           </Text>
         </TouchableOpacity>
         <DefaultView style={{
@@ -220,20 +213,9 @@ const UserProfile = ({route}:any) => {
           justifyContent: 'center',
           gap: 10
         }}>
+          {isFollow ? (
 
-        <TouchableOpacity style={{
-            backgroundColor: colors.dark.primary,
-          borderRadius: 10,
-          padding: 5,
-          borderWidth: 1,
-          borderColor: colors.dark.primary,
-          height: 40,
-          width: 150,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          paddingHorizontal: 20
-        }}>
+        <TouchableOpacity style={styles.follow_btn} onPress={unfollowUser}>
           <Text
             style={{
               color: "#333",
@@ -241,9 +223,27 @@ const UserProfile = ({route}:any) => {
               fontWeight: '500',
               textAlign: 'center',
             }}>
-            Segir
+            Siguiendo
           </Text>
         </TouchableOpacity>
+          ): (
+
+        <TouchableOpacity style={[styles.follow_btn, {
+          backgroundColor: 'rgba(255,255,255, .2)',
+          borderColor: 'rgba(255,255,255, .2)'
+        }]} onPress={() => followUser()}>
+        <Text
+          style={{
+            color: "#fff",
+            fontSize: 16,
+            fontWeight: '500',
+            textAlign: 'center',
+          }}>
+          Seguir
+        </Text>
+      </TouchableOpacity>
+          )}
+
         <TouchableOpacity style={{
           backgroundColor: 'rgba(255,255,255, .2)',
           width: 50,
@@ -268,9 +268,10 @@ const UserProfile = ({route}:any) => {
           width: '100%',
           flex: 1,
           alignItems: 'center',
-          borderRadius: 10,
+          borderRadius: 20,
           justifyContent: 'center',
           margin: 'auto',
+          zIndex: 99999,
         }}>
           <DefaultView style={{
             backgroundColor: '#101010',
@@ -285,8 +286,10 @@ const UserProfile = ({route}:any) => {
             gap: 10,
             flexWrap: 'wrap',
             margin: 'auto',
-            maxHeight: '80%',
-            marginBottom: 200
+            maxHeight: '70%',
+            marginTop: 120,
+            marginBottom: 200,
+            overflow: 'hidden'
           }}>
 
 {data?.getOneUser?.interests?.music.map((m:string) => (

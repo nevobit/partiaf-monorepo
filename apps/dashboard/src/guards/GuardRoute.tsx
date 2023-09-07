@@ -16,8 +16,6 @@ const PublicValidationFragment = (
 
 const GuardRoute = ({privateValidation}: Props) => {
   const { user } = useSelector((store: AppStore) => store.auth);
-
-  console.log(user)
   return user.token ? (
     privateValidation ? (
       PrivateValidationFragment

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   Modal,
+  Platform,
 } from 'react-native';
 import {View} from '../../components/Layout/Theme';
 import Stories from '../../components/UI/Home/Stories';
@@ -174,7 +175,7 @@ const Home = ({navigation}: any) => {
 
         <DefaultView style={{
           paddingHorizontal: 15,
-          marginTop: 15,
+          marginTop: Platform.OS == 'android'? 15 : 40,
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between'

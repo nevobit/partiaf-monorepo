@@ -22,7 +22,6 @@ export const getGoersByTicketRoute: RouteOptions = {
       const { params } = request;
       const { ticket } = params as Params;
 
-      console.log({ticket})
       const goers = await getGoersByTicket(ticket);
       reply.status(200).send(goers);
     } catch (err) {

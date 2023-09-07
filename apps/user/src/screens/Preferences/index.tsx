@@ -83,7 +83,6 @@ const preferences = {
 };
 
 const Preferences = ({navigation}: any) => {
-  const [myPreferences, setMyPreferences] = useState({});
   const [preferenceFood, setPreferenceFood] = useState<string[]>([]);
   const [preferenceMusic, setPreferenceMusic] = useState<string[]>([]);
   const [preferencePlan, setPreferencePlan] = useState<string[]>([]);
@@ -346,10 +345,10 @@ const Preferences = ({navigation}: any) => {
       </ScrollView>
       <DefaultView style={{flex: 1, justifyContent: 'flex-end'}}>
         <TouchableOpacity
-          disabled={preferenceFood.length < 2}
+          disabled={preferenceFood.length + preferenceMusic.length + preferencePlan.length < 5}
           style={{
             backgroundColor:
-              preferenceFood.length <= 2
+              preferenceFood.length + preferenceMusic.length + preferencePlan.length  < 5
                 ? 'rgb(100,100,100)'
                 : colors.dark.primary,
             height: 50,

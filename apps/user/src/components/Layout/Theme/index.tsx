@@ -3,14 +3,8 @@ import {
   SafeAreaView,
   StyleProp,
   ViewStyle,
-  ScrollView,
-  StatusBar,
-  View as DefaultView,
 } from 'react-native';
-import Colors from './colors';
 import {ReactNode} from 'react';
-import {useTheme} from '../../../contexts/ThemeContexts';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import CustomStatusBar from '../CustomStatusBar';
 
 interface Props {
@@ -19,12 +13,11 @@ interface Props {
 }
 
 export const View = ({style, children}: Props) => {
-  const {top} = useSafeAreaInsets();
-  const {theme} = useTheme();
   return (
     <SafeAreaView
       style={[
         {
+          // flex: 1,
           width: '100%',
           backgroundColor: "#000",
         },
@@ -35,7 +28,6 @@ export const View = ({style, children}: Props) => {
         backgroundColor="#000"
         barStyle="light-content"
       />
-
       {children}
     </SafeAreaView>
   );

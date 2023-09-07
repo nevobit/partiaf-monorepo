@@ -2,6 +2,7 @@ import {
   getAllUsers,
   getUserById,
   registerStore,
+  updateUser,
   verifyUserToken,
 } from '@partiaf/business-logic';
 
@@ -36,8 +37,6 @@ export default {
     getAllUsers: async (parent: any, {}, ctx: any) => {
       const { id } = (await verifyUserToken(ctx)) as { id: string };
       const users = await getAllUsers(id);
-      
-      console.log(users);
       if (users instanceof Error) {
         return new Error('Invalid credentials');
       }
@@ -49,6 +48,16 @@ export default {
     registerStore: async (parent: any, { code }: {code: string}, ctx: any) => {
       const { id } = await verifyUserToken(ctx) as { id: string };
       const user = await registerStore({id, code});
+      if (user instanceof Error) {
+        return new Error('Invalid credentials');
+      }
+
+      return user;
+    },
+
+    updateUser: async (parent: any, { data }: any, ctx: any) => {
+      const { id } = await verifyUserToken(ctx) as { id: string };
+      const user = await updateUser({id, ...data});
       if (user instanceof Error) {
         return new Error('Invalid credentials');
       }
