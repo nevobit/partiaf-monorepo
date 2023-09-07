@@ -15,10 +15,65 @@
   margin-top: 2rem;
 }
 
-.cnt_cards{
+.cnt_cards {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
+.cnt_photo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 
+.cnt_photo h3{
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.section_photos{
+  display: flex;
+  gap: 3rem;
+}
+
+.upload_photo {
+  width: 60rem;
+}
+
+.photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.photos img {
+  height: 10rem;
+  width: 100%;
+  object-fit: cover;
+  border-radius: .4rem; 
+}
+
+.img_item {
+  position: relative;
+}
+
+.img_item button {
+  height: 1.8rem;
+  width: 1.8rem !important;
+  border-radius: 5rem;
+  font-size: 1.8rem;
+  display: grid;
+  place-items: center;
+  background-color: #ca0b00;
+  color: #f2f6fa;
+  position: absolute;
+  right: -0.7rem;
+  top: -0.7rem;
+}
+
+.footer_update_store{
+  padding: 2rem;
+  display: flex;
+  justify-content: right;
+}
