@@ -1,4 +1,5 @@
-import { CLOUDINARY_URL } from "@/screens/Private/RegisterBusiness";
+import { CLOUDINARY_URL } from '@/screens/Private/RegisterBusiness';
+import { useState } from 'react'; 
 
 interface Props {
   store: any;
@@ -6,6 +7,8 @@ interface Props {
 }
 
 export const useUpdatePhotos = ({ store, setStore }: Props) => {
+  const [loadingPhoto, setLoadingPhoto] = useState(false); // Estado de carga
+
   const uploadHandler = async (e: any, imageField = "image") => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -14,6 +17,7 @@ export const useUpdatePhotos = ({ store, setStore }: Props) => {
     bodyFormData.append("cloud_name", "matosr96");
 
     try {
+      setLoadingPhoto(true); // Establecer estado de carga a true
       fetch(CLOUDINARY_URL, {
         method: "post",
         body: bodyFormData,
@@ -25,17 +29,21 @@ export const useUpdatePhotos = ({ store, setStore }: Props) => {
           images.push(image);
           setStore((prev: any) => ({ ...prev, ["photos"]: images }));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setLoadingPhoto(false); 
+        });
     } catch (err) {
       console.log(err);
+      setLoadingPhoto(false);
     }
   };
 
   const removePhoto = (image: string) => {
     let images = store.photos || [];
-    images = images.filter((i: any) => i != image);
+    images = images.filter((i: any) => i !== image);
     setStore((prev: any) => ({ ...prev, ["photos"]: images }));
   };
 
-  return { uploadHandler, removePhoto };
+  return { uploadHandler, removePhoto, loadingPhoto };
 };
