@@ -138,7 +138,25 @@ const TabBar = ({state, navigation}: BottomTabBarProps) => {
                     }} />
                     </View>
                      :
-                    <Icon name={iconName} size={25} color="#fff" />
+                     (
+                      <>
+                      {route.name == 'Moments' ? (
+                        <View>
+                          <Icon name="lock-closed" style={{
+                            position: 'absolute',
+                            right: -1,
+                            top: -2,
+                            zIndex: 99
+                          }}  size={15} color="#fff" />
+                          <Icon name={iconName} size={25} color="#333" />
+                        </View>
+
+                      ): (
+                        <Icon name={iconName} size={25} color="#fff" />
+                      )}
+                      </>
+
+                     )
                   )}
                 </View>
               )}

@@ -1,14 +1,11 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 
 type FormState<T> = T;
 
-export const useForm = <T>(initialState: T) => {
+export const useForm = <T extends Record<string, any>>(initialState: T) => {
   const [formState, setFormState] = useState<FormState<T>>(initialState);
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = event.target;
+  const handleChange = (name: keyof T, value: T[keyof T]) => {
     setFormState((prev) => ({
       ...prev,
       [name]: value,
@@ -19,4 +16,4 @@ export const useForm = <T>(initialState: T) => {
     formState,
     handleChange,
   };
-}
+};

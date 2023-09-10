@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {Text, View as DefaultView, Image, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import {Text, View as DefaultView, Image, TouchableOpacity, Modal, TouchableWithoutFeedback, ScrollView} from 'react-native';
 import {View} from '../../components/Layout/Theme';
 import colors from '../../components/Layout/Theme/colors';
 import {useTheme} from '../../contexts/ThemeContexts';
@@ -19,7 +19,7 @@ const UserProfile = ({route}:any) => {
   const {theme} = useTheme();
 
   const {user} = useSelector((state: any) => state.auth);
-
+  const [open, setOpen] = useState(false);
   const {data, loading, error, refetch} = useQuery(GET_ONE_USER, {
     variables: { id: route.params.id },
     context: {
@@ -143,14 +143,72 @@ const UserProfile = ({route}:any) => {
           }}>
           {data?.getOneUser.firstname} {data?.getOneUser.lastname}
         </Text>
+        <DefaultView style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: 10,
+          gap: 10
+        }}>
+
+        <TouchableOpacity 
+        onPress={() => setOpen(true)}
+        style={{
+          backgroundColor: 'rgba(255,255,255, .2)',
+          height: 40,
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 10,
+          paddingHorizontal: 10
+        }}>
+          <Text style={{
+            color: '#fff'
+          }}>
+          {data?.getOneUser?.interests?.food[0]}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+        onPress={() => setOpen(true)}
+        style={{
+          backgroundColor: 'rgba(255,255,255, .2)',
+          height: 40,
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 10,
+          paddingHorizontal: 10
+        }}>
+          <Text style={{
+            color: '#fff'
+          }}>
+          {data?.getOneUser?.interests?.plan[0]}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+        onPress={() => setOpen(true)}
+        style={{
+          backgroundColor: 'rgba(255,255,255, .2)',
+          height: 40,
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 10,
+          paddingHorizontal: 10
+        }}>
+          <Text style={{
+            color: '#fff'
+          }}>
+          {data?.getOneUser?.interests?.music[0]}
+          </Text>
+        </TouchableOpacity>
+        </DefaultView>
+
         <TouchableOpacity>
           <Text
             style={{
               color: 'rgba(255,255,255,0.5)',
               fontSize: 14,
               textAlign: 'center',
-              marginTop: 5,
-              marginBottom: 10,
             }}>
             {data?.getOneUser.biography}
           </Text>
@@ -164,12 +222,17 @@ const UserProfile = ({route}:any) => {
         }}>
 
         <TouchableOpacity style={{
-          backgroundColor: colors.dark.primary,
-          width: 150,
+            backgroundColor: colors.dark.primary,
+          borderRadius: 10,
+          padding: 5,
+          borderWidth: 1,
+          borderColor: colors.dark.primary,
           height: 40,
+          width: 150,
+          display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: 5
+          paddingHorizontal: 20
         }}>
           <Text
             style={{
@@ -182,19 +245,115 @@ const UserProfile = ({route}:any) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={{
-          backgroundColor: 'rgba(255,255,255,.8)',
+          backgroundColor: 'rgba(255,255,255, .2)',
           width: 50,
           height: 40,
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: 5
+          borderRadius: 10,
         }}>
-            <Icon name='person-add-outline' size={18} />
+            <Icon name='person-add-outline' size={18} color='#fff' />
         </TouchableOpacity>
         </DefaultView>
 
       </DefaultView>
       <OtherProfileTopTap id={route.params.id} />
+      <Modal visible={open}
+      animationType='fade'
+      transparent={true}
+>
+  <TouchableWithoutFeedback onPress={() => setOpen(false)}>
+
+        <DefaultView style={{
+          width: '100%',
+          flex: 1,
+          alignItems: 'center',
+          borderRadius: 10,
+          justifyContent: 'center',
+          margin: 'auto',
+        }}>
+          <DefaultView style={{
+            backgroundColor: '#101010',
+            width: '95%',
+            paddingTop: 20,
+            paddingBottom: 20,
+            paddingHorizontal: 5,
+            alignItems: 'center',
+            borderRadius: 10,
+            justifyContent: 'center',
+            flexDirection: 'row',
+            gap: 10,
+            flexWrap: 'wrap',
+            margin: 'auto',
+            maxHeight: '80%',
+            marginBottom: 200
+          }}>
+
+{data?.getOneUser?.interests?.music.map((m:string) => (
+
+          
+        <DefaultView style={{
+          backgroundColor: 'rgba(255,255,255, .2)',
+          height: 40,
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 10,
+          paddingHorizontal: 10
+        }}>
+          <Text style={{
+            color: '#fff'
+          }}>
+            {m}
+          </Text>
+        </DefaultView>
+))}
+
+
+{data?.getOneUser?.interests?.food.map((m:string) => (
+
+          
+<DefaultView style={{
+  backgroundColor: 'rgba(255,255,255, .2)',
+  height: 40,
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 10,
+  paddingHorizontal: 10
+}}>
+  <Text style={{
+    color: '#fff'
+  }}>
+    {m}
+  </Text>
+</DefaultView>
+))}
+
+
+{data?.getOneUser?.interests?.plan.map((m:string) => (
+
+          
+<DefaultView style={{
+  backgroundColor: 'rgba(255,255,255, .2)',
+  height: 40,
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 10,
+  paddingHorizontal: 10
+}}>
+  <Text style={{
+    color: '#fff'
+  }}>
+    {m}
+  </Text>
+</DefaultView>
+))}
+
+        </DefaultView>
+
+        </DefaultView>
+  </TouchableWithoutFeedback>
+
+      </Modal>
     </View>
   );
 };

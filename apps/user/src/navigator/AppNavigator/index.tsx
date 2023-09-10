@@ -15,6 +15,7 @@ import Partiaf from '../../screens/Partiaf';
 import VerifyAge from '../../screens/VerifyAge';
 import {useSelector} from 'react-redux';
 import Search from '../../screens/Search';
+import Moments from '../../screens/Moments';
 
 const Tab = createBottomTabNavigator();
 const Auth = createStackNavigator<AuthStackParamList>();
@@ -83,7 +84,7 @@ export const AppNavigator = () => {
       tabBar={(props: any) => <TabBar {...props} />}>
       <Tab.Screen name="Home" component={HomeNavigator} />
       <Tab.Screen name="Search" component={Search} />
-      <Tab.Screen name="Moments" component={Home} />
+      <Tab.Screen name="Moments" component={Moments} />
       <Tab.Screen name="Partiaf" component={Partiaf} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>

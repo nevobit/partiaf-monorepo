@@ -2,7 +2,7 @@ import React from 'react'
 import { View as DefaultView, Image, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-const Header = ({ navigation, filters, back, wallet, ticket, options, openModal }: any) => {
+const Header = ({ navigation, openFilters, filters, back, wallet, ticket, options, openModal }: any) => {
     return (
         <DefaultView style={{
             display: 'flex',
@@ -50,7 +50,10 @@ const Header = ({ navigation, filters, back, wallet, ticket, options, openModal 
                         flexDirection: 'row',
                         gap: 15,
                     }}>
-                    <Icon name="options-outline" size={24} color="#fff" />
+                        <TouchableOpacity onPress={openFilters}>
+                        <Icon name="options-outline" size={24} color="#fff" />
+                    </TouchableOpacity>
+
                     <Icon name="qr-code-outline" size={24} color="rgba(0,0,0,1)" />
                 </DefaultView>
             ) : (

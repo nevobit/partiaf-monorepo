@@ -8,6 +8,7 @@ import {
   Image,
   ActivityIndicator,
   TextInput,
+  StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector } from 'react-redux';
@@ -16,12 +17,11 @@ import { GET_USER_BY_ID } from '../../graphql/queries/users';
 import { useEffect } from 'react';
 import { DivisaFormater } from '../../utilities/divisaFormater';
 import axios from 'axios';
-import { Linking } from 'react-native';
 import { WebView } from 'react-native-webview';
 import colors from '../../components/Layout/Theme/colors';
 import { BottomSheet } from '../../containers';
 import Header from '../../components/Layout/Header';
-
+import Modal from '../../containers/Modal';
 const Wallet = ({ navigation }: any) => {
   const { user } = useSelector((state: any) => state.auth);
 
@@ -35,10 +35,9 @@ const Wallet = ({ navigation }: any) => {
 
   const [paymentInfo, setPaymentInfo] = useState();
   const [amount, setAmount] = useState(0);
-  const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState();
 
   const createOrder = async () => {
     setIsLoading(true);
@@ -46,24 +45,24 @@ const Wallet = ({ navigation }: any) => {
       price: amount
     });
     setPaymentInfo(data)
-    if (!await Linking.canOpenURL(data.init_point)) {
-      await Linking.openURL(data.init_point);
+    setUrl(data.init_point);
+    setOpenModal(false)
     setIsLoading(false);
-    } else {
-    setIsLoading(false);
-    console.log("No se puede abrir la URL:", data.init_point);
-    }
   }
 
   useEffect(() => {
     refetch();
   }, [refetch]);
+
+  console.log(url)
   return (
+    <>
+
     <View
       style={{
         minHeight: '100%',
       }}>
-    
+
       <Header navigation={navigation} back wallet />
       <DefaultView
         style={{
@@ -101,6 +100,7 @@ const Wallet = ({ navigation }: any) => {
         <DefaultView
           style={{
             alignItems: 'center',
+            opacity: .5
           }}>
           <DefaultView
             style={{
@@ -124,6 +124,7 @@ const Wallet = ({ navigation }: any) => {
         <DefaultView
           style={{
             alignItems: 'center',
+            opacity: .5
           }}>
           <DefaultView
             style={{
@@ -146,6 +147,7 @@ const Wallet = ({ navigation }: any) => {
         <DefaultView
           style={{
             alignItems: 'center',
+            opacity: .5
           }}>
           <DefaultView
             style={{
@@ -193,6 +195,7 @@ const Wallet = ({ navigation }: any) => {
         <DefaultView
           style={{
             alignItems: 'center',
+            opacity: .5
           }}>
           <DefaultView
             style={{
@@ -277,61 +280,90 @@ const Wallet = ({ navigation }: any) => {
         </DefaultView>
       )} */}
 
-      <BottomSheet isVisible={openModal} setIsVisible={setOpenModal}>
-        <TextInput 
-        onChangeText={(text) => setAmount(Number(text))}
-        keyboardType='numeric' style={{
-          color: "#fff",
+      <Modal isVisible={openModal} setIsVisible={setOpenModal}>
+        <Text style={{
+          color: '#fff',
+          textAlign: 'center',
+          fontWeight: '600',
           fontSize: 16,
-          height: 60,
-          paddingHorizontal: 10,
-          borderWidth: 1,
-          borderColor: '#fff',
-          borderRadius: 15,
-          marginBottom: 15
-        }}
-        placeholder='Valor a recargar'
-        placeholderTextColor={colors.dark.holderColor}
+          marginBottom: 20
+        }}>Valor a recargar</Text>
+        <TextInput
+          onChangeText={(text) => setAmount(Number(text))}
+          keyboardType='numeric' style={{
+            color: "#fff",
+            fontSize: 16,
+            height: 60,
+            paddingHorizontal: 10,
+            borderWidth: 1,
+            borderColor: '#fff',
+            borderRadius: 15,
+            marginBottom: 15
+          }}
+          placeholder='Valor a recargar'
+          placeholderTextColor={colors.dark.holderColor}
         />
         <TouchableOpacity
-            onPress={createOrder}
-            style={{
-              backgroundColor: colors.dark.primary,
-              borderRadius: 15,
-              height: 50,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 45,
-              width: '100%',
+          onPress={createOrder}
+          style={{
+            backgroundColor: colors.dark.primary,
+            borderRadius: 15,
+            height: 50,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 45,
+            width: '100%',
 
-            }}>
-              {isLoading ? <ActivityIndicator size='small' /> : (
+          }}>
+          {isLoading ? <ActivityIndicator size='small' /> : (
 
             <Text style={{
               fontWeight: '600',
               fontSize: 16,
               color: '#333'
             }}>Continuar</Text>
-            )}
+          )}
 
-          </TouchableOpacity>
-      </BottomSheet>
-      {open && <MyWebView url={url} />}
+        </TouchableOpacity>
+      </Modal>
     </View>
+    {url && 
+
+    <View 
+              style={{
+                flex: 1,
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                height: '100%',
+                width: "100%",
+              backgroundColor: '#fff',
+                zIndex: 9999999999,
+              }}
+
+              
+    >
+        <StatusBar backgroundColor="#fff" barStyle='dark-content' />
+        <WebView
+          originWhitelist={['*']}
+          source={{ uri: url }}
+          onError={(err) => console.log(err)}
+          style={{
+            flex: 1,
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            height: '100%',
+            width: '100%',
+            zIndex: 9999999999,
+          }}
+          startInLoadingState={true}
+        />
+    </View>
+  }
+    </>
   );
 };
 
 export default Wallet;
-
-const MyWebView = ({ url }: any) => {
-  return (
-    <DefaultView style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%'
-    }}>
-      <WebView source={{ uri: url }} />;
-    </DefaultView>)
-};

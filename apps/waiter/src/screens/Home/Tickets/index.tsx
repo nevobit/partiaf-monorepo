@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 
 const Tickets = ({selected}: any) => {
   const {user} = useSelector((state: any) => state.auth);
-    const {data: goers, refetch} = useQuery(GET_GOERS_BY_TICKET_ID, {
+    const {data: goers, refetch, startPolling, stopPolling} = useQuery(GET_GOERS_BY_TICKET_ID, {
         variables: { id: selected },
         context: {
           headers: {
@@ -17,6 +17,15 @@ const Tickets = ({selected}: any) => {
         },
       })
 
+      useEffect(() => {
+        startPolling(1000);
+        return () => {
+          stopPolling();
+        }
+    
+      }, [startPolling, stopPolling]);
+
+      
       useEffect(() => {
         refetch()
       }, [selected])
