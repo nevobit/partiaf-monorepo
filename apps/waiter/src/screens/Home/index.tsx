@@ -7,6 +7,7 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   Image,
+  Platform,
 } from 'react-native';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -101,7 +102,7 @@ export const HomeScreen = ({navigation, route}:any) => {
           alignItems: 'center',
           justifyContent: 'center'
         }}
-        onPress={() => navigation.navigate('scanner')}
+        onPress={() => Platform.OS == 'android'? navigation.navigate('scanner') : navigation.navigate('scannerIos')}
         >
           <Image 
           style={{

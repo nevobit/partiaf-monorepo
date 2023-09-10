@@ -137,6 +137,7 @@ type Mutation {
     userSignin(phone: String!, password: String!): AuthPayload
     userSignup(userData: UserInput): AuthPayload
     createGoer(data: GoerInput): Goer
+    updateGoer(data: GoerInput): Goer
     registerStore(code: String): User
     updateUser(data: UserInput): User
     followUser(followId: String): Boolean

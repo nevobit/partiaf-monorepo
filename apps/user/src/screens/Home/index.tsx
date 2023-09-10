@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   View as DefaultView,
@@ -26,7 +26,7 @@ const Home = ({navigation}: any) => {
   const [when, setWhen] = useState('all');
 
 
-  const { data } = useQuery(GET_STORES, {
+  const { data, startPolling, stopPolling } = useQuery(GET_STORES, {
     context: {
       headers: {
         authorization: user.token ? `Bearer ${user.token}` : '',
@@ -40,11 +40,20 @@ const Home = ({navigation}: any) => {
     setOpenFilters(false);
   }
 
+  useEffect(() => {
+    startPolling(1000);
+    return () => {
+      stopPolling();
+    };
+  }, [stopPolling, startPolling]);
+  
+
   return (
     <View style={{
       backgroundColor: '#000',
       height: '100%',
-      position: 'relative'
+      position: 'relative',
+      flex: 1
     }}>
       <Header navigation={navigation} openFilters={() => setOpenFilters(true)} filters={true} />
       <ScrollView style={{

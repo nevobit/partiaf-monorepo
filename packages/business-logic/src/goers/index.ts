@@ -3,3 +3,4 @@ export * from './get-by-id';
 export * from './get-by-ticket';
 export * from './get-by-user';
 export * from './get-one';
+export * from './update';

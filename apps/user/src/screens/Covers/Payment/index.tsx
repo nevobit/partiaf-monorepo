@@ -63,6 +63,7 @@ const Payment = ({navigation, route}: any) => {
                 image: route.params.goer.image,
                 name: route.params.goer.name,
                 time: route.params.goer.hour,
+                entry_status: 'in_list',
               },
             },
             

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View as DefaultView,
   ScrollView,
@@ -16,16 +16,25 @@ import { GET_STORES } from '../../graphql/queries/users';
 const Stores = ({navigation}: any) => {  
     const {user} = useSelector((state: any) => state.auth);
   
-    const { data } = useQuery(GET_STORES, {
+    const { data, startPolling, stopPolling } = useQuery(GET_STORES, {
       context: {
         headers: {
           authorization: user.token ? `Bearer ${user.token}` : '',
         },
       },
     });
+
+    useEffect(() => {
+      startPolling(2000);
+      return () => {
+        stopPolling();
+      };
+    }, [stopPolling, startPolling]);
     
   return (
-    <View>
+    <View style={{
+      flex: 1
+    }}>
       <DefaultView
         style={{
           display: 'flex',

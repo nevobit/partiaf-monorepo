@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { View, Dimensions, Alert, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react'
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { View, Dimensions, Alert, Text, TouchableOpacity } from 'react-native';
+import { RNCamera } from 'react-native-camera';
 import Modal from '../../containers/Modal';
 import { colors } from '../../layout/theme/colors';
 import { useMutation } from '@apollo/client';
 import { UPDATE_GOER } from '../../graphql/mutations/auth';
-import { useCameraDevices } from 'react-native-vision-camera';
-import { Camera } from 'react-native-vision-camera';
-import { BarcodeFormat, useScanBarcodes } from 'vision-camera-code-scanner';
 
-const QrScanner = ({navigation}: any) => {
-    const [hasPermission, setHasPermission] = useState(false);
+const QrScannerIos = ({navigation}: any) => {
     const [qrValue, setQrValue] = useState<any>({})
     const [light, setLight] = useState(false)
     const [showDialog, setShowDialog] = useState(false)
-    const devices = useCameraDevices();
-    const device = devices.back;
-  
+
     const [updateGoer, {loading, error}] = useMutation(UPDATE_GOER);
-    const [frameProcessor, barcodes] = useScanBarcodes([BarcodeFormat.QR_CODE], {
-        checkInverted: true,
-      });
+
   const onSubmit = async() => {
     try{
 
@@ -39,13 +33,6 @@ const QrScanner = ({navigation}: any) => {
         Alert.alert(String(err))
     }
   }
-
-  useEffect(() => {
-    (async () => {
-      const status = await Camera.requestCameraPermission();
-      setHasPermission(status == 'granted');
-    })();
-  }, []);
 
   return (
     <View style={{
@@ -110,7 +97,7 @@ const QrScanner = ({navigation}: any) => {
             </View>
 
         </Modal>
-    {/* <QRCodeScanner
+    <QRCodeScanner
         onRead={(e) => {
             onSubmit()
             setQrValue(JSON.parse(e.data))
@@ -133,24 +120,9 @@ const QrScanner = ({navigation}: any) => {
             flex: 0,
         }}
         flashMode={light ? RNCamera.Constants.FlashMode.torch : RNCamera.Constants.FlashMode.auto}
-    /> */}
-
-{device != null &&
-    hasPermission && (
-      <>
-        <Camera
-          style={StyleSheet.absoluteFill}
-          device={device}
-          isActive={true}
-        />
-        {barcodes.map((barcode, idx) => (
-          <Text key={idx}>
-            {barcode.displayValue}
-          </Text>
-        ))}
-      </>)}
+    />
 </View>
   )
 }
 
-export default QrScanner
+export default QrScannerIos

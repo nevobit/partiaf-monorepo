@@ -64,11 +64,11 @@ const UpdateTicket = ({ setOpen, cover }: Props) => {
                 <Input
                   name="name"
                   value={formState.name}
-                  onChange={handleChange}
+                  onChange={({target}) => handleChange('name', target.value)}
                 />
               </Field>
               <Field label="Tipo">
-                <select name="type" onChange={handleChange}>
+                <select name="type" onChange={({target}) => handleChange('type', target.value)}>
                   <option value="General">General</option>
                   <option value="VIP">VIP</option>
                 </select>
@@ -81,7 +81,7 @@ const UpdateTicket = ({ setOpen, cover }: Props) => {
                   type="number"
                   name="price"
                   value={formState.price}
-                  onChange={handleChange}
+                  onChange={({target}) => handleChange('price', target.value)}
                   required
                 />
               </Field>
@@ -89,7 +89,7 @@ const UpdateTicket = ({ setOpen, cover }: Props) => {
                 <Input
                   name="limit"
                   value={formState.limit}
-                  onChange={handleChange}
+                  onChange={({target}) => handleChange('limit', target.value)}
                   required
                 />
               </Field>
@@ -100,7 +100,7 @@ const UpdateTicket = ({ setOpen, cover }: Props) => {
                 <Input
                   type="date"
                   name="date"
-                  onChange={handleChange}
+                  onChange={({target}) => handleChange('date', target.value)}
                   required
                 />
               </Field>
@@ -109,7 +109,7 @@ const UpdateTicket = ({ setOpen, cover }: Props) => {
                   name="hour"
                   type="time"
                   value={formState.hour}
-                  onChange={handleChange}
+                  onChange={({target}) => handleChange('hour', target.value)}
                   required
                 />
               </Field>
@@ -118,7 +118,7 @@ const UpdateTicket = ({ setOpen, cover }: Props) => {
               <Textarea
                 name="description"
                 value={formState.description}
-                onChange={handleChange}
+                onChange={({target}) => handleChange('description', target.value)}
               />
             </Field>
           </div>
