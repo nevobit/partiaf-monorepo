@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ImageInput.module.css";
+import Loader from "../Loader";
 
 interface Props {
   value?: string;
@@ -10,9 +11,10 @@ interface Props {
   width?: string;
   fontSize?: string;
   fontWeight?: string;
+  loading?: boolean;
 }
 
-const ImageInput = ({ value, onChange }: Props) => {
+const ImageInput = ({ value, loading, onChange }: Props) => {
   return (
     <div>
       <div className={styles.formbold_file_input}>
@@ -24,13 +26,17 @@ const ImageInput = ({ value, onChange }: Props) => {
           onChange={onChange}
         />
         <label htmlFor="file">
-          <div>
-            <span className={styles.formbold_drop_file}>
-              Arrasta el archivo
-            </span>
-            <span className={styles.formbold_or}>O</span>
-            <span className={styles.formbold_browse}>Buscalo</span>
-          </div>
+          {loading ? (
+            <Loader small />
+          ) : (
+            <div>
+              <span className={styles.formbold_drop_file}>
+                Arrasta el archivo
+              </span>
+              <span className={styles.formbold_or}>O</span>
+              <span className={styles.formbold_browse}>Buscalo</span>
+            </div>
+          )}
         </label>
       </div>
     </div>

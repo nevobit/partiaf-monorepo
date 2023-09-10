@@ -18,7 +18,10 @@ const BusinessSettings = () => {
     updateStore,
     isUpdating,
   } = useUpdateStore();
-  const { uploadHandler, removePhoto } = useUpdatePhotos({ store, setStore });
+  const { uploadHandler, removePhoto, loadingPhoto } = useUpdatePhotos({
+    store,
+    setStore,
+  });
 
   useEffect(() => {
     if (storeData) {
@@ -33,7 +36,7 @@ const BusinessSettings = () => {
   return (
     <div className={styles.screen}>
       <div className={styles.header_Setting}>
-        <h1>Personal Account Settings</h1>
+        <h1>Configuracion del negocio</h1>
       </div>
       <div className={styles.cnt_menu}>
         <div className={styles.menu}>
@@ -48,6 +51,7 @@ const BusinessSettings = () => {
                 <ImageInput
                   name="photos"
                   onChange={(e) => uploadHandler(e, "featurephoto")}
+                  loading={loadingPhoto}
                 />
               </div>
               <div className={styles.photos}>

@@ -1,73 +1,70 @@
-
-
-
 const cardData = [
   {
-    label: "Business name",
+    label: "Nombre del negocio",
     description:
-      "Please enter your full name, or a display name you are comfortable with.",
-    description_footer: "Please use 32 characters at maximum.",
+      "Por favor, ingrese el nombre completo del negocio o un nombre de visualización con el que se sienta cómodo.",
+    description_footer: "Por favor, utilice un máximo de 32 caracteres.",
     name: "name",
   },
   {
-    label: "Business email",
-    description: "Please enter your business email address.",
-    description_footer: "Please use a valid email address.",
+    label: "Correo electrónico del negocio",
+    description: "Por favor, ingrese la dirección de correo electrónico de su negocio.",
+    description_footer: "Por favor, utilice una dirección de correo electrónico válida.",
     name: "email"
   },
   {
-    label: "Business Phone",
-    description: "Please enter your business phone number.",
-    description_footer: "Please use a valid phone number.",
+    label: "Teléfono del negocio",
+    description: "Por favor, ingrese el número de teléfono de su negocio.",
+    description_footer: "Por favor, utilice un número de teléfono válido.",
     name: "phone"
   },
   {
-    label: "NIT Number",
+    label: "Número de NIT",
     description:
-      "Please enter your NIT (Tax Identification Number) associated with your business.",
-    description_footer: "Please use a valid NIT number.",
+      "Por favor, ingrese su NIT (Número de Identificación Tributaria) asociado con su negocio.",
+    description_footer: "Por favor, utilice un número de NIT válido.",
     name: "nit"
   },
   {
-    label: "Limit",
-    description: "Please enter the limit for your business.",
-    description_footer: "Please use a valid limit.",
+    label: "Límite",
+    description: "Por favor, ingrese el límite para su negocio.",
+    description_footer: "Por favor, utilice un límite válido.",
     name: "limit"
   },
   {
-    label: "Tables",
-    description: "Please enter the number of tables in your business.",
-    description_footer: "Please use a valid number of tables.",
+    label: "Mesas",
+    description: "Por favor, ingrese el número de mesas en su negocio.",
+    description_footer: "Por favor, utilice un número válido de mesas.",
     name: "tables"
   },
   {
-    label: "Max Per Table",
-    description: "Please enter the maximum number of people per table.",
-    description_footer: "Please use a valid number for the maximum.",
+    label: "Máximo por Mesa",
+    description: "Por favor, ingrese el número máximo de personas por mesa.",
+    description_footer: "Por favor, utilice un número válido para el máximo.",
     name: "max_per_table"
   },
   {
-    label: "Min Per Table",
-    description: "Please enter the minimum number of people per table.",
-    description_footer: "Please use a valid number for the minimum.",
+    label: "Mínimo por Mesa",
+    description: "Por favor, ingrese el número mínimo de personas por mesa.",
+    description_footer: "Por favor, utilice un número válido para el mínimo.",
     name: "min_per_table"
   },
   {
-    label: "Chairs Per Table",
-    description: "Please enter the number of chairs per table.",
-    description_footer: "Please use a valid number of chairs.",
+    label: "Sillas por Mesa",
+    description: "Por favor, ingrese el número de sillas por mesa.",
+    description_footer: "Por favor, utilice un número válido de sillas.",
     name: "chairs_per_table"
   },
   {
-    label: "Chairs",
-    description: "Please enter the total number of chairs in your business.",
-    description_footer: "Please use a valid number of chairs.",
+    label: "Sillas",
+    description: "Por favor, ingrese el número total de sillas en su negocio.",
+    description_footer: "Por favor, utilice un número válido de sillas.",
     name: "chairs"
   },
   {
-    label: "Employees",
-    description: "Please enter the number of employees in your business.",
-    description_footer: "Please use a valid number of employees.",
+    label: "Empleados",
+    description: "Por favor, ingrese el número de empleados en su negocio.",
+    description_footer: "Por favor, utilice un número válido de empleados.",
     name: "employes"
   },
 ];
