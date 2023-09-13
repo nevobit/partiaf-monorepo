@@ -2,6 +2,7 @@ import React from 'react';
 import {Image, Text, View} from 'react-native';
 
 const StoreCard = ({photos, name, type}: any) => {
+  console.log(photos[0])
   return (
     <View
       style={{

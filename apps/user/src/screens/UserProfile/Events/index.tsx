@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import {View, Text, ScrollView, Image, TouchableOpacity} from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { GET_GOERS_BY_ID, GET_GOERS_BY_USER_ID } from '../../../graphql/queries/goers';
 import colors from '../../../components/Layout/Theme/colors';
 
-const Events = ({navigation, route, id}:any) => {
-  const {user} = useSelector((state: any) => state.auth);
+const Events = ({ navigation, route, id }: any) => {
+  const { user } = useSelector((state: any) => state.auth);
 
-  const {data: tickets, refetch} = useQuery(GET_GOERS_BY_ID, {
+  const { data: tickets, refetch } = useQuery(GET_GOERS_BY_ID, {
     variables: { id: id },
     context: {
       headers: {
@@ -27,41 +27,55 @@ const Events = ({navigation, route, id}:any) => {
         padding: 10,
       }}>
       <ScrollView>
-      {tickets?.getGoersByUserId?.map((ticket:any) => (
+        {tickets?.getGoersById?.map((ticket: any) => (
 
-<TouchableOpacity 
-onPress={() => navigation.navigate('TicketDetails')}
-style={{
-  backgroundColor: '#fff',
-  marginTop: 20,
-  borderRadius: 5,
-  paddingHorizontal: 10,
-  paddingVertical: 5,
-  flexDirection: 'row',
-}}
-key={ticket.id}
->
-  <View style={{
-    width: '65%',
+          <TouchableOpacity
+            onPress={() => navigation.navigate('TicketDetails')}
+            style={{
+              backgroundColor: '#1D1C21',
+              marginTop: 20,
+              borderRadius: 15,
+              paddingHorizontal: 10,
+              paddingVertical: 5,
+              flexDirection: 'row',
+            }}
+            key={ticket.id}
+          >
+           <View style={{
+    width: '100%',
     padding: 10,
   }}>
+    <View style={{
+      flexDirection: 'row'
+    }}>
     <Text style={{
-      fontSize: 12
-    }}>ID 2000 | Ticket | <Text style={{
-      color: "green"
-    }}>EN-USO</Text></Text>
+      color: '#fff',
+      fontSize: 18,
+      fontWeight: '600'
+    }}>
+    {ticket.name}
+    </Text>
     <Text style={{
-      fontSize: 16,
+      color: "#333",
       fontWeight: '600',
-      color: colors.light.text
-    }}>{ticket.name}</Text>
+      padding: 5,
+      borderRadius: 10,
+      backgroundColor: '#2FC500',
+      width: 80,
+      textAlign: 'center',
+      marginLeft: 'auto',
+      fontSize: 14,
+    }}>Activo</Text>
+    </View>
     <Text style={{
       fontSize: 14,
       fontWeight: '500',
+      color: colors.dark.text
     }}>10 Junio 2023 | 10:00PM</Text>
     <Text style={{
       fontSize: 14,
       fontWeight: '500',
+      color: colors.dark.text
     }}>Santa Marta - Colombia</Text>
   </View>
   <View style={{
@@ -74,93 +88,12 @@ key={ticket.id}
       width: 25,
       borderRadius: 100,
       position: 'absolute',
-      top: -16
+      bottom: 30,
+      right: -25
     }} />
-    
-    <View style={{
-      backgroundColor: 'black',
-      height: 25,
-      width: 25,
-      borderRadius: 100,
-      position: 'absolute',
-      bottom: -16
-    }} />
-    
-    <View style={{
-      marginTop:3
-    }}>
-      
-   
-    
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 12,
-      left: 13
-    }} />
-    
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 27,
-      left: 13
-    }} />
-    
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 42,
-      left: 13
-    }} />
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 57,
-      left: 13
-    }} />
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 72,
-      left: 13
-    }} />
-    
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 97,
-      left: 13
-    }} />
-    </View>
-      <Image style={{
-        width: 100,
-        height: 100,
-        marginLeft: 19,
-        marginTop: -3
-      }} source={{
-        uri:'https://i.ibb.co/n14Qpb9/qrcode.png'
-      }} />
   </View>
-</TouchableOpacity>
-))}
+          </TouchableOpacity>
+        ))}
       </ScrollView>
     </View>
   );
