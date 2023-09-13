@@ -12,6 +12,7 @@ import StoreCard from '../../components/UI/StoreCard';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { GET_STORES } from '../../graphql/queries/users';
+import Header from '../../components/Layout/Header';
 
 const Stores = ({navigation}: any) => {  
     const {user} = useSelector((state: any) => state.auth);
@@ -31,53 +32,16 @@ const Stores = ({navigation}: any) => {
       };
     }, [stopPolling, startPolling]);
     
+  function setOpenFilters(arg0: boolean) {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <View style={{
       flex: 1
     }}>
-      <DefaultView
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingTop: 15,
-          paddingBottom: 15,
-          paddingHorizontal: 10,
-        }}>
-        <DefaultView
-          style={{
-            flexDirection: 'row',
-            gap: 10,
-          }}>
-          <Icon name="options-outline" size={23} color="#fff" />
-          <Icon name="qr-code-outline" size={23} color="rgba(10,10,10,1)" />
-        </DefaultView>
-        <Image
-          style={{
-            width: 110,
-            height: 18,
-            resizeMode: 'contain',
-            tintColor: 'rgba(255,255,255,.9)',
-          }}
-          source={{
-            uri: 'https://i.ibb.co/4Y7W9S0/333333-Partiaf-logo-ios.png',
-          }}
-        />
-        <DefaultView
-          style={{
-            flexDirection: 'row',
-            gap: 10,
-          }}>
-          <TouchableOpacity onPress={() => navigation.navigate('Wallet')}>
-            <Icon name="wallet-outline" size={23} color="#fff" />
-          </TouchableOpacity>
+         <Header navigation={navigation} openFilters={() => setOpenFilters(true)} filters={true} />
 
-          <TouchableOpacity onPress={() => navigation.navigate('Tickets')}>
-            <Icon name="qr-code-outline" size={23} color="#fff" />
-          </TouchableOpacity>
-        </DefaultView>
-      </DefaultView>
       <ScrollView>
         <Stories navigation={navigation} />
         <DefaultView

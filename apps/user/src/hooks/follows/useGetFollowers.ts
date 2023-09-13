@@ -6,7 +6,7 @@ import { GET_FOLLOWERS, IS_FOLLOW } from "../../graphql/queries/follows";
 export const useGetFollowers = (uuid: string) => {
     const { user } = useSelector((state: any) => state.auth);
 
-    const {data, loading, error,refetch} = useQuery(GET_FOLLOWERS, {
+    const {data, loading, error,refetch, startPolling, stopPolling} = useQuery(GET_FOLLOWERS, {
       variables: { uuid },
       context: {
         headers: {
@@ -17,5 +17,5 @@ export const useGetFollowers = (uuid: string) => {
 
     // const { followUser } = data;
 
-    return { isLoading: loading, error, followers: data?.getFollowers, refetch }
+    return { isLoading: loading, error, followers: data?.getFollowers, refetch, startPolling, stopPolling }
 }

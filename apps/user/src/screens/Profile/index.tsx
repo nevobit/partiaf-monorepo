@@ -10,6 +10,8 @@ import { signout } from '../../features/auth';
 import Header from '../../components/Layout/Header';
 import { BottomSheet } from '../../containers';
 import { useUser } from '../../hooks';
+import { useGetFollowers } from '../../hooks/follows/useGetFollowers';
+import { useGetFolloweds } from '../../hooks/follows/useGetFolloweds';
 
 const Profile = ({ navigation }: any) => {
   const [modal, setModal] = useState(false);
@@ -44,9 +46,30 @@ const Profile = ({ navigation }: any) => {
     setOpen(true);
   }
 
+
+  const { followers, isLoading: isLoadingGetFollowers, error: errorGetFollowers, refetch: refetchGetFollowers, stopPolling: stopPollingFoll, startPolling: startPollingFoll } = useGetFollowers(user?.id);
+  const { followeds, isLoading: isLoadingGetFolloweds, error: errorGetFolloweds, refetch: refetchGetFolloweds, stopPolling, startPolling } = useGetFolloweds(user?.id);
+
   useEffect(() => {
     refetch();
-  }, [refetch]);
+    refetchGetFollowers();
+    refetchGetFolloweds();
+  }, [refetch, refetchGetFollowers, refetchGetFolloweds]);
+
+  useEffect(() => {
+    startPolling(1000);
+    return () => {
+      stopPolling();
+    };
+  }, [stopPolling, startPolling]);
+
+  useEffect(() => {
+    startPollingFoll(1000);
+    return () => {
+      stopPollingFoll();
+    };
+  }, [stopPollingFoll, startPollingFoll]);
+
 
   if(isLoading) return <ActivityIndicator size='large' />
 
@@ -73,7 +96,7 @@ const Profile = ({ navigation }: any) => {
               fontWeight: '700',
               fontSize: 18,
             }}>
-            {user?.following.length}
+            {followeds?.length}
           </Text>
           <Text
             style={{
@@ -106,7 +129,7 @@ const Profile = ({ navigation }: any) => {
               fontWeight: '700',
               fontSize: 18,
             }}>
-            {user?.following.length}
+            {followers?.length}
           </Text>
           <Text
             style={{

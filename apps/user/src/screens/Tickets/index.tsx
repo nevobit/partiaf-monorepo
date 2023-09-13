@@ -94,7 +94,9 @@ onPress={() => navigation.navigate('TicketDetails', {id: ticket.id})}
 style={{
   backgroundColor: '#fff',
   marginTop: 20,
-  borderRadius: 5,
+  // borderRadius: 15,
+  borderTopLeftRadius: 15,
+  borderBottomLeftRadius: 15,
   // height: 100,
   paddingVertical: 10,
   flexDirection: 'row',

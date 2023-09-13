@@ -33,9 +33,9 @@ const Events = ({navigation, id}:any) => {
 <TouchableOpacity 
 onPress={() => {}}
 style={{
-  backgroundColor: '#fff',
+  backgroundColor: '#1D1C21',
   marginTop: 20,
-  borderRadius: 5,
+  borderRadius: 15,
   paddingHorizontal: 10,
   paddingVertical: 5,
   flexDirection: 'row',
@@ -43,29 +43,40 @@ style={{
 key={ticket.id}
 >
   <View style={{
-    width: '65%',
+    width: '100%',
     padding: 10,
   }}>
+    <View style={{
+      flexDirection: 'row'
+    }}>
     <Text style={{
-      fontSize: 12,
-      color: '#000'
-    }}>ID 2000 | Ticket | <Text style={{
-      color: "green"
-    }}>EN-USO</Text></Text>
+      color: '#fff',
+      fontSize: 18,
+      fontWeight: '600'
+    }}>
+    {ticket.name}
+    </Text>
     <Text style={{
-      fontSize: 16,
+      color: "#333",
       fontWeight: '600',
-      color: colors.light.text
-    }}>{ticket.name}</Text>
+      padding: 5,
+      borderRadius: 10,
+      backgroundColor: '#2FC500',
+      width: 80,
+      textAlign: 'center',
+      marginLeft: 'auto',
+      fontSize: 14,
+    }}>Activo</Text>
+    </View>
     <Text style={{
       fontSize: 14,
       fontWeight: '500',
-      color: colors.light.text
+      color: colors.dark.text
     }}>10 Junio 2023 | 10:00PM</Text>
     <Text style={{
       fontSize: 14,
       fontWeight: '500',
-      color: colors.light.text
+      color: colors.dark.text
     }}>Santa Marta - Colombia</Text>
   </View>
   <View style={{
@@ -78,90 +89,9 @@ key={ticket.id}
       width: 25,
       borderRadius: 100,
       position: 'absolute',
-      top: -16
+      bottom: 30,
+      right: -25
     }} />
-    
-    <View style={{
-      backgroundColor: 'black',
-      height: 25,
-      width: 25,
-      borderRadius: 100,
-      position: 'absolute',
-      bottom: -16
-    }} />
-    
-    <View style={{
-      marginTop:3
-    }}>
-      
-   
-    
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 12,
-      left: 13
-    }} />
-    
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 27,
-      left: 13
-    }} />
-    
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 42,
-      left: 13
-    }} />
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 57,
-      left: 13
-    }} />
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 72,
-      left: 13
-    }} />
-    
-    <View style={{
-      backgroundColor: 'black',
-      height: 10,
-      width: 1,
-      borderRadius: 100,
-      position: 'absolute',
-      top: 97,
-      left: 13
-    }} />
-    </View>
-      <Image style={{
-        width: 100,
-        height: 100,
-        marginLeft: 19,
-        marginTop: -3
-      }} source={{
-        uri:'https://i.ibb.co/n14Qpb9/qrcode.png'
-      }} />
   </View>
 </TouchableOpacity>
 ))}
