@@ -25,8 +25,6 @@ const Artists = () => {
     },
   });
 
-  console.log(data);
-
   return (
     <DefaultView
       style={{

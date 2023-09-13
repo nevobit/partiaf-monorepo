@@ -18,7 +18,9 @@ input UserInput {
     phone: String
     photo: [String]
     password: String
+    biography: String
     accountType: String
+    isPrivate: Boolean
     interests: Interests
 }
 
@@ -125,6 +127,9 @@ type Query {
     getOneGoer(id: String): Goer
     getGoersById(id: String): [Goer]
     getGoersByTicketId(id: String): [Goer]
+    isFollowUser(followId: String): Boolean
+    getFollowers(uuid: String): [User]
+    getFolloweds(uuid: String): [User]
 }
    
 
@@ -132,7 +137,11 @@ type Mutation {
     userSignin(phone: String!, password: String!): AuthPayload
     userSignup(userData: UserInput): AuthPayload
     createGoer(data: GoerInput): Goer
+    updateGoer(data: GoerInput): Goer
     registerStore(code: String): User
+    updateUser(data: UserInput): User
+    followUser(followId: String): Boolean
+    unfollowUser(followId: String): Boolean
 
 }
 

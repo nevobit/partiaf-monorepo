@@ -33,7 +33,7 @@ const Tickets = ({selected}: any) => {
     <ScrollView style={styles.list}>
     {selected &&
       goers?.getGoersByTicketId?.map((goer: any) => (
-        <CoverItem {...goer} key={goer.id} />
+        <CoverItem checked={goer.entry_status == 'completed'} {...goer} key={goer.id} />
       ))}
       <View style={{
         height: 20

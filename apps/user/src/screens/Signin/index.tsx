@@ -36,7 +36,6 @@ const Signin = ({navigation}: any) => {
     logout();
     setLoading(true);
     try {
-      console.log(user);
       const {data} = await login({
         variables: {
           ...user,

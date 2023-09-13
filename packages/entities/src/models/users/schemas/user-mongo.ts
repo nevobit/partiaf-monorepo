@@ -29,8 +29,8 @@ export const UsersSchemaMongo = new Schema<User>(
     matchs: [{ type: String, ref: 'users' }],
     friends: [{ type: String, ref: 'users' }],
     loginMethod: { type: String },
-    events: { type: Number },
-    balance: { type: Number },
+    events: { type: Number, default: 0 },
+    balance: { type: Number, default: 0 },
     lastLogin: { type: Date },
     stores: [{
       type: String, ref: 'stores'
@@ -50,7 +50,7 @@ export const UsersSchemaMongo = new Schema<User>(
     },
     dateOfBirth: { type: Date },
     pin: { type: Number },
-    isPrivate: { type: Boolean },
+    isPrivate: { type: Boolean, default: false },
     isVerified: { type: Boolean },
     accountType: { type: String, default: 'personal' },
   },

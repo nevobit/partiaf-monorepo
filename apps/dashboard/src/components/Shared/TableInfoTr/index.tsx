@@ -34,14 +34,6 @@ const TableInfoTr = ({action, detail, seeDetail,setDetail, data:{id, user_pictur
    const [actualLocation, setctualLocation]= useState(location.pathname)
 
 
-
-  //  useEffect(()=>{
-  //   console.log(detail)
-  //   setActivate(!activate)
-  //  },[detail])
-  console.log(actualLocation)
-
-
     return (
     <tr key={id} className={`${styles.tr}  ${activate ? styles.activate : ""}`}>
       <td className={`${styles.td_picture}`}>

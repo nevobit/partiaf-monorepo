@@ -20,7 +20,6 @@ export const createStore = createAsyncThunk<Store, Partial<CreateStoreDto>>(
 export const getStoresByAdmin = createAsyncThunk<Result<Store>, Props>(
     'stores/get-by-admin',
     async (props) => {
-        console.log(props)
         const { data } = await partiafApi.get<Result<Store>>(`/stores?page=${props.page}`, {
             headers: {
               "Authorization": `Bearer ${props}`

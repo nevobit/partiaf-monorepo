@@ -133,7 +133,8 @@ const VerifyAge = ({navigation}: any) => {
         </Text>
         <DefaultView
           style={{
-            padding: 10
+            padding: 10,
+            position:'relative'
           }}>
           <TextInput
             placeholder="Edad"
@@ -145,25 +146,28 @@ const VerifyAge = ({navigation}: any) => {
               color: 'rgba(255,255,255,1)',
               fontSize: 16,
               paddingHorizontal: 10,
-              height: 40
+              height: 45
             }}
             value={date.toLocaleString().slice(0,9)}
           />
         <TouchableOpacity style={{
-          backgroundColor: 'rgba(255,255,255,.6)',
-          height: 40,
+          backgroundColor: 'trasparent',
+          height: 45,
           alignItems: 'center',
           display: 'flex',
           justifyContent: 'center',
           borderRadius: 10,
-          marginTop: 10
+          marginTop: 10,
+          position:'absolute',
+          left: 10,
+          width: '100%'
         }} onPress={() => setOpen(true)}>
           <Text style={{
             color: '#fff',
             textAlign: 'center',
             fontWeight: '600',
             fontSize: 16
-          }}>Seleccionar fecha</Text>
+          }}></Text>
         </TouchableOpacity>
         </DefaultView>
         

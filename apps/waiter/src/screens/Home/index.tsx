@@ -7,6 +7,7 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   Image,
+  Platform,
   StatusBar,
 } from 'react-native';
 
@@ -107,7 +108,7 @@ export const HomeScreen = ({navigation, route}:any) => {
           alignItems: 'center',
           justifyContent: 'center'
         }}
-        onPress={() => navigation.navigate('scanner')}
+        onPress={() => Platform.OS == 'android'? navigation.navigate('scanner') : navigation.navigate('scannerIos')}
         >
           <Image 
           style={{

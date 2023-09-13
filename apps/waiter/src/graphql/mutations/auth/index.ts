@@ -7,3 +7,19 @@ mutation Mutation($phone: String!, $password: String!) {
     }
 }
   `;
+
+  export const UPDATE_GOER = gql`
+  mutation Mutation($data: GoerInput) {
+    updateGoer(data: $data) {
+      amount
+      cost
+      date
+      description
+      id
+      name
+      image
+      status
+      time
+    }
+  }
+`

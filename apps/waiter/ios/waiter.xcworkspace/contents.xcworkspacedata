@@ -2,9 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:waiter.xcodeproj">
+      location = "group:/Users/alessandrodebonis/Documents/App/partiaf-monorepo/apps/waiter/ios/waiter.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:waiter.xcodeproj">
    </FileRef>
 </Workspace>

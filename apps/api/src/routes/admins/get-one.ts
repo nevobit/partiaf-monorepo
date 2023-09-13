@@ -13,7 +13,6 @@ export const getAdminByIdRoute: RouteOptions = {
    try {
     const { admin } = request;     
      const adminInfo = await getAdminById(admin.id);
-     console.log({adminInfo})
      reply.status(200).send(adminInfo);
    } catch (err) {
      if (err instanceof Error) {

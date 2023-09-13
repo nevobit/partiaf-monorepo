@@ -13,7 +13,6 @@ export default {
     Query: {
         getTicketsByStoreId: async (parent: any, { id }: ArgsType, ctx: any) => {
             await verifyUserToken(ctx);
-            console.log(id)
             const page = 1;
             const limit = 100000;
             const tickets = await getAllTicketsByStore(page,limit,id);
@@ -25,7 +24,6 @@ export default {
           },
           getAllTickets: async (parent: any, { id }: ArgsType, ctx: any) => {
             await verifyUserToken(ctx);
-            console.log(id)
             const page = 1;
             const limit = 100000;
             const tickets = await getAllTickets(page,limit);

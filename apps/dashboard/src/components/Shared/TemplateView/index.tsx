@@ -85,7 +85,6 @@ const TemplateView = ( {table:{ user, date, hour, ...rest }, }:Props) => {
   // example data end
   
 const openDetail = ()=>{
-  console.log("Click in openDetail")
   setOpen(!open)
 }
 

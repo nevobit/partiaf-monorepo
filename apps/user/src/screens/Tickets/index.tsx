@@ -83,8 +83,8 @@ const Tickets = ({navigation,  route}: any) => {
 
         </DefaultView>
         <ScrollView contentContainerStyle={{
-          paddingBottom: 80,
-          paddingHorizontal: 10
+          paddingBottom: 210,
+          paddingHorizontal: 10,
         }}>
 
 {tickets?.getGoersByUserId?.map((ticket:any) => (

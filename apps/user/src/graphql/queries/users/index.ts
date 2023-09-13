@@ -17,7 +17,9 @@ export const GET_USER_BY_ID = gql`
       accountType
       followers
       following
+      biography
       balance
+      isPrivate
     }
   }
 `;
