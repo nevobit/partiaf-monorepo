@@ -43,6 +43,10 @@ target 'waiter' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
+
   target 'waiterTests' do
     inherit! :complete
     # Pods for testing

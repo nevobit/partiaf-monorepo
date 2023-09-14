@@ -63,11 +63,6 @@ const HomeNavigator = () => {
       <HomeStackNavigator.Screen name="TicketDetails" component={Details} />
       <HomeStackNavigator.Screen name="Payment" component={Payment} />
       <HomeStackNavigator.Screen name="UserProfile" component={UserProfile} />
-      <HomeStackNavigator.Screen name="EditProfile" component={EditProfile}    options={{
-          presentation: 'card',
-          animationTypeForReplace: 'push',
-        }} />
-
 <HomeStackNavigator.Screen name="Invitation" component={Invitation}    options={{
           presentation: 'card',
           animationTypeForReplace: 'push',
