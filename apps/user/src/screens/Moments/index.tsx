@@ -6,7 +6,7 @@ import { launchCamera } from 'react-native-image-picker'
 import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios'
-
+import VideoProcessing from 'react-native-video-processing'
 const axiosInstance = axios.create({
     maxContentLength: 50000000,
   });
@@ -46,18 +46,30 @@ const Moments = () => {
             presentationStyle: 'fullScreen',
             cameraType: 'back',
             durationLimit: 60,
-        }, (resp) => {
+            maxWidth: 720,
+            maxHeight: 1280,
+            saveToPhotos: true
+        }, (async (resp) => {
             console.log("VIDEO", resp)
             if (resp.didCancel) return;
             if (!resp.assets) return;
             if (!resp.assets[0].uri) return;
             console.log("VIDEO")
+
+            const compressedVideo = await VideoProcessing.compress(
+                resp.assets[0].uri,
+                {
+                  width: 720, // Ancho deseado
+                  height: 1280, // Alto deseado
+                  bitrateMultiplier: 0.5, // Factor de compresión (ajusta según tus necesidades)
+                }
+              );
             setSize(resp.assets[0].fileSize)
-            const file = { uri: resp.assets[0].uri, name: resp.assets[0].fileName, type: resp.assets[0].type };
+            const file = { uri: compressedVideo, name: resp.assets[0].fileName, type: resp.assets[0].type };
         
             uploadImage(file)
         })
-    }
+    )}
 
     return (
         <View style={{
