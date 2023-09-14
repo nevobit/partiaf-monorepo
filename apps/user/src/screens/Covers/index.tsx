@@ -17,6 +17,7 @@ import { GET_USER_BY_ID } from '../../graphql/queries/users';
 import { useEffect } from 'react';
 import { GET_TICKETS_BY_STORE_ID } from '../../graphql/queries/tickets';
 import { DivisaFormater } from '../../utilities/divisaFormater';
+import { useFocusEffect } from '@react-navigation/native';
 
 const DismissKeyboard = ({children}: any) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -46,10 +47,14 @@ const Covers = ({navigation, route}: any) => {
 
 
 
+  useFocusEffect(() => {
+    refetch();
+  });
+
+
   useEffect(() => {
     refetch();
-  }, [refetch]);
-
+  }, [refetch])
 
   const [covers, setCovers] = useState<any>({});
   

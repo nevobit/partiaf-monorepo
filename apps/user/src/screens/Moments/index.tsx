@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
-import { StatusBar, Text, TouchableOpacity } from 'react-native'
+import { PermissionsAndroid, StatusBar, Text, TouchableOpacity } from 'react-native'
 import { View } from '../../components/Layout/Theme'
 import { View as DefaultView } from 'react-native'
 import { launchCamera } from 'react-native-image-picker'
 import Video from 'react-native-video';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios'
+
+const axiosInstance = axios.create({
+    maxContentLength: 50000000,
+  });
 
 const Moments = () => {
     const [video, setVideo] = useState<string>();
@@ -17,10 +21,10 @@ const Moments = () => {
     const uploadImage = async (file:any) => {
         setIsLoading(true);
         const formData = new FormData();
-        formData.append('image', file);
+        formData.append('video', file);
     
         try {
-          const { data } = await axios.post('http://192.168.1.3/api/v3/upload/video', formData, {
+          const { data } = await axiosInstance.post('https:/partiaf-api.xyz/api/v3/upload/video', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'api-key': 'a0341d0de71a21b122a134576803f9fea2e9841a307b4e26f9240ac2f7d363ff3018a17f2d7f3ecb5a9fe62327e4eaf306864ec741e6432aa50faaf9d92aa6bd'
@@ -35,22 +39,19 @@ const Moments = () => {
         }
       };
 
-    const getPhoto = () => {
-        launchCamera({
+    const getPhoto = async () => {
+        await launchCamera({
             mediaType: 'video',
-            videoQuality: 'low',
-            // saveToPhotos: true,
-            
+            videoQuality: 'high',
             presentationStyle: 'fullScreen',
             cameraType: 'back',
-            durationLimit: 3,
+            durationLimit: 60,
         }, (resp) => {
             console.log("VIDEO", resp)
             if (resp.didCancel) return;
             if (!resp.assets) return;
             if (!resp.assets[0].uri) return;
             console.log("VIDEO")
-            // setVideo(resp.assets[0].uri)
             setSize(resp.assets[0].fileSize)
             const file = { uri: resp.assets[0].uri, name: resp.assets[0].fileName, type: resp.assets[0].type };
         
