@@ -108,7 +108,7 @@ export const HomeScreen = ({navigation, route}:any) => {
           alignItems: 'center',
           justifyContent: 'center'
         }}
-        onPress={() => Platform.OS == 'android'? navigation.navigate('scanner') : navigation.navigate('scannerIos')}
+        onPress={() => Platform.OS == 'android'? navigation.navigate('scanner') : navigation.navigate('scanner')}
         >
           <Image 
           style={{

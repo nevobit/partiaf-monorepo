@@ -4,6 +4,10 @@ import Modal from '../../containers/Modal';
 import { colors } from '../../layout/theme/colors';
 import { useMutation } from '@apollo/client';
 import { UPDATE_GOER } from '../../graphql/mutations/auth';
+import { request, PERMISSIONS } from 'react-native-permissions';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
+
 const QrScanner = ({navigation}: any) => {
     const [hasPermission, setHasPermission] = useState(false);
     const [qrValue, setQrValue] = useState<any>({})
@@ -11,7 +15,28 @@ const QrScanner = ({navigation}: any) => {
     const [showDialog, setShowDialog] = useState(false)
   
     const [updateGoer, {loading, error}] = useMutation(UPDATE_GOER);
-  const onSubmit = async() => {
+  
+    useEffect(() => {
+        const solicitarPermisos = async () => {
+          try {
+            const result = await request(PERMISSIONS.IOS.CAMERA);
+            const result2 = await request(PERMISSIONS.ANDROID.CAMERA);
+            
+            console.log(result2)
+            if (result === 'granted') {
+              // Permiso concedido, puedes realizar acciones aquí
+            } else {
+              // Permiso denegado
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+    
+        solicitarPermisos();
+      }, []);
+    
+    const onSubmit = async() => {
     try{
 
           await updateGoer({
@@ -96,7 +121,7 @@ const QrScanner = ({navigation}: any) => {
             </View>
 
         </Modal>
-    {/* <QRCodeScanner
+     <QRCodeScanner
         onRead={(e) => {
             onSubmit()
             setQrValue(JSON.parse(e.data))
@@ -119,7 +144,7 @@ const QrScanner = ({navigation}: any) => {
             flex: 0,
         }}
         flashMode={light ? RNCamera.Constants.FlashMode.torch : RNCamera.Constants.FlashMode.auto}
-    /> */}
+    />
 </View>
   )
 }

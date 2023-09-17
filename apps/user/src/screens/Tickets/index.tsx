@@ -53,6 +53,7 @@ const Tickets = ({navigation,  route}: any) => {
           <TextInput
             placeholderTextColor="rgba(255, 255, 255,.4)"
             placeholder="Buscar tikcet"
+            onChangeText={(text) => setSearch(text)}
             style={{
               borderWidth: 1,
               borderColor: 'rgba(255,255,255,.8)',
@@ -87,7 +88,7 @@ const Tickets = ({navigation,  route}: any) => {
           paddingHorizontal: 10,
         }}>
 
-{tickets?.getGoersByUserId?.map((ticket:any) => (
+{tickets?.getGoersByUserId?.filter((ticket:any) => ticket.name.toLowerCase().includes(search.toLowerCase())).map((ticket:any) => (
 
 <TouchableOpacity 
 onPress={() => navigation.navigate('TicketDetails', {id: ticket.id})}

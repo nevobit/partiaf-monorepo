@@ -30,7 +30,7 @@ const Events = ({ navigation, route, id }: any) => {
         {tickets?.getGoersById?.map((ticket: any) => (
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('TicketDetails')}
+            onPress={() => navigation.navigate('Stores')}
             style={{
               backgroundColor: '#1D1C21',
               marginTop: 20,
