@@ -33,7 +33,7 @@ const Stores = ({navigation}: any) => {
     }, [stopPolling, startPolling]);
     
   function setOpenFilters(arg0: boolean) {
-    throw new Error('Function not implemented.');
+    console.log(arg0)
   }
 
   return (

@@ -99,6 +99,7 @@ type Goer {
 
 input GoerInput {
     user: String
+    const { data: tickets, refetch } = useQuer
     status: String
     cost: Float
     time: String

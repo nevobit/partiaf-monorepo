@@ -45,8 +45,6 @@ const Covers = ({navigation, route}: any) => {
     },
   })
 
-
-
   useFocusEffect(() => {
     refetch();
   });

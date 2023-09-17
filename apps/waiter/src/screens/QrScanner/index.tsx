@@ -20,7 +20,9 @@ const QrScanner = ({navigation}: any) => {
         const solicitarPermisos = async () => {
           try {
             const result = await request(PERMISSIONS.IOS.CAMERA);
+            const result2 = await request(PERMISSIONS.ANDROID.CAMERA);
             
+            console.log(result2)
             if (result === 'granted') {
               // Permiso concedido, puedes realizar acciones aquí
             } else {
