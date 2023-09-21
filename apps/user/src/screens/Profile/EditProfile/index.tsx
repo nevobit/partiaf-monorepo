@@ -17,6 +17,7 @@ const EditProfile = ({ navigation }: any) => {
         photo: user.photo
     }); 
     
+    console.log(photo)
     const { updatedUser, updateUserFn, isLoading: isLoadingUpdate } = useUpdateUser(userToUpdate);
 
     const handleUpdateUser = async() => {
