@@ -21,7 +21,7 @@ import { useGetFollowers } from '../../hooks/follows/useGetFollowers';
 import { useGetFolloweds } from '../../hooks/follows/useGetFolloweds';
 import { useUnFollowUser } from '../../hooks/follows/useUnFollowUser';
 
-const UserProfile = ({ route }: any) => {
+const UserProfile = ({ navigation, route }: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const [open, setOpen] = useState(false);
   const { data, loading, error, refetch } = useQuery(GET_ONE_USER, {
@@ -311,7 +311,7 @@ const UserProfile = ({ route }: any) => {
         </DefaultView>
       ) : (
 
-        <OtherProfileTopTap id={route.params.id} />
+        <OtherProfileTopTap navigation={navigation} id={route.params.id} />
       )}
 
       <Modal visible={open}

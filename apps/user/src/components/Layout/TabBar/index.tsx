@@ -65,9 +65,9 @@ const TabBar = ({state, navigation}: BottomTabBarProps) => {
           case 'Search':
             iconName = focused ? 'ios-search' : 'ios-search-outline';
             break;
-          case 'Moments':
-            iconName = focused ? 'ios-tv' : 'ios-tv-outline';
-            break;
+          // case 'Moments':
+          //   iconName = focused ? 'ios-tv' : 'ios-tv-outline';
+          //   break;
           case 'Partiaf':
             iconName = focused ? 'ios-bonfire' : 'ios-bonfire-outline';
             break;

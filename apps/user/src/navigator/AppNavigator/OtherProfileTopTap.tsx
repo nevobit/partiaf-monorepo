@@ -76,7 +76,7 @@ const TabBar = ({state, navigation}: any) => {
   );
 };
 
-const OtherProfileTopTap = ({id}: any) => {
+const OtherProfileTopTap = ({navigation, id}: any) => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -112,7 +112,7 @@ const OtherProfileTopTap = ({id}: any) => {
         backgroundColor: 'rgba(0,0,0,1)',
       }}>
       <Tab.Screen name="Eventos" >
-        {() => <Events id={id} />}
+        {() => <Events navigation={navigation} id={id} />}
       </Tab.Screen> 
       <Tab.Screen name="Momentos" component={Moments} />
     </Tab.Navigator>
