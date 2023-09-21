@@ -86,7 +86,7 @@ export const AppNavigator = () => {
       tabBar={(props: any) => <TabBar {...props} />}>
       <Tab.Screen name="Home" component={HomeNavigator} />
       <Tab.Screen name="Search" component={Search} />
-      <Tab.Screen name="Moments" component={() => null} />
+      {/* <Tab.Screen name="Moments" component={() => null} /> */}
       <Tab.Screen name="Partiaf" component={Partiaf} />
       <Tab.Screen name="Profile" component={ProfileNavigator} />
     </Tab.Navigator>
