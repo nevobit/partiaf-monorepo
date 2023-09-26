@@ -97,24 +97,32 @@ type Goer {
     date: String
 }
 
+
 input GoerInput {
     user: String
-    const { data: tickets, refetch } = useQuer
     status: String
     cost: Float
     time: String
     ticket: String
     amount: Int
+    hour: String
     image: String
     name: String
     description: String
     date: String
+    entry_status: String
 }
 
 type AuthPayload {
     token: String
 }
 
+type Request {
+    id: String
+    senderId: User
+    reciverId: String
+    status_request: String
+}
 
 type Query {
     getUserById: User
@@ -131,6 +139,10 @@ type Query {
     isFollowUser(followId: String): Boolean
     getFollowers(uuid: String): [User]
     getFolloweds(uuid: String): [User]
+    isFriend(reciverId: String): Boolean
+    isRequest(reciverId: String): Boolean
+    getFriends(uuid: String): [User]
+    pendingRequests(uuid: String): [Request]
 }
    
 
@@ -141,9 +153,12 @@ type Mutation {
     updateGoer(data: GoerInput): Goer
     registerStore(code: String): User
     updateUser(data: UserInput): User
+    deleteUser: Boolean
     followUser(followId: String): Boolean
     unfollowUser(followId: String): Boolean
-
+    sendFriendRequest(uuid: String, reciverId: String): Boolean
+    acceptRequest(id: String): Boolean
+    rejectRequest(id: String): Boolean
 }
 
 `;

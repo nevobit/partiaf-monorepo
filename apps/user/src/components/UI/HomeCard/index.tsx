@@ -2,7 +2,6 @@ import React from 'react';
 import {Image, Text, View} from 'react-native';
 
 const StoreCard = ({photos, name, type}: any) => {
-  console.log(photos[0])
   return (
     <View
       style={{
@@ -16,7 +15,7 @@ const StoreCard = ({photos, name, type}: any) => {
           borderRadius: 20,
         }}
         source={{
-          uri: photos?.length> 0? `${photos[0]}`: 'https://res.cloudinary.com/matosr96/image/upload/v1682659931/vothwysoycqrw8fsne0w.jpg',
+          uri: photos?.length> 0 && photos[0]?.length > 0 ? `${photos[0]}`: 'https://res.cloudinary.com/matosr96/image/upload/v1682659931/vothwysoycqrw8fsne0w.jpg',
         }}
       />
       <Text

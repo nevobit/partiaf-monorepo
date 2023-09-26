@@ -18,9 +18,11 @@ const Events = ({ navigation, route, id }: any) => {
   });
 
 
+  console.log(tickets?.getGoersById[0]?.ticket)
+
   useEffect(() => {
     refetch();
-  }, []);
+  }, [refetch]);
   return (
     <View
       style={{
@@ -30,7 +32,7 @@ const Events = ({ navigation, route, id }: any) => {
         {tickets?.getGoersById?.map((ticket: any) => (
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('Stores')}
+          onPress={() => navigation.navigate('Ticket', {ticket: ticket.ticket})}
             style={{
               backgroundColor: '#1D1C21',
               marginTop: 20,

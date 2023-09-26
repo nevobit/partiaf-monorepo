@@ -10,6 +10,7 @@ import colors from '../../../components/Layout/Theme/colors';
 import { DivisaFormater } from '../../../utilities/divisaFormater';
 import { useState } from 'react';
 import { CREATE_GOER } from '../../../graphql/mutations';
+import { useGetFriends } from '../../../hooks';
 
 const Payment = ({navigation, route}: any) => {
     const {user} = useSelector((state: any) => state.auth);
@@ -36,7 +37,9 @@ const Payment = ({navigation, route}: any) => {
     },
   });
 
+  const { friends, refetch: refetchFriends } = useGetFriends();
 
+  console.log({friends})
   const onSubmit = async(e: any) => {
     e.preventDefault();
     setLoadingGoer(true);
@@ -63,13 +66,18 @@ const Payment = ({navigation, route}: any) => {
                 image: route.params.goer.image,
                 name: route.params.goer.name,
                 time: route.params.goer.hour,
-                // entry_status: 'in_list',
+                entry_status: 'in_list',
               },
             },
             
           }); 
           setLoadingGoer(false);
-          navigation.navigate('Tickets')
+
+          if(friends.length > 0){
+            navigation.navigate('Invitation')
+          }else{
+            navigation.navigate('Tickets')
+          }
         }},
       ]);
 
@@ -85,7 +93,8 @@ const Payment = ({navigation, route}: any) => {
 
   useEffect(() => {
     refetch();
-  }, [refetch]);
+    refetchFriends();
+  }, [refetch, refetchFriends]);
   return (
     <View style={{
         minHeight: '100%',

@@ -1,5 +1,5 @@
-import React from 'react';
-import {Text, Image, Dimensions, View as DefaultView, StatusBar} from 'react-native';
+import React, { useState } from 'react';
+import {Text, Image, Dimensions, View as DefaultView, StatusBar, Linking} from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native';
@@ -7,12 +7,13 @@ import { GET_STORE_BY_ID } from '../../graphql/queries/users';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { BottomSheet } from '../../containers';
 
 const screenHeight = Dimensions.get('screen').height;
 
 const Store = ({route, navigation}: any) => {
   const insets = useSafeAreaInsets();
-  
+  const [options, setOptions] = useState(false);
   const {user} = useSelector((state: any) => state.auth);
   const { data } = useQuery(GET_STORE_BY_ID, {
     variables: { getStoreByIdId: route.params.store },
@@ -22,6 +23,21 @@ const Store = ({route, navigation}: any) => {
       },
     },
   });
+
+  const sendWhatsAppMessage = async () => {
+    await Linking.openURL(
+      `http://api.whatsapp.com/send?phone=57${data?.getStoreById?.phone}` + "Quisiera hablar con alguien"
+    );
+
+  };
+
+  const sendToLocation = async () => {
+    await Linking.openURL(
+      `https://www.google.com/maps/search/${data?.getStoreById?.name}/@6.2499801,-75.6705568,13z?entry=ttu`
+    )
+  }
+
+  console.log(data)
   return (
     <DefaultView
       style={{
@@ -63,7 +79,7 @@ const Store = ({route, navigation}: any) => {
           resizeMode: 'cover',
         }}
         source={{
-          uri: data?.getStoreById?.photos[0],
+          uri: data?.getStoreById?.photos[0]? data?.getStoreById?.photos[0]: 'https://i.postimg.cc/0jMMGxbs/default.jpg',
         }}
       />
 
@@ -84,7 +100,12 @@ const Store = ({route, navigation}: any) => {
             paddingTop: 20,
             paddingBottom: 0,
           }}>
-          <DefaultView
+            <DefaultView style={{
+              flexDirection: 'row',
+              justifyContent:'space-between',
+              alignItems: 'center',
+            }}>
+            <DefaultView
             style={{
               backgroundColor: colors.dark.primary,
               borderRadius: 20,
@@ -104,6 +125,13 @@ const Store = ({route, navigation}: any) => {
               4.24
             </Text>
           </DefaultView>
+            <DefaultView>
+            <TouchableOpacity onPress={() => setOptions(true)}>
+              <Icon name='ellipsis-vertical' size={26} color='#fff'/>
+            </TouchableOpacity>
+          </DefaultView>
+            </DefaultView>
+      
 
           <Text
             style={{
@@ -181,6 +209,10 @@ justifyContent: 'center'
             </Text>
           </DefaultView>
         </DefaultView>
+
+
+
+
         <DefaultView
           style={{
             paddingHorizontal: 20,
@@ -273,6 +305,21 @@ justifyContent: 'center'
             paddingHorizontal: 20,
             paddingVertical: 10,
           }}>
+            <Text
+            style={{
+              fontWeight: '500',
+              fontSize: 18,
+              color: '#fff',
+              marginBottom: 5
+            }}>
+            Sobre el negocio
+          </Text> 
+            <Text style={{
+              color: 'rgba(255,255,255,.6)',
+              fontSize: 16
+            }}>
+              {data?.getStoreById?.description}
+            </Text>
           {/* <Text
             style={{
               fontWeight: '500',
@@ -292,6 +339,45 @@ justifyContent: 'center'
       /> */}
         </DefaultView>
       </DefaultView>
+
+
+      <BottomSheet isVisible={options} setIsVisible={setOptions} >
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 6,
+          height: 50
+        }}
+          onPress={sendWhatsAppMessage}
+        >
+          <Icon name='call-outline' size={22} color="#fff" />
+          <Text style={{
+            color: '#fff',
+            fontSize: 14,
+            fontWeight:'300'
+
+          }}>Whatsapp</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 4,
+          height: 50,
+
+        }}
+
+        onPress={sendToLocation}
+        >
+          <Icon name='map-outline' size={22} color="#fff" />
+          <Text style={{
+            color: '#fff',
+            fontSize: 14,
+            fontWeight:'300'
+          }}>Ubicacion</Text>
+        </TouchableOpacity>
+      </BottomSheet>
     </DefaultView>
   );
 };

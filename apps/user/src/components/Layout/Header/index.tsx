@@ -45,6 +45,12 @@ const Header = ({ navigation, openFilters, filters, back, wallet, ticket, option
             )}
 
             {filters ? (
+                <DefaultView style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    gap: 10
+                }}>
                 <DefaultView
                     style={{
                         flexDirection: 'row',
@@ -53,9 +59,18 @@ const Header = ({ navigation, openFilters, filters, back, wallet, ticket, option
                         <TouchableOpacity onPress={openFilters}>
                         <Icon name="options-outline" size={24} color="#fff" />
                     </TouchableOpacity>
-
-                    <Icon name="qr-code-outline" size={24} color="rgba(0,0,0,1)" />
                 </DefaultView>
+                <DefaultView
+                style={{
+                    flexDirection: 'row',
+                    gap: 15,
+                }}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
+                    <Icon name="notifications-outline" size={24} color="#fff" />
+                </TouchableOpacity>
+            </DefaultView>
+                </DefaultView>
+
             ) : (
                 <></>
             )}

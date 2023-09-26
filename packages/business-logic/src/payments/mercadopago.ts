@@ -12,6 +12,19 @@ mercadopago.configure({
     'APP_USR-111919875569225-091621-12afb0b23b63802e46d2d0b7b6ef950a-1199911258',
 });
 
+/**
+ * Create a purchase order in MercadoPago.
+ * @param {Object} props - Order properties.
+ * @param {string} props.title - Title of the product or service.
+ * @param {number} props.price - Unit price of the product or service.
+ * @returns {Promise<Object>} - Promise that resolves to an object with order information.
+ */
+
+enum AutoReturn {
+  ALL= 'all',
+  APPROVED= 'approved',
+}
+
 export const createOrder = async ({ title, price }: Props) => {
   let preference = {
     items: [
@@ -21,6 +34,7 @@ export const createOrder = async ({ title, price }: Props) => {
         quantity: 1,
       },
     ],
+    auto_return: AutoReturn.ALL,
   };
 
   const result = await mercadopago.preferences.create(preference)

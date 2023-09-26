@@ -1,4 +1,5 @@
 import {
+  deleteUser,
   getAllUsers,
   getUserById,
   registerStore,
@@ -58,6 +59,16 @@ export default {
     updateUser: async (parent: any, { data }: any, ctx: any) => {
       const { id } = await verifyUserToken(ctx) as { id: string };
       const user = await updateUser({id, ...data});
+      if (user instanceof Error) {
+        return new Error('Invalid credentials');
+      }
+
+      return user;
+    },
+
+    deleteUser: async (parent: any, {}, ctx: any) => {
+      const { id } = await verifyUserToken(ctx) as { id: string };
+      const user = await deleteUser(id);
       if (user instanceof Error) {
         return new Error('Invalid credentials');
       }

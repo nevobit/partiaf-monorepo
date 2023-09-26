@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 import OtherProfileTopTap from '../../navigator/AppNavigator/OtherProfileTopTap';
 import Header from '../../components/Layout/Header';
 import styles from './styles';
-import { useFollowUser } from '../../hooks';
+import { useFollowUser, useIsRequest, useSendRequest } from '../../hooks';
 import { useIsfollowUser } from '../../hooks/follows/useIsfollowUser';
 import { useGetFollowers } from '../../hooks/follows/useGetFollowers';
 import { useGetFolloweds } from '../../hooks/follows/useGetFolloweds';
@@ -36,9 +36,13 @@ const UserProfile = ({ navigation, route }: any) => {
   const { followUserFn, follow, isLoading, error: errorFollow } = useFollowUser(route.params.id);
   const { unfollowUserFn, unfollow, isLoading: isUnfollow, error: errorUnFollow } = useUnFollowUser(route.params.id);
 
-  const { isFollow, isLoading: isLoadginIsFollow, error: errorIsFollow, refetch: refetchIsFollow } = useIsfollowUser(route.params.id);
-  const { followers, isLoading: isLoadingGetFollowers, error: errorGetFollowers, refetch: refetchGetFollowers } = useGetFollowers(route.params.id);
-  const { followeds, isLoading: isLoadingGetFolloweds, error: errorGetFolloweds, refetch: refetchGetFolloweds, stopPolling, startPolling } = useGetFolloweds(route.params.id);
+  const { isFollow,  refetch: refetchIsFollow } = useIsfollowUser(route.params.id);
+  const { isRequest,  refetch: refetchIsRequest } = useIsRequest(route.params.id);
+
+  const { followers,  refetch: refetchGetFollowers } = useGetFollowers(route.params.id);
+  const { followeds,  refetch: refetchGetFolloweds, stopPolling, startPolling } = useGetFolloweds(route.params.id);
+  const { sendRequestFn, request,  error: errorRequest } = useSendRequest(route.params.id);
+  
 
   const followUser = async () => {
     await followUserFn();
@@ -46,6 +50,11 @@ const UserProfile = ({ navigation, route }: any) => {
     refetchGetFollowers();
     refetchGetFolloweds();
   };
+
+  const sendUserRequest = async() => {
+    await sendRequestFn();
+    refetchIsRequest();
+  }
 
   const unfollowUser = async () => {
     await unfollowUserFn();
@@ -59,8 +68,9 @@ const UserProfile = ({ navigation, route }: any) => {
     refetchIsFollow();
     refetch();
     refetchGetFollowers();
+    refetchIsRequest();
     refetchGetFolloweds();
-  }, [refetch, refetchIsFollow]);
+  }, [refetch]);
 
   useEffect(() => {
     startPolling(1000);
@@ -199,7 +209,9 @@ const UserProfile = ({ navigation, route }: any) => {
           </DefaultView>
         )}
 
-        <TouchableOpacity>
+        <TouchableOpacity style={{
+          marginVertical: 10
+        }}>
           <Text
             style={{
               color: 'rgba(255,255,255,0.5)',
@@ -254,9 +266,11 @@ const UserProfile = ({ navigation, route }: any) => {
 
           )}
 
-          <TouchableOpacity style={{
+          <TouchableOpacity 
+          onPress={() => sendUserRequest()}
+          style={{
             backgroundColor: 'rgba(255,255,255, .2)',
-            width: data?.getOneUser?.isPrivate ? 150 : 50,
+            width: data?.getOneUser?.isPrivate ? 150 : isRequest? 125:  50,
             height: 40,
             alignItems: 'center',
             justifyContent: 'center',
@@ -264,7 +278,25 @@ const UserProfile = ({ navigation, route }: any) => {
             flexDirection: 'row',
             gap: 10
           }}>
+            {!isRequest ? (
             <Icon name='person-add-outline' size={18} color='#fff' />
+
+            ): (
+              <DefaultView style={{
+                flexDirection:'row',
+                gap: 10
+              }}>
+            <Icon name='person-remove-outline' size={18} color='#fff' />
+
+              <Text style={{
+                fontWeight: '500',
+                color: '#fff',
+                fontSize: 16.
+              }}>Cancelar</Text>
+              </DefaultView>
+
+            )}
+
             {data?.getOneUser?.isPrivate && (
               <Text style={{
                 fontWeight: '500',
@@ -351,7 +383,9 @@ const UserProfile = ({ navigation, route }: any) => {
               {data?.getOneUser?.interests?.music.map((m: string) => (
 
 
-                <DefaultView style={{
+                <DefaultView 
+                key={m}
+                style={{
                   backgroundColor: 'rgba(255,255,255, .2)',
                   height: 40,
                   alignItems: 'center',
@@ -371,7 +405,9 @@ const UserProfile = ({ navigation, route }: any) => {
               {data?.getOneUser?.interests?.food.map((m: string) => (
 
 
-                <DefaultView style={{
+                <DefaultView 
+                key={m}
+                style={{
                   backgroundColor: 'rgba(255,255,255, .2)',
                   height: 40,
                   alignItems: 'center',
@@ -391,7 +427,9 @@ const UserProfile = ({ navigation, route }: any) => {
               {data?.getOneUser?.interests?.plan.map((m: string) => (
 
 
-                <DefaultView style={{
+                <DefaultView 
+                key={m}
+                style={{
                   backgroundColor: 'rgba(255,255,255, .2)',
                   height: 40,
                   alignItems: 'center',

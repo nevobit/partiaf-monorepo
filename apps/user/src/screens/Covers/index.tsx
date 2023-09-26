@@ -126,7 +126,10 @@ const Covers = ({navigation, route}: any) => {
          }}>
           {tickets?.getTicketsByStoreId?.map((ticket:any) => (
 
-          <DefaultView style={{
+          <TouchableOpacity
+          key={ticket.id}
+          onPress={() => navigation.navigate('Ticket', {ticket: ticket})}
+          style={{
            overflow: 'hidden',
            marginBottom: 20,
            borderRadius: 10,
@@ -252,7 +255,7 @@ const Covers = ({navigation, route}: any) => {
             </DefaultView>
             
            </DefaultView>
-          </DefaultView>
+          </TouchableOpacity>
           ))}
 
           {/* <DefaultView style={{
@@ -399,7 +402,7 @@ const Covers = ({navigation, route}: any) => {
           image: covers.image,
           hour: covers.hour,
           name: covers.name,
-          user: data?.getUserById.id
+          user: data?.getUserById?.id
          }})}
           style={{
             backgroundColor: colors.dark.primary,

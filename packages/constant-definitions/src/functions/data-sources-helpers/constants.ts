@@ -10,4 +10,5 @@ export enum Collection {
   FOLLOWS = 'follows',
   BOOKINGS = 'bookings',
   REPORTED = 'reported',
+  FRIEND_REQUEST = 'friend-requests',
 }

@@ -30,7 +30,12 @@ const Stories = ({navigation}:any) => {
     refetch();
   }, [refetch]);
 
-  if(loadingUsers || loading) return <Text>Cargando...</Text>
+  if(loadingUsers || loading) return <Text style={{
+    color: '#fff',
+    fontSize: 12,
+    textAlign: 'center',
+    padding: 40
+  }}>Cargando...</Text>
 
 
 // Función para calcular la puntuación de similitud entre dos conjuntos de intereses

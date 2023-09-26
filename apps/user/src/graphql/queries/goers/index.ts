@@ -29,8 +29,32 @@ query GetGoersById($id: String) {
     description
     image
     name
+    ticket {
+      hour
+      id
+      image
+      limit
+      description
+      name
+      image
+      price
+      type
+    }
     status
     time
+  }
+}
+`
+
+
+export const GET_GOERS_BY_TICKET = gql`
+query GetGoersByTicketId($id: String) {
+  getGoersByTicketId(id: $id) {
+    id
+    user {
+      photo
+      id
+    }
   }
 }
 `

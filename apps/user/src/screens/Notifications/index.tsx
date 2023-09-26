@@ -3,18 +3,30 @@ import { View } from '../../components/Layout/Theme'
 import { Text, View as DefaultView, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
 import Icon  from 'react-native-vector-icons/Ionicons'
 import colors from '../../components/Layout/Theme/colors'
-import { useGetFriends } from '../../hooks'
+import { useAcceptRequest, useGetPendingFriends } from '../../hooks'
 
-const Invitation = ({navigation}: any) => {
+const Notifications = ({navigation}: any) => {
   const [selected, setSelected] = useState(false);
 
-  const { friends, refetch } = useGetFriends();
+  const { friends, refetch, startPolling, stopPolling } = useGetPendingFriends();
+  const { acceptRequestFn } = useAcceptRequest();
 
+  const accepteRequest = async(id: string) => {
+    await acceptRequestFn({ variables:{ id }});
+    refetch();
+  }
 
   useEffect(() => {
-    refetch()
+    startPolling(2000);
+    return () => {
+      stopPolling();
+    };
+  }, [stopPolling, startPolling]);
+
+  useEffect(() => {
+    refetch();
   }, [refetch])
-  console.log(friends)
+  console.log("FEIEDS", friends)
 
   return (
     <View
@@ -54,7 +66,7 @@ const Invitation = ({navigation}: any) => {
                     <Text style={{
                         color: '#fff',
                         fontSize: 16
-                    }}>Invitar amigos</Text>
+                    }}>Notificaciones</Text>
 
 
 <TouchableOpacity
@@ -76,12 +88,14 @@ const Invitation = ({navigation}: any) => {
   {friends?.map((friend: any) => (
 
 <TouchableOpacity 
+key={friend.id}
 onPress={() => setSelected(!selected)}
 style={{
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  alignItems: 'center'
+  alignItems: 'center',
+  marginBottom: 15
 }}>
   <DefaultView style={{
     flexDirection: 'row',
@@ -97,19 +111,22 @@ style={{
               resizeMode: 'cover',
             }}
             source={{
-              uri: friend?.photo[0]? friend.photo[0] :  'https://i.postimg.cc/0jMMGxbs/default.jpg',
+              uri: friend?.sendetId?.photo?.[0]? friend?.sendetId?.photo?.[0] :  'https://i.postimg.cc/0jMMGxbs/default.jpg',
             }}
           />
   <Text style={{
     color: 'rgba(255,255,255,.8)',
     fontSize: 16,
     fontWeight: '600'
-  }}>{friend?.firstname} {friend?.lastname}</Text>
+  }}>{friend?.senderId?.firstname} {friend?.senderId?.lastname}</Text>
   </DefaultView>
+  <DefaultView style={{
+    flexDirection: 'row',
+    gap: 10
+  }}>
 
   <DefaultView style={{
-                    width: 30,
-                    height: 30,
+                    
                     backgroundColor: 'rgba(255,255,255,0.1)',
                     borderRadius: 5,
                     alignItems: 'center',
@@ -117,57 +134,49 @@ style={{
                     justifyContent: 'center',
                     overflow: 'hidden'
                 }}>
-                    <DefaultView style={{
-                        height: 26,
-                        width: 26,
-                        borderRadius: 5,
-                        backgroundColor: selected? colors.dark.primary : 'rgba(255,255,255,0.1)'
-                    }} />
-                    {selected && (
-
-                    <Icon name='checkmark-outline' style={{
-                      position: 'absolute'
-                    }} color='#333' size={24} />
-                    )}
-
+                    
+                      <TouchableOpacity style={{
+                        backgroundColor: 'rgba(255,255,255,.5)',
+                        padding: 5
+                      }}>
+                        <Text style={{
+                          fontWeight: '600',
+                          fontSize: 14
+                        }}>Rechazar</Text>
+                      </TouchableOpacity>
                     </DefaultView>
+
+  <DefaultView style={{
+                    
+                    backgroundColor: 'rgba(255,255,255,0.1)',
+                    borderRadius: 5,
+                    alignItems: 'center',
+                    // alignItems: 'center',
+                    justifyContent: 'center',
+                    overflow: 'hidden'
+                }}>
+                    
+                      <TouchableOpacity style={{
+                        backgroundColor: colors.dark.primary,
+                        padding: 5
+                      }}
+                      onPress={() => accepteRequest(friend.id)}
+                      >
+                        <Text style={{
+                          fontWeight: '600',
+                          fontSize: 14
+                        }}>Aceptar</Text>
+                      </TouchableOpacity>
+                    </DefaultView>
+  </DefaultView>
+
 </TouchableOpacity>
   ))}
 
 </DefaultView>
 
-<TouchableOpacity
-onPress={() => navigation.navigate('Tickets')}
-          style={{
-            backgroundColor: colors.dark.primary,
-            height: 50,
-            borderRadius: 15,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '95%',
-            alignSelf: 'center',
-            marginTop: 'auto',
-            marginBottom: 20,
-            position: 'absolute',
-            bottom: 0
-          }}
-          >
-          {false ? <ActivityIndicator size='small' /> : (
-
-            <Text
-              style={{
-                fontWeight: '500',
-                fontSize: 16,
-                color: 'rgba(0, 0, 0, .9)',
-              }}>
-              Enviar
-            </Text>
-          )}
-
-        </TouchableOpacity>
     </View>
   )
 }
 
-export default Invitation
+export default Notifications
