@@ -84,6 +84,11 @@ export const GET_STORES = gql`
       phone
       type
       photos
+      specialties {
+        food
+        music
+        plan
+      }
     }
   }
 `;
@@ -103,6 +108,7 @@ query GetStoreById($getStoreByIdId: String) {
       music
       plan
     }
+    description
   }
 }
 `;

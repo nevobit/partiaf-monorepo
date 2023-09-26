@@ -11,3 +11,9 @@ mutation UpdateUser($data: UserInput) {
     }
   }
 `
+
+export const DELETE_USER = gql`
+mutation Mutation {
+  deleteUser
+}
+`

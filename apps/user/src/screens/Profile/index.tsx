@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState } from 'react';
-import { Text, View as DefaultView, Image, TouchableOpacity, Linking, Modal, TouchableWithoutFeedback, TextInput, Pressable, ActivityIndicator } from 'react-native';
+import { Text, View as DefaultView, Image, TouchableOpacity, Linking, Modal, TouchableWithoutFeedback, TextInput, Pressable, ActivityIndicator, Alert } from 'react-native';
 import { View } from '../../components/Layout/Theme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ProfileTopTap from '../../navigator/AppNavigator/ProfileTopTap';
@@ -12,6 +12,7 @@ import { BottomSheet } from '../../containers';
 import { useUser } from '../../hooks';
 import { useGetFollowers } from '../../hooks/follows/useGetFollowers';
 import { useGetFolloweds } from '../../hooks/follows/useGetFolloweds';
+import { useDeleteUser } from '../../hooks/users/useDeleteUser';
 
 const Profile = ({ navigation }: any) => {
   const [modal, setModal] = useState(false);
@@ -50,6 +51,50 @@ const Profile = ({ navigation }: any) => {
   const { followers, isLoading: isLoadingGetFollowers, error: errorGetFollowers, refetch: refetchGetFollowers, stopPolling: stopPollingFoll, startPolling: startPollingFoll } = useGetFollowers(user?.id);
   const { followeds, isLoading: isLoadingGetFolloweds, error: errorGetFolloweds, refetch: refetchGetFolloweds, stopPolling, startPolling } = useGetFolloweds(user?.id);
 
+  const { deleteUserFn } = useDeleteUser();
+  const deleteAccountHandler = () => {
+    Alert.alert(
+      'Confirmación',
+      '¿Estás seguro de que deseas eliminar tu cuenta?',
+      [
+        {
+          text: 'Cancelar',
+          onPress: () => {
+            return
+          },
+          style: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          onPress: async () => {
+            Alert.alert(
+              'Eliminar cuenta',
+              'Al eliminar tu cuenta ya no podras recuperar tus datos, estas seguro?',
+            [
+              {
+                text: 'Cancelar',
+                onPress: () => {
+                  return
+                },
+                style: 'cancel',
+              },{
+                text: 'Eliminar',
+                onPress: async() => {
+                  await deleteUserFn();
+                  logout();
+                  console.log('Cuenta eliminada');
+                }
+              }
+            ]
+              )
+          },
+          style: 'destructive',
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   useEffect(() => {
     refetch();
     refetchGetFollowers();
@@ -71,7 +116,16 @@ const Profile = ({ navigation }: any) => {
   }, [stopPollingFoll, startPollingFoll]);
 
 
-  if(isLoading) return <ActivityIndicator size='large' />
+  if(isLoading) return (
+    <View style={{
+      flex: 1,
+      backgroundColor: '#000',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <ActivityIndicator size='large' color='#fff' />
+    </View>
+  )
 
   return (
     <View style={{
@@ -295,6 +349,22 @@ const Profile = ({ navigation }: any) => {
             color: 'red',
             fontSize: 16
           }}>Cerrar sesion</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 6,
+          height: 50,
+
+        }}
+          onPress={deleteAccountHandler}
+        >
+          <Icon name='trash-outline' size={22} color="red" />
+          <Text style={{
+            color: 'red',
+            fontSize: 16
+          }}>Borrar cuenta</Text>
         </TouchableOpacity>
       </BottomSheet>
 

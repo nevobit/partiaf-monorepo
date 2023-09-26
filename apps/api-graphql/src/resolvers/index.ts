@@ -4,6 +4,7 @@ import users from './users';
 import tickets from './tickets';
 import goers from './goers';
 import follows from './follows';
+import friendRequests from './friend-requests';
 
 export default {
   Query: {
@@ -11,12 +12,14 @@ export default {
     ...stores.Query,
     ...tickets.Query,
     ...goers.Query,
-    ...follows.Query
+    ...follows.Query,
+    ...friendRequests.Query
   },
   Mutation: {
     ...auth.Mutation,
     ...goers.Mutation,
     ...users.Mutation,
-    ...follows.Mutation
+    ...follows.Mutation,
+    ...friendRequests.Mutation
   },
 };

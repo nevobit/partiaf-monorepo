@@ -10,6 +10,8 @@ import Payment from '../../screens/Covers/Payment';
 import UserProfile from '../../screens/UserProfile';
 import EditProfile from '../../screens/Profile/EditProfile';
 import Invitation from '../../screens/Invitation';
+import TicketDetails from '../../screens/Covers/Details';
+import Notifications from '../../screens/Notifications';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -41,6 +43,7 @@ export type RootStackParamList = {
     id: string | undefined;
   };
   Moments:undefined;
+  Notifications:undefined;
   EditProfile:{ 
     id: string | undefined
   };
@@ -48,6 +51,7 @@ export type RootStackParamList = {
     id: string | undefined
   };
   Settings:undefined;
+  Ticket :{ ticket: any | undefined};
 };
 const HomeStackNavigator = createStackNavigator<RootStackParamList>();
 
@@ -63,6 +67,8 @@ const HomeNavigator = () => {
       <HomeStackNavigator.Screen name="TicketDetails" component={Details} />
       <HomeStackNavigator.Screen name="Payment" component={Payment} />
       <HomeStackNavigator.Screen name="UserProfile" component={UserProfile} />
+      <HomeStackNavigator.Screen name="Ticket" component={TicketDetails} />
+      <HomeStackNavigator.Screen name="Notifications" component={Notifications} />
 <HomeStackNavigator.Screen name="Invitation" component={Invitation}    options={{
           presentation: 'card',
           animationTypeForReplace: 'push',

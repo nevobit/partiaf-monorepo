@@ -18,15 +18,20 @@ import { useQuery } from '@apollo/client';
 import { GET_STORES } from '../../graphql/queries/users';
 import Header from '../../components/Layout/Header';
 import colors from '../../components/Layout/Theme/colors';
+import { useUser } from '../../hooks';
 
 const Home = ({navigation}: any) => {
   const {user} = useSelector((state: any) => state.auth);
+  const { user: userInfo, isLoading, refetch } = useUser();
+
+
+
   const [openFilters, setOpenFilters] = useState(false);
   const [type, setType] = useState('all');
   const [when, setWhen] = useState('all');
 
 
-  const { data, startPolling, stopPolling } = useQuery(GET_STORES, {
+  const { loading, data, startPolling, stopPolling } = useQuery(GET_STORES, {
     context: {
       headers: {
         authorization: user.token ? `Bearer ${user.token}` : '',
@@ -47,6 +52,39 @@ const Home = ({navigation}: any) => {
     };
   }, [stopPolling, startPolling]);
   
+
+  if(loading) return <Text>Cargando...</Text>
+
+  // Calcular la afinidad de un negocio con los intereses del usuario
+function calcularAfinidadNegocio(negocio:any, interesesUsuario:any) {
+  let afinidad = 0;
+  if (negocio.specialities) {
+    Object.keys(negocio.specialities).forEach(categoria => {
+      negocio.specialities[categoria].forEach((especialidad: any) => {
+        if (interesesUsuario[categoria].includes(especialidad)) {
+          afinidad++;
+        }
+      });
+    });
+  } else {
+    afinidad = 0; // Establecer afinidad en 0 si no hay especialidades
+  }
+  return afinidad;
+}
+
+// Filtrar y ordenar los negocios por afinidad
+function filtrarYOrdenarNegocios(negocios: any, interesesUsuario: any) {
+  return negocios?.map((negocio: any) => ({
+      negocio,
+      afinidad: calcularAfinidadNegocio(negocio, interesesUsuario),
+    }))
+    .sort((a:any, b: any) => b.afinidad - a.afinidad)
+    .map((negocio: any) => negocio.negocio);
+}
+
+// Obtener la lista ordenada de negocios
+const negociosOrdenados = filtrarYOrdenarNegocios(data?.getAllStores, userInfo?.interests);
+
 
   return (
     <View style={{
@@ -102,7 +140,7 @@ const Home = ({navigation}: any) => {
               flexDirection: 'row',
               marginTop: 20,
             }}>
-              {data?.getAllStores.map((store: any) => (
+              {negociosOrdenados?.map((store: any) => (
                 <TouchableOpacity key={store.id} onPress={() => navigation.navigate('Store', {store: store.id})}>
                 <HomeCard {...store} />                  
                 </TouchableOpacity>

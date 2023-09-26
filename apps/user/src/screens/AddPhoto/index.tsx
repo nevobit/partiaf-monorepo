@@ -4,10 +4,7 @@ import { Text, TouchableOpacity, View as DefaultView, Image, ActivityIndicator }
 import colors from '../../components/Layout/Theme/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
 import { saveUserInfo } from '../../features/auth';
-import { launchImageLibrary } from 'react-native-image-picker';
-import axios, { AxiosError } from 'axios';
 import { useUploadImage } from '../../hooks';
 
 const AddPhoto = ({ navigation }: any) => {
