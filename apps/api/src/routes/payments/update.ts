@@ -14,8 +14,8 @@ export const webhookRoute: RouteOptions = {
   handler: async (request: FastifyRequestAdmin, reply: FastifyReply) => {
     try {
       const { query } = request;
-      const { payment } = query as {payment: any}
-      await updatePayment(payment, '');
+      const queryData = query as {payment: any}
+      await updatePayment(queryData, '');
       reply.status(204).send('Payment updated successfully');
     } catch (err) {
       reply.status(500).send(err);

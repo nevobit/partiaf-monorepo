@@ -42,7 +42,7 @@ export const createOrder = async ({ title, price, userId }: Props) => {
         quantity: 1,
       },
     ],
-    notification_url: "https://partiaf-api.xyz/api/v1/webhook",
+    notification_url: "https://partiaf-api.xyz/api/v3/webhook",
     external_reference: userId
     // auto_return: AutoReturn.ALL,
   };
