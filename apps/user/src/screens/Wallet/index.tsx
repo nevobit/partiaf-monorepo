@@ -42,6 +42,7 @@ const Wallet = ({ navigation }: any) => {
   const [openModal, setOpenModal] = useState(false);
   const [url, setUrl] = useState();
 
+  console.log({userI})
   const createOrder = async () => {
     setIsLoading(true);
     try{

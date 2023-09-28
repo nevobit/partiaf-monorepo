@@ -2,6 +2,7 @@ import { Collection, getModel } from '@partiaf/constant-definitions';
 import { User, UsersSchemaMongo } from '@partiaf/entities';
 import mercadopago from 'mercadopago';
 import { CreatePreferencePayload } from 'mercadopago/models/preferences/create-payload.model';
+import { PaymentGetResponse } from 'mercadopago/resources/payment';
 import { MercadoPagoPreference } from 'mercadopago/resources/preferences';
 
 interface Props {
@@ -58,11 +59,12 @@ export const updatePayment = async (payment: any, id: string) => {
   if (payment.type === "payment") {
     const data = await mercadopago.payment.findById(payment["data.id"]);
     console.log(data);
-    const userId = payment.external_reference;
+    const userId = data.body.external_reference;
+    console.log(userId);
     const model = getModel<User>(Collection.USERS, UsersSchemaMongo);
     const user = await model.findById(userId).select('-password');
     if(!user) return;
-    user.balance += Number(payment.total_paid_amount);
+    user.balance += Number(data.body.transaction_details.total_paid_amount);
 
     await user.save();
 

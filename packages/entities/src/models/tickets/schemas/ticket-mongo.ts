@@ -14,6 +14,7 @@ export const TicketSchemaMongo = new Schema<Ticket>(
     limit: { type: Number },
     initial_limit: {type: Number},
     hour: {type: String},
+    date: {type: String},
     image: {type: String},
     percentage: {type: Number},
     status: { type: String, default: StatusType.ACTIVE },

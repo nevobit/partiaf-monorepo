@@ -31,6 +31,7 @@ const Details = ({navigation, route}: any) => {
     },
   });
 
+  console.log(data)
   useEffect(() => {
     refetch();
   }, [refetch]);
@@ -238,7 +239,7 @@ const Details = ({navigation, route}: any) => {
                     color: '#000',
                     fontSize: 15,
                   }}>
-                  Jun 12 2023
+                  {data?.getOneGoer?.time}
                 </Text>
               </DefaultView>
               <DefaultView
