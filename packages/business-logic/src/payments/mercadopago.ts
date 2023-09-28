@@ -64,7 +64,10 @@ export const updatePayment = async (payment: any, id: string) => {
     const model = getModel<User>(Collection.USERS, UsersSchemaMongo);
     const user = await model.findById(userId).select('-password');
     if(!user) return;
-    user.balance += Number(data.body.transaction_details.total_paid_amount);
+
+    if(data.body.status == 'approved'){
+      user.balance += Number(data.body.transaction_details.total_paid_amount);
+    }
 
     await user.save();
 
