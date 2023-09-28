@@ -7,7 +7,7 @@ interface FastifyRequestAdmin extends FastifyRequest {
   admin?: Admin;
 }
 
-export const createOrderRoute: RouteOptions = {
+export const webhookRoute: RouteOptions = {
   method: RouteMethod.POST,
   url: '/webhook',
   // preHandler: verifyToken,
