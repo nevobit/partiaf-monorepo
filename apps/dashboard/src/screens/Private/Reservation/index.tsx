@@ -66,7 +66,6 @@ const Reservation = ( { user, date, hour, ...rest }: Table) => {
   // example data end
   
 const openDetail = ()=>{
-  console.log("Click in openDetail")
   setOpen(!open)
 }
 

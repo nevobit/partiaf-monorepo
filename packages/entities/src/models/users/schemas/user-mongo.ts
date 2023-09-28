@@ -13,6 +13,7 @@ export const UsersSchemaMongo = new Schema<User>(
     password: { type: String },
     phone: { type: String, unique: true },
     gender: { type: String },
+    try_balance: {type: Number},
     photo: [{ type: String }],
     biography: { type: String },
     wishlist: [{ type: String }],

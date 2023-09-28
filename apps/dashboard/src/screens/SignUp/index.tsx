@@ -46,7 +46,6 @@ const SignUp = () => {
   const handleCheckBox = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     setAgree(!agree);
-    console.log(agree);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +63,6 @@ const SignUp = () => {
       return;
     }
 
-    console.log(user);
     const { repeat_password, ...registerUser } = user;
     dispatch(register(registerUser) as any);
   };

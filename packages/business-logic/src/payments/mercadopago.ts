@@ -1,10 +1,13 @@
 import { Collection, getModel } from '@partiaf/constant-definitions';
 import { User, UsersSchemaMongo } from '@partiaf/entities';
 import mercadopago from 'mercadopago';
+import { CreatePreferencePayload } from 'mercadopago/models/preferences/create-payload.model';
+import { MercadoPagoPreference } from 'mercadopago/resources/preferences';
 
 interface Props {
   title: string;
   price: number;
+  userId: string;
 }
 
 mercadopago.configure({
@@ -25,8 +28,12 @@ enum AutoReturn {
   APPROVED= 'approved',
 }
 
-export const createOrder = async ({ title, price }: Props) => {
-  let preference = {
+export const createOrder = async ({ title, price, userId }: Props) => {
+  const model = getModel<User>(Collection.USERS, UsersSchemaMongo);
+  const user = (await model.findById(userId).select('-password')) as User;
+  user.balance = user.try_balance + Number(price);
+
+  let preference : CreatePreferencePayload = {
     items: [
       {
         title,
@@ -34,7 +41,9 @@ export const createOrder = async ({ title, price }: Props) => {
         quantity: 1,
       },
     ],
-    auto_return: AutoReturn.ALL,
+    notification_url: "https://partiaf-api.xyz/api/v1/webhook",
+    external_reference: userId
+    // auto_return: AutoReturn.ALL,
   };
 
   const result = await mercadopago.preferences.create(preference)
@@ -46,16 +55,25 @@ export const success = () => {};
 export const updatePayment = async (payment: any, id: string) => {
   if (payment.type != 'payment') return;
 
-  const data = await mercadopago.payment.findById(payment['data.id']);
+  if (payment.type === "payment") {
+    const data = await mercadopago.payment.findById(payment["data.id"]);
+    console.log(data);
+    const userId = payment.external_reference;
+    const model = getModel<User>(Collection.USERS, UsersSchemaMongo);
+    const user = await model.findById(userId).select('-password');
+    if(!user) return;
+    user.balance += Number(payment.total_paid_amount);
 
-  console.log(data);
+    await user.save();
 
-  return;
+  }
 
-  const model = getModel<User>(Collection.USERS, UsersSchemaMongo);
 
-  const user = (await model.findById(id).select('-password')) as User;
-  user.balance = user.balance + Number(data.body.total_paid_amount);
 
   return true;
+
+  // const user = (await model.findById(id).select('-password')) as User;
+  // user.balance = user.balance + Number(data.body.total_paid_amount);
+
+  // return true;
 };

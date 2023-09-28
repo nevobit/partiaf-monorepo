@@ -49,7 +49,6 @@ const Signin = () => {
   const handleCheckBox = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     setRemeber(!remember);
-    console.log(remember);
   };
 
   const handleGoogleSuccess = async (

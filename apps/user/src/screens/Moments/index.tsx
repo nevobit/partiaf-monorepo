@@ -49,11 +49,9 @@ const Moments = () => {
             maxHeight: 1280,
             saveToPhotos: true
         }, (async (resp) => {
-            console.log("VIDEO", resp)
             if (resp.didCancel) return;
             if (!resp.assets) return;
             if (!resp.assets[0].uri) return;
-            console.log("VIDEO")
 
             const file = { uri: resp.assets[0].uri, name: resp.assets[0].fileName, type: resp.assets[0].type };
         

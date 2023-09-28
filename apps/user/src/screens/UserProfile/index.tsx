@@ -15,11 +15,12 @@ import { useEffect } from 'react';
 import OtherProfileTopTap from '../../navigator/AppNavigator/OtherProfileTopTap';
 import Header from '../../components/Layout/Header';
 import styles from './styles';
-import { useFollowUser, useIsRequest, useSendRequest } from '../../hooks';
+import { useFollowUser, useIsFriend, useIsRequest, useSendRequest } from '../../hooks';
 import { useIsfollowUser } from '../../hooks/follows/useIsfollowUser';
 import { useGetFollowers } from '../../hooks/follows/useGetFollowers';
 import { useGetFolloweds } from '../../hooks/follows/useGetFolloweds';
 import { useUnFollowUser } from '../../hooks/follows/useUnFollowUser';
+import { useCancelRequest } from '../../hooks/friend-requests/useCancelRequest';
 
 const UserProfile = ({ navigation, route }: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -38,11 +39,12 @@ const UserProfile = ({ navigation, route }: any) => {
 
   const { isFollow,  refetch: refetchIsFollow } = useIsfollowUser(route.params.id);
   const { isRequest,  refetch: refetchIsRequest } = useIsRequest(route.params.id);
+  const { isFriend,  refetch: refetchIsFriend } = useIsFriend(route.params.id);
 
   const { followers,  refetch: refetchGetFollowers } = useGetFollowers(route.params.id);
   const { followeds,  refetch: refetchGetFolloweds, stopPolling, startPolling } = useGetFolloweds(route.params.id);
   const { sendRequestFn, request,  error: errorRequest } = useSendRequest(route.params.id);
-  
+  const { cancelRequestFn } = useCancelRequest(route.params.id);
 
   const followUser = async () => {
     await followUserFn();
@@ -53,6 +55,11 @@ const UserProfile = ({ navigation, route }: any) => {
 
   const sendUserRequest = async() => {
     await sendRequestFn();
+    refetchIsRequest();
+  }
+
+  const cancelUserRequest = async() => {
+    await cancelRequestFn();
     refetchIsRequest();
   }
 
@@ -68,6 +75,7 @@ const UserProfile = ({ navigation, route }: any) => {
     refetchIsFollow();
     refetch();
     refetchGetFollowers();
+    refetchIsFriend();
     refetchIsRequest();
     refetchGetFolloweds();
   }, [refetch]);
@@ -265,9 +273,37 @@ const UserProfile = ({ navigation, route }: any) => {
           </>
 
           )}
+          {isFriend ? (
+
+<TouchableOpacity 
+
+style={{
+  backgroundColor: colors.dark.primary,
+  width:  100,
+  height: 40,
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 10,
+  flexDirection: 'row',
+  gap: 10
+}}>
+    <>
+    <DefaultView style={{
+      flexDirection:'row',
+      gap: 10
+    }}>
+    <Text style={{
+      fontWeight: '500',
+      color: 'rgba(0,0,0,0.8)',
+      fontSize: 16.
+    }}>Amigo</Text>
+    </DefaultView>
+    </>
+</TouchableOpacity>
+          ): (
 
           <TouchableOpacity 
-          onPress={() => sendUserRequest()}
+          onPress={isRequest? () => cancelUserRequest() : () => sendUserRequest() }
           style={{
             backgroundColor: 'rgba(255,255,255, .2)',
             width: data?.getOneUser?.isPrivate ? 150 : isRequest? 125:  50,
@@ -278,10 +314,11 @@ const UserProfile = ({ navigation, route }: any) => {
             flexDirection: 'row',
             gap: 10
           }}>
-            {!isRequest ? (
+            {!isRequest && !isFriend ? (
             <Icon name='person-add-outline' size={18} color='#fff' />
 
             ): (
+              <>
               <DefaultView style={{
                 flexDirection:'row',
                 gap: 10
@@ -294,6 +331,7 @@ const UserProfile = ({ navigation, route }: any) => {
                 fontSize: 16.
               }}>Cancelar</Text>
               </DefaultView>
+              </>
 
             )}
 
@@ -305,6 +343,8 @@ const UserProfile = ({ navigation, route }: any) => {
               }}>Agregar</Text>
             )}
           </TouchableOpacity>
+          )}
+
         </DefaultView>
 
       </DefaultView>

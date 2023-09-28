@@ -48,6 +48,7 @@ export interface User extends Base {
   followers: string[];
   following: string[];
   matchs: string[];
+  try_balance: number;
   friends: string[];
   stores: string[];
   loginMethod: string;

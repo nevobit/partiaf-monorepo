@@ -14,7 +14,6 @@ const Invitation = ({navigation}: any) => {
   useEffect(() => {
     refetch()
   }, [refetch])
-  console.log(friends)
 
   return (
     <View

@@ -238,6 +238,10 @@ justifyContent: 'center'
           <TouchableOpacity
           onPress={() => navigation.navigate('Covers', { store:  route.params.store })}
             style={{
+              backgroundColor: 'rgba(255, 255, 255, .1)',
+              borderRadius: 10,
+              paddingHorizontal:20,
+              paddingVertical:10,
               alignItems: 'center',
             }}>
             <Icon name="barcode-outline" color="#fff" size={30} />

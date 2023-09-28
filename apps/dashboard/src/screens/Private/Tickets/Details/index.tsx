@@ -19,7 +19,6 @@ const CoversDetails = () => {
 
   if(isLoading) return <Loader small />
 
-  console.log(goers)
   
   return (
     <>

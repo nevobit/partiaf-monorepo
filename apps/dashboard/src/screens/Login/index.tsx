@@ -27,13 +27,10 @@ const Login = () => {
       const handleCheckBox =(e: React.FormEvent<HTMLInputElement>) =>{
         e.preventDefault()
         setRemeber(!remember)
-        console.log(remember)
     }
 
       const onSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-  
-        console.log(user)
         // dispatch(login({email: user.email, password: user.password}) as any)
       }
     
