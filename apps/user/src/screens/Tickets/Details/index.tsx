@@ -239,7 +239,7 @@ const Details = ({navigation, route}: any) => {
                     color: '#000',
                     fontSize: 15,
                   }}>
-                  {data?.getOneGoer?.time}
+                  {data?.getOneGoer?.ticket.date}
                 </Text>
               </DefaultView>
               <DefaultView
