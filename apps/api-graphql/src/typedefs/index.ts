@@ -76,6 +76,7 @@ type Ticket{
     limit: Int
     hour: String
     price: String
+    date: String
     min_age: Int
     image: String
     description: String
