@@ -85,8 +85,8 @@ export default {
       return false;
     },
     rejectRequest: async (parent: any, { recieverId }: {recieverId: string}, ctx: any) => {
-      await verifyUserToken(ctx) as { id: string };
-      const request = await rejectFriendRequest(recieverId);
+      const { id } = await verifyUserToken(ctx) as { id: string };
+      const request = await rejectFriendRequest(recieverId, id);
       if (request instanceof Error) {
         return new Error('Invalid credentials');
       }

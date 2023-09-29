@@ -19,6 +19,11 @@ const Notifications = ({navigation}: any) => {
     refetch();
   }
 
+  const rejectedRequest = async(recieverId: string) => {
+    await rejectedRequestFn({ variables:{ recieverId }});
+    refetch();
+  }
+
   useEffect(() => {
     startPolling(2000);
     return () => {
@@ -138,7 +143,7 @@ style={{
                 }}>
                     
                       <TouchableOpacity 
-                      onPress={() => rejectedRequestFn(friend.id)}
+                      onPress={() => rejectedRequest(friend.id)}
                       style={{
                         backgroundColor: 'rgba(255,255,255,.5)',
                         padding: 5
