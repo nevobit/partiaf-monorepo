@@ -32,6 +32,7 @@ query GetGoersById($id: String) {
     ticket {
       hour
       id
+      date
       image
       limit
       description
