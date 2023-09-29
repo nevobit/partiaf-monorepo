@@ -154,7 +154,7 @@ const UserProfile = ({ navigation, route }: any) => {
           }}>
           {data?.getOneUser?.firstname} {data?.getOneUser?.lastname}
         </Text>
-        {!data?.getOneUser?.isPrivate && (
+        {(!data?.getOneUser?.isPrivate || isFriend) && (
 
           <DefaultView style={{
           flexDirection: 'row',
@@ -335,7 +335,7 @@ style={{
 
             )}
 
-            {data?.getOneUser?.isPrivate && (
+            {data?.getOneUser?.isPrivate && !isRequest && (
               <Text style={{
                 fontWeight: '500',
                 color: '#fff',
@@ -348,7 +348,7 @@ style={{
         </DefaultView>
 
       </DefaultView>
-      {data?.getOneUser?.isPrivate ? (
+      {(data?.getOneUser?.isPrivate && !isFriend) ? (
         <DefaultView style={{
           display: 'flex',
           alignItems: 'center',
