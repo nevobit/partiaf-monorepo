@@ -74,6 +74,7 @@ query GetOneGoer($id: String) {
     time
     ticket {
       hour
+      date
     }
     user {
       firstname
