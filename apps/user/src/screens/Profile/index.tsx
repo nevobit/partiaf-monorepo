@@ -36,9 +36,9 @@ const Profile = ({ navigation }: any) => {
 
   const photoHandler = () => {
     if (!user.photo[0]) {
-      setChangePhoto(true);
+      setChangePhoto(false);
     }else{
-      setChangePhotoBottom(true)
+      setChangePhotoBottom(false)
     }
   }
 
@@ -82,7 +82,6 @@ const Profile = ({ navigation }: any) => {
                 onPress: async() => {
                   await deleteUserFn();
                   logout();
-                  console.log('Cuenta eliminada');
                 }
               }
             ]
@@ -226,7 +225,7 @@ const Profile = ({ navigation }: any) => {
               marginTop: 5,
               marginBottom: 20,
             }}>
-            Click para anadir una biografia
+            Click para agregar una biografia
           </Text>
         </TouchableOpacity>
         )}

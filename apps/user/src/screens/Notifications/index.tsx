@@ -4,12 +4,15 @@ import { Text, View as DefaultView, TouchableOpacity, Image, ActivityIndicator }
 import Icon  from 'react-native-vector-icons/Ionicons'
 import colors from '../../components/Layout/Theme/colors'
 import { useAcceptRequest, useGetPendingFriends } from '../../hooks'
+import { useCancelRequest } from '../../hooks/friend-requests/useCancelRequest'
+import { useRejectedRequest } from '../../hooks/friend-requests/useRejectedRequest'
 
 const Notifications = ({navigation}: any) => {
   const [selected, setSelected] = useState(false);
 
   const { friends, refetch, startPolling, stopPolling } = useGetPendingFriends();
   const { acceptRequestFn } = useAcceptRequest();
+  const { rejectedRequestFn } = useRejectedRequest();
 
   const accepteRequest = async(id: string) => {
     await acceptRequestFn({ variables:{ id }});
@@ -26,7 +29,6 @@ const Notifications = ({navigation}: any) => {
   useEffect(() => {
     refetch();
   }, [refetch])
-  console.log("FEIEDS", friends)
 
   return (
     <View
@@ -55,7 +57,7 @@ const Notifications = ({navigation}: any) => {
 
 
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('Tickets')}
+                        onPress={() => navigation.goBack()}
                         style={{
                             flexDirection: 'row',
                             gap: 10,
@@ -76,7 +78,7 @@ const Notifications = ({navigation}: any) => {
                             gap: 10,
                         }}>
 
-                        <Icon name="link-outline" size={24} color="#fff" />
+                        <Icon name="link-outline" size={24} color="#000" />
                     </TouchableOpacity>
                 </DefaultView>
             </DefaultView>
@@ -135,7 +137,9 @@ style={{
                     overflow: 'hidden'
                 }}>
                     
-                      <TouchableOpacity style={{
+                      <TouchableOpacity 
+                      onPress={() => rejectedRequestFn(friend.id)}
+                      style={{
                         backgroundColor: 'rgba(255,255,255,.5)',
                         padding: 5
                       }}>

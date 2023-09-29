@@ -6,10 +6,12 @@ export const isFriend = async (
   reciverId: string
 ): Promise<Boolean | Error> => {
   const model = getModel<FriendRequest>(Collection.FRIEND_REQUEST, FriendRequestSchemaMongo);
-  const follow = await model
-    .find({ senderId: uuid })
-    .where("receiverId")
-    .equals(reciverId);
-  if (follow.length > 0) return true;
+    const myFriend = await model
+    .find({ senderId: uuid, receiverId: reciverId, status_request: 'accepted' })
+    .populate('receiverId');
+
+  const yourFriend = await model
+    .find({ senderId: reciverId, receiverId: uuid, status_request: 'accepted' });
+  if (myFriend.length > 0 || yourFriend.length > 0) return true;
   return false;
 };

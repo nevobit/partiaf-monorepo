@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   TextInput,
   StatusBar,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector } from 'react-redux';
@@ -25,7 +26,7 @@ import Modal from '../../containers/Modal';
 const Wallet = ({ navigation }: any) => {
   const { user } = useSelector((state: any) => state.auth);
 
-  const { data, loading, refetch } = useQuery(GET_USER_BY_ID, {
+  const { data: userInfo, loading, refetch } = useQuery(GET_USER_BY_ID, {
     context: {
       headers: {
         authorization: user.token ? `Bearer ${user.token}` : '',
@@ -33,28 +34,40 @@ const Wallet = ({ navigation }: any) => {
     },
   });
 
+  const userI = userInfo?.getUserById; 
+
   const [paymentInfo, setPaymentInfo] = useState();
   const [amount, setAmount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [url, setUrl] = useState();
 
+  console.log({userI})
   const createOrder = async () => {
     setIsLoading(true);
-    const { data } = await axios.post('https://partiaf-api.xyz/api/v3/create-order', {
-      price: amount
-    });
-    setPaymentInfo(data)
-    setUrl(data.init_point);
-    setOpenModal(false)
-    setIsLoading(false);
+    try{
+      const { data } = await axios.post('https://partiaf-api.xyz/api/v3/create-order', {
+        price: amount,
+        userId: userI?.id
+      });
+      setPaymentInfo(data)
+      setUrl(data.init_point);
+      setOpenModal(false)
+      setIsLoading(false);
+    }catch(err:any){
+      setOpenModal(false)
+      setIsLoading(false);
+      console.log(err)
+      Alert.alert('Error', `Ocurrio un error al intentar hacer el pago, ${err}`)
+    }
+
+
   }
 
   useEffect(() => {
     refetch();
   }, [refetch]);
 
-  console.log(url)
   return (
     <>
 
@@ -85,7 +98,7 @@ const Wallet = ({ navigation }: any) => {
               fontWeight: '600',
               fontSize: 30,
             }}>
-            {DivisaFormater(data?.getUserById.balance)}
+            {DivisaFormater(userI?.balance)}
           </Text>
         )}
       </DefaultView>

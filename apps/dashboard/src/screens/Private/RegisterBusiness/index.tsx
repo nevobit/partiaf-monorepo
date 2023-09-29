@@ -129,8 +129,6 @@ const RegisterBusiness = () => {
 
   const navigate = useNavigate();
 
-  console.log({ successStore });
-
   useEffect(() => {
     if (successStore) {
       navigate(PrivateRoutes.BUSINESS, { replace: true });

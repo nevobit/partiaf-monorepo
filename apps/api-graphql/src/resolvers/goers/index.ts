@@ -14,7 +14,6 @@ export default {
         getGoersByUserId: async (parent: any, {}, ctx: any) => {
             const { id } = (await verifyUserToken(ctx)) as { id: string };
             const tickets = await getGoersByUser(id);
-            console.log(tickets)
             return tickets;
           },
 

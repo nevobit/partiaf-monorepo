@@ -158,7 +158,8 @@ type Mutation {
     unfollowUser(followId: String): Boolean
     sendFriendRequest(uuid: String, reciverId: String): Boolean
     acceptRequest(id: String): Boolean
-    rejectRequest(id: String): Boolean
+    cancelRequest(recieverId: String): Boolean
+    rejectRequest(recieverId: String): Boolean
 }
 
 `;

@@ -39,7 +39,6 @@ const Payment = ({navigation, route}: any) => {
 
   const { friends, refetch: refetchFriends } = useGetFriends();
 
-  console.log({friends})
   const onSubmit = async(e: any) => {
     e.preventDefault();
     setLoadingGoer(true);

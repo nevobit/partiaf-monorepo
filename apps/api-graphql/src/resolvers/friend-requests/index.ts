@@ -1,5 +1,6 @@
 import {
   acceptFriendRequest,
+  cancelFriendRequest,
   createFollow, getFolloweds, getFollowers, getFriends, getPendingFriendRequests, isFollow, isFriend, isRequest, rejectFriendRequest, sendRequest, unfollow, verifyUserToken,
 } from '@partiaf/business-logic';
 
@@ -27,7 +28,6 @@ export default {
       
       const request = await isRequest(id, reciverId);
 
-      console.log({request})
       if (request instanceof Error) {
         return new Error('Invalid credentials');
       }
@@ -42,28 +42,22 @@ export default {
         return new Error('Invalid credentials');
       }
 
-      console.log({followers})
       return followers;
     },
     pendingRequests: async (parent: any, { uuid }: {uuid: string}, ctx: any) => {
       const { id } =  await verifyUserToken(ctx) as { id: string };
       const userId = uuid ?? id; 
-      console.log(userId)
       const requests = await getPendingFriendRequests(userId);
       if (requests instanceof Error) {
         return new Error('Invalid credentials');
       }
-      console.log({requests})
       return requests;
     },
   },
   Mutation: {
     sendFriendRequest: async (parent: any, { uuid, reciverId }: {uuid: string, reciverId: string}, ctx: any) => {
-      console.log(uuid)
-      console.log(reciverId)
       const { id } = await verifyUserToken(ctx) as { id: string };
       const userId = uuid ?? id; 
-      console.log('REQUESTS')
       const request = await sendRequest(userId, reciverId);
       if (request instanceof Error) {
         return new Error('Solicitud no enviada');
@@ -79,9 +73,20 @@ export default {
       }
       return request;
     },
-    rejectRequest: async (parent: any, { id }: {id: string}, ctx: any) => {
+    cancelRequest: async (parent: any, { recieverId }: {recieverId: string}, ctx: any) => {
+      const { id } = await verifyUserToken(ctx) as { id: string };
+      const request = await cancelFriendRequest(id, recieverId);
+      if (request instanceof Error) {
+        return new Error('Invalid credentials');
+      }
+
+      if(request.senderId) 
+        return true;
+      return false;
+    },
+    rejectRequest: async (parent: any, { recieverId }: {recieverId: string}, ctx: any) => {
       await verifyUserToken(ctx) as { id: string };
-      const request = await rejectFriendRequest(id);
+      const request = await rejectFriendRequest(recieverId);
       if (request instanceof Error) {
         return new Error('Invalid credentials');
       }

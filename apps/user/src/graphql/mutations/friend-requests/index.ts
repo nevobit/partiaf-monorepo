@@ -11,3 +11,15 @@ mutation Mutation($id: String) {
   acceptRequest(id: $id)
 }
 `
+
+export const CANCEL_REQUEST = gql`
+mutation Mutation($recieverId: String) {
+  cancelRequest(recieverId: $recieverId)
+}
+`
+
+export const REJECTED_REQUEST = gql`
+mutation RejectRequest($recieverId: String) {
+  rejectRequest(recieverId: $recieverId)
+}
+`

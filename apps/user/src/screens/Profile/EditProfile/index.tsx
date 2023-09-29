@@ -17,9 +17,7 @@ const EditProfile = ({ navigation }: any) => {
         photo: user.photo
     });
 
-    console.log("UPDATE ERROR", error)
     const { updatedUser, updateUserFn, isLoading: isLoadingUpdate } = useUpdateUser(userToUpdate);
-    console.log("UPDATE USER", updatedUser)
 
     const handleUpdateUser = async () => {
         await setUserToUpdate((prev) => ({...prev, 'photo': [photo]}))
@@ -84,6 +82,12 @@ const EditProfile = ({ navigation }: any) => {
                     marginTop: 20,
                 }}>
 
+                    
+                    {isLoadingPhoto ? <ActivityIndicator size='large' color='#fff' /> : 
+                    
+                    (
+
+                    <>
                 {user.photo[0] && photo.length < 5 ? (
                     <Image
                         style={{
@@ -118,6 +122,9 @@ const EditProfile = ({ navigation }: any) => {
                     </>
 
                 )}
+                    </>
+                    )}
+
 
 
 

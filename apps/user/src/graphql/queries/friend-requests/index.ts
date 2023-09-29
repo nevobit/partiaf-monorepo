@@ -1,5 +1,11 @@
 import { gql } from "@apollo/client";
 
+
+export const IS_FRIEND = gql`
+query Query($reciverId: String) {
+  isFriend(reciverId: $reciverId)
+}
+`
 export const IS_REQUEST = gql`
 query Query($reciverId: String) {
     isRequest(reciverId: $reciverId)
