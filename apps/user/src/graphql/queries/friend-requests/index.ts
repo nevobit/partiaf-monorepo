@@ -27,6 +27,7 @@ query PendingRequests($uuid: String) {
     pendingRequests(uuid: $uuid) {
       id
       senderId {
+        id
         phone
         firstname
         lastname

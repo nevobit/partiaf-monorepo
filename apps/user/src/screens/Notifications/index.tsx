@@ -143,7 +143,7 @@ style={{
                 }}>
                     
                       <TouchableOpacity 
-                      onPress={() => rejectedRequest(friend.id)}
+                      onPress={() => rejectedRequest(friend.senderId.id)}
                       style={{
                         backgroundColor: 'rgba(255,255,255,.5)',
                         padding: 5
