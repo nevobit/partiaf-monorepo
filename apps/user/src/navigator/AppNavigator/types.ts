@@ -9,4 +9,5 @@ export type AuthStackParamList = {
   UserType: undefined;
   Preferences: undefined;
   VerifyAge: undefined;
+  Privacity: undefined;
 };

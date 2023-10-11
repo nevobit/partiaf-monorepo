@@ -240,7 +240,19 @@ const Signup = ({navigation}: any) => {
               Inicia sesion ahora
             </Text>
           </TouchableOpacity>
+          
         </DefaultView>
+        <TouchableOpacity onPress={() => navigation.navigate('Privacity')}>
+            <Text
+              style={{
+                color: '#fff',
+                textAlign: 'center',
+                marginTop: 15,
+                fontSize: 16
+              }}>
+              Politica de Privacidad y Tratamiento de datos
+            </Text>
+          </TouchableOpacity>
       </DefaultView>
     </View>
   );

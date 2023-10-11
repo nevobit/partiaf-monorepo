@@ -18,6 +18,7 @@ import Search from '../../screens/Search';
 import Moments from '../../screens/Moments';
 import ProfileNavigator from '../Stacks/ProfileStack';
 import UserProfile from '../../screens/UserProfile';
+import Privacity from '../../screens/Privacity';
 
 const Tab = createBottomTabNavigator();
 const Auth = createStackNavigator<AuthStackParamList>();
@@ -68,6 +69,14 @@ export const AuthNavigator = () => {
       <Auth.Screen
         name="VerifyAge"
         component={VerifyAge}
+        options={{
+          presentation: 'card',
+          animationTypeForReplace: 'push',
+        }}
+      />
+      <Auth.Screen
+        name="Privacity"
+        component={Privacity}
         options={{
           presentation: 'card',
           animationTypeForReplace: 'push',

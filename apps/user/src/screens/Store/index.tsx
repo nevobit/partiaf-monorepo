@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Text, Image, Dimensions, View as DefaultView, StatusBar, Linking} from 'react-native';
+import {Text, Image, Dimensions, View as DefaultView, StatusBar, Linking, Alert, TextInput} from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native';
@@ -8,12 +8,15 @@ import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BottomSheet } from '../../containers';
+import Modal from '../../containers/Modal';
 
 const screenHeight = Dimensions.get('screen').height;
 
 const Store = ({route, navigation}: any) => {
   const insets = useSafeAreaInsets();
   const [options, setOptions] = useState(false);
+  const [report, setReport] = useState(false);
+
   const {user} = useSelector((state: any) => state.auth);
   const { data } = useQuery(GET_STORE_BY_ID, {
     variables: { getStoreByIdId: route.params.store },
@@ -23,6 +26,12 @@ const Store = ({route, navigation}: any) => {
       },
     },
   });
+
+  const sendReport = () => {
+    Alert.alert('Reportar Negocio', 'Establecimiento reportado correctamente');
+    setReport(false);
+    setOptions(false);
+  }
 
   const sendWhatsAppMessage = async () => {
     await Linking.openURL(
@@ -381,7 +390,54 @@ justifyContent: 'center'
             fontWeight:'300'
           }}>Ubicacion</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 6,
+          height: 50
+        }}
+        onPress={() => setReport(true)}
+        >
+          <Icon name='warning-outline' size={22} color="#fff" />
+          <Text style={{
+            color: '#fff',
+            fontSize: 14,
+            fontWeight:'300'
+
+          }}>Reportar</Text>
+        </TouchableOpacity>
+   
       </BottomSheet>
+
+      <Modal isVisible={report} setIsVisible={setReport}>
+          <TextInput  style={{
+            borderWidth: 1,
+            borderColor: '#fff',
+            borderRadius: 15,
+            paddingHorizontal: 15,
+            color: '#fff',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start',
+            display:'flex'
+          }} placeholder='Razon' placeholderTextColor='rgba(255,255,255,.5)' />
+          <TouchableOpacity style={{
+            backgroundColor: colors.dark.primary,
+            borderRadius: 15,
+            height: 50,
+            marginTop: 20,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 20
+          }}
+          onPress={sendReport}
+          >
+            <Text style={{
+              fontWeight: '600',
+              fontSize: 16
+            }} >Enviar</Text>
+          </TouchableOpacity>
+      </Modal>
     </DefaultView>
   );
 };
