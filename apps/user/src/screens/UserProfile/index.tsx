@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { Text, View as DefaultView, Image, TouchableOpacity, Modal, TouchableWithoutFeedback, ScrollView, Alert } from 'react-native';
+import { Text, View as DefaultView, Image, TouchableOpacity, Modal as ModalView, TouchableWithoutFeedback, ScrollView, Alert } from 'react-native';
 import { View } from '../../components/Layout/Theme';
 import colors from '../../components/Layout/Theme/colors';
 import { useTheme } from '../../contexts/ThemeContexts';
@@ -21,10 +21,15 @@ import { useGetFollowers } from '../../hooks/follows/useGetFollowers';
 import { useGetFolloweds } from '../../hooks/follows/useGetFolloweds';
 import { useUnFollowUser } from '../../hooks/follows/useUnFollowUser';
 import { useCancelRequest } from '../../hooks/friend-requests/useCancelRequest';
+import { BottomSheet } from '../../containers';
+import { TextInput } from 'react-native';
+import Modal from '../../containers/Modal';
 
 const UserProfile = ({ navigation, route }: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const [open, setOpen] = useState(false);
+  const [report, setReport] = useState(false);
+
   const { data, loading, error, refetch } = useQuery(GET_ONE_USER, {
     variables: { id: route.params.id },
     context: {
@@ -34,6 +39,7 @@ const UserProfile = ({ navigation, route }: any) => {
     },
   });
 
+  const [options, setOptions] = useState(false);
   const { followUserFn, follow, isLoading, error: errorFollow } = useFollowUser(route.params.id);
   const { unfollowUserFn, unfollow, isLoading: isUnfollow, error: errorUnFollow } = useUnFollowUser(route.params.id);
 
@@ -70,7 +76,14 @@ const UserProfile = ({ navigation, route }: any) => {
     refetchGetFolloweds();
   };
 
+  const sendReport = () => {
+    Alert.alert('Reportar Usuario', 'Usuario reportado correctamente')
+  }
 
+  const blockUser = () => {
+    Alert.alert('Bloquear Usuario', 'Usuario bloqueado correctamente')
+  }
+  
   useEffect(() => {
     refetchIsFollow();
     refetch();
@@ -92,7 +105,24 @@ const UserProfile = ({ navigation, route }: any) => {
     <View style={{
       flex: 1
     }}>
+      <DefaultView style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      }}>
       <Header wallet ticket />
+      <TouchableOpacity style={{
+        marginRight: 10,
+        marginTop: 10
+      }}
+      onPress={() => setOptions(true)}
+      >
+        <Text>
+          <Icon name='ellipsis-vertical' color='#fff' size={24} />
+        </Text>
+      </TouchableOpacity>
+      </DefaultView>
+
       <DefaultView
         style={styles.container}>
         <DefaultView
@@ -386,7 +416,7 @@ style={{
         <OtherProfileTopTap navigation={navigation} id={route.params.id} />
       )}
 
-      <Modal visible={open}
+      <ModalView visible={open}
         animationType='fade'
         transparent={true}
       >
@@ -490,6 +520,73 @@ style={{
           </DefaultView>
         </TouchableWithoutFeedback>
 
+      </ModalView>
+
+
+      <BottomSheet isVisible={options} setIsVisible={setOptions} >
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 6,
+          height: 50
+        }}
+        onPress={() => setReport(true)}
+        >
+          <Icon name='warning-outline' size={22} color="#fff" />
+          <Text style={{
+            color: '#fff',
+            fontSize: 14,
+            fontWeight:'300'
+
+          }}>Reportar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 4,
+          height: 50,
+
+        }}
+onPress={blockUser}
+        >
+          <Icon name='lock-closed-outline' size={22} color="#fff" />
+          <Text style={{
+            color: '#fff',
+            fontSize: 14,
+            fontWeight:'300'
+          }}>Bloquear</Text>
+        </TouchableOpacity>
+      </BottomSheet>
+
+      <Modal isVisible={report} setIsVisible={setReport}>
+          <TextInput  style={{
+            borderWidth: 1,
+            borderColor: '#fff',
+            borderRadius: 15,
+            paddingHorizontal: 15,
+            color: '#fff',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start',
+            display:'flex'
+          }} placeholder='Razon' placeholderTextColor='rgba(255,255,255,.5)' />
+          <TouchableOpacity style={{
+            backgroundColor: colors.dark.primary,
+            borderRadius: 15,
+            height: 50,
+            marginTop: 20,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 20
+          }}
+          onPress={sendReport}
+          >
+            <Text style={{
+              fontWeight: '600',
+              fontSize: 16
+            }} >Enviar</Text>
+          </TouchableOpacity>
       </Modal>
     </View>
   );

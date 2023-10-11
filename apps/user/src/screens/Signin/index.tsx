@@ -105,6 +105,7 @@ const Signin = ({navigation}: any) => {
               fontSize: 14,
               color: 'white',
             }}
+            keyboardType='numeric'
             onChangeText={text => setUser(prev => ({...prev, ['phone']: text}))}
             placeholder="Telefono"
           />
