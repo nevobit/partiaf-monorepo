@@ -81,6 +81,7 @@ const UserProfile = ({ navigation, route }: any) => {
   }
 
   const blockUser = () => {
+    setOptions(false);
     Alert.alert('Bloquear Usuario', 'Usuario bloqueado correctamente')
   }
   
@@ -101,6 +102,10 @@ const UserProfile = ({ navigation, route }: any) => {
   }, [stopPolling, startPolling]);
 
 
+  const handlerReport = () => {
+    setOptions(false);
+    setReport(true); 
+  }
   return (
     <View style={{
       flex: 1
@@ -531,7 +536,7 @@ style={{
           gap: 6,
           height: 50
         }}
-        onPress={() => setReport(true)}
+        onPress={handlerReport}
         >
           <Icon name='warning-outline' size={22} color="#fff" />
           <Text style={{
@@ -560,7 +565,7 @@ onPress={blockUser}
         </TouchableOpacity>
       </BottomSheet>
 
-      <Modal isVisible={report} setIsVisible={setReport}>
+      <Modal  isVisible={report} setIsVisible={setReport}>
           <TextInput  style={{
             borderWidth: 1,
             borderColor: '#fff',

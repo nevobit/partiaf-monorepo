@@ -56,7 +56,12 @@ const Store = ({ route, navigation }: any) => {
     );
   };
 
-  console.log(data);
+  const handlerReport = () => {
+    setOptions(false);
+    setReport(true);
+  }
+
+  console.log(data)
   return (
     <DefaultView
       style={{
@@ -432,15 +437,14 @@ const Store = ({ route, navigation }: any) => {
             Ubicacion
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 6,
-            height: 50,
-          }}
-          onPress={() => setReport(true)}
+        <TouchableOpacity style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 6,
+          height: 50
+        }}
+        onPress={handlerReport}
         >
           <Icon name="warning-outline" size={22} color="#fff" />
           <Text
