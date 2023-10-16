@@ -574,7 +574,8 @@ onPress={blockUser}
             color: '#fff',
             alignItems: 'flex-start',
             justifyContent: 'flex-start',
-            display:'flex'
+            display:'flex',
+            height: 40
           }} placeholder='Razon' placeholderTextColor='rgba(255,255,255,.5)' />
           <TouchableOpacity style={{
             backgroundColor: colors.dark.primary,
