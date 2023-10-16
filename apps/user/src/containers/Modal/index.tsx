@@ -13,6 +13,9 @@ const Modal = ({ children, isVisible, setIsVisible }: Props) => {
       animationType='fade'
       transparent={true}
       visible={isVisible}
+      style={{
+        zIndex: 999
+      }}
     >
       <TouchableWithoutFeedback onPress={() => setIsVisible(false)}>
         <View style={styles.bottomSheetContainer}>

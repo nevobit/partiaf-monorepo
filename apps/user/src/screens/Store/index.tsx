@@ -46,6 +46,11 @@ const Store = ({route, navigation}: any) => {
     )
   }
 
+  const handlerReport = () => {
+    setOptions(false);
+    setReport(true);
+  }
+
   console.log(data)
   return (
     <DefaultView
@@ -397,7 +402,7 @@ justifyContent: 'center'
           gap: 6,
           height: 50
         }}
-        onPress={() => setReport(true)}
+        onPress={handlerReport}
         >
           <Icon name='warning-outline' size={22} color="#fff" />
           <Text style={{
