@@ -470,6 +470,7 @@ const Store = ({ route, navigation }: any) => {
             alignItems: "flex-start",
             justifyContent: "flex-start",
             display: "flex",
+            height: 40
           }}
           placeholder="Razon"
           placeholderTextColor="rgba(255,255,255,.5)"
