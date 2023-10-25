@@ -1,0 +1,114 @@
+.title{
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 2rem;
+}
+
+.copy{
+    color: rgba(255, 255, 255, .8);
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.picture{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    padding: 2rem 6rem;
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 30rem 1fr;
+    gap: 4rem;
+    width: min(90%, 110rem);
+    margin: 0 auto;
+}
+
+.container h2{
+    font-weight: 600;
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.container button{
+    background-color: #ffe243;
+    border: none;
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    color: #333;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.container p{
+    color: rgba(255, 255, 255, .8);
+}
+
+.container ul{
+    list-style: none;
+}
+
+.container li{
+    color: rgba(255, 255, 255, .8);
+    margin-bottom: 1rem;
+}
+
+.office{
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.container h4{
+    color: #fff;
+    margin-top: 2rem;
+}
+
+.container h5{
+    color: #fff;
+    margin-top: 8rem;
+    margin-bottom: 1rem;
+}
+
+.container ul{
+    margin-top: 2rem;
+}
+
+.message{
+    max-width: 40rem;
+    margin-top: 3rem;
+}
+
+.grid h2{
+    color: #fff;
+}
+
+.grid p{
+    color: rgba(255, 255, 255, .8);
+    margin-bottom: 4rem;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 2rem 0;
+        grid-template-columns:1fr;
+    }    
+
+    .picture img{
+        width: 30rem;
+        height: 20rem;
+    }
+
+    .copy{
+        max-width: 90%;
+        margin: 2rem auto;
+    }
+}
