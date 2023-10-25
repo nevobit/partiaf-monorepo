@@ -4,9 +4,9 @@ import {
   TextInput,
   TouchableOpacity,
   View as DefaultView,
-  Image,
   ActivityIndicator,
   Platform,
+  Alert,
 } from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import {View} from '../../components/Layout/Theme';
@@ -48,6 +48,8 @@ const Signin = ({navigation}: any) => {
       if(err instanceof Error){
         if(err.message == 'Invalid crednetials'){
           setError('Credenciales invalidas');                  
+        }else{
+          Alert.alert("Error", 'Algo salio mal, vuelve a intentarlo ')
         }
       }
       setLoading(false);
@@ -129,7 +131,8 @@ const Signin = ({navigation}: any) => {
           <TouchableOpacity
             disabled={user.password.length < 1 || user.phone.length < 1}
             style={{
-              backgroundColor: colors.dark.primary,
+              backgroundColor: user.password.length < 9 || user.phone.length < 4? 'rgb(100,100,100)'
+              : colors.dark.primary,
               height: 50,
               borderRadius: 15,
               display: 'flex',
