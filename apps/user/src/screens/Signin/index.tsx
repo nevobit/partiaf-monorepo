@@ -4,9 +4,9 @@ import {
   TextInput,
   TouchableOpacity,
   View as DefaultView,
-  Image,
   ActivityIndicator,
   Platform,
+  Alert,
 } from 'react-native';
 import colors from '../../components/Layout/Theme/colors';
 import {View} from '../../components/Layout/Theme';
@@ -48,6 +48,8 @@ const Signin = ({navigation}: any) => {
       if(err instanceof Error){
         if(err.message == 'Invalid crednetials'){
           setError('Credenciales invalidas');                  
+        }else{
+          Alert.alert("Error", 'Algo salio mal, vuelve a intentarlo ')
         }
       }
       setLoading(false);
