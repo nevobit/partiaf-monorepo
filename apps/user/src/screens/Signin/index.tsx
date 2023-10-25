@@ -131,7 +131,7 @@ const Signin = ({navigation}: any) => {
           <TouchableOpacity
             disabled={user.password.length < 1 || user.phone.length < 1}
             style={{
-              backgroundColor: user.password.length < 9 || user.phone.length < 4? 'rgb(100,100,100)'
+              backgroundColor: user.password.length < 4 || user.phone.length < 9? 'rgb(100,100,100)'
               : colors.dark.primary,
               height: 50,
               borderRadius: 15,
