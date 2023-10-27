@@ -13,6 +13,7 @@ import { useUser } from '../../hooks';
 import { useGetFollowers } from '../../hooks/follows/useGetFollowers';
 import { useGetFolloweds } from '../../hooks/follows/useGetFolloweds';
 import { useDeleteUser } from '../../hooks/users/useDeleteUser';
+import LoadingScreen from '../../containers/LoadingScreen';
 
 const Profile = ({ navigation }: any) => {
   const [modal, setModal] = useState(false);
@@ -116,14 +117,15 @@ const Profile = ({ navigation }: any) => {
 
 
   if(isLoading) return (
-    <View style={{
-      flex: 1,
-      backgroundColor: '#000',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      <ActivityIndicator size='large' color='#fff' />
-    </View>
+    // <View style={{
+    //   flex: 1,
+    //   backgroundColor: '#000',
+    //   alignItems: 'center',
+    //   justifyContent: 'center'
+    // }}>
+    //   <ActivityIndicator size='large' color='#fff' />
+    // </View>
+    <LoadingScreen />
   )
 
   return (

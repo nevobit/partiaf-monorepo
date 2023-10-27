@@ -116,7 +116,7 @@ filteredUsers.sort(compararUsuariosPorIntereses);
       {filteredUsers?.map((user: any) => (
 
        <TouchableOpacity
-       key={user._id}
+       key={user.id}
        onPress={() => navigation.navigate('UserProfile', {id: user._id})}
         style={{
           alignItems: 'center',
