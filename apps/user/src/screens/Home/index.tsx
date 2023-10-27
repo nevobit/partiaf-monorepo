@@ -19,6 +19,7 @@ import { GET_STORES } from '../../graphql/queries/users';
 import Header from '../../components/Layout/Header';
 import colors from '../../components/Layout/Theme/colors';
 import { useUser } from '../../hooks';
+import LoadingScreen from '../../containers/LoadingScreen';
 
 const Home = ({navigation}: any) => {
   const {user} = useSelector((state: any) => state.auth);
@@ -53,7 +54,7 @@ const Home = ({navigation}: any) => {
   }, [stopPolling, startPolling]);
   
 
-  if(loading) return <Text>Cargando...</Text>
+  if(loading) return <LoadingScreen />
 
   // Calcular la afinidad de un negocio con los intereses del usuario
 function calcularAfinidadNegocio(negocio:any, interesesUsuario:any) {

@@ -24,6 +24,7 @@ import { useCancelRequest } from '../../hooks/friend-requests/useCancelRequest';
 import { BottomSheet } from '../../containers';
 import { TextInput } from 'react-native';
 import Modal from '../../containers/Modal';
+import LoadingScreen from '../../containers/LoadingScreen';
 
 const UserProfile = ({ navigation, route }: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -106,6 +107,9 @@ const UserProfile = ({ navigation, route }: any) => {
     setOptions(false);
     setReport(true); 
   }
+
+  if(loading) return <LoadingScreen />
+  
   return (
     <View style={{
       flex: 1
