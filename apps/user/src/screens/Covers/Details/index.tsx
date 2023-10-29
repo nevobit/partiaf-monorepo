@@ -41,7 +41,7 @@ const TicketDetails = ({navigation, route}: any) => {
       const has = covers.id === cover.id;
       if(has){
         let updatedCover = {}; 
-        if(op == '+' && covers.amount < cover.limit){
+        if(op == '+' && covers.amount < 1 && cover.limit > 0 ){
           updatedCover = {...covers,
             amount: covers.amount + 1}
         }else if(op == '-' && covers.amount > 0){

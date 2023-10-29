@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { User, UserAccountType } from './user';
+import { User } from './user';
 import crypto from 'crypto';
 
 export const UsersSchemaMongo = new Schema<User>(
@@ -51,6 +51,7 @@ export const UsersSchemaMongo = new Schema<User>(
     },
     dateOfBirth: { type: Date },
     pin: { type: Number },
+    isDev: { type: Boolean, default: false },
     isPrivate: { type: Boolean, default: false },
     isVerified: { type: Boolean },
     accountType: { type: String, default: 'personal' },

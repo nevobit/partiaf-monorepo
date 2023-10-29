@@ -100,6 +100,7 @@ type Goer {
 
 
 input GoerInput {
+    id: String
     user: String
     status: String
     cost: Float
