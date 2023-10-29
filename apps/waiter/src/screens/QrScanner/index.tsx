@@ -42,6 +42,7 @@ const QrScanner = ({navigation}: any) => {
           await updateGoer({
             variables: {
               data: {
+                id: qrValue.id,
                 entry_status: 'completed',
               },
             },

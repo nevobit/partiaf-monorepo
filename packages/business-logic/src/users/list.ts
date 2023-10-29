@@ -6,7 +6,7 @@ export const getAllUsers = async (id: string): Promise<User[]> => {
   let query = {};
 
   if (id) {
-    query = { _id: { $ne: id } };
+    query = { _id: { $ne: id }, isDev: false };
   }
 
   const user = await model.find(query).select('-password').lean();

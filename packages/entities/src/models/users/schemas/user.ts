@@ -65,6 +65,7 @@ export interface User extends Base {
   isVerified: boolean;
   isBlocked: boolean;
   isSuspended: boolean;
+  isDev: boolean;
   blockReason: string;
   suspensionReason: string;
   paymentsMethods: UserPayment[];
