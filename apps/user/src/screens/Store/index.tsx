@@ -60,8 +60,6 @@ const Store = ({ route, navigation }: any) => {
     setOptions(false);
     setReport(true);
   }
-
-  console.log(data)
   return (
     <DefaultView
       style={{

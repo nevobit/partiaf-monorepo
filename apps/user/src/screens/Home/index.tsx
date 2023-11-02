@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Text,
   View as DefaultView,
@@ -7,6 +7,7 @@ import {
   Image,
   Modal,
   Platform,
+  RefreshControl,
 } from 'react-native';
 import {View} from '../../components/Layout/Theme';
 import Stories from '../../components/UI/Home/Stories';
@@ -15,7 +16,7 @@ import HomeCard from '../../components/UI/HomeCard';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
-import { GET_STORES } from '../../graphql/queries/users';
+import { GET_STORES, GET_USER_BY_ID } from '../../graphql/queries/users';
 import Header from '../../components/Layout/Header';
 import colors from '../../components/Layout/Theme/colors';
 import { useUser } from '../../hooks';
@@ -24,15 +25,21 @@ import LoadingScreen from '../../containers/LoadingScreen';
 const Home = ({navigation}: any) => {
   const {user} = useSelector((state: any) => state.auth);
   const { user: userInfo, isLoading, refetch } = useUser();
-
-
+  const [refreshing, setRefreshing] = useState(false);
 
   const [openFilters, setOpenFilters] = useState(false);
   const [type, setType] = useState('all');
   const [when, setWhen] = useState('all');
 
+  const {data: dataUsers, loading: loadginUsers, error, refetch: refetchUsers} = useQuery(GET_USER_BY_ID, {
+    context: {
+      headers: {
+        authorization: user.token ? `Bearer ${user.token}` : '',
+      },
+    },
+  });
 
-  const { loading, data, startPolling, stopPolling } = useQuery(GET_STORES, {
+  const { loading, data, refetch: refetchStores } = useQuery(GET_STORES, {
     context: {
       headers: {
         authorization: user.token ? `Bearer ${user.token}` : '',
@@ -46,14 +53,16 @@ const Home = ({navigation}: any) => {
     setOpenFilters(false);
   }
 
-  useEffect(() => {
-    startPolling(1000);
-    return () => {
-      stopPolling();
-    };
-  }, [stopPolling, startPolling]);
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetchUsers().then(() => {
+    refetchStores().then(() => {
+          setRefreshing(false);
+    })
+  })
   
-
+  }, [])
+  
   if(loading) return <LoadingScreen />
 
   // Calcular la afinidad de un negocio con los intereses del usuario
@@ -87,6 +96,7 @@ function filtrarYOrdenarNegocios(negocios: any, interesesUsuario: any) {
 const negociosOrdenados = filtrarYOrdenarNegocios(data?.getAllStores, userInfo?.interests);
 
 
+
   return (
     <View style={{
       backgroundColor: '#000',
@@ -98,8 +108,10 @@ const negociosOrdenados = filtrarYOrdenarNegocios(data?.getAllStores, userInfo?.
       <ScrollView style={{
       backgroundColor: '#000',
       height: '100%'
-    }}>
-        <Stories navigation={navigation} />
+    }}
+    refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+    >
+        <Stories navigation={navigation} refetch={refetchUsers} loading={loadginUsers} data={dataUsers} />
 
         <DefaultView
           style={{

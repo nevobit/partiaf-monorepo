@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {View} from '../../components/Layout/Theme';
 import {
   View as DefaultView,
   Keyboard,
+  RefreshControl,
   Text,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -25,7 +26,7 @@ const DismissKeyboard = ({children}: any) => (
   </TouchableWithoutFeedback>
 );
 const Covers = ({navigation, route}: any) => {
-  
+  const [refreshing ,setRefreshing] = useState(false);
   const {user} = useSelector((state: any) => state.auth);
 
   const {data, loading, error, refetch} = useQuery(GET_USER_BY_ID, {
@@ -36,7 +37,7 @@ const Covers = ({navigation, route}: any) => {
     },
   });
 
-  const {data: tickets} = useQuery(GET_TICKETS_BY_STORE_ID, {
+  const {data: tickets, refetch: refetchTikets} = useQuery(GET_TICKETS_BY_STORE_ID, {
     variables: { id: route.params.store },
     context: {
       headers: {
@@ -49,6 +50,12 @@ const Covers = ({navigation, route}: any) => {
     refetch();
   });
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetchTikets().then(() => {
+      setRefreshing(false);
+    })
+  }, [])
 
   useEffect(() => {
     refetch();
@@ -123,7 +130,9 @@ const Covers = ({navigation, route}: any) => {
          <ScrollView style={{
           paddingHorizontal: 15,
           marginTop: 50
-         }}>
+         }}
+         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+         >
           {tickets?.getTicketsByStoreId?.map((ticket:any) => (
 
           <TouchableOpacity
