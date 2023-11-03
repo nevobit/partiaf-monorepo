@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { Layout } from '@/components';
 import { Banner, Blog, Commitment } from '@/sections';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   return (
@@ -22,20 +23,24 @@ const Home: NextPage = () => {
           </div>
           <div>
             <h2>Descarga la App Hoy</h2>
-            <span>
+            <Link href='https://apps.apple.com/co/app/partiaf/id6450636147?l=en-GB'>
               <Image
                 src="/app-store-logo.png"
                 width={150}
                 height={40}
                 alt="App Store logo"
               />
+            </Link>
+          <Link href='https://play.google.com/store/apps/details?id=com.nevobit.partiaf'>
+
               <Image
                 src="/playstore-logo.png"
                 width={150}
                 height={30}
                 alt="App Store logo"
               />
-            </span>
+          </Link>
+
           </div>
         </div>
       </section>

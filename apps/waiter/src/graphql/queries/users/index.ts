@@ -49,6 +49,7 @@ query GetGoersByTicketId($id: String) {
     id
     image
     name
+    entry_status
     status
     time
     user {

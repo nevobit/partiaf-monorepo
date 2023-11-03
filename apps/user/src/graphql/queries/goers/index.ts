@@ -72,6 +72,7 @@ query GetOneGoer($id: String) {
     name
     status
     time
+    entry_status
     ticket {
       hour
       date

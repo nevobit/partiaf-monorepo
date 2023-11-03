@@ -93,6 +93,7 @@ type Goer {
     ticket: Ticket
     amount: Int
     image: String
+    entry_status: String
     name: String
     description: String
     date: String
