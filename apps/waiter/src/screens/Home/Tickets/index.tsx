@@ -22,6 +22,8 @@ const Tickets = ({selected}: any) => {
     },
   });
 
+  console.log(goers?.getGoersByTicketId)
+
   useEffect(() => {
     startPolling(1000);
     return () => {
