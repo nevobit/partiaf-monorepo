@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react'
-import { Text, View as DefaultView, Image, StatusBar, Dimensions } from 'react-native';
+import { Text, View as DefaultView, Image, StatusBar, Dimensions, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import { GET_ONE_TICKET } from '../../../graphql/queries/tickets';
 import { View } from '../../../components/Layout/Theme';
@@ -105,15 +105,18 @@ const TicketDetails = ({navigation, route}: any) => {
       <Image
         style={{
           position: 'relative',
-          top: -50,
+          top: -20,
           width: '100%',
           height: screenHeight * 0.50,
-          resizeMode: 'cover',
+          resizeMode: 'contain'
         }}
         source={{
           uri: ticket.image,
         }}
       />
+
+      <ScrollView>
+
       <DefaultView style={{
         flexDirection: 'row',
         marginTop: -35,
@@ -198,6 +201,8 @@ const TicketDetails = ({navigation, route}: any) => {
       {/* <Text style={{
         color: '#fff'
       }}>{JSON.stringify(ticket)}</Text> */}
+    
+      </ScrollView>
       <DefaultView style={{
         flexDirection: 'row',
         alignItems: 'center',
@@ -287,8 +292,7 @@ const TicketDetails = ({navigation, route}: any) => {
          </TouchableOpacity>
        </DefaultView>
           
-      </DefaultView>
-       
+      </DefaultView>   
     </View>
   ) 
 }

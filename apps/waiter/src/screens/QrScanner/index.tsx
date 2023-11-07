@@ -59,6 +59,16 @@ const QrScanner = ({navigation}: any) => {
     }
   }
 
+  const getInformation = async (e: any) => {
+    const parsedData = JSON.parse(e.data);
+    setQrValue(parsedData);
+  };
+  
+  useEffect(() => {
+    if(qrValue.name){
+      onSubmit(); // Llama a onSubmit después de que qrValue se haya actualizado
+    }
+  }, [qrValue]);
  
 
   return (
@@ -98,16 +108,16 @@ const QrScanner = ({navigation}: any) => {
                     color: '#fff',
                     marginBottom: 5,
                     fontSize: 16
-                }} >Fecha: {qrValue.ticket.date}</Text>
+                }} >Fecha: {qrValue?.ticket?.date}</Text>
                 <Text style={{
                     color: '#fff',
                     marginBottom: 5,
                     fontSize: 16
-                }} >Hora: {qrValue.ticket.hour}</Text>
+                }} >Hora: {qrValue?.ticket?.hour}</Text>
                 <TouchableOpacity 
                 onPress={() => setShowDialog(false)}
                 style={{
-                    backgroundColor: 'red',
+                    backgroundColor: colors.dark.primary,
                     width: '100%',
                     height: 40,
                     borderRadius: 30,
@@ -146,7 +156,7 @@ const QrScanner = ({navigation}: any) => {
                 <TouchableOpacity 
                 onPress={() => setShowDialogError(false)}
                 style={{
-                    backgroundColor: colors.dark.primary,
+                    backgroundColor: 'red',
                     width: '100%',
                     height: 40,
                     borderRadius: 30,
@@ -164,12 +174,9 @@ const QrScanner = ({navigation}: any) => {
 
         </Modal>
      <QRCodeScanner
-        onRead={(e) => {
-            onSubmit()
-            setQrValue(JSON.parse(e.data))
-        }}
+        onRead={(e) => getInformation(e)}
         reactivate={true}
-        reactivateTimeout={10000}
+        reactivateTimeout={5000}
         showMarker
         cameraContainerStyle={{
             height: Dimensions.get('window').height,
