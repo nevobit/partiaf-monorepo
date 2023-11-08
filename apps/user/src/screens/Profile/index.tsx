@@ -126,7 +126,7 @@ const Profile = ({ navigation }: any) => {
 
 
   useEffect(() =>{
-    if(!user.token){
+    if(!user?.token){
       addUserToken();
     }
   },[])

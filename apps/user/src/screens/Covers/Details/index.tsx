@@ -176,7 +176,11 @@ const TicketDetails = ({navigation, route}: any) => {
         }}>Precio: <Text style={{
           color: colors.dark.primary
         }}>{DivisaFormater(ticket.price)}</Text></Text>
-
+   <Text style={{
+          color: '#fff',
+          fontSize: 14,
+          marginRight: 15
+        }}>Fecha: {ticket.date}</Text>
         <Text style={{
           color: '#fff',
           fontSize: 14,
