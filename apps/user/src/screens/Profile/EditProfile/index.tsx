@@ -20,7 +20,7 @@ const EditProfile = ({ navigation }: any) => {
     const { updatedUser, updateUserFn, isLoading: isLoadingUpdate } = useUpdateUser(userToUpdate);
 
     const handleUpdateUser = async () => {
-        await setUserToUpdate((prev) => ({...prev, 'photo': [photo]}))
+        await setUserToUpdate((prev) => ({...prev, photo: [photo? photo : user.photo]}))
         await updateUserFn();
         refetch();
         navigation.navigate('Profile');

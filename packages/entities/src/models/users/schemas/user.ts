@@ -57,6 +57,7 @@ export interface User extends Base {
   verificationCode: number;
   lastLogin: Date;
   location: Location;
+  token: string;
   dateOfBirth: Date;
   notifications: boolean;
   pin: number;

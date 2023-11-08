@@ -15,12 +15,16 @@ import {useDispatch} from 'react-redux';
 import {signin, signout} from '../../features/auth';
 import {useMutation} from '@apollo/client';
 import {LOGIN_USER} from '../../graphql/mutations';
+import getToken from '../../notifications/get-token';
+import { useUpdateUser } from '../../hooks';
 
 const Signin = ({navigation}: any) => {
   const [user, setUser] = useState({
     phone: '',
     password: '',
   });
+
+  const [token, setToken] = useState('');
 
   const dispatch = useDispatch();
 
@@ -49,6 +53,7 @@ const Signin = ({navigation}: any) => {
         if(err.message == 'Invalid crednetials'){
           setError('Credenciales invalidas');                  
         }else{
+          console.log(err)
           Alert.alert("Error", 'Algo salio mal, vuelve a intentarlo ')
         }
       }

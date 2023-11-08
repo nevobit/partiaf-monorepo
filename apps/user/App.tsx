@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/self-closing-comp */
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 // import Home from './src/screens/Home';
@@ -18,10 +18,15 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {persistor, store} from './src/store';
 import client from './src/graphql';
 import {ApolloProvider} from '@apollo/client';
+import getToken from './src/notifications/get-token';
+import {PermissionsAndroid} from 'react-native';
 
 const App = (): JSX.Element => {
   const {updateTheme} = useTheme();
 
+  useEffect(() => {
+    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+  }, [])
   return (
     <Provider store={store}>
       <ApolloProvider client={client}>
