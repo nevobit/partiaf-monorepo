@@ -125,11 +125,11 @@ const Profile = ({ navigation }: any) => {
   }, [stopPollingFoll, startPollingFoll]);
 
 
-  useEffect(() =>{
-    if(!user?.token){
-      addUserToken();
-    }
-  },[])
+  // useEffect(() =>{
+  //   if(!user?.token){
+  //     addUserToken();
+  //   }
+  // },[])
 
   if(isLoading) return (
     // <View style={{

@@ -15,19 +15,20 @@ const firebaseConfig = {
     storageBucket: "partiaf-776e2.appspot.com",
     messagingSenderId: "50623224650",
     appId: "1:50623224650:android:09d3d4107f9be466467fb3",
+    databaseURL: 'partiaf-776e2.appspot.com'
   // Puedes eliminar esta línea si no estás utilizando la base de datos
 };
 
 
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-} else {
-    firebase.app();
-}
+// if (!firebase.apps.length) {
+//     firebase.initializeApp(firebaseConfig);
+// } else {
+//     firebase.app();
+// }
 
-messaging().setBackgroundMessageHandler(async remoteMessage => {
-    console.log('Message handled in the background!', remoteMessage);
-});
+// messaging().setBackgroundMessageHandler(async remoteMessage => {
+//     console.log('Message handled in the background!', remoteMessage);
+// });
 
 
 AppRegistry.registerComponent(appName, () => App);

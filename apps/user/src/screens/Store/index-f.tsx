@@ -8,6 +8,7 @@ import {
   Linking,
   Alert,
   TextInput,
+  View,
 } from "react-native";
 import colors from "../../components/Layout/Theme/colors";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -53,10 +54,10 @@ const Store = ({ route, navigation }: any) => {
 //     setReport(true);
 //   }
   return (
-    <DefaultView>
+    <View>
         <Text>
         </Text>
-    </DefaultView>
+    </View>
   
   );
 }

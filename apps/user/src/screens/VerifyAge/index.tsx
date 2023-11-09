@@ -31,10 +31,10 @@ const VerifyAge = ({navigation}: any) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const token = await getToken();
+      // const token = await getToken();
       const {data} = await register({
         variables: {
-          userData: {...userInfo, token  },
+          userData: {...userInfo, /* token */  },
         },
       });
       dispatch(signin({...data.userSignup}));

@@ -14,5 +14,5 @@ export const useStoreById = (store: string) => {
         },
       });
 
-      return { store: data.getStoreById, isLoading: loading, error };
+      return { store: data?.getStoreById, isLoading: loading, error };
 }
