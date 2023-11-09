@@ -16,6 +16,7 @@ input UserInput {
     firstname: String
     lastname: String
     phone: String
+    token: String
     photo: [String]
     password: String
     biography: String
@@ -38,6 +39,7 @@ type User {
     isPrivate: Boolean
     isVerified: Boolean
     pin: Int
+    token: String
     location: String
     balance: Int
     events: Int
@@ -93,6 +95,7 @@ type Goer {
     ticket: Ticket
     amount: Int
     image: String
+    entry_status: String
     name: String
     description: String
     date: String

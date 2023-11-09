@@ -20,7 +20,8 @@
     "apollo-server-core": "~3.12.0",
     "@partiaf/entities": "workspace:*",
     "@apollo/server": "~4.7.1",
-    "@partiaf/business-logic": "workspace:*"
+    "@partiaf/business-logic": "workspace:*",
+    "firebase-admin": "~11.11.0"
   },
   "devDependencies": {
     "@types/node": "~20.2.4",

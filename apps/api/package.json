@@ -22,7 +22,8 @@
     "@partiaf/business-logic": "workspace:*",
     "@partiaf/entities": "workspace:*",
     "@partiaf/constant-definitions": "workspace:*",
-    "@fastify/swagger": "8.5.1"
+    "@fastify/swagger": "8.5.1",
+    "firebase-admin": "~11.11.0"
   },
   "devDependencies": {
     "@types/node": "18.11.18",

@@ -24,6 +24,7 @@ query GetTicketsByStoreId($id: String) {
       id
       image
       limit
+      date
       description
       name
       image

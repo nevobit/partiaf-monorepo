@@ -58,6 +58,7 @@ export default {
 
     updateUser: async (parent: any, { data }: any, ctx: any) => {
       const { id } = await verifyUserToken(ctx) as { id: string };
+      console.log(data)
       const user = await updateUser({id, ...data});
       if (user instanceof Error) {
         return new Error('Invalid credentials');

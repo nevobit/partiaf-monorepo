@@ -16,6 +16,8 @@ lib-cov
 coverage
 build/
 
+service-account-key.json
+
 # nyc test coverage
 .nyc_output
 

@@ -17,7 +17,7 @@ import Header from '../../components/Layout/Header';
 const Stores = ({navigation}: any) => {  
     const {user} = useSelector((state: any) => state.auth);
   
-    const { data, startPolling, stopPolling } = useQuery(GET_STORES, {
+    const { data, startPolling, stopPolling, refetch } = useQuery(GET_STORES, {
       context: {
         headers: {
           authorization: user.token ? `Bearer ${user.token}` : '',
@@ -43,7 +43,7 @@ const Stores = ({navigation}: any) => {
          <Header navigation={navigation} openFilters={() => setOpenFilters(true)} filters={true} />
 
       <ScrollView>
-        <Stories navigation={navigation} />
+        <Stories navigation={navigation} refetch={refetch} />
         <DefaultView
           style={{
             width: '100%',

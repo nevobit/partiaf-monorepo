@@ -15,6 +15,7 @@ export const GET_USER_BY_ID = gql`
         plan
       }
       accountType
+      token
       followers
       following
       biography

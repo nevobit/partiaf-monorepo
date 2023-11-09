@@ -8,8 +8,10 @@ import {useSelector} from 'react-redux';
 
 const Tickets = ({selected}: any) => {
   const {user} = useSelector((state: any) => state.auth);
+
   const {
     data: goers,
+    error,
     refetch,
     startPolling,
     stopPolling,
@@ -21,6 +23,11 @@ const Tickets = ({selected}: any) => {
       },
     },
   });
+
+  console.log(selected)
+
+  // console.log(goers?.getGoersByTicketId)
+  console.log(error)
 
   useEffect(() => {
     startPolling(1000);

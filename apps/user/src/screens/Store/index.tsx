@@ -46,7 +46,7 @@ const Store = ({ route, navigation }: any) => {
   const sendWhatsAppMessage = async () => {
     await Linking.openURL(
       `http://api.whatsapp.com/send?phone=57${data?.getStoreById?.phone}` +
-        "Quisiera hablar con alguien"
+      "Quisiera hablar con alguien"
     );
   };
 
@@ -350,28 +350,32 @@ const Store = ({ route, navigation }: any) => {
             paddingVertical: 10,
           }}
         >
-       
+
+          <DefaultView>
+            <Text
+              style={{
+                fontWeight: "500",
+                fontSize: 18,
+                color: "#fff",
+                marginBottom: 5,
+              }}
+            >
+              Sobre el negocio
+            </Text>
+            <Text
+              style={{
+                color: "rgba(255,255,255,.6)",
+                fontSize: 16,
+              }}
+            >
+              {data?.getStoreById?.description}
+            </Text>
+          </DefaultView>
+
           <ScrollView>
-          <Text
-            style={{
-              fontWeight: "500",
-              fontSize: 18,
-              color: "#fff",
-              marginBottom: 5,
-            }}
-          >
-            Sobre el negocio
-          </Text>
-          <Text
-            style={{
-              color: "rgba(255,255,255,.6)",
-              fontSize: 16,
-            }}
-          >
-            {data?.getStoreById?.description}
-          </Text>
+
           </ScrollView>
-      
+
           {/* <Text
             style={{
               fontWeight: '500',
@@ -442,7 +446,7 @@ const Store = ({ route, navigation }: any) => {
           gap: 6,
           height: 50
         }}
-        onPress={handlerReport}
+          onPress={handlerReport}
         >
           <Icon name="warning-outline" size={22} color="#fff" />
           <Text

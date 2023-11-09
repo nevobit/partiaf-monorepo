@@ -12,7 +12,7 @@ export const useUpdateUser = (info: any) => {
        },
       context: {
         headers: {
-          authorization: user.token ? `Bearer ${user.token}` : '',
+          authorization: user?.token ? `Bearer ${user?.token}` : '',
         },
       },
     });

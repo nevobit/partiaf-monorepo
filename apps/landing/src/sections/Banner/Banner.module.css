@@ -34,6 +34,16 @@
   margin-top: 5rem;
 }
 
+.stores a{
+  background-color: #fff;
+  border-radius: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 1rem;
+  padding-inline:3rem;
+}
+
 .picture {
   width: 55rem;
   height: 55rem;
@@ -70,4 +80,9 @@
   .picture > * {
     object-fit: cover;
   }
+
+  .stores {
+    flex-direction: column;
+  }
+  
 }

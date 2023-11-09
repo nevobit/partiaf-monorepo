@@ -125,7 +125,7 @@ key={ticket.id}
       fontSize: 14,
       fontWeight: '500',
       color: '#000'
-    }}>10 Junio 2023 | {ticket.ticket.hour}</Text>
+    }}>{ticket.ticket.date} | {ticket.ticket.hour}</Text>
     <Text style={{
       fontSize: 14,
       fontWeight: '500',

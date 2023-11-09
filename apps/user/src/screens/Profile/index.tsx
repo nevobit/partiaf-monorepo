@@ -9,19 +9,22 @@ import { useDispatch } from 'react-redux';
 import { signout } from '../../features/auth';
 import Header from '../../components/Layout/Header';
 import { BottomSheet } from '../../containers';
-import { useUser } from '../../hooks';
+import { useUpdateUser, useUser } from '../../hooks';
 import { useGetFollowers } from '../../hooks/follows/useGetFollowers';
 import { useGetFolloweds } from '../../hooks/follows/useGetFolloweds';
 import { useDeleteUser } from '../../hooks/users/useDeleteUser';
 import LoadingScreen from '../../containers/LoadingScreen';
+import getToken from '../../notifications/get-token';
 
 const Profile = ({ navigation }: any) => {
   const [modal, setModal] = useState(false);
   const [open, setOpen] = useState(false);
+  const [token, setToken] = useState('');
   const [changePhoto, setChangePhoto] = useState(false);
   const [changePhotoBottom, setChangePhotoBottom] = useState(false);
 
   const { user, isLoading, refetch } = useUser();
+  const { updateUserFn, } = useUpdateUser({ token: token});    
 
   const dispatch = useDispatch();
   const logout = () => {
@@ -95,6 +98,12 @@ const Profile = ({ navigation }: any) => {
     );
   };
 
+  const addUserToken = async () =>{
+    const t = await getToken();
+    await setToken(t);
+    await updateUserFn();
+  }
+
   useEffect(() => {
     refetch();
     refetchGetFollowers();
@@ -115,6 +124,12 @@ const Profile = ({ navigation }: any) => {
     };
   }, [stopPollingFoll, startPollingFoll]);
 
+
+  // useEffect(() =>{
+  //   if(!user?.token){
+  //     addUserToken();
+  //   }
+  // },[])
 
   if(isLoading) return (
     // <View style={{

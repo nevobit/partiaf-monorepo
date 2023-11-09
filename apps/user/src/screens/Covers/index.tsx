@@ -195,7 +195,7 @@ const Covers = ({navigation, route}: any) => {
             color: colors.dark.text,
             fontWeight: '600',
             fontSize: 14
-           }}>23 Jun 2023</Text>
+           }}>{ticket.date}</Text>
            <Text style={{
             color: colors.dark.text,
             fontWeight: '600',
