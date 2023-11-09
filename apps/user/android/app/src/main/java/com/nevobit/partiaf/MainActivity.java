@@ -1,4 +1,4 @@
-package com.user;
+package com.nevobit.partiaf;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

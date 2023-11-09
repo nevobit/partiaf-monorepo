@@ -34,6 +34,8 @@ const Tickets = ({navigation,  route}: any) => {
     },
   });
 
+  console.log(tickets)
+
   useEffect(() => {
     refetch();
   }, []);

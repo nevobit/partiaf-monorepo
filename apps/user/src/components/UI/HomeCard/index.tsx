@@ -30,7 +30,7 @@ const StoreCard = ({photos, name, type}: any) => {
         style={{
           color: '#fff',
         }}>
-        Medellin
+        Santa Marta
       </Text>
     </View>
   );

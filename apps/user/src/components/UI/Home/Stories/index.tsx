@@ -1,21 +1,11 @@
 import { useQuery } from '@apollo/client';
 import React, { useEffect } from 'react';
 import {ScrollView, View as DefaultView, Image, Text, TouchableOpacity} from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { GET_USERS, GET_USER_BY_ID } from '../../../../graphql/queries/users';
-import localStorage from 'redux-persist/es/storage';
 
-const Stories = ({navigation}:any) => {
-  
+const Stories = ({data, refetch, loading, navigation}:any) => {  
   const {user} = useSelector((state: any) => state.auth);
-
-  const {data, loading, error, refetch} = useQuery(GET_USER_BY_ID, {
-    context: {
-      headers: {
-        authorization: user.token ? `Bearer ${user.token}` : '',
-      },
-    },
-  });
 
   const {data: users, loading: loadingUsers} = useQuery(GET_USERS, {
     context: {
@@ -25,7 +15,6 @@ const Stories = ({navigation}:any) => {
     },
   });
 
-  console.log()
   useEffect(() => {
     refetch();
   }, [refetch]);
@@ -62,7 +51,6 @@ const filteredUsers = [...users?.getAllUsers];
 
 // Ordenar el arreglo de usuarios utilizando la función de comparación personalizada
 filteredUsers.sort(compararUsuariosPorIntereses);
-
 
   return (
     <ScrollView
@@ -116,7 +104,7 @@ filteredUsers.sort(compararUsuariosPorIntereses);
       {filteredUsers?.map((user: any) => (
 
        <TouchableOpacity
-       key={user.id}
+       key={user._id}
        onPress={() => navigation.navigate('UserProfile', {id: user._id})}
         style={{
           alignItems: 'center',

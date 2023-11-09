@@ -40,7 +40,7 @@ const StoreCard = ({photos, name, type}: any) => {
             fontSize: 14,
             fontWeight: '300',
           }}>
-          Medellin - Colombia
+          Santa Marta - Colombia
         </Text>
       </View>
       <Image
