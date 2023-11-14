@@ -14,7 +14,7 @@ import { useGetFollowers } from '../../hooks/follows/useGetFollowers';
 import { useGetFolloweds } from '../../hooks/follows/useGetFolloweds';
 import { useDeleteUser } from '../../hooks/users/useDeleteUser';
 import LoadingScreen from '../../containers/LoadingScreen';
-import getToken from '../../notifications/get-token';
+// import getToken from '../../notifications/get-token';
 
 const Profile = ({ navigation }: any) => {
   const [modal, setModal] = useState(false);
@@ -99,8 +99,8 @@ const Profile = ({ navigation }: any) => {
   };
 
   const addUserToken = async () =>{
-    const t = await getToken();
-    await setToken(t);
+    // const t = await getToken();
+    // await setToken(t);
     await updateUserFn();
   }
 

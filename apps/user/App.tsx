@@ -18,15 +18,15 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {persistor, store} from './src/store';
 import client from './src/graphql';
 import {ApolloProvider} from '@apollo/client';
-import getToken from './src/notifications/get-token';
-import {PermissionsAndroid} from 'react-native';
+// import getToken from './src/notifications/get-token';
+// import {PermissionsAndroid} from 'react-native';
 
 const App = (): JSX.Element => {
   const {updateTheme} = useTheme();
 
-  useEffect(() => {
-    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
-  }, [])
+  // useEffect(() => {
+  //   PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+  // }, [])
   return (
     <Provider store={store}>
       <ApolloProvider client={client}>
