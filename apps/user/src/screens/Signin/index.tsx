@@ -15,7 +15,7 @@ import {useDispatch} from 'react-redux';
 import {signin, signout} from '../../features/auth';
 import {useMutation} from '@apollo/client';
 import {LOGIN_USER} from '../../graphql/mutations';
-import getToken from '../../notifications/get-token';
+//import getToken from '../../notifications/get-token';
 import { useUpdateUser } from '../../hooks';
 
 const Signin = ({navigation}: any) => {

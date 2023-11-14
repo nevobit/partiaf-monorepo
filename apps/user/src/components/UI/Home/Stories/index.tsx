@@ -35,13 +35,13 @@ function calcularPuntuacionIntereses(interesesA: string[], interesesB: string[])
 
 // Función de comparación personalizada
 function compararUsuariosPorIntereses(a: any, b: any): number {
-  const puntuacionA = calcularPuntuacionIntereses(data?.getUserById?.interests?.food, a.interests.food) +
-    calcularPuntuacionIntereses(data?.getUserById?.interests?.music, a.interests.music) +
-    calcularPuntuacionIntereses(data?.getUserById?.interests?.plan, a.interests.plan);
+  const puntuacionA = calcularPuntuacionIntereses(data?.getUserById?.interests?.food, a?.interests?.food) +
+    calcularPuntuacionIntereses(data?.getUserById?.interests?.music, a?.interests?.music) +
+    calcularPuntuacionIntereses(data?.getUserById?.interests?.plan, a?.interests?.plan);
 
-  const puntuacionB = calcularPuntuacionIntereses(data?.getUserById?.interests?.food, b.interests.food) +
-    calcularPuntuacionIntereses(data?.getUserById?.interests?.music, b.interests.music) +
-    calcularPuntuacionIntereses(data?.getUserById?.interests?.plan, b.interests.plan);
+  const puntuacionB = calcularPuntuacionIntereses(data?.getUserById?.interests?.food, b?.interests?.food) +
+    calcularPuntuacionIntereses(data?.getUserById?.interests?.music, b?.interests?.music) +
+    calcularPuntuacionIntereses(data?.getUserById?.interests?.plan, b?.interests?.plan);
 
   return puntuacionB - puntuacionA; // Orden descendente
 }
@@ -50,7 +50,7 @@ function compararUsuariosPorIntereses(a: any, b: any): number {
 const filteredUsers = [...users?.getAllUsers];
 
 // Ordenar el arreglo de usuarios utilizando la función de comparación personalizada
-filteredUsers.sort(compararUsuariosPorIntereses);
+filteredUsers?.sort(compararUsuariosPorIntereses);
 
   return (
     <ScrollView
@@ -130,7 +130,7 @@ filteredUsers.sort(compararUsuariosPorIntereses);
                 borderRadius: 100,
               }}
               source={{
-                uri:  user.photo[0]?.length > 5? user.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
+                uri:  user?.photo[0]?.length > 5? user?.photo[0] : 'https://i.postimg.cc/0jMMGxbs/default.jpg',
               }}
             />
           </DefaultView>
