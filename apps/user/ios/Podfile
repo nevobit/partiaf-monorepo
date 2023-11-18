@@ -43,9 +43,7 @@ target 'user' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
-  permissions_path = '../node_modules/react-native-permissions/ios'
-  pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
+  
 
   target 'userTests' do
     inherit! :complete
@@ -62,3 +60,4 @@ target 'user' do
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end
+
