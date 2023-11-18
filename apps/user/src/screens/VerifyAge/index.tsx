@@ -16,7 +16,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {saveUserInfo, signin} from '../../features/auth';
 import {useMutation} from '@apollo/client';
 import {REGISTER_USER} from '../../graphql/mutations';
-//import getToken from '../../notifications/get-token';
+// import getToken from '../../notifications/get-token';
 
 const VerifyAge = ({navigation}: any) => {
   const {userInfo} = useSelector((state: any) => state.auth);

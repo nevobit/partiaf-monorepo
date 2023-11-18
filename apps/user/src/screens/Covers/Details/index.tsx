@@ -74,10 +74,15 @@ const TicketDetails = ({navigation, route}: any) => {
     console.log(getAmount(ticket.id))
     
   return (
-    <View style={{
+    <ScrollView style={{
       flex: 1,
+      backgroundColor: '#000'
       // paddingTop: 20,
     }}>
+      <ScrollView contentContainerStyle={{
+        flex: 1
+      }}>
+
       <StatusBar translucent backgroundColor="transparent" />
       <DefaultView
         style={{
@@ -115,7 +120,7 @@ const TicketDetails = ({navigation, route}: any) => {
         }}
       />
 
-      <ScrollView>
+      <DefaultView>
 
       <DefaultView style={{
         flexDirection: 'row',
@@ -206,7 +211,7 @@ const TicketDetails = ({navigation, route}: any) => {
         color: '#fff'
       }}>{JSON.stringify(ticket)}</Text> */}
     
-      </ScrollView>
+      </DefaultView>
       <DefaultView style={{
         flexDirection: 'row',
         alignItems: 'center',
@@ -296,8 +301,10 @@ const TicketDetails = ({navigation, route}: any) => {
          </TouchableOpacity>
        </DefaultView>
           
-      </DefaultView>   
-    </View>
+      </DefaultView>  
+      </ScrollView>
+
+    </ScrollView>
   ) 
 }
 
