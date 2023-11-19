@@ -35,12 +35,25 @@
 			</dict>
 		</dict>
 	</dict>
+<<<<<<< HEAD
 	<key>NSContactsUsageDescription</key>
 	<string>accesoaloscontactosparadarterecomendaciones</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>accesoalacamaraparaagregarunafotodeusuario</string>
+=======
+	<key>NSCameraReactionEffectsEnabled</key>
+	<false/>
+	<key>NSCameraStudioLightEnabled</key>
+	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Permisos para la camara</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>YOUR TEXT</string>
+>>>>>>> 630cefea332480e1c95f7bf809d9ed12d1a56d6f
 	<key>UIAppFonts</key>
 	<array>
 		<string>Ionicons.ttf</string>

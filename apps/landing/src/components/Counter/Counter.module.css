@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    justify-content: center;
+    margin-top: 0rem;
+    gap: 3rem;
+    z-index: 999;
+    position: relative;
+}
+
+.container h2{
+    font-size: 6rem;
+    z-index: 9;
+    color: #dbf6c1;
+
+}
+
+.container p{
+    font-weight: 300;
+}
+
