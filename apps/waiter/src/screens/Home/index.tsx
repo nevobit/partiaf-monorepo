@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   Platform,
+  StatusBar,
 } from 'react-native';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -58,7 +59,10 @@ export const HomeScreen = ({navigation, route}:any) => {
   }, [refetch])
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{
+      backgroundColor:"#000"
+    }}>
+      <StatusBar barStyle={"light-content"}/>
       <View style={styles.container}>
         <View style={styles.header}>
           <LogoIcon width={140} height={40} color={colors.dark.primary} />
@@ -78,7 +82,9 @@ export const HomeScreen = ({navigation, route}:any) => {
 
           <Dropdown selected={selected} setSelected={setSelected} data={tickets?.getTicketsByStoreId} />
           <View style={{
-            height: '95%',
+            height: "85%",
+            paddingBottom: 20,
+            marginBottom: 20,
             marginTop: -10
           }}>
 

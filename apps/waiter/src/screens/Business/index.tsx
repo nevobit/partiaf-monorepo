@@ -10,6 +10,7 @@ import {
   TextInput,
   Alert,
   ActivityIndicator,
+  StatusBar,
 } from 'react-native';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -30,6 +31,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_USER_BY_ID, REGISTER_STORE } from '../../graphql/queries';
 import { signinStore } from '../../features/authStore';
+import { BottomSheet } from '../../containers';
 
 export const Business = ({navigation}:any) => {
   const {user} = useSelector((state: any) => state.auth);
@@ -110,7 +112,10 @@ export const Business = ({navigation}:any) => {
   }, [refetch]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{
+      backgroundColor: "#000"
+    }}>
+      <StatusBar barStyle={"light-content"} />
       <ScrollView style={styles.container}>
         <View style={styles.header}>
           <LogoIcon width={120} height={40} color={colors.dark.primary} />
@@ -202,34 +207,14 @@ export const Business = ({navigation}:any) => {
         /> */}
       </View>
 
-      {open && (
-
-      <View style={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        width: '100%',
-        height: 230,
-        zIndex:99,
-        paddingHorizontal: 15,
-        borderTopRightRadius: 30,
-        borderTopLeftRadius: 30,
-        backgroundColor: colors.dark.modal,
-        alignItems: 'center'
-      }}>
-        <View style={{
-          backgroundColor: '#fff',
-          height: 5,
-          width: 30,
-          borderRadius: 100,
-          marginTop: 10,
-          
-        }} />
-        <TextInput
+    
+        <BottomSheet isVisible={open} setIsVisible={setOpen}>
+          <TextInput
         onChangeText={(text) => setCode(text)}
         style={{
           borderWidth: 1,
           borderColor: '#fff',
+          height: 50,
           borderRadius: 15,
           marginBottom: 20,
           paddingHorizontal: 20,
@@ -256,8 +241,10 @@ export const Business = ({navigation}:any) => {
             color: '#333'
           }}>{isRegister? <ActivityIndicator size={'small'} />  : 'Registrar'}</Text>
         </TouchableOpacity>
-      </View>
-      )}
+        </BottomSheet>
+
+      
+    
 
     </SafeAreaView>
   );
