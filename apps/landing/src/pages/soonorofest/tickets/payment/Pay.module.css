@@ -1,0 +1,151 @@
+.img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50rem;
+}
+
+.container_tic{
+    padding-top: 2rem;
+    padding-inline: 1.5rem;
+}
+
+.info{
+    color: #fff;
+}
+
+.info h3{
+    font-size: 1.6rem;
+}
+
+.info p{
+    font-size: 1.4rem;
+    margin-bottom: .5rem;
+    font-weight: 400;
+}
+
+
+.btn_ye{
+    position: relative;
+    z-index: 999;
+    margin-top: 1rem;
+    background-color: #ffc800;
+    border-radius: 1rem;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.btn_ye button{
+    width: 100%;
+    background-color: transparent;
+    height: 4rem;
+    border: none;
+    color: #333;
+}
+
+.bottom{
+    height: 10rem;
+    width: 100%;
+    margin-top: 5rem;
+    margin-bottom: 4rem;
+}
+.promoter{
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+   
+}
+
+.promoter input{
+    height: 4rem;
+    border-radius: 1rem;
+    border: none;
+    padding-inline: 1rem;
+    outline: none;
+    width: 90%;
+}
+
+.promoter button{
+    height: 4rem;
+    width: 10%;
+    border-radius: 1rem;
+    border: none;
+}
+
+.promoter button img{
+    width: 2.5rem;
+}
+
+.info h4{
+    margin-top: 2rem;
+}
+
+.type{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+}
+
+.total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.total h5{
+    font-size: 1.8rem;
+}
+
+.persons h5{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.persons input{
+    height: 4rem;
+    border-radius: 1rem;
+    border: none;
+    padding-inline: 1rem;
+    outline: none;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.persons .btn{
+    width: 100%;
+    border-radius: 1rem;
+    height: 4rem;
+    border: none;
+
+}
+
+.amount{
+    margin-bottom: 1rem;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.list button{
+    background-color: transparent;
+    border: none;
+    color: #fff;
+}
+
+.list button img{
+    width: 2rem;
+    filter: invert(1);
+}

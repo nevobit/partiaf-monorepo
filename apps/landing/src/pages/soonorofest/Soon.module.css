@@ -49,3 +49,30 @@
     z-index: 9999;
     margin-top: 8rem;
 }
+
+.container_tic{
+    padding: 2rem;
+}
+
+.btn_ye{
+    position: relative;
+    z-index: 999;
+    margin-top: 4rem;
+    background-color: #ffc800;
+    border-radius: 1rem;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.btn_ye button{
+    width: 100%;
+    background-color: transparent;
+    height: 4rem;
+    border: none;
+    color: #333;
+}

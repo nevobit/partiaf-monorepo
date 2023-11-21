@@ -5,6 +5,7 @@ import styles from "./Soon.module.css"
 import Image from 'next/image';
 import Link from 'next/link';
 import FormularioModal from '@/components/Modal';
+import { useRouter } from 'next/router';
 
 const SoonoroFest = () => {
   const [diferenciaEnDias, setDiferenciaEnDias] = useState<number | null>(null);
@@ -25,6 +26,8 @@ const SoonoroFest = () => {
     // Actualiza el estado
     setDiferenciaEnDias(diferenciaEnDias);
   }, []);
+
+  const router = useRouter();
 
   const [deviceType, setDeviceType] = useState<string>('');
 
@@ -211,6 +214,8 @@ const SoonoroFest = () => {
               }}
             >
               <button
+              disabled
+              onClick={() => router.push("/soonorofest/tickets")}
                 style={{
                   backgroundColor: "rgba(0, 0, 0, .1)",
                   borderRadius: 10,
