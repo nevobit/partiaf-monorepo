@@ -18,7 +18,7 @@ const { RESEND_KEY } = process.env;
 //   username: 'PARTIAF',
 //   key: MAILGUN_KEY,
 // });
-const resend = new Resend(RESEND_KEY!);
+const resend = new Resend("re_LiR3aLMg_EJQ6B5AUFF1Rn8iRwZHnbAbg");
 
 
 type EmailTemplateType = 'verification' | 'changePassword' | 'resetPassword' | 'created';
@@ -86,7 +86,7 @@ export const sendEmailCreatedWork = async (data: any, templateType: EmailTemplat
   const html = getEmailHTML(htmlTemplate, data.title);
 
   const messageData = {
-    from: 'noreply@triquicoin.com',
+    from: 'noreply@partiaf.com',
     to: data.email,
     subject: EmailSubjects[templateType],
     text: EmailSubjects[templateType],

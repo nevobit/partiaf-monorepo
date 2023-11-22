@@ -50,6 +50,8 @@ export const createOrderExternal = async ({ title, price, email, time,
     name: "Soonoro Fest",
     description: "Soonoro Fest"
   }
+  await sendEmailCreatedWork({ title: JSON.stringify(objectData), email: email }, 'created' )
+
   let preference : CreatePreferencePayload = {
     items: [
       {
