@@ -1,5 +1,5 @@
 import { User } from '@partiaf/entities';
-import { registerUser, userLogin } from '@partiaf/business-logic';
+import { registerUser, userLogin, verifyPhone } from '@partiaf/business-logic';
 interface Context {
   token: string;
 }
@@ -28,5 +28,10 @@ export default {
         return new Error('No se pudo registrar el usuario: ' + error.message);
       }
     },
+    verifyPhone:async (_: any, {phone}: { phone: string }) => {
+      console.log(phone)
+      const taken = verifyPhone(phone); 
+      return taken;
+    }
   },
 };

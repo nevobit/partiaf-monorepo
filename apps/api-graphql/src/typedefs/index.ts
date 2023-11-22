@@ -66,6 +66,10 @@ type Store{
     phone: String
     min_age: Int
     photos: [String]
+    city: String
+    country: String
+    lat: String
+    lon: String
     specialties: Specialties
     description: String
     status: String
@@ -79,6 +83,10 @@ type Ticket{
     hour: String
     price: String
     date: String
+    city: String
+    country: String
+    lat: String
+    lon: String
     min_age: Int
     image: String
     description: String
@@ -92,6 +100,10 @@ type Goer {
     status: String
     cost: Float
     time: String
+    city: String
+    country: String
+    lat: String
+    lon: String
     ticket: Ticket
     amount: Int
     image: String
@@ -148,6 +160,7 @@ type Query {
     isRequest(reciverId: String): Boolean
     getFriends(uuid: String): [User]
     pendingRequests(uuid: String): [Request]
+
 }
    
 
@@ -165,6 +178,7 @@ type Mutation {
     acceptRequest(id: String): Boolean
     cancelRequest(recieverId: String): Boolean
     rejectRequest(recieverId: String): Boolean
+    verifyPhone(phone: String): Boolean
 }
 
 `;

@@ -21,7 +21,8 @@
     "mailgun.js": "8.0.6",
     "otp-generator": "4.0.0",
     "cloudinary": "~1.40.0",
-    "firebase-admin": "~11.11.0"
+    "firebase-admin": "~11.11.0",
+    "resend": "1.1.0"
   },
   "devDependencies": {
     "@types/node": "20.2.1",

@@ -6,18 +6,11 @@ import { registerRoutes } from '../routes';
 import { verify } from '@partiaf/business-logic';
 import fastifyMultipart from '@fastify/multipart';
 import swagger from '@fastify/swagger';
-import * as admin from "firebase-admin";
-
-var serviceAccount = require("../service-account-key.json");
 
 const { PORT, HOST, MONGODB_URL } = process.env;
 
 console.log("[server]: Initializing Firebase Admin SDK...");
-export const firebaseApp = admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  projectId: 'partiaf-776e2',
-  // storageBucket: process.env.FILES_BUCKET,
-});
+
 
 const corsOptions = {
   origin: '*',

@@ -1,10 +1,11 @@
 import { Collection, getModel } from "@partiaf/constant-definitions";
-import { FriendRequest, FriendRequestSchemaMongo } from "@partiaf/entities";
+import { FriendRequest, FriendRequestSchemaMongo, User, UsersSchemaMongo } from "@partiaf/entities";
 
 export const getFriends = async (
   uuid: string
 ): Promise<any[] | Error> => {
   const model = getModel<FriendRequest>(Collection.FRIEND_REQUEST, FriendRequestSchemaMongo);
+getModel<User>(Collection.USERS, UsersSchemaMongo);
 
   try {
     const sentRequests = await model
