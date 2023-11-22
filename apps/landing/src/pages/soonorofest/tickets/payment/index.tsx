@@ -55,14 +55,20 @@ const Tickets = () => {
       alert("Debes ingresar todos los cupos")
       return
     }
+    if (email.length < 5) {
+      alert("Debes un correo para enviarte los tickets")
+      return
+    }
     try {
       setLoading(true)
       const { data } = await axios.post('https://partiaf-api.xyz/api/v3/create-order', {
         price: event.price * event.attendees,
-        userId: "170f2069-2465-4e08-90d1-a30d5f036be0",
         email: email,
-        participants,
-        event
+        time: "16:00",
+        date: "16-12-2023",
+        ticket: event.price == 5000 ? "adf6f9f8-22c0-4673-a513-40cadd254f23" : "7da7fe52-b0a6-44b8-9570-86da819834ba",
+        amount: event.attendees,
+        users: participants,
       });
 
       if (data.init_point) {
@@ -130,7 +136,7 @@ const Tickets = () => {
               fontWeight: '600',
               fontSize: 14,
               textAlign: "left"
-            }}>Soonoro Fest General</p>
+            }}>Soonoro Fest</p>
             <p style={{
               color: "#fff",
               fontWeight: '600',
@@ -203,7 +209,7 @@ const Tickets = () => {
         </div>
         <div className={styles.promoter}>
           <input onChange={({ target }) => setPromoter(target.value)} placeholder='Codigo del promotor' />
-          <button><Image src="/add-outline.svg" alt="" width={40} height={40} /></button>
+          {/* <button><Image src="/add-outline.svg" alt="" width={40} height={40} /></button> */}
         </div>
         <div className={styles.btn_ye}>
           <button disabled onClick={createOrder}>

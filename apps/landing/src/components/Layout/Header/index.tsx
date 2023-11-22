@@ -16,6 +16,8 @@ const Header = () => {
           <Link href="/">FAQs</Link>
           <Link href="/">Sobre nosotros</Link>
         </nav>
+        <Link href="/soonorofest">Soonoro Fest</Link>
+
       </div>
     </header>
   );

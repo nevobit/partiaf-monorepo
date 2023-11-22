@@ -158,7 +158,7 @@ const Tickets = () => {
             gap: 5
            }}>
            <button
-           onClick={() => handleDecrementAttendees("Soonoro Fest General", 50000, "General")}
+           onClick={() => handleDecrementAttendees("Soonoro Fest General", 5000, "General")}
            style={{
             width:50,
             backgroundColor: "rgba(255,255,255,0.2)",
@@ -179,7 +179,7 @@ const Tickets = () => {
                 textAlign: 'center'
               }}>{selectedEvent.eventName == "Soonoro Fest General"?  selectedEvent.attendees : 0 }</p>
             <button 
-                       onClick={() => handleIncrementAttendees("Soonoro Fest General", 50000, "General")}
+                       onClick={() => handleIncrementAttendees("Soonoro Fest General", 5000, "General")}
 
             style={{
                 width:50,

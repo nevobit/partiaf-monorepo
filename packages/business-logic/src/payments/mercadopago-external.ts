@@ -13,6 +13,7 @@ interface Props {
     date?: string;
     ticket?: string;
     amount?: string;
+    users?: any[]
 }
 
 mercadopago.configure({
@@ -36,7 +37,8 @@ enum AutoReturn {
 export const createOrderExternal = async ({ title, price, email, time,
   date,
   ticket,
-  amount }: Props) => {
+  amount, users }: Props) => {
+
   const objectData = {
     user: "7fac095a-45ac-429d-93ce-292ca250b81b",
     email,
@@ -47,7 +49,8 @@ export const createOrderExternal = async ({ title, price, email, time,
     amount,
     entry_status: "in_list",
     name: "Soonoro Fest",
-    description: "Soonoro Fest"
+    description: "Soonoro Fest",
+    users
   }
 
   let preference : CreatePreferencePayload = {
@@ -59,7 +62,10 @@ export const createOrderExternal = async ({ title, price, email, time,
       },
     ],
     notification_url: "https://partiaf-api.xyz/api/v3/webhook-external",
-    external_reference: JSON.stringify(objectData)
+    external_reference: JSON.stringify(objectData),
+    back_urls: {
+      success: "https://partiaf.com/soonorofest/success"
+    }
     // auto_return: AutoReturn.ALL,
   };
 

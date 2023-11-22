@@ -214,7 +214,6 @@ const SoonoroFest = () => {
               }}
             >
               <button
-              disabled
               onClick={() => router.push("/soonorofest/tickets")}
                 style={{
                   backgroundColor: "rgba(0, 0, 0, .1)",
