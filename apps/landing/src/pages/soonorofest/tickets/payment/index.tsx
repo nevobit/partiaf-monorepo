@@ -66,7 +66,7 @@ const Tickets = () => {
         email: email,
         time: "16:00",
         date: "16-12-2023",
-        ticket: event.price == 5000 ? "adf6f9f8-22c0-4673-a513-40cadd254f23" : "7da7fe52-b0a6-44b8-9570-86da819834ba",
+        ticket: event.price == 50000 ? "adf6f9f8-22c0-4673-a513-40cadd254f23" : "7da7fe52-b0a6-44b8-9570-86da819834ba",
         amount: event.attendees,
         users: participants,
       });
