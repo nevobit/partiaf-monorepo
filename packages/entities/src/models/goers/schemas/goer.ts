@@ -9,6 +9,7 @@ import { Base } from "../../../common";
     amount: number;
     image: string;
     entry_status: string;
+    email: string;
     name: string;
     description: string;
   }

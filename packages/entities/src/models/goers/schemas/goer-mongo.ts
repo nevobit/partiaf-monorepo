@@ -14,6 +14,7 @@ export const GoerSchemaMongo = new Schema<Goer>(
     amount: {type: Number},
     image: {type: String},
     name: {type: String},
+    email: {type: String},
     description: {type: String},
     date: {type: String},
     entry_status: {type: String}

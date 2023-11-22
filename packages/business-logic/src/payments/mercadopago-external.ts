@@ -4,7 +4,6 @@ import mercadopago from 'mercadopago';
 import { CreatePreferencePayload } from 'mercadopago/models/preferences/create-payload.model';
 import { PaymentGetResponse } from 'mercadopago/resources/payment';
 import { MercadoPagoPreference } from 'mercadopago/resources/preferences';
-import { sendEmailCreatedWork } from '../mailing';
 import { randomUUID } from 'crypto';
 interface Props {
   title: string;
@@ -39,7 +38,7 @@ export const createOrderExternal = async ({ title, price, email, time,
   ticket,
   amount }: Props) => {
   const objectData = {
-    user: randomUUID(),
+    user: "7fac095a-45ac-429d-93ce-292ca250b81b",
     email,
     cost: price,
     time,
@@ -50,7 +49,6 @@ export const createOrderExternal = async ({ title, price, email, time,
     name: "Soonoro Fest",
     description: "Soonoro Fest"
   }
-  await sendEmailCreatedWork({ title: JSON.stringify(objectData), email: email }, 'created' )
 
   let preference : CreatePreferencePayload = {
     items: [
@@ -98,7 +96,7 @@ export const updatePaymentExternal = async (payment: any, id: string) => {
       await store.save();
       await result.save();
 
-      await sendEmailCreatedWork({ title: JSON.stringify(info), email: email }, 'created' )
+      // await sendEmailCreatedWork({ title: JSON.stringify(info), email: email }, 'created' )
 
       console.log("Send email")
     }
