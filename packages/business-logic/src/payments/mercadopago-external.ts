@@ -40,16 +40,10 @@ export const createOrderExternal = async ({ title, price, email, time,
   amount, users }: Props) => {
 
   const objectData = {
-    user: "7fac095a-45ac-429d-93ce-292ca250b81b",
     email,
     cost: price,
-    time,
-    date,
     ticket,
     amount,
-    entry_status: "in_list",
-    name: "Soonoro Fest",
-    description: "Soonoro Fest",
     users
   }
 
@@ -61,6 +55,7 @@ export const createOrderExternal = async ({ title, price, email, time,
         quantity: 1,
       },
     ],
+
     notification_url: "https://partiaf-api.xyz/api/v3/webhook-external",
     external_reference: JSON.stringify(objectData),
     back_urls: {
@@ -88,7 +83,12 @@ export const updatePaymentExternal = async (payment: any, id: string) => {
     if(!email) return;
 
     if(data.body.status == 'approved'){
-      const result = new model(info);
+      const result = new model({...info,    user: "7fac095a-45ac-429d-93ce-292ca250b81b",     entry_status: "in_list",
+      name: "Soonoro Fest",
+      description: "Soonoro Fest",
+      time: "16:00",
+      date: "16-12-2023",
+    });
       const cover = await modelCover.findById(info.ticket);
       const store = await modelStore.findById(cover?.store);
 

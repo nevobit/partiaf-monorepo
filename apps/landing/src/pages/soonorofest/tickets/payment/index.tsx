@@ -61,7 +61,7 @@ const Tickets = () => {
     }
     try {
       setLoading(true)
-      const { data } = await axios.post('https://partiaf-api.xyz/api/v3/create-order', {
+      const { data } = await axios.post('https://partiaf-api.xyz/api/v3/create-order-external', {
         price: event.price * event.attendees,
         email: email,
         time: "16:00",
@@ -212,7 +212,7 @@ const Tickets = () => {
           {/* <button><Image src="/add-outline.svg" alt="" width={40} height={40} /></button> */}
         </div>
         <div className={styles.btn_ye}>
-          <button disabled onClick={createOrder}>
+          <button onClick={createOrder}>
             {loading ? <Image src="/refresh-outline.svg" width={30} height={30} alt='' /> : (
               "Continuar"
             )}
