@@ -20,6 +20,8 @@ export const StoreSchemaMongo = new Schema<Store>(
     status: { type: String, default: StatusType.ACTIVE },
     last_login: { type: Date, default: Date.now() },
     balance: { type: Number, default: 0 },
+    city: { type: String },
+    country: { type: String },
     chairs: { type: Number, default: 0 },
     tables: { type: Number, default: 0 },
     max_per_table: { type: Number, default: 8 },

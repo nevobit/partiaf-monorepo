@@ -46,6 +46,8 @@ export interface Store extends Base {
   website: string;
   facebook: string;
   instagram: string;
+  city: string;
+  country: string;
   tiktok: string;
   youtube: string;
   employes: number;

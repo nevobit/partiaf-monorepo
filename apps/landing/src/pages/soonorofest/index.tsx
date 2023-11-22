@@ -367,7 +367,7 @@ const SoonoroFest = () => {
                   border: "none",
                   marginBlock: 10
                 }}
-                href="https://instagram.com/soonorofest?igshid=a2tsY2FwbW92ZXFv&utm_source=qr"
+                href="https://wa.me/573123357484"
                 >
                 <Image src="/logo-whatsapp.svg" width={30} height={30} alt='Icono' style={{
                   filter: "invert(0)"
