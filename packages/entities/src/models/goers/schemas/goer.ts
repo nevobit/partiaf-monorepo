@@ -10,6 +10,7 @@ import { Base } from "../../../common";
     image: string;
     entry_status: string;
     email: string;
+    isPaid: boolean;
     name: string;
     description: string;
     users: any[];

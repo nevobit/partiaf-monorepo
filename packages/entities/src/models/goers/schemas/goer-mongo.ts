@@ -15,6 +15,7 @@ export const GoerSchemaMongo = new Schema<Goer>(
     image: {type: String},
     name: {type: String},
     email: {type: String},
+    isPaid: { type: Boolean, default: false },
     promoter: { type: String },
     users: [{
       name: { type: String },
