@@ -131,7 +131,7 @@ const Tickets = () => {
             color: "#fff",
             fontWeight: '600',
             fontSize: 14
-           }}>1500 Cupos</p>
+           }}>1498 Cupos</p>
                
             </div>
             <div style={{
@@ -141,12 +141,24 @@ const Tickets = () => {
               justifyContent: 'space-between',
               marginTop: 25
             }}>
+            <div>
+            <p style={{
+            color: "rgba(255,255,255,1)",
+            fontWeight: '400',
+            fontSize: 15,
+            textAlign: "left",
+            textDecoration: "line-through",
+            opacity: .5
+           }}>$50,000</p>
             <p style={{
             color: "#fff",
             fontWeight: '600',
             fontSize: 15,
-            textAlign: "left"
-           }}>$50,000</p>
+            textAlign: "left",
+            marginTop: 5
+           }}>$45,000</p>
+            </div>
+
            <div style={{
             display: "flex",
             flexDirection: 'row',
@@ -158,7 +170,7 @@ const Tickets = () => {
             gap: 5
            }}>
            <button
-           onClick={() => handleDecrementAttendees("Soonoro Fest General", 5000, "General")}
+           onClick={() => handleDecrementAttendees("Soonoro Fest General", 45000, "General")}
            style={{
             width:50,
             backgroundColor: "rgba(255,255,255,0.2)",
@@ -179,7 +191,7 @@ const Tickets = () => {
                 textAlign: 'center'
               }}>{selectedEvent.eventName == "Soonoro Fest General"?  selectedEvent.attendees : 0 }</p>
             <button 
-                       onClick={() => handleIncrementAttendees("Soonoro Fest General", 5000, "General")}
+                       onClick={() => handleIncrementAttendees("Soonoro Fest General", 45000, "General")}
 
             style={{
                 width:50,

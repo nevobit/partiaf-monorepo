@@ -14,6 +14,7 @@ interface Props {
     ticket?: string;
     amount?: string;
     users?: any[]
+    promoter?: string;
 }
 
 mercadopago.configure({
@@ -34,17 +35,15 @@ enum AutoReturn {
   APPROVED= 'approved',
 }
 
-export const createOrderExternal = async ({ title, price, email, time,
-  date,
-  ticket,
-  amount, users }: Props) => {
+export const createOrderExternal = async ({ title, price, email,
+  amount, users, promoter }: Props) => {
 
   const objectData = {
     email,
     cost: price,
-    ticket,
     amount,
-    users
+    users,
+    promoter
   }
 
   let preference : CreatePreferencePayload = {
@@ -83,7 +82,8 @@ export const updatePaymentExternal = async (payment: any, id: string) => {
     if(!email) return;
 
     if(data.body.status == 'approved'){
-      const result = new model({...info,    user: "7fac095a-45ac-429d-93ce-292ca250b81b",     entry_status: "in_list",
+      const ticket = info.price < 1500000 ? "adf6f9f8-22c0-4673-a513-40cadd254f23" : "7da7fe52-b0a6-44b8-9570-86da819834ba";
+      const result = new model({...info, ticket, user: "7fac095a-45ac-429d-93ce-292ca250b81b",     entry_status: "in_list",
       name: "Soonoro Fest",
       description: "Soonoro Fest",
       time: "16:00",

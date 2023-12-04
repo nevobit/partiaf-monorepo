@@ -5,24 +5,27 @@ export interface InitMongooseOptions {
 }
 
 export const initMongoose = async ({ mongoUrl }: InitMongooseOptions) => {
+  console.log("ENTER PRIET")
   const conn = connection;
+  console.log(conn)
 
   const connectionUrl = mongoUrl || '';
 
+  
   conn.on('error', err => {
     console.error(`Error on mongoose connection: ${JSON.stringify(err)}`);
     throw new Error(err);
   });
 
   conn.on('connected', () => {
-    console.info(`Mongoose connection: ${connectionUrl}`);
+    console.log(`Mongoose connection: ${connectionUrl}`);
   });
 
   conn.on('reconnectedFailed', () => {
-    console.error(`Mongoose: DB Connection Lost, retries failed`);
+    console.log(`Mongoose: DB Connection Lost, retries failed`);
   });
 
-  await connect(connectionUrl, {
-    autoIndex: true,
-  });
+  const connecton = await connect(connectionUrl);
+
+  console.log({connecton})
 };

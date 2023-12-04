@@ -6,6 +6,7 @@ import useEventSelection from '@/hooks/useEventSelection'
 import * as uuid from "uuid";
 import { DivisaFormater } from '@/utils/divisaFormater'
 import axios from 'axios'
+import Loader from '@/components/Layout/Loader'
 
 interface Participant {
   id: string;
@@ -66,7 +67,7 @@ const Tickets = () => {
         email: email,
         time: "16:00",
         date: "16-12-2023",
-        ticket: event.price == 50000 ? "adf6f9f8-22c0-4673-a513-40cadd254f23" : "7da7fe52-b0a6-44b8-9570-86da819834ba",
+        ticket: event.price < 1500000 ? "adf6f9f8-22c0-4673-a513-40cadd254f23" : "7da7fe52-b0a6-44b8-9570-86da819834ba",
         amount: event.attendees,
         users: participants,
       });
@@ -82,6 +83,8 @@ const Tickets = () => {
 
       setLoading(false)
     } catch (err: any) {
+      setLoading(false)
+      alert("Algo salio mal" + err)
     }
   }
 
@@ -208,12 +211,12 @@ const Tickets = () => {
           <h5>{DivisaFormater(event?.price * event?.attendees)}</h5>
         </div>
         <div className={styles.promoter}>
-          <input onChange={({ target }) => setPromoter(target.value)} placeholder='Codigo del promotor' />
+          <input onChange={({ target }) => setPromoter(target.value)} placeholder='Codigo del promotor (Opcional)' />
           {/* <button><Image src="/add-outline.svg" alt="" width={40} height={40} /></button> */}
         </div>
         <div className={styles.btn_ye}>
           <button onClick={createOrder}>
-            {loading ? <Image src="/refresh-outline.svg" width={30} height={30} alt='' /> : (
+            {loading ? <Loader small /> : (
               "Continuar"
             )}
           </button>

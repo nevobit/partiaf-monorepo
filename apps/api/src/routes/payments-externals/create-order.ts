@@ -15,8 +15,8 @@ export const createOrderExternalRoute: RouteOptions = {
     try {
       const { body } = request;
       
-      const { price, email, time, date, ticket, amount, users } = body as any;
-      const order = await createOrderExternal({ title: "Compra Partiaf", price, email,  time, date, ticket, amount, users });
+      const { price, email, time, date, ticket, amount, users, promoter } = body as any;
+      const order = await createOrderExternal({ title: "Compra Partiaf", price, email,  time, date, ticket, amount, users, promoter });
       reply.status(201).send(order);
     } catch (err) {
       reply.status(500).send(err);

@@ -32,12 +32,7 @@
       "reviewCategory": "production",
       "shouldPublish": false
     },
-    {
-      "packageName": "dashboard",
-      "projectFolder": "apps/dashboard",
-      "reviewCategory": "production",
-      "shouldPublish": false
-    },
+  
     {
       "packageName": "@partiaf/entities",
       "projectFolder": "packages/entities",

@@ -11,7 +11,6 @@ const { PORT, HOST, MONGODB_URL } = process.env;
 
 console.log("[server]: Initializing Firebase Admin SDK...");
 
-
 const corsOptions = {
   origin: '*',
 };

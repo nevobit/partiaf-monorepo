@@ -28,7 +28,7 @@ return `${header}\n${htmlTemplate}\n${warning}\n${footer}`.replace(
     verification: 'Verificación de correo electrónico Partiaf',
     changePassword: 'Cambio de contraseña en Partiaf',
     resetPassword: 'Reestablecer contraseña en Partiaf',
-    created: 'Oportunidad en Partiaf',
+    created: 'Ticket de Partiaf',
   };
   
   export const EmailTemplates = {
@@ -43,7 +43,7 @@ return `${header}\n${htmlTemplate}\n${warning}\n${footer}`.replace(
     created: `
     <div style="padding: 1rem 2rem;">
     <h3 style="font-size: 1.2rem; color: rgba(0,0,0, 0.8);">¡Tickets de Partiaf!</h3>
-    <p style="font-size: 14px;">Revisa los detalles a tu compra a continuación:</p>
+    <p style="font-size: 14px;">Revisa los detalles de tu compra a continuación:</p>
     <h2>{code}</h2>
     <p style="font-size: 14px;">¡Para conocer más detalles, descarga en la aplicación Partiaf ahora!</p>
     <a href="https://play.google.com/store/apps/details?id=com.nevobit.partiaf" style="text-decoration: none; background-color: #4CAF50; color: white; padding: 10px 15px; display: inline-block; border-radius: 5px;">Ir a Partiaf</a>

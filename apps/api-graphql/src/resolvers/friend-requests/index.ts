@@ -37,7 +37,9 @@ export default {
     getFriends: async (parent: any, { uuid }: {uuid: string}, ctx: any) => {
       const { id } =  await verifyUserToken(ctx) as { id: string };
       const userId = uuid ?? id; 
+
       const followers = await getFriends(userId);
+      console.log(followers)
       if (followers instanceof Error) {
         return new Error('Invalid credentials');
       }

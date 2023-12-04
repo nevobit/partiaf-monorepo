@@ -12,6 +12,7 @@ import { Base } from "../../../common";
     email: string;
     name: string;
     description: string;
-    users: any[]
+    users: any[];
+    promoter: string;
   }
   

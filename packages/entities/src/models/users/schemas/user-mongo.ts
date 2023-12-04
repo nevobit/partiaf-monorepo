@@ -18,6 +18,7 @@ export const UsersSchemaMongo = new Schema<User>(
     biography: { type: String },
     wishlist: [{ type: String }],
     token: {type: String},
+    promocionalCode: {type: String},
     interests: {
       music: [{ type: String }],
       plan: [{ type: String }],

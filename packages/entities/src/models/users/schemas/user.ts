@@ -49,6 +49,7 @@ export interface User extends Base {
   following: string[];
   matchs: string[];
   try_balance: number;
+  promocionalCode: string;
   friends: string[];
   stores: string[];
   loginMethod: string;

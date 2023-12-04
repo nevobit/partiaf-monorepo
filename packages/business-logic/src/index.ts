@@ -4,7 +4,7 @@ export * from './files';
 export * from './follows';
 export * from './friend-requests';
 export * from './goers';
-export * from './helpers';
+export * from './mailing';
 export * from './payments';
 export * from './stores';
 export * from './tickets';

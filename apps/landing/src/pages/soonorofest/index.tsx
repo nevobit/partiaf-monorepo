@@ -377,7 +377,7 @@ const SoonoroFest = () => {
                   color: "#333"
                 }} >Whatsapp</p>
                 </Link>
-                <button   style={{
+                <Link href="https://g.co/kgs/8tmBVY"   style={{
                   backgroundColor: "rgba(0, 0, 0, .1)",
                   borderRadius: 10,
                   paddingInline: 30,
@@ -392,7 +392,7 @@ const SoonoroFest = () => {
                 <p style={{
                   fontSize: "14px"
                 }}>Ubicación</p>
-                </button>
+                </Link>
                 </div>
 
               </div>
