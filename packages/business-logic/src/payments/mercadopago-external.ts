@@ -104,7 +104,7 @@ export const updatePaymentExternal = async (payment: any, id: string) => {
 
   if (payment.type === "payment") {
     const data = await mercadopago.payment.findById(payment["data.id"]);
-    const goerId = JSON.parse(data.body.external_reference);
+    const goerId = data.body.external_reference;
 
     if (data.body.status == "approved") {
       const goer = await model.findById(goerId);
