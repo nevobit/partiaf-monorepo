@@ -1,3 +1,4 @@
+import BottomMenu from "../BottomMenu"
 import styles from "./principal.module.css"
 
 const Principal = ({children}:any) => {
@@ -5,6 +6,7 @@ const Principal = ({children}:any) => {
     <div className={styles.body}>
         {/* <Nav/> */}
         {children}
+        <BottomMenu />
     </div>
   )
 }

@@ -58,7 +58,7 @@ const main = async () => {
     },
   });
   await server.ready();
-  server.swagger();
+  // server.swagger();
 
   server.listen({ port: Number(PORT), host: HOST }, (error, address) => {
     if (error) {

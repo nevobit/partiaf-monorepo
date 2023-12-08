@@ -11,7 +11,7 @@ export const generateUsersCode = async (id: string): Promise<User[]> => {
 
   const users = await model.find(query).select('-password').lean();
 
-  const usersWithPromoCodes = users.filter((user) => user.accountType == "promoter").map((user) => {
+  const usersWithPromoCodes = users.filter((user) => user.accountType == "promoter" && user.promocionalCode == null).map((user) => {
     const promoCode = generatePromoCode(user.firstname, user.lastname);
     return { ...user, promoCode };
   });

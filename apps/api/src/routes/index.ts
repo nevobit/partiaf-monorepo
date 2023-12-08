@@ -8,6 +8,7 @@ import { paymentsRoutes } from './payments';
 import { goersRoutes } from './goers';
 import { filesRoutes } from './files';
 import { paymentsExternalRoutes } from './payments-externals';
+import { usersRoutes } from './users';
 
 const routes: RouteOptions[] = [
   healthCheckRoute,
@@ -18,7 +19,8 @@ const routes: RouteOptions[] = [
   ...paymentsRoutes,
   ...goersRoutes,
   ...filesRoutes,
-  ...paymentsExternalRoutes
+  ...paymentsExternalRoutes,
+  ...usersRoutes
 ];
 
 export const registerRoutes = (server: FastifyInstance) => {

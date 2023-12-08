@@ -17,6 +17,7 @@ const CoversDetails = () => {
     queryFn: () => getGoers(id || "")
   });
 
+  console.log(goers)
   if(isLoading) return <Loader small />
 
   
@@ -31,7 +32,7 @@ const CoversDetails = () => {
             </div>
             <div className={styles.box}>
               <h3>Entradas Efectivas</h3>
-              <p>{goers.filter((goer: Goer) => goer.entry_status == "in-use").length}</p>
+              <p>{goers.filter((goer: Goer) => goer.entry_status == "in_list" && goer.isPaid).length}</p>
             </div>
             <div className={styles.box}>
               <h3>Entradas no Efectivas </h3>
@@ -45,13 +46,15 @@ const CoversDetails = () => {
           <div className={styles.list_container}>
             <div className={styles.list}>
               <h3>En cola</h3>
-              {goers.filter((goer:Goer) => goer.entry_status == 'in-use').map((goer: any) => (
-                <div className={styles.queue_cards}>
+              {goers.filter((goer:Goer) => goer.entry_status == 'in_list' && goer.isPaid).map((goer: any) => (
+                <div className={styles.queue_cards} key={goer.uuid}>
                   <div className={`${styles.card_queue} cola}`}>
                     <div className={styles.image_section}>
                       <img src={"/default.jpg"} alt="" />
                       <div>
-                        <h3>{goer.user.firstname} {goer.user.lastname}</h3>
+                        <h3 style={{
+                          textTransform: "capitalize"
+                        }}>{goer.users[0].name}</h3>
                         <p>{goer.user.phone}</p>
                       </div>
                     </div>

@@ -1,7 +1,7 @@
 import { getModel, Collection } from '@partiaf/constant-definitions';
 import { User, UsersSchemaMongo } from '@partiaf/entities';
 
-export const getAllUsers = async (id: string): Promise<User[]> => {
+export const getAllUsers = async (id?: string): Promise<User[]> => {
   const model = getModel<User>(Collection.USERS, UsersSchemaMongo);
   let query = {};
 

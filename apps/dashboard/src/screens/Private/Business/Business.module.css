@@ -157,3 +157,20 @@
     top: 25%;
     transform: translateY(-100%);
   }
+
+
+
+
+  @media screen and (max-width: 768px) {
+    .form {
+      background-color: #fff;
+      min-width: 288px;
+      width: 100%;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); */
+    }
+   }
+
+    
