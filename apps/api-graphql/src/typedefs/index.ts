@@ -111,6 +111,8 @@ type Goer {
     name: String
     description: String
     date: String
+    users: [User]
+    isPaid: Boolean
 }
 
 
