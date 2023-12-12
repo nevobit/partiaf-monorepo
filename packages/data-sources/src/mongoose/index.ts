@@ -5,10 +5,8 @@ export interface InitMongooseOptions {
 }
 
 export const initMongoose = async ({ mongoUrl }: InitMongooseOptions) => {
-  console.log("ENTER PRIET")
   const conn = connection;
-  console.log(conn)
-
+  
   const connectionUrl = mongoUrl || '';
 
   

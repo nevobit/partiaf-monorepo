@@ -6,7 +6,7 @@ export const getGoersById = async (id:string): Promise<any> => {
     const model = await getModel<Goer>(Collection.GOERS, GoerSchemaMongo)
     await getModel<Ticket>(Collection.TICKETS , TicketSchemaMongo)
 
-    const goers = await model.find({cover: id}).populate('user').populate('ticket');
+    const goers = await model.find({cover: id, isPaid: true}).populate('user').populate('ticket');
 
     return goers;
 }

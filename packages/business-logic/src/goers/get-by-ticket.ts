@@ -6,6 +6,6 @@ export const getGoersByTicket = async (id:string): Promise<any> => {
     getModel<User>(Collection.USERS, UsersSchemaMongo)
     getModel<Ticket>(Collection.TICKETS, TicketSchemaMongo)
 
-    const goers = await model.find({ticket: id}).populate('user').populate('ticket');
+    const goers = await model.find({ticket: id, isPaid: true}).populate('user').populate('ticket');
     return goers;
 }

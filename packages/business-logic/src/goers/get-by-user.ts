@@ -4,6 +4,6 @@ import { Goer, GoerSchemaMongo, Ticket, TicketSchemaMongo } from "@partiaf/entit
 export const getGoersByUser = async (id:string): Promise<any> => {
     const model = getModel<Goer>(Collection.GOERS, GoerSchemaMongo);
     await getModel<Ticket>(Collection.TICKETS , TicketSchemaMongo)
-    const goers = await model.find({user: id}).sort({createdAt: -1}).populate('ticket');
+    const goers = await model.find({user: id, isPaid: true}).sort({createdAt: -1}).populate('ticket');
     return goers;
 }
