@@ -21,7 +21,7 @@ export const getStoresByAdmin = async (
   const pageSize = +limit || 15;
   const skip = (actualPage - 1) * pageSize;
 
-  const query: { admin: string; status?: StatusType } = { admin: uuid };
+  const query: { admin: { $in: string }; status?: StatusType } = { admin: { $in: uuid } };
 
   if (status) {
     query.status = status;

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"; // Asegúrate de importar Link desde re
 import styles from "./header.module.css";
 import logo from "../../../../public/logo-partiaf-neg.svg";
 import { PublicRoutes } from "@/constant-definitions";
+import { LogOut } from "react-feather";
 
 const Header = () => {
   const { name, email } = localStorage.getItem("user")
@@ -40,7 +41,7 @@ const Header = () => {
       </div>
       <div className={open ? styles.container_logout : styles.none}>
         <button onClick={HandleExit}>
-          <i className="bx bxs-log-out-circle"></i>
+          <LogOut />
           <span>Cerrar Sesión</span>
         </button>
       </div>

@@ -54,7 +54,7 @@ const CoversDetails = () => {
                       <div>
                         <h3 style={{
                           textTransform: "capitalize"
-                        }}>{goer.users[0].name}</h3>
+                        }}>{goer.users[0].name} ( {goer.amount} ) </h3>
                         <p>{goer.user.phone}</p>
                       </div>
                     </div>
@@ -69,24 +69,24 @@ const CoversDetails = () => {
             </div>
             <div className={styles.list}>
               <h3>Ingresado</h3>
-              {/* {UsersJoined?.map((user: User) => (
+               {goers.filter((goer:Goer) => goer.entry_status == 'completed' && goer.isPaid).map((goer: any) => (
                 <div className={styles.queue_cards}>
                   <div className={`${styles.card_queue} cola}`}>
                     <div className={styles.image_section}>
                       <img src={"/default.jpg"} alt="" />
                       <div>
-                        <h3>{user.username}</h3>
-                        <p>Femenino</p>
+                        <h3>{goer.users[0].name} ( {goer.amount} )</h3>
+                        <p>{goer.user.phone}</p>
                       </div>
                     </div>
 
                     <div className={styles.event_section}>
-                      <h4>{cover.name}</h4>
-                      <p>{cover.type}</p>
+                      <h4>{goer.name}</h4>
+                      <p>{goer.ticket.type}</p>
                     </div>
                   </div>
                 </div>
-              ))} */}
+              ))} 
             </div>
             <div className={styles.list}>
               <h3>Cancelado</h3>

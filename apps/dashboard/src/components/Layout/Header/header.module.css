@@ -101,13 +101,15 @@
   position: absolute;
   right: 0;
   margin-right: 1%;
-  top: 0;
+  top: 50px;
   margin-top: 3%;
   background-color: var(--main-color);
   padding: 1rem;
   border-radius: 0.6rem;
   border: 1px solid rgba(0, 0, 0, 0.4);
   z-index: 99999;
+  background-color: #fff;
+
 }
 
 .container_logout button {

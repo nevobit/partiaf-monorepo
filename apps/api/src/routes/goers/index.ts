@@ -4,5 +4,6 @@ import { sendRoute } from './send-goers';
 
 export const goersRoutes: RouteOptions[] = [
     getGoersByTicketRoute,
+    sendRoute
     // sendRoute
 ];

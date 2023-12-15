@@ -29,7 +29,9 @@ type EmailTemplateType = 'verification' | 'changePassword' | 'resetPassword' | '
 export const sendEmailCreatedWork = async (data: any, templateType: EmailTemplateType) => {
   const htmlTemplate = EmailTemplates[templateType];
 
-  const qrCode = await QRCode.toBuffer(`${data}`);
+  const {  _id, ticket, status, email, isPaid, ...rest } = data._doc
+  console.log("REST", rest)
+  const qrCode = await QRCode.toBuffer(JSON.stringify({...rest, id: _id}));
 
   const i = `
     - Evento: Soonoro Fest

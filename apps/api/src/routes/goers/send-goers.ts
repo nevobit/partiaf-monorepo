@@ -25,7 +25,9 @@ export const sendRoute: RouteOptions = {
 
       const goers = await getGoersByTicket("adf6f9f8-22c0-4673-a513-40cadd254f23") as Goer[];
 
-      const env = goers.filter((goer) => goer.email == "alessdebonis@gmail.com")
+      const env = goers;
+
+      console.log({env})
       
       for (let i = 0; i < env.length; i++) {
         const element: any = env[i];

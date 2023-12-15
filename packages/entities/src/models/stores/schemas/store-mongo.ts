@@ -34,7 +34,7 @@ export const StoreSchemaMongo = new Schema<Store>(
     youtube: { type: String },
     rating: { type: Number },
     employe_code: { type: Number },
-    admin: { type: String, ref: 'admins' },
+    admin: [{ type: String, ref: 'admins' }],
     organizer: {
       type: String,
       ref: 'users',
